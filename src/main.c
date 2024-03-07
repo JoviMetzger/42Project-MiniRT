@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/07 19:29:54 by smclacke      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/miniRT.h"
 
 int main(int argc, char **argv)
@@ -6,11 +18,11 @@ int main(int argc, char **argv)
 
 	if (!ft_parse_input(argc, argv, &data)) // Check file Input & supstract the values to the struct.
 	{
-		printf("parser failed\n");
-		// clean up, terminate window etc
+		// clean up needed? - or if fails when reading file, free what
+		// was made and just error out
 		return (EXIT_FAILURE);
 	}
-	// ft_parse_input(argc, argv, &data);
+
 	// ft_open_window(&data); // Open window
 	// ft_render(&data); // the whole shazam!
 
