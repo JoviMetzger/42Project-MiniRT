@@ -18,18 +18,23 @@ MLX42			= $(MLX42_PATH)/build/libmlx42.a
 
 # Sources files
 SRC_HEADER		= ./header
-SRC				= ./src/main.c \
-					./src/movement.c \
-					./src/open_window.c \
-					./src/parse_input.c \
-					./src/render.c \
-					./src/ray.c \
-					./src/colour.c \
-					./src/
+
+SRCS			= main.c								\
+					window/movement.c 					\
+					window/open_window.c				\
+					window/colour.c						\
+					render/render.c						\
+					render/ray.c						\
+					parser/parse_input.c				\
+					utils/parser_utils.c				\
+					
+
+SRC_DIR			= src
+SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))
 
 # Objects files
 OBJ_PATH		= obj
-OBJ				= $(addprefix $(OBJ_PATH)/, $(notdir $(SRC:.c=.o)))
+OBJ				= $(addprefix $(OBJ_PATH)/, $(SRCS:%.c=%.o))
 
 # Colours
 PINK 			= \033[35m
@@ -56,13 +61,13 @@ $(MLX42):
 		@cd	$(MLX42_PATH) && cmake -B build && cmake --build build -j4
 		@echo "$(BLUE)$(BOLD) --- Compiling Minilibx Done --- $(RESET)"
 
-$(OBJ_PATH)/%.o: ./src/%.c
+$(OBJ_PATH)/%.o: $(SRC_DIR)/%.c
 		@mkdir -p $(OBJ_PATH)
+		@mkdir -p $(OBJ_PATH)/render
+		@mkdir -p $(OBJ_PATH)/window
+		@mkdir -p $(OBJ_PATH)/parser
+		@mkdir -p $(OBJ_PATH)/utils
 		@$(CC) $(CFLAGS) -c -o $@ $<
-
-# ADD LIKE THIS LATER OTHER FOLDERS
-# $(OBJ_PATH)/%.o: ./src/utils/%.c
-# 		$(CC) $(CFLAGS) -c -o $@ $<
 
 # Executest the program
 open: $(NAME)
@@ -79,6 +84,7 @@ clean:
 
 fclean: clean
 		@$(MAKE) fclean -C $(LIBFT_PATH)
+		@rm -rf $(OBJ_DIR)
 		@rm -rf $(NAME)
 		@echo "$(GREEN) $(ITALIC)   ✅ Cleaned executer ✅$(RESET)"
 

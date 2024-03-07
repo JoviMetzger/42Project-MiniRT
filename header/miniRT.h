@@ -19,8 +19,8 @@
 # define RESET "\033[0m"
 
 // Window
-#define WIDTH 1400
-#define HEIGHT 1000
+# define WIDTH 1400
+# define HEIGHT 1000
 
 // --- Structs --- 
 // -------------------------------------------------------------
@@ -133,7 +133,7 @@ typedef struct s_ray
 void ft_put_image(t_data *data);
 void ft_key_action(mlx_key_data_t keydata, t_data *data);
 void ft_open_window(t_data *data);
-void ft_parse_input(int argc, char **argv, t_data *data);
+int	 ft_parse_input(int argc, char **argv, t_data *data);
 void ft_render(t_data *data);
 
 #endif
