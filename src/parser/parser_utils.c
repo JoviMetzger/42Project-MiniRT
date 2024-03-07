@@ -6,17 +6,19 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:20:47 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/07 21:24:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/07 21:35:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
 // some space for funny lil funcs
+
 // value checking funcs
+
 // number of elements good check funcs
 
-// is R G B format etc
+// is R G B format etc...
 
 int		is_dot(int c)
 {
