@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/07 20:37:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/07 21:14:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	check_file_type(char *arg)
 void	parse_input(int argc, char **argv, t_data *data)
 {
 	int		file;
-	// (void)	data;
 
 	file = 0;
 	if (argc != 2)
@@ -44,5 +43,4 @@ void	parse_input(int argc, char **argv, t_data *data)
 	if (file == -1)
 		error_msg("Couldn't open file");
 	read_file(data, file);
-	// parse_array(data);
 }
