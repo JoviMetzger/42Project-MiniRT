@@ -1,4 +1,28 @@
 
+Notes for parse_array()
+
+// * error messages:
+// * 	missing element
+// * 	wrong element
+// * 	missing value
+// * 	value out of range
+	
+// after creating array
+// find identifier
+// check correct elements (number of, value type, range)
+// add to structs
+// repeat till end of file
+// if not all needs are met, free what has been created, error
+
+// 		OR
+
+// check everything first, if wrong, free arr and error
+// and then go through again and add info to data struct
+// or is there a better way without too much messy leakage?
+// if doing it first example way, leakyy?
+
+
+---------------------------------------------------------
 ## **Elements of file:**
 
 		**A = ambient lighting**
@@ -137,6 +161,9 @@ NOTES
  - 3D normalized vector of axis of cylinder... what?
 
 --------------------------------------------------------
+
+
+// Jovi's og parser function
 
 // void ft_parse_input(int argc, char **argv, t_data *data)
 // {

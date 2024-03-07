@@ -6,26 +6,19 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 20:14:17 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/07 21:18:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/07 21:24:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-	// after creating array/list
-		// find identifier
-		// check correct elements (number of, value type, range)
-		// add to structs
-		// repeat till end of file
-		// if not all needs are met, free what has been created, error
-		// * error messages:
-		// * 	missing element
-		// * 	wrong element
-		// * 	missing value
-		// * 	value out of range
-// check everything, if wrong, free arr and error
-// then go through again and add info to data struct
-// or is there a better way without too much messy leakage?
+/**
+ * @brief	takes array of strings from read_file()
+ * 			checks the elements and values are correct
+ * 			adds them to the t_data struct
+ * 			if invalid, frees array, error message and exit
+ * @todo	figure out approach, check error and memory handling, norm
+*/
 static void	parse_array(t_data *data, char **arr)
 {
 	(void)	data;
@@ -51,10 +44,11 @@ static void	parse_array(t_data *data, char **arr)
 /**
  * @brief	reading through the file line by line, copying each
  * 			line into a 2D array of strings
- * 			if error occurs, array is freed, file is closed
+ * 			if error occurs, array is freed, file is closed,
  * 			error message and exit
  * 			else close file, call parse_array which adds everything
  * 			into t_data struct, then free array and return to main
+ * @todo	freeing and norm
 */
 void	read_file(t_data *data, int file)
 {
