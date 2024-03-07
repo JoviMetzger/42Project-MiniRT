@@ -4,12 +4,13 @@ int main(int argc, char **argv)
 {
     t_data data;
 
-	if (!ft_parse_input(argc, argv, &data)) // Check file Input & supstract the values to the struct.
-	{
-		printf("parser failed\n");
-		// clean up, terminate window etc
-		return (EXIT_FAILURE);
-	}
+	// if (!ft_parse_input(argc, argv, &data)) // Check file Input & supstract the values to the struct.
+	// {
+	// 	printf("parser failed\n");
+	// 	// clean up, terminate window etc
+	// 	return (EXIT_FAILURE);
+	// }
+	ft_parse_input(argc, argv, &data);
 	ft_open_window(&data); // Open window
 	ft_render(&data); // the whole shazam!
 
