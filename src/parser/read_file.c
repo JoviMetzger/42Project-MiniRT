@@ -6,11 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 20:14:17 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/07 21:24:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/07 21:26:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
+
+// checking functions
+// converting functions
+// adding to t_data struct
 
 /**
  * @brief	takes array of strings from read_file()
@@ -36,9 +40,9 @@ static void	parse_array(t_data *data, char **arr)
 		// anything wrong, free arr, error
 		i++;
 	}
+	// i = 0;
 	// reset | info good, now add to struct
-	i = 0;
-	// while arr, add elements to data struct
+	// while arr, CONVERT ELEMENTS and add to data struct
 }
 
 /**
