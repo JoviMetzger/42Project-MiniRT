@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: smclacke <smclacke@student.codam.nl>         +#+                      #
+#                                                    +#+                       #
+#    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
+#    Updated: 2024/03/07 19:35:08 by smclacke      ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
+
 # Executable
 NAME 			= miniRT
 INPUT_FILE		= ./images_rt/test1.rt
@@ -26,8 +38,8 @@ SRCS			= main.c								\
 					render/render.c						\
 					render/ray.c						\
 					parser/parse_input.c				\
-					utils/parser_utils.c				\
-					
+					parser/parser_utils.c				\
+
 
 SRC_DIR			= src
 SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))
@@ -61,7 +73,7 @@ $(MLX42):
 		@cd	$(MLX42_PATH) && cmake -B build && cmake --build build -j4
 		@echo "$(BLUE)$(BOLD) --- Compiling Minilibx Done --- $(RESET)"
 
-$(OBJ_PATH)/%.o: $(SRC_DIR)/%.c
+$(OBJ_PATH)/%.o: $(SRC_DIR)/%.c $(SRC_HEADER)
 		@mkdir -p $(OBJ_PATH)
 		@mkdir -p $(OBJ_PATH)/render
 		@mkdir -p $(OBJ_PATH)/window
