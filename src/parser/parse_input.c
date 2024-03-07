@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/07 20:34:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/07 20:37:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-static void		check_file_type(char *arg)
+static void	check_file_type(char *arg)
 {
 	int		i;
 
@@ -31,7 +31,7 @@ static void		check_file_type(char *arg)
 	error_msg("Wrong file type");
 }
 
-void parse_input(int argc, char **argv, t_data *data)
+void	parse_input(int argc, char **argv, t_data *data)
 {
 	int		file;
 	// (void)	data;

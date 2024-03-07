@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 20:14:17 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/07 20:32:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/07 20:43:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@
 void	read_file(t_data *data, int file)
 {
 	char	*line;
+	char	**arr;
 	(void)	data;
 
 	line = get_next_line(file);
+	arr = (char **)malloc(sizeof(char *) * 6); //  6 strs
+	if (!arr)
+		parse_error("malloc oopsie", file);
 	while (line)
 	{
 		if (line)
