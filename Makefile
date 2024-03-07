@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/07 19:35:08 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/07 20:18:44 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,13 +32,15 @@ MLX42			= $(MLX42_PATH)/build/libmlx42.a
 SRC_HEADER		= ./header
 
 SRCS			= main.c								\
-					window/movement.c 					\
-					window/open_window.c				\
-					window/colour.c						\
-					render/render.c						\
-					render/ray.c						\
+					movement.c 							\
+					open_window.c						\
+					colour.c							\
+					render.c							\
+					ray.c								\
+					parser/read_file.c					\
 					parser/parse_input.c				\
 					parser/parser_utils.c				\
+					utils/error.c						\
 
 
 SRC_DIR			= src
@@ -75,8 +77,6 @@ $(MLX42):
 
 $(OBJ_PATH)/%.o: $(SRC_DIR)/%.c $(SRC_HEADER)
 		@mkdir -p $(OBJ_PATH)
-		@mkdir -p $(OBJ_PATH)/render
-		@mkdir -p $(OBJ_PATH)/window
 		@mkdir -p $(OBJ_PATH)/parser
 		@mkdir -p $(OBJ_PATH)/utils
 		@$(CC) $(CFLAGS) -c -o $@ $<

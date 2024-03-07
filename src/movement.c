@@ -1,4 +1,4 @@
-#include "../../header/miniRT.h"
+#include "../header/miniRT.h"
 
 void ft_key_action(mlx_key_data_t keydata, t_data *data)
 {

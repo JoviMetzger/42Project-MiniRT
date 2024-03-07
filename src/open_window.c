@@ -1,4 +1,4 @@
-#include "../../header/miniRT.h"
+#include "../header/miniRT.h"
 
 void error_msg(char *msg)
 {

@@ -1,4 +1,4 @@
-#include "../../header/miniRT.h"
+#include "../header/miniRT.h"
 
 // Might or might not need the function
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b)

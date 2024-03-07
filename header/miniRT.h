@@ -134,11 +134,31 @@ typedef struct s_ray
 // Main functions
 void ft_put_image(t_data *data);
 void ft_key_action(mlx_key_data_t keydata, t_data *data);
+void error_msg(char *msg);
 void ft_open_window(t_data *data);
 void ft_render(t_data *data);
 
+// --- Utils ---
+void		parse_error(char *msg, int file);
+// jovi error_msg()
+
+
+// --- hi from Sarah --- //
 // --- Parser ---
+
+# ifndef BUFFERSIZE
+#  define BUFFERSIZE 100
+# endif
+
+// --- parse_input --- //
+void		parse_input(int argc, char **argv, t_data *data);
+
+// --- parser_utils --- //
 int			is_dot(int c);
-int			ft_parse_input(int argc, char **argv, t_data *data);
+void		close_protect(int file);
+
+// --- read_file --- //
+void		read_file(t_data *data, int file);
+
 
 #endif
