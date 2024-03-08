@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser_error.c                                     :+:    :+:            */
+/*   free_utils.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/03/08 15:30:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/08 16:52:34 by smclacke      ########   odam.nl         */
+/*   Created: 2024/03/08 16:50:09 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/08 16:51:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/parser.h"
 
-void	free_arr_error(char *msg, char **arr)
+void	free_array(char **arr)
 {
-	free_array(arr);
-	error_msg(msg);
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
 
-void	free_close_parse_error(char *msg, char **ar, char *line, int file)
+void	free_close_util(char *line, int file)
 {
-	close_protect(file);
-	free_array(ar);
 	free(line);
-	error_msg(msg);
-}
-
-void	parse_error(char *msg, int file)
-{
 	close_protect(file);
-	error_msg(msg);
 }
 
-void error_msg2(char *msg)
+void	close_protect(int file)
 {
-	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd(msg, 2);
-	exit(EXIT_FAILURE);
+	if (close(file) == -1)
+		error_msg("Closing file errored");
 }

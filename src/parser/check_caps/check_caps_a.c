@@ -1,37 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   check_caps.c                                       :+:    :+:            */
+/*   check_caps_a.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:25:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/08 15:40:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/08 17:01:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/parser.h"
+#include "../../../header/parser.h"
+
+static int	check_a(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	if (str[i] == 'A')
+		return (1);
+	return (0);
+}	
 
 /**
- * @brief	ensure we have the Ambient lighting, Camera and Light elements
- * 			and they are only declared once
+ * @brief	ensure we have the Ambient lighting element
+ * 			and they is only one declared
 */
-void	check_caps(char **arr)
+void	check_caps_a(char **arr)
 {
 	int		i;
-	bool	a_flag;
-	bool	c_flag;
-	bool	l_flag;
-	(void)	arr;
+	int		flag;
 
 
 	i = 0;
-	a_flag = false;
-	c_flag = false;
-	l_flag = false;
-	printf("we are gunna check the caps\n");
-	// while (arr[i])
-	// {
-	// 	while (is_space())
-	// }
+	flag = 0;
+	while (arr[i])
+	{
+		if (check_a(arr[i]) == 1)
+		{
+			if (arr[i + 1])
+			{
+				i++;
+				while (arr[i])
+				{
+					if (check_a(arr[i]) == 1)
+						free_arr_error("Duplicate Ambient Light element", arr);
+					i++;
+				}
+				break ;
+			}
+		}
+		i++;
+	}
 }
