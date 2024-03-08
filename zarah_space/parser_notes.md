@@ -1,4 +1,35 @@
 
+
+line 1 = A	+ 	light	+ 	r,g,b
+line 2 = C	+ 	coords	+ 	vector	+ 	FOV
+line 3 = L	+ 	coords	+ 	light	+ 	r,g,b
+line 4 = pl + 	coords	+ 	vector	+ 	r,g,b
+line 5 = sp + 	coords	+ 	decimal + 	r,g,b
+line 6 = cy + 	coords	+	vector	+	decimal	+	decimal	+	r,g,b
+
+
+
+light	-			[0.0,1.0]
+
+r g b	- 			[0 - 255] no decimals
+
+vector	- 			[-1,1] xyz
+
+coordinates -		[decimals] xyz
+
+FOV		-			[0,180]
+
+decimal	-			[decimals] (diameter/height)
+
+// one or more line breaks
+// separated by one or more spaces
+// each element set in any order
+// elements defined by caps declared once, rest possibly many times
+// each element starts with the identifier
+
+
+---------------------------------------------------------
+
 Notes for parse_array()
 
 // * error messages:

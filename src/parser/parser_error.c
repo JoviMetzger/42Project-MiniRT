@@ -1,47 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser_utils.c                                     :+:    :+:            */
+/*   parser_error.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/03/07 15:20:47 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/08 15:56:15 by smclacke      ########   odam.nl         */
+/*   Created: 2024/03/08 15:30:59 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/08 15:50:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/parser.h"
 
-// some space for funny lil funcs
-
-// value checking funcs
-
-// number of elements good check funcs
-
-// is R G B format etc...
-
-int	ft_isspace(int c)
+void	close_protect(int file)
 {
-	if ((c >= 9 && c <= 13) || c == ' ')
-		return (c);
-	return (0);
+	if (close(file) == -1)
+		error_msg("Closing file errored");
 }
 
-int		is_dot(int c)
+void	free_array(char **arr)
 {
-	return (c == '.');
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
 
-void	free_close_util(char *line, int file)
+void	free_close_parse_error(char *msg, char **ar, char *line, int file)
 {
-	free(line);
 	close_protect(file);
+	free_array(ar);
+	free(line);
+	error_msg(msg);
 }
 
-char	**rt_malloc(char **arr, int size, int file)
+void	parse_error(char *msg, int file)
 {
-	arr = (char **)malloc(sizeof(char *) * size + 1);
-	if (!arr)
-		parse_error("malloc failure", file);
-	return (arr);
+	close_protect(file);
+	error_msg(msg);
+}
+
+void error_msg2(char *msg)
+{
+	ft_putstr_fd("Error: ", 2);
+	ft_putendl_fd(msg, 2);
+	exit(EXIT_FAILURE);
 }

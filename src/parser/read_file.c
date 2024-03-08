@@ -6,81 +6,108 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 20:14:17 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/07 21:26:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/08 16:01:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/miniRT.h"
+#include "../../header/parser.h"
 
-// checking functions
-// converting functions
-// adding to t_data struct
+/**
+ * @brief	while input is in string format, check it's validity
+ * 			Ambient light, Light and Camera must be declared and only once
+ * 			all other elements (sp, cy, pl) must have correct values
+ * 			if error/invalid, free in check function, error and exit
+*/
+static void	check_input(char **arr)
+{
+	check_caps(arr);
+	// check_cap_vals(arr);
+	// check_other(arr);
+	// check_invalid(arr);
+}
+
+/**
+ * @brief	convert validated string data into double/int etc
+*/
+static void	convert_input(char **arr)
+{
+	(void)	arr;
+	return ;
+}
+
+/**
+ * @brief	add converted and validated input into t_data struct
+*/
+static void	add_input(t_data *data, char **arr)
+{
+	(void)	arr;
+	(void)	data;
+	// init data (?)
+	return ;
+}
 
 /**
  * @brief	takes array of strings from read_file()
  * 			checks the elements and values are correct
+ * 			converts from string to double/int etc..
  * 			adds them to the t_data struct
- * 			if invalid, frees array, error message and exit
- * @todo	figure out approach, check error and memory handling, norm
+ * 			if something wrong, function will free, error and exit
+ * 			willnot return here if error
 */
 static void	parse_array(t_data *data, char **arr)
 {
-	(void)	data;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while (arr[i])
-	{
-		printf("[%i] - %s\n", i, arr[i]);
-		// check identifier
-		// check element count
-		// check value format
-		// anything wrong, free arr, error
-		i++;
-	}
-	// i = 0;
-	// reset | info good, now add to struct
-	// while arr, CONVERT ELEMENTS and add to data struct
+	check_input(arr);
+	convert_input(arr);
+	add_input(data, arr);
 }
 
+// if still necessary for testing :)
+// static	void	print_array(char **arr)
+// {
+// 	int		i = 0;
+
+// 	while (arr[i])
+// 	{
+// 		printf("[%i] %s\n", i, arr[i]);
+// 		i++;
+// 	}
+// }
+
 /**
- * @brief	reading through the file line by line, copying each
- * 			line into a 2D array of strings
- * 			if error occurs, array is freed, file is closed,
+ * @brief	read through the file line by line, copying each
+ * 			line into a 2D array of strings (arr)
+ * 			if error occurs, array and line is freed, file is closed,
  * 			error message and exit
- * 			else close file, call parse_array which adds everything
- * 			into t_data struct, then free array and return to main
- * @todo	freeing and norm
+ * 			else close file, call parse_array which checks input, converts it
+ * 			and adds everything into t_data struct, 
+ * 			then frees array and line and returns to main to continue
+ * 			rt_malloc is protected :)
 */
 void	read_file(t_data *data, int file)
 {
 	char	*line;
 	char	**arr;
 	int		i;
+	(void)	data;
 
 	i = 0;
 	line = get_next_line(file);
-	arr = (char **)malloc(sizeof(char *) * BUFFER_SIZE + 1);
-	if (!arr)
-		parse_error("malloc oopsie", file);
+	arr = rt_malloc(NULL, BUFF_SIZE, file);
 	while (line)
 	{
 		if (line)
 		{
 			arr[i] = ft_strdup(line);
 			if (!arr[i])
-			{
-				// free_arr(arr); //  for anything that has already been made
-				parse_error("malloc oopsie in while", file);
-			}
+				free_close_parse_error("malloc failure", arr, line, file);
+			free(line);
 			line = get_next_line(file);
 			i++;
 		}
 	}
-	close_protect(file);
+	arr[i] = NULL;
+	free_close_util(line, file);
+	// print_array(arr);
 	parse_array(data, arr);
-	// free arr 
-	// need to free line?
+	free_array(arr);
 }

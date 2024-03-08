@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   miniRT.h                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/08 15:38:36 by smclacke      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -8,8 +20,6 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <math.h>
-# include <sys/stat.h>
-# include <fcntl.h>
 
 // --- Colours ---
 # define BLACK "\033[30;1m"
@@ -134,31 +144,8 @@ typedef struct s_ray
 // Main functions
 void ft_put_image(t_data *data);
 void ft_key_action(mlx_key_data_t keydata, t_data *data);
-void error_msg(char *msg);
 void ft_open_window(t_data *data);
+void error_msg(char *msg);
 void ft_render(t_data *data);
-
-// --- Utils ---
-void		parse_error(char *msg, int file);
-// jovi error_msg()
-
-
-// --- hi from Sarah --- //
-// --- Parser ---
-
-# ifndef BUFFERSIZE
-#  define BUFFERSIZE 100
-# endif
-
-// --- parse_input --- //
-void		parse_input(int argc, char **argv, t_data *data);
-
-// --- parser_utils --- //
-int			is_dot(int c);
-void		close_protect(int file);
-
-// --- read_file --- //
-void		read_file(t_data *data, int file);
-
 
 #endif

@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   check_caps.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/08 15:39:18 by smclacke      ########   odam.nl         */
+/*   Created: 2024/03/08 15:25:52 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/08 15:40:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/parser.h"
-#include "../header/miniRT.h"
+#include "../../header/parser.h"
 
-int main(int argc, char **argv)
+/**
+ * @brief	ensure we have the Ambient lighting, Camera and Light elements
+ * 			and they are only declared once
+*/
+void	check_caps(char **arr)
 {
-    t_data data;
+	int		i;
+	bool	a_flag;
+	bool	c_flag;
+	bool	l_flag;
+	(void)	arr;
 
-	parse_input(argc, argv, &data);
 
-	// ft_open_window(&data); // Open window
-	// ft_render(&data); // the whole shazam!
-
-	// mlx_loop(data.mlx);		// loop
-	// mlx_terminate(data.mlx); // terminate
-
-	return (EXIT_SUCCESS);
+	i = 0;
+	a_flag = false;
+	c_flag = false;
+	l_flag = false;
+	printf("we are gunna check the caps\n");
+	// while (arr[i])
+	// {
+	// 	while (is_space())
+	// }
 }
