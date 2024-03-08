@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/08 15:39:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/08 16:23:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int main(int argc, char **argv)
 {
     t_data data;
 
-	parse_input(argc, argv, &data);
+	parse_input(argc, argv, &data); // if we return, all input is in t_data :)
 
-	// ft_open_window(&data); // Open window
-	// ft_render(&data); // the whole shazam!
+	ft_open_window(&data); // Open window
+	ft_render(&data); // the whole shazam!
 
-	// mlx_loop(data.mlx);		// loop
-	// mlx_terminate(data.mlx); // terminate
+	mlx_loop(data.mlx);		// loop
+	mlx_terminate(data.mlx); // terminate
 
 	return (EXIT_SUCCESS);
 }
