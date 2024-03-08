@@ -6,8 +6,6 @@ void ft_parse_input(int argc, char **argv, t_data *data)
     (void)argv;
 
     // check_file() // Check valid input and put everything in the struct.
-    data->viewport_H = 600;
-    data->viewport_W = 800;
 
     // Ambient lightning (A): 
     data->ambient.ratio = 0.2;
@@ -41,15 +39,6 @@ void ft_parse_input(int argc, char **argv, t_data *data)
     data->objects.sphere.colour.r = 10;
     data->objects.sphere.colour.g = 0;
     data->objects.sphere.colour.b = 255;
-    // printf("\nHERE\n\n");
-    // printf("Sphere: %f\n", data->objects.sphere.center.x);
-    // printf("Sphere: %f\n", data->objects.sphere.center.y);
-    // printf("Sphere: %f\n", data->objects.sphere.center.z);
-    // printf("Sphere: %f\n", data->objects.sphere.diameter);
-    // printf("Sphere: %f\n", data->objects.sphere.colour.r);
-    // printf("Sphere: %f\n", data->objects.sphere.colour.g);
-    // printf("Sphere: %f\n", data->objects.sphere.colour.b);
-
 
     // Plane (pl): 
     data->objects.plane.center.x = 0.0;

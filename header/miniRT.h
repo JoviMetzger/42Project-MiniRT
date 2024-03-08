@@ -19,17 +19,21 @@
 # define RESET "\033[0m"
 
 // Window
-#define WIDTH 1400
-#define HEIGHT 1000
+#define WIDTH 1920
+#define HEIGHT 1080
 
 // --- Structs --- 
 // -------------------------------------------------------------
 // Position - coordinates
-typedef struct s_pos3
+typedef union u_pos3
 {
-    float	x;  // x-axis (left-right)
-    float	y;  // y-axis (up-down)
-    float	z;  // z-axis (forward-back forwrd)
+    double   xyz[3];
+    struct
+    {
+        double	x;  // x-axis (left-right)
+        double	y;  // y-axis (up-down)
+        double	z;  // z-axis (forward-back forwrd)
+    };
 }   t_pos3;
 
 // -------------------------------------------------------------
@@ -47,7 +51,7 @@ typedef struct s_sphere
 {
     t_colour    colour;
     t_pos3      center;
-    float       diameter;
+    double       diameter;
     struct s_sphere *next;
 }   t_sphere;
 
@@ -66,8 +70,8 @@ typedef struct s_cylinder
     t_colour    colour;
     t_pos3      center;
     t_pos3      vector;
-    float    diameter;
-    float    height;
+    double    diameter;
+    double    height;
     struct s_cylinder *next;
 }   t_cylinder;
 
@@ -86,7 +90,7 @@ typedef struct s_camera
 {
     t_pos3      place;
     t_pos3      vector;
-    int         FOV;
+    int         FOV; //field of view
 }   t_camera;
 
 // -------------------------------------------------------------
@@ -94,7 +98,7 @@ typedef struct s_camera
 typedef struct s_ambient 
 {
     t_colour    colour;
-    float       ratio;
+    double       ratio;
 }   t_ambient;
 
 // -------------------------------------------------------------
@@ -103,8 +107,19 @@ typedef struct s_light
 {
     t_colour    colour;
     t_pos3      place;
-    float       ratio;
+    double       ratio;
 }   t_light;
+
+// -------------------------------------------------------------
+// Screen struct
+typedef struct s_screen
+{
+    double  viewport_w;
+    double  viewport_h;
+    double  img_ratio;
+    double  pixel_x;
+    double  pixel_y;
+}   t_screen;
 
 // -------------------------------------------------------------
 // Main struct
@@ -112,8 +127,7 @@ typedef struct s_data
 {
     mlx_image_t *image;
     mlx_t       *mlx;
-    uint32_t    viewport_W;
-    uint32_t    viewport_H;
+    t_screen    screen;
     t_obj_type  objects;
     t_camera    camera;
     t_ambient   ambient;
@@ -128,6 +142,7 @@ typedef struct s_ray
     t_pos3  vector;
 }   t_ray;
 
+
 // --- Functions --- 
 // Main functions
 void ft_put_image(t_data *data);
@@ -135,5 +150,10 @@ void ft_key_action(mlx_key_data_t keydata, t_data *data);
 void ft_open_window(t_data *data);
 void ft_parse_input(int argc, char **argv, t_data *data);
 void ft_render(t_data *data);
+
+void ft_testing(t_data *data, uint32_t x, uint32_t y);
+int32_t ft_pixel(int32_t r, int32_t g, int32_t b);
+t_ray ft_create_ray(t_data *data, int x, int y);
+
 
 #endif
