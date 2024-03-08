@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/08 15:37:24 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/08 16:09:34 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,6 @@ $(MLX42):
 $(OBJ_PATH)/%.o: $(SRC_DIR)/%.c $(SRC_HEADER)
 		@mkdir -p $(OBJ_PATH)
 		@mkdir -p $(OBJ_PATH)/parser
-		@mkdir -p $(OBJ_PATH)/utils
 		@$(CC) $(CFLAGS) -c -o $@ $<
 
 # Executest the program
