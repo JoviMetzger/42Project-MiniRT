@@ -14,7 +14,6 @@ sp 	0,0,20 20 255,0,0
 cy 	50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255
 
 
-
 line 1 = A	+ 	light	+ 	r,g,b
 line 2 = C	+ 	coords	+ 	vector	+ 	FOV
 line 3 = L	+ 	coords	+ 	light	+ 	r,g,b

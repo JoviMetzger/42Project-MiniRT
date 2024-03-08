@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 20:14:17 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/08 16:56:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/08 17:04:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@
 */
 static void	check_input(char **arr)
 {
-	check_caps_a(arr);
-	check_caps_l(arr);
-	check_caps_c(arr);
+	check_elements(arr);
 	// check_cap_vals(arr);
 	// check_other(arr);
 	// check_invalid(arr);

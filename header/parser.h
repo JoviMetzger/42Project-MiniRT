@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/08 16:56:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/08 17:04:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		check_caps_c(char **arr);
 void		check_caps_l(char **arr);
 
 // --- check_input --- //
-
+void		check_elements(char **arr);
 
 // --- parser_error --- //
 void		free_arr_error(char *msg, char **arr);
