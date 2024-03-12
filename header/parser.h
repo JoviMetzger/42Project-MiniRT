@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 20:14:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 20:21:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		check_l(char **arr);
 int			check_pl(char *str);
 int			check_sp(char *str);
 int			check_cy(char *str);
-void		check_dup(char **arr, int type, int i);
+void		check_dup(char **arr, int i, int type);
 int			check_capital(char *str, int type);
 
 // --- check_elements --- //
