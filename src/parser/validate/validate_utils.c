@@ -6,11 +6,55 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 17:21:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 18:26:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 19:38:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
+
+int	is_alpha(int c)
+{
+	return ((c >= 'a' && c <= 'z')
+		|| (c >= 'A' && c <= 'Z'));
+}
+
+int	is_valid_no(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] && ft_isspace(str[i]))
+			i++;
+		while (str[i] && is_alpha(str[i]))
+			i++;
+		if (!is_num(str[i]) && !is_dot(str[i])
+			&& !is_comma(str[i]) && !ft_isspace(str[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	num_elems(char *str)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] && ft_isspace(str[i]))
+			i++;
+		if (str[i])
+			count++;
+		while (str[i] && !ft_isspace(str[i]))
+			i++;
+	}
+	return (count);
+}
 
 int	is_caps(char *str)
 {
@@ -20,7 +64,7 @@ int	is_caps(char *str)
 		return (L);
 	else if (check_c(str) == 1)
 		return (C);
-	return (0);	
+	return (0);
 }
 
 int	is_other(char *str)
@@ -31,5 +75,5 @@ int	is_other(char *str)
 		return (sp);
 	else if (check_cy(str) == 1)
 		return (cy);
-	return (0);	
+	return (0);
 }

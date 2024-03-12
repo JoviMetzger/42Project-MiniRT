@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:20:47 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 18:53:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 19:06:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ int	ft_isspace(int c)
 	if ((c >= 9 && c <= 13) || c == ' ')
 		return (c);
 	return (0);
+}
+
+int	is_comma(int c)
+{
+	return (c == ',');
 }
 
 int	is_dot(int c)

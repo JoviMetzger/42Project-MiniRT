@@ -6,49 +6,26 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 17:59:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 19:38:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
-static int	check_caps(char *str)
+static int	check_no_elems(char *str, int type)
 {
-	if (is_caps(str) == A)
-	{
-		if (!validate_a(str))
-			return (0);
-	}
-	else if (is_caps(str) == L)
-	{
-		if (!validate_l(str))
-			return (0);
-	}
-	else if (is_caps(str) == C)
-	{
-		if (!validate_c(str))
-			return (0);
-	}
-	return (1);
-}
-
-static int	check_other(char *str)
-{
-	if (is_other(str) == pl)
-	{
-		if (!validate_pl(str))
-			return (0);
-	}
-	else if (is_other(str) == sp)
-	{
-		if (!validate_sp(str))
-			return (0);
-	}
-	else if (is_other(str) == cy)
-	{
-		if (!validate_cy(str))
-			return (0);
-	}
+	if (type == A && (num_elems(str) != 3))
+		return (0);
+	if (type == C && (num_elems(str) != 4))
+		return (0);
+	if (type == L && (num_elems(str) != 4))
+		return (0);
+	if (type == sp && (num_elems(str) != 4))
+		return (0);
+	if (type == pl && (num_elems(str) != 4))
+		return (0);
+	if (type == cy && (num_elems(str) != 6))
+		return (0);
 	return (1);
 }
 
@@ -63,19 +40,25 @@ static int	check_other(char *str)
 void	validate_elems(char **arr)
 {
 	int		i;
+	int		type;
 
 	i = 0;
+	type = 0;
 	while (arr[i])
 	{
-		if (is_caps(arr[i]))
+		if (!is_valid_no(arr[i]))
+			free_arr_error("Invalid character", arr, NULL);
+		type = is_caps(arr[i]);
+		if (type)
 		{
-			if (!check_caps(arr[i]))
-				free_arr_error("Element format error", arr, NULL);
+			if (!check_no_elems(arr[i], type))
+				free_arr_error("Invalid number of arguments", arr, NULL);
 		}
-		if (is_other(arr[i]))
+		else
 		{
-			if (!check_other(arr[i]))
-				free_arr_error("Element format error", arr, NULL);
+			type = is_other(arr[i]);
+			if (!check_no_elems(arr[i], type))
+				free_arr_error("Invalid number of arguments", arr, NULL);
 		}
 		i++;
 	}
