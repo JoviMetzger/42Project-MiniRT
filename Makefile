@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/12 15:44:21 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/12 16:42:17 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,12 +42,16 @@ SRCS			= main.c											\
 					parser/check_elements/check_caps_a.c			\
 					parser/check_elements/check_caps_l.c			\
 					parser/check_elements/check_caps_c.c			\
-					parser/check_elements/check_elems.c				\
-					parser/check_elements.c							\
+					parser/check_elements/check_utils.c				\
+					parser/check_elements/check_elements.c			\
+					parser/validate/validate.c						\
+					parser/convert/convert.c						\
 					parser/free_utils.c								\
 					parser/parser_error.c							\
 					parser/parser_utils.c							\
 
+# parser/convert
+# parser/validate
 
 SRC_DIR			= src
 SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))
@@ -85,7 +89,10 @@ $(OBJ_PATH)/%.o: $(SRC_DIR)/%.c $(SRC_HEADER)
 		@mkdir -p $(OBJ_PATH)
 		@mkdir -p $(OBJ_PATH)/parser
 		@mkdir -p $(OBJ_PATH)/parser/check_elements
+		@mkdir -p $(OBJ_PATH)/parser/validate
+		@mkdir -p $(OBJ_PATH)/parser/convert
 		@$(CC) $(CFLAGS) -c -o $@ $<
+
 
 # Executest the program
 open: $(NAME)

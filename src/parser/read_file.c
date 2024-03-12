@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 20:14:17 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 15:34:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 17:00:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,23 @@
 static void	check_input(char **arr)
 {
 	check_elements(arr);
-	// check_cap_vals(arr); // ensure AA failes etc
-	// check_other(arr);
-	// check_invalid(arr);
+	validate_elems(arr);
 }
 
 /**
  * @brief	convert validated string data into double/int etc
+ * 			during AND after conversion, check converted info again:
+ * 			check - ratio, format, etc but in converted form now not string
+ * @note	probabaly just convert and add to structs ...
 */
-static void	convert_input(char **arr)
-{
-	(void) arr;
-	return ;
-}
-
-/**
- * @brief	add converted and validated input into t_data struct
-*/
-static void	add_input(t_data *data, char **arr)
+static void	convert_input(t_data *data, char **arr)
 {
 	(void) arr;
 	(void) data;
-	// init data (?)
+
+	// convert_elems(t_data *data, char **arr);
+	// convert + add as we goo
+	// check again all info is valid, ratio, format...
 	return ;
 }
 
@@ -57,8 +52,7 @@ static void	add_input(t_data *data, char **arr)
 static void	parse_array(t_data *data, char **arr)
 {
 	check_input(arr);
-	convert_input(arr);
-	add_input(data, arr);
+	convert_input(data, arr);
 }
 
 /**

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   check_input.c                                      :+:    :+:            */
+/*   check_elements.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:36:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 15:41:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 17:00:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/parser.h"
+#include "../../../header/parser.h"
 
 static int	check_pl(char *str)
 {
@@ -22,7 +22,11 @@ static int	check_pl(char *str)
 	if (str[i] && str[i] + 1)
 	{
 		if (str[i] == 'p' && str[i + 1] == 'l')
+		{
+			if (!str[i + 2] || (str[i + 2] && !ft_isspace(str[i + 2])))
+				return (0);
 			return (1);
+		}
 	}
 	return (0);
 }
