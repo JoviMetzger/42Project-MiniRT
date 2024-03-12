@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 23:26:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 23:54:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,15 @@ int			is_other(char *str);
 
 // --- convert --- //
 void		convert_input(t_data *data, char **arr);
+
+// --- ft_atof --- //
+double		ft_atof(char *str);
+
+// --- sort_caps --- //
+int			sort_a(char **elem_str, t_data *data);
+
+// --- sort_other --- //
+
 
 // --- validate_caps --- //
 int			validate_a(char *str);

@@ -6,23 +6,27 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 23:32:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/13 00:02:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
-static void	sort_into_struct(char **elem_str, int type)
+static int	sort_into_struct(char **elem_str, t_data *data, int type)
 {
-	int		i;
-
-	i = 0;
-	printf("type = %i\n", type);
-	while (elem_str[i])
-	{
-		printf("str = %s\n", elem_str[i]);
-		i++;
-	}
+	if (type == A && !sort_a(elem_str, data))
+		return (0);
+	// else if (type == L && !sort_l(elem_str, data))
+	// 	return (0);
+	// else if (type == C && !sort_c(elem_str, data))
+	// 	return (0);
+	// else if (type == sp && sort_sp(elem_str, data))
+	// 	return (0);
+	// else if (type == cy && sort_cy(elem_str, data))
+	// 	return (0);
+	// else if (type == pl && sort_pl(elem_str, data))
+	// 	return (0);
+	return (1);
 }
 
 /**
@@ -31,41 +35,38 @@ static void	sort_into_struct(char **elem_str, int type)
  * 			after conversion, check converted info again:
  * 			check - ratio, format, etc but in converted form now not string
 */
-static void	convert_element(char **arr, int type, int i)
+static void	convert_element(char **arr, t_data *data, int type, int i)
 {
 	char	**elem_str;
 
 	elem_str = ft_split(arr[i], ' ');
 	if (!elem_str)
 		free_arr_error("malloc failed", arr, NULL);
-	sort_into_struct(elem_str, type);
+	if (!sort_into_struct(elem_str, data, type))
+	{
+		free_array(elem_str);
+		free_arr_error("Unknown parser error", arr, NULL);
+	}
 	free_array(elem_str);
 }
 
 void	convert_input(t_data *data, char **arr)
 {
-	(void) data;
 	int		i;
 	int		type;
-	int		flag;
 
 	i = 0;
 	type = 0;
-	flag = 0;
-	// for each element, make array, convert input, add to data struct
-	// free secondary array each time
-	// if error, free made array, free arr, error, exit
 	while (arr[i])
 	{
 		type = get_type(arr[i]);
-		printf("type first = %i\n", type);
 		if (type == 999)
 			i++;
 		else if (type == 0)
-			free_arr_error("Unknow parser error", arr, NULL);
+			free_arr_error("Unknown parser error", arr, NULL);
 		else if (type != 0 && type != 999)
 		{
-			convert_element(arr, type, i);
+			convert_element(arr, data, type, i);
 			i++;
 		}
 	}

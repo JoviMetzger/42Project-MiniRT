@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/08 15:38:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/13 00:16:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@
 // Position - coordinates
 typedef struct s_pos3
 {
-    float	x;  // x-axis (left-right)
-    float	y;  // y-axis (up-down)
-    float	z;  // z-axis (forward-back forwrd)
+    double	x;  // x-axis (left-right)
+    double	y;  // y-axis (up-down)
+    double	z;  // z-axis (forward-back forwrd)
 }   t_pos3;
 
 // -------------------------------------------------------------
@@ -59,7 +59,7 @@ typedef struct s_sphere
 {
     t_colour    colour;
     t_pos3      center;
-    float       diameter;
+    double       diameter;
     struct s_sphere *next;
 }   t_sphere;
 
@@ -78,8 +78,8 @@ typedef struct s_cylinder
     t_colour    colour;
     t_pos3      center;
     t_pos3      vector;
-    float    diameter;
-    float    height;
+    double    diameter;
+    double    height;
     struct s_cylinder *next;
 }   t_cylinder;
 
@@ -106,7 +106,7 @@ typedef struct s_camera
 typedef struct s_ambient 
 {
     t_colour    colour;
-    float       ratio;
+    double       ratio;
 }   t_ambient;
 
 // -------------------------------------------------------------
@@ -115,7 +115,7 @@ typedef struct s_light
 {
     t_colour    colour;
     t_pos3      place;
-    float       ratio;
+    double       ratio;
 }   t_light;
 
 // -------------------------------------------------------------
