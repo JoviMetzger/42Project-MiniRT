@@ -6,18 +6,24 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 22:01:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 23:32:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
-// use split by space for this, careful with memory!
-// void		convert_input(char **arr)
-// {
-//		// piece by piece, convert and add to struct
-//		// check again validity of input
-// }
+static void	sort_into_struct(char **elem_str, int type)
+{
+	int		i;
+
+	i = 0;
+	printf("type = %i\n", type);
+	while (elem_str[i])
+	{
+		printf("str = %s\n", elem_str[i]);
+		i++;
+	}
+}
 
 /**
  * @brief	convert validated string data into double/int etc
@@ -25,25 +31,15 @@
  * 			after conversion, check converted info again:
  * 			check - ratio, format, etc but in converted form now not string
 */
-void	convert_input(t_data *data, char **arr)
+static void	convert_element(char **arr, int type, int i)
 {
 	char	**elem_str;
-	int		amount;
-	int		i;
-	
-	i = 0;
-	while (arr[i])
-	{
-		amount = input_count(arr[i]);
-		elem_str = (char **)malloc(sizeof(char *) * (amount + 1));
-		if (!elem_strs)
-			free_arr_error("malloc failed convert_input()", arr, NULL);
-		i++;
-	}
-	
-	// convert_elems(t_data *data, char **arr);
-	// convert + add as we goo
-	// check again all info is valid, ratio, format...
+
+	elem_str = ft_split(arr[i], ' ');
+	if (!elem_str)
+		free_arr_error("malloc failed", arr, NULL);
+	sort_into_struct(elem_str, type);
+	free_array(elem_str);
 }
 
 void	convert_input(t_data *data, char **arr)
@@ -51,24 +47,27 @@ void	convert_input(t_data *data, char **arr)
 	(void) data;
 	int		i;
 	int		type;
+	int		flag;
 
 	i = 0;
 	type = 0;
+	flag = 0;
 	// for each element, make array, convert input, add to data struct
 	// free secondary array each time
 	// if error, free made array, free arr, error, exit
 	while (arr[i])
 	{
-		type = is_caps(arr[i]);
-		if (type)
-			convert_element(arr, type, i);
-		else
+		type = get_type(arr[i]);
+		printf("type first = %i\n", type);
+		if (type == 999)
+			i++;
+		else if (type == 0)
+			free_arr_error("Unknow parser error", arr, NULL);
+		else if (type != 0 && type != 999)
 		{
-			type = is_other(arr[i]);
 			convert_element(arr, type, i);
+			i++;
 		}
-		i++;
 	}
-	// free arr
-	// validate all data
+	// validiate_numbers() // validate all data from within t_data struct
 }

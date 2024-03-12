@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 20:34:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 23:21:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,11 @@ void	validate_elems(char **arr)
 	{
 		if (!is_valid_no(arr[i]))
 			free_arr_error("Invalid character", arr, NULL);
-		type = is_caps(arr[i]);
-		if (type)
-		{
-			if (!check_no_elems(arr[i], type))
-				free_arr_error("Invalid number of arguments", arr, NULL);
-		}
-		else
-		{
-			type = is_other(arr[i]);
-			if (!check_no_elems(arr[i], type))
-				free_arr_error("Invalid number of arguments", arr, NULL);
-		}
+		type = get_type(arr[i]);
+		if (type == 0)
+			free_arr_error("Unknow parser error", arr, NULL);
+		if (!check_no_elems(arr[i], type))
+			free_arr_error("Invalid number of arguments", arr, NULL);
 		i++;
 	}
 }

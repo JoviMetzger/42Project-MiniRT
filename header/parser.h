@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 20:34:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 23:26:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ char		**rt_malloc(char **arr, int size, int file);
 int			is_alpha(int c);
 int			is_dash(int c);
 int			is_valid(int c);
+int			is_space(char *str);
+int			get_type(char *str);
 
 
 // ----------- /check_elements/ ------------ //
