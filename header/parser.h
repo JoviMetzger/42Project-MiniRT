@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/08 17:04:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 15:31:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@
 # define sp 5
 # define cy 6
 
+typedef struct s_elems
+{
+	bool	sp_b;
+	bool	pl_b;
+	bool	cy_b;
+}		t_elems;
+
 // --- parse_input --- //
 void		parse_input(int argc, char **argv, t_data *data);
 
@@ -41,11 +48,18 @@ void		check_caps_c(char **arr);
 // --- check_caps_l --- //
 void		check_caps_l(char **arr);
 
+// --- check_elems --- //
+int			check_a(char *str);
+int			check_c(char *str);
+int			check_l(char *str);
+int			check_sp(char *str);
+int			check_cy(char *str);
+
 // --- check_input --- //
 void		check_elements(char **arr);
 
 // --- parser_error --- //
-void		free_arr_error(char *msg, char **arr);
+void		free_arr_error(char *msg, char **arr, t_elems *check);
 void		free_close_parse_error(char *msg, char **ar, char *line, int file);
 void		parse_error(char *msg, int file);
 void 		error_msg2(char *msg);

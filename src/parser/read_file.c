@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 20:14:17 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/08 17:04:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 15:34:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 static void	check_input(char **arr)
 {
 	check_elements(arr);
-	// check_cap_vals(arr);
+	// check_cap_vals(arr); // ensure AA failes etc
 	// check_other(arr);
 	// check_invalid(arr);
 }
@@ -31,7 +31,7 @@ static void	check_input(char **arr)
 */
 static void	convert_input(char **arr)
 {
-	(void)	arr;
+	(void) arr;
 	return ;
 }
 
@@ -40,8 +40,8 @@ static void	convert_input(char **arr)
 */
 static void	add_input(t_data *data, char **arr)
 {
-	(void)	arr;
-	(void)	data;
+	(void) arr;
+	(void) data;
 	// init data (?)
 	return ;
 }
@@ -76,7 +76,6 @@ void	read_file(t_data *data, int file)
 	char	*line;
 	char	**arr;
 	int		i;
-	(void)	data;
 
 	i = 0;
 	line = get_next_line(file);

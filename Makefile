@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/08 17:00:12 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/12 15:17:41 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,10 @@ SRCS			= main.c											\
 					ray.c											\
 					parser/parse_input.c							\
 					parser/read_file.c								\
-					parser/check_caps/check_caps_a.c				\
-					parser/check_caps/check_caps_l.c				\
-					parser/check_caps/check_caps_c.c				\
+					parser/check_elements/check_caps_a.c			\
+					parser/check_elements/check_caps_l.c			\
+					parser/check_elements/check_caps_c.c			\
+					parser/check_elements/check_elems.c				\
 					parser/check_input.c							\
 					parser/free_utils.c								\
 					parser/parser_error.c							\
@@ -83,7 +84,7 @@ $(MLX42):
 $(OBJ_PATH)/%.o: $(SRC_DIR)/%.c $(SRC_HEADER)
 		@mkdir -p $(OBJ_PATH)
 		@mkdir -p $(OBJ_PATH)/parser
-		@mkdir -p $(OBJ_PATH)/parser/check_caps
+		@mkdir -p $(OBJ_PATH)/parser/check_elements
 		@$(CC) $(CFLAGS) -c -o $@ $<
 
 # Executest the program
