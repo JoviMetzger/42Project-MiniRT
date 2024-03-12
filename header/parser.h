@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 23:54:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/13 00:35:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ double		ft_atof(char *str);
 
 // --- sort_caps --- //
 int			sort_a(char **elem_str, t_data *data);
+int			sort_l(char **elem_str, t_data *data);
 
 // --- sort_other --- //
 
