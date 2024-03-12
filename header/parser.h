@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 18:59:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 19:02:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,15 @@ int			validate_sp(char *str);
 int			validate_cy(char *str);
 int			validate_pl(char *str);
 
+// --- valid_nums --- //
+int			is_rbg(char *str);
+int			is_light(char *str);
+
+// --- valid_nums_2 --- //
+
 // --- validate_utils --- //
 int			is_caps(char *str);
 int			is_other(char *str);
-
-// --- validate_utils_2 --- //
-int			is_rbg(char *str);
-int			is_light(char *str);
 
 // ----------- /convert/ ----------- //
 

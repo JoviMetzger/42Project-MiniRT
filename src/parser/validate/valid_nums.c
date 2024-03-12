@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   validate_utils_2.c                                 :+:    :+:            */
+/*   valid_nums.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 19:00:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 19:02:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
 /**
- * 
- * 
+
 light	-			[0.0,1.0]
 
 r g b	- 			[0 - 255] no decimals
@@ -32,9 +31,7 @@ decimal	-			[decimals] (diameter/height)
 // is light
 // is rgb
 // is vector
-// is coords
-// is fov
-// is decimal
+
 
 
 int	is_rbg(char *str)
