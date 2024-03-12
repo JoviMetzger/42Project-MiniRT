@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   check_utils_2.c                                    :+:    :+:            */
+/*   check_utils.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 17:30:17 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 19:50:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 19:57:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,32 @@ int	check_cy(char *str)
 				return (0);
 			return (1);
 		}
+	}
+	return (0);
+}
+
+void	check_dup(char **arr, int type, int i)
+{
+	while (arr[i])
+	{
+		if (check_capital(arr[i], type) == 1)
+			free_arr_error("Duplicate element", arr, NULL);
+		i++;
+	}
+}
+
+int	check_capital(char *str, int type)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	if (str[i] == type)
+	{
+		if (!str[i + 1] || (str[i + 1] && !ft_isspace(str[i + 1])))
+			return (0);
+		return (1);
 	}
 	return (0);
 }

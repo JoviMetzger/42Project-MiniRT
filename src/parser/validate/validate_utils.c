@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 17:21:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 19:38:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 20:15:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ int	num_elems(char *str)
 
 int	is_caps(char *str)
 {
-	if (check_a(str) == 1)
+	if (check_capital(str, 'A') == 1)
 		return (A);
-	else if (check_l(str) == 1)
+	else if (check_capital(str, 'L') == 1)
 		return (L);
-	else if (check_c(str) == 1)
+	else if (check_capital(str, 'C') == 1)
 		return (C);
 	return (0);
 }

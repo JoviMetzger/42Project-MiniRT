@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 19:52:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 20:14:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,17 @@ void		close_protect(int file);
 
 // ----------- /check_elements/ ------------ //
 
-// --- check_caps_a --- //
-int			check_a(char *str);
-void		check_caps_a(char **arr);
-// --- check_caps_c --- //
-int			check_c(char *str);
-void		check_caps_c(char **arr);
-// --- check_caps_l --- //
-int			check_l(char *str);
-void		check_caps_l(char **arr);
+// --- check_caps --- //
+void		check_a(char **arr);
+void		check_c(char **arr);
+void		check_l(char **arr);
 
 // --- check_utils --- //
+int			check_pl(char *str);
 int			check_sp(char *str);
 int			check_cy(char *str);
-int			check_pl(char *str);
+void		check_dup(char **arr, int type, int i);
+int			check_capital(char *str, int type);
 
 // --- check_elements --- //
 void		check_elements(char **arr);

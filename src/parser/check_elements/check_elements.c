@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:36:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 17:30:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 20:12:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static	int	check_invalid(char *str)
 		i++;
 	if (str[i])
 	{
-		if (!check_a(&str[i]) && !check_c(&str[i]) && !check_l(&str[i])
+		if (str[i] != 'A' && str[i] != 'L' && str[i] != 'C'
 			&& !check_sp(&str[i]) && !check_pl(&str[i])
 			&& !check_cy(&str[i]))
 			return (1);
@@ -80,8 +80,8 @@ static void	check_other_elements(char **arr)
 */
 void	check_elements(char **arr)
 {
-	check_caps_a(arr);
-	check_caps_l(arr);
-	check_caps_c(arr);
+	check_l(arr);
+	check_c(arr);
+	check_a(arr);
 	check_other_elements(arr);
 }
