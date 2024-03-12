@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/12 20:05:43 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/12 20:29:18 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ SRCS			= main.c											\
 					colour.c										\
 					render.c										\
 					ray.c											\
-					parser/parse_input.c							\
 					parser/check_elements/check_caps.c				\
 					parser/check_elements/check_elements.c			\
 					parser/check_elements/check_utils.c				\
@@ -48,9 +47,11 @@ SRCS			= main.c											\
 					parser/convert/valid_nums_2.c					\
 					parser/convert/valid_caps.c						\
 					parser/convert/valid_other.c					\
-					parser/free_utils.c								\
+					parser/parse_input.c							\
+					parser/parser_free.c							\
 					parser/parser_error.c							\
 					parser/parser_utils.c							\
+					parser/parser_utils_2.c							\
 
 SRC_DIR			= src
 SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))

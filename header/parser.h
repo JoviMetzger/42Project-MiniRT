@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 20:21:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 20:34:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void		free_close_parse_error(char *msg, char **ar, char *line, int file);
 void		parse_error(char *msg, int file);
 void 		error_msg2(char *msg);
 
+// --- parser_free --- //
+void		free_array(char **arr);
+void		free_close_util(char *line, int file);
+void		close_protect(int file);
+
 // --- parser_utils --- //
 int			is_num(int c);
 int			ft_isspace(int c);
@@ -51,10 +56,10 @@ int			is_comma(int c);
 int			is_dot(int c);
 char		**rt_malloc(char **arr, int size, int file);
 
-// --- free_utils --- //
-void		free_array(char **arr);
-void		free_close_util(char *line, int file);
-void		close_protect(int file);
+// --- parser_utils_2 --- //
+int			is_alpha(int c);
+int			is_dash(int c);
+int			is_valid(int c);
 
 
 // ----------- /check_elements/ ------------ //
@@ -81,7 +86,6 @@ void		check_elements(char **arr);
 void		validate_elems(char **arr);
 
 // --- validate_utils --- //
-int			is_alpha(int c);
 int			is_valid_no(char *str);
 int			num_elems(char *str);
 int			is_caps(char *str);

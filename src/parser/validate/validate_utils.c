@@ -6,35 +6,39 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 17:21:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 20:15:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 20:41:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
-int	is_alpha(int c)
+static int	skip_alpha(char *str)
 {
-	return ((c >= 'a' && c <= 'z')
-		|| (c >= 'A' && c <= 'Z'));
+	int		i;
+
+	i = 0;
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	while (str[i] && is_alpha(str[i]))
+		i++;
+	return (i);
 }
 
 int	is_valid_no(char *str)
 {
 	int		i;
 
-	i = 0;
+	i = skip_alpha(str);
 	while (str[i])
 	{
-		while (str[i] && ft_isspace(str[i]))
+		printf("str = %c\n", str[i]);
+		if (ft_isspace(str[i]))
 			i++;
-		while (str[i] && is_alpha(str[i]))
-			i++;
-		if (!is_num(str[i]) && !is_dot(str[i])
-			&& !is_comma(str[i]) && !ft_isspace(str[i]))
-			return (1);
+		if (!is_valid(str[i]))
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	num_elems(char *str)
