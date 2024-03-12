@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 16:46:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 17:42:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,6 @@ void		parse_input(int argc, char **argv, t_data *data);
 // --- read_file --- //
 void		read_file(t_data *data, int file);
 
-// --- check_caps_a --- //
-void		check_caps_a(char **arr);
-// --- check_caps_c --- //
-void		check_caps_c(char **arr);
-// --- check_caps_l --- //
-void		check_caps_l(char **arr);
-// --- check_utils --- //
-int			check_a(char *str);
-int			check_c(char *str);
-int			check_l(char *str);
-int			check_sp(char *str);
-int			check_cy(char *str);
-
-// --- check_elements --- //
-void		check_elements(char **arr);
-
-// --- validate --- //
-
-// --- convert --- //
-
 // --- parser_error --- //
 void		free_arr_error(char *msg, char **arr, t_elems *check);
 void		free_close_parse_error(char *msg, char **ar, char *line, int file);
@@ -76,5 +56,51 @@ char		**rt_malloc(char **arr, int size, int file);
 void		free_array(char **arr);
 void		free_close_util(char *line, int file);
 void		close_protect(int file);
+
+// ----------- /check_elements/ ------------ //
+
+// --- check_caps_a --- //
+void		check_caps_a(char **arr);
+// --- check_caps_c --- //
+void		check_caps_c(char **arr);
+// --- check_caps_l --- //
+void		check_caps_l(char **arr);
+
+// --- check_utils --- //
+int			check_a(char *str);
+int			check_c(char *str);
+int			check_l(char *str);
+int			check_sp(char *str);
+int			check_cy(char *str);
+int			check_pl(char *str);
+
+// --- check_elements --- //
+void		check_elements(char **arr);
+
+// ------------ /validate/ ------------ //
+
+// --- validate --- //
+void		validate_elems(char **arr);
+
+// --- validate_a --- //
+int			validate_a(char *str);
+// --- validate_c --- //
+int			validate_c(char *str);
+// --- validate_l --- //
+int			validate_l(char *str);
+// --- validate_pl --- //
+int			validate_pl(char *str);
+// --- validate_sp --- //
+int			validate_sp(char *str);
+// --- validate_cy --- //
+int			validate_cy(char *str);
+
+// --- validate_utils --- //
+int			is_caps(char *str);
+int			is_other(char *str);
+
+// ----------- /convert/ ----------- //
+
+// --- convert --- //
 
 #endif

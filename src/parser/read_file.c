@@ -6,29 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 20:14:17 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 17:00:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 17:33:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/parser.h"
 
 /**
- * @brief	while input is in string format, check it's validity
- * 			Ambient light, Light and Camera must be declared and only once
- * 			all other elements (sp, cy, pl) must have correct values
- * 			if error/invalid, free in check function, error and exit
-*/
-static void	check_input(char **arr)
-{
-	check_elements(arr);
-	validate_elems(arr);
-}
-
-/**
  * @brief	convert validated string data into double/int etc
- * 			during AND after conversion, check converted info again:
+ * 			as we convert, we add to t_data struct
+ * 			after conversion, check converted info again:
  * 			check - ratio, format, etc but in converted form now not string
- * @note	probabaly just convert and add to structs ...
 */
 static void	convert_input(t_data *data, char **arr)
 {
@@ -47,11 +35,18 @@ static void	convert_input(t_data *data, char **arr)
  * 			converts from string to double/int etc..
  * 			adds them to the t_data struct
  * 			if something wrong, function will free, error and exit
- * 			willnot return here if error
+ * 			will not return here if error
+ * @brief	(check elements + validate_elems) 
+ * 			while input is in string format, check it's validity
+ * 			Ambient light, Light and Camera must be declared and only once
+ * 			all other elements (sp, cy, pl) must be declared, poss multi
+ * 			if error/invalid, free in check function, error and exit
+ * 			info attached to each element is validated before conversion
 */
 static void	parse_array(t_data *data, char **arr)
 {
-	check_input(arr);
+	check_elements(arr);
+	validate_elems(arr);
 	convert_input(data, arr);
 }
 
