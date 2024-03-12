@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/12 20:29:18 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/12 21:52:40 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INPUT_FILE		= ./images_rt/test1.rt
 CC 				= cc
 CFLAGS 			= -Wall -Wextra
 CFLAGS			+= -Werror
-CFLAGS			+= -g -fsanitize=address	# For leaks OR 'make && valgrind --leak-check=full ./miniRT ...'
+CFLAGS			+= -g -fsanitize=address
 
 # Libraries
 LIBFT_PATH		= ./libraries/libft

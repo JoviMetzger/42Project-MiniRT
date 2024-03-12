@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 19:28:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 21:49:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ decimal	-			[decimals] (diameter/height)
 // is light
 // is rgb
 // is vector
-
 
 // int	is_rbg(char *str)
 // {

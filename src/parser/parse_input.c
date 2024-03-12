@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 19:53:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 21:53:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@
 */
 static void	parse_array(t_data *data, char **arr)
 {
-	(void) data;
 	check_elements(arr);
 	validate_elems(arr);
-	// convert_input(data, arr);
+	convert_input(data, arr);
 }
 
 /**
