@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/12 17:41:49 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/12 18:58:00 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,20 +46,14 @@ SRCS			= main.c											\
 					parser/check_elements/check_utils_2.c			\
 					parser/check_elements/check_elements.c			\
 					parser/validate/validate.c						\
-					parser/validate/validate_a.c					\
-					parser/validate/validate_c.c					\
-					parser/validate/validate_l.c					\
-					parser/validate/validate_sp.c					\
-					parser/validate/validate_pl.c					\
-					parser/validate/validate_cy.c					\
+					parser/validate/validate_caps.c					\
+					parser/validate/validate_other.c				\
 					parser/validate/validate_utils.c				\
+					parser/validate/validate_utils_2.c				\
 					parser/convert/convert.c						\
 					parser/free_utils.c								\
 					parser/parser_error.c							\
 					parser/parser_utils.c							\
-
-# parser/convert
-# parser/validate
 
 SRC_DIR			= src
 SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 17:42:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 18:59:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		parse_error(char *msg, int file);
 void 		error_msg2(char *msg);
 
 // --- parser_utils --- //
+int			is_num(int c);
 int			ft_isspace(int c);
 int			is_dot(int c);
 char		**rt_malloc(char **arr, int size, int file);
@@ -82,22 +83,23 @@ void		check_elements(char **arr);
 // --- validate --- //
 void		validate_elems(char **arr);
 
-// --- validate_a --- //
+// --- validate_caps --- //
 int			validate_a(char *str);
-// --- validate_c --- //
 int			validate_c(char *str);
-// --- validate_l --- //
 int			validate_l(char *str);
-// --- validate_pl --- //
-int			validate_pl(char *str);
-// --- validate_sp --- //
+
+// --- validate_other --- //
 int			validate_sp(char *str);
-// --- validate_cy --- //
 int			validate_cy(char *str);
+int			validate_pl(char *str);
 
 // --- validate_utils --- //
 int			is_caps(char *str);
 int			is_other(char *str);
+
+// --- validate_utils_2 --- //
+int			is_rbg(char *str);
+int			is_light(char *str);
 
 // ----------- /convert/ ----------- //
 

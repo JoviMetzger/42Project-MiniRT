@@ -1,19 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   validate_pl.c                                      :+:    :+:            */
+/*   validate_utils_2.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/03/12 17:41:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 17:43:04 by smclacke      ########   odam.nl         */
+/*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/12 19:00:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
-int	validate_pl(char *str)
+/**
+ * 
+ * 
+light	-			[0.0,1.0]
+
+r g b	- 			[0 - 255] no decimals
+
+vector	- 			[-1,1] xyz
+
+coordinates -		[decimals] xyz
+
+FOV		-			[0,180]
+
+decimal	-			[decimals] (diameter/height)
+
+*/
+
+// is light
+// is rgb
+// is vector
+// is coords
+// is fov
+// is decimal
+
+
+int	is_rbg(char *str)
 {
+	(void) str;
+	return (1);
+}
+
+int	is_light(char *str)
+{
+	int		i;
+
+	i = 0;
 	printf("str = %s\n", str);
+	// while (str[i])
+	// {
+		
+	// }
 	return (1);
 }
