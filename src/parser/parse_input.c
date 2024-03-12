@@ -6,11 +6,70 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/08 15:38:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 19:53:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/parser.h"
+
+/**
+ * @brief	takes array of strings from read_file()
+ * 			checks the elements and values are correct
+ * 			converts from string to double/int etc..
+ * 			adds them to the t_data struct
+ * 			if something wrong, function will free, error and exit
+ * 			will not return here if error
+ * @brief	(check elements + validate_elems) 
+ * 			while input is in string format, check it's validity
+ * 			Ambient light, Light and Camera must be declared and only once
+ * 			all other elements (sp, cy, pl) must be declared, poss multi
+ * 			if error/invalid, free in check function, error and exit
+ * 			number of arguments and characters checked before conversion
+*/
+static void	parse_array(t_data *data, char **arr)
+{
+	(void) data;
+	check_elements(arr);
+	validate_elems(arr);
+	// convert_input(data, arr);
+}
+
+/**
+ * @brief	read through the file line by line, copying each
+ * 			line into a 2D array of strings (arr)
+ * 			if error occurs, array and line is freed, file is closed,
+ * 			error message and exit
+ * 			else close file, call parse_array which checks input, converts it
+ * 			and adds everything into t_data struct, 
+ * 			then frees array and line and returns to main to continue
+ * 			rt_malloc is protected :)
+*/
+static void	read_file(t_data *data, int file)
+{
+	char	*line;
+	char	**arr;
+	int		i;
+
+	i = 0;
+	line = get_next_line(file);
+	arr = rt_malloc(NULL, BUFF_SIZE, file);
+	while (line)
+	{
+		if (line)
+		{
+			arr[i] = ft_strdup(line);
+			if (!arr[i])
+				free_close_parse_error("malloc failure", arr, line, file);
+			free(line);
+			line = get_next_line(file);
+			i++;
+		}
+	}
+	arr[i] = NULL;
+	free_close_util(line, file);
+	parse_array(data, arr);
+	free_array(arr);
+}
 
 static void	check_file_type(char *arg)
 {

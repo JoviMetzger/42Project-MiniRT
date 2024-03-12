@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/12 19:21:54 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/12 19:51:39 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,13 +38,11 @@ SRCS			= main.c											\
 					render.c										\
 					ray.c											\
 					parser/parse_input.c							\
-					parser/read_file.c								\
 					parser/check_elements/check_caps_a.c			\
 					parser/check_elements/check_caps_l.c			\
 					parser/check_elements/check_caps_c.c			\
-					parser/check_elements/check_utils.c				\
-					parser/check_elements/check_utils_2.c			\
 					parser/check_elements/check_elements.c			\
+					parser/check_elements/check_utils.c				\
 					parser/validate/validate.c						\
 					parser/validate/validate_utils.c				\
 					parser/convert/convert.c						\

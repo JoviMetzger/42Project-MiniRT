@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 19:32:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 19:52:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ typedef struct s_elems
 // --- parse_input --- //
 void		parse_input(int argc, char **argv, t_data *data);
 
-// --- read_file --- //
-void		read_file(t_data *data, int file);
-
 // --- parser_error --- //
 void		free_arr_error(char *msg, char **arr, t_elems *check);
 void		free_close_parse_error(char *msg, char **ar, char *line, int file);
@@ -59,25 +56,27 @@ void		free_array(char **arr);
 void		free_close_util(char *line, int file);
 void		close_protect(int file);
 
+
 // ----------- /check_elements/ ------------ //
 
 // --- check_caps_a --- //
+int			check_a(char *str);
 void		check_caps_a(char **arr);
 // --- check_caps_c --- //
+int			check_c(char *str);
 void		check_caps_c(char **arr);
 // --- check_caps_l --- //
+int			check_l(char *str);
 void		check_caps_l(char **arr);
 
 // --- check_utils --- //
-int			check_a(char *str);
-int			check_c(char *str);
-int			check_l(char *str);
 int			check_sp(char *str);
 int			check_cy(char *str);
 int			check_pl(char *str);
 
 // --- check_elements --- //
 void		check_elements(char **arr);
+
 
 // ------------ /validate/ ------------ //
 
@@ -91,9 +90,11 @@ int			num_elems(char *str);
 int			is_caps(char *str);
 int			is_other(char *str);
 
+
 // ----------- /convert/ ----------- //
 
 // --- convert --- //
+void		convert_input(t_data *data, char **arr);
 
 // --- validate_caps --- //
 int			validate_a(char *str);
