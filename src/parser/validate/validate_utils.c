@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 17:21:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 20:41:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 21:46:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ int	is_valid_no(char *str)
 	i = skip_alpha(str);
 	while (str[i])
 	{
-		printf("str = %c\n", str[i]);
-		if (ft_isspace(str[i]))
-			i++;
 		if (!is_valid(str[i]))
 			return (0);
 		i++;
