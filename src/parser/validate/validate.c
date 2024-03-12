@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 17:40:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 17:59:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	validate_elems(char **arr)
 			if (!check_caps(arr[i]))
 				free_arr_error("Element format error", arr, NULL);
 		}
-		else if (is_other(arr[i]))
+		if (is_other(arr[i]))
 		{
 			if (!check_other(arr[i]))
 				free_arr_error("Element format error", arr, NULL);

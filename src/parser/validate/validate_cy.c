@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 17:41:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 17:41:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/12 17:54:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 int	validate_cy(char *str)
 {
+	printf("str = %s\n", str);
 	return (1);
 }
