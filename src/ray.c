@@ -1,37 +1,40 @@
 #include "../header/miniRT.h"
 
-t_ray ft_create_ray(t_data *data, int x, int y)
+t_ray ft_create_ray(t_data *data, int pos_x, int pos_y)
 {
-
-    // t_ray ray;
+    t_ray ray;
     t_screen screen = data->screen;
-    
+
+    init_camera(data);
+
+    double img_width = data->mlx->width;
+    double img_height = data->mlx->height;
     // 1. Calculate the ray from the “eye” through the pixel,
     // give the screen struct it information;
 
-    screen.viewport_w = 2 * ((x + 0.5) / (double)data->mlx->width) - 1;
-    screen.viewport_h = 1 + 2 * ((y + 0.5) / (double)data->mlx->height);
-   
-    // Formula: image_ratio = width/height 
-    screen.img_ratio = (double)data->mlx->width / (double)data->mlx->height;
+    // image_ratio = window_width / window_height 
+    screen.img_ratio = img_width / img_height;
+
+    //  viewport_w = 2 * ((pos_x + 0.5) / window_width) - 1;
+    //  viewport_h = 1 - 2 * ((pos_y + 0.5) / window_height);
+    screen.viewport_w = 2 * ((pos_x + 0.5) / img_width) - 1;
+    screen.viewport_h = 1 - 2 * ((pos_y + 0.5) / img_height);
     
-    // - M_PI: This is a constant representing the value of pi.
-    // - tan(): This is the tangent function.
-    // - fov: field of view
-    // Formula:
-    //  vector_x = (2 * ((pixel_x + 0.5) / viewport_width) - 1) * ((double)viewport_width / viewport_height) * (tan((fov / 2) * (M_PI / 180)));
-    //  vector_y = (1 - 2 * ((pixel_y + 0.5) / viewport_height)) * (tan((fov / 2) * (M_PI / 180)));
-    screen.pixel_x = ?;
-    screen.pixel_y = ?;
+    screen.total_pixel_num = img_height * img_height; // might not need this
+    
+    // M_PI: This is a constant representing the value of pi.
+    // pixel_x = viewport_w * image_ratio * tan((fov / 2) * (M_PI / 180));
+    // pixel_y = viewport_h * (tan((fov / 2) * (M_PI / 180)));
+    screen.pixel_delata_x = screen.viewport_w * screen.img_ratio * tan((data->camera.FOV / 2) * (M_PI / 180));
+    screen.pixel_delata_y = screen.viewport_h * tan((data->camera.FOV / 2) * (M_PI / 180));
 
     // 2. Determine which objects the ray intersects, and
     // // give the ray struct it information
     // // need first screen info before we can calculate the ray info
-    ray.place = ;
-    ray.vector = ;
+    ray.place = data->camera.place;  // ray.place = {data->camera.place.x, data->camera.place.y, data->camera.place.z};
+    ray.vector = init_vector(data, screen);
     return (ray); // return the ray struct
 }
-
 
 
 // // ------------------- SOME TESTING ---------------------------
@@ -56,4 +59,5 @@ t_ray ft_create_ray(t_data *data, int x, int y)
 //     else 
 //         mlx_put_pixel(data->image, x, y, ft_pixel(0, 0, 0));
 // }
+
 // // ------------------------------------------------------------

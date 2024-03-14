@@ -10,6 +10,7 @@ void error_msg(char *msg)
 void ft_open_window(t_data *data)
 {
 	// Gotta error check this stuff
+	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	if (!(data->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", 0)))
 		error_msg("Failed to set up the connection.");
 	if (!(data->image = mlx_new_image(data->mlx, data->mlx->width, data->mlx->height)))

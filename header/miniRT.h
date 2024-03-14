@@ -19,22 +19,36 @@
 # define RESET "\033[0m"
 
 // Window
-#define WIDTH 1920
-#define HEIGHT 1080
+# define WIDTH 1920
+# define HEIGHT 1080
+
+// Math stuff
+# define M_PI 3.14159265358979323846 // This is a constant representing the value of pi. -> i am pretty sure it is defined in the 'math.h' library, but VScode is not reconizing it. So I defined it here again 
 
 // --- Structs --- 
 // -------------------------------------------------------------
+// // Position - coordinates
+// // Don't understand the difference between a union and struct.
+// // you can just as well use the 'normal' x,y,z position
+// // because to use 'double xyz' you need to do t_pos3.xyz[0], which is same as t_pos3.x
+// typedef union u_vec3
+// {
+//     double   xyz[3];
+//     struct
+//     {
+//         double	x;  // x-axis (left-right)
+//         double	y;  // y-axis (up-down)
+//         double	z;  // z-axis (forward-back forwrd)
+//     };
+// }   t_vec3;
+
 // Position - coordinates
-typedef union u_pos3
+typedef struct s_vec3
 {
-    double   xyz[3];
-    struct
-    {
-        double	x;  // x-axis (left-right)
-        double	y;  // y-axis (up-down)
-        double	z;  // z-axis (forward-back forwrd)
-    };
-}   t_pos3;
+    double	x;  // x-axis (left-right)
+    double	y;  // y-axis (up-down)
+    double	z;  // z-axis (forward-back forwrd)
+}   t_vec3;
 
 // -------------------------------------------------------------
 // Colour - RGB
@@ -49,30 +63,30 @@ typedef struct s_colour
 // Object1: sphere
 typedef struct s_sphere
 {
-    t_colour    colour;
-    t_pos3      center;
-    double       diameter;
-    struct s_sphere *next;
+    t_colour            colour;
+    t_vec3              center;
+    double              diameter;
+    struct s_sphere     *next;
 }   t_sphere;
 
 // Object2: plane
 typedef struct s_plane
 {
-    t_colour colour;
-    t_pos3   center;
-    t_pos3   vector;
-    struct s_plane *next;
+    t_colour        colour;
+    t_vec3          center;
+    t_vec3          vector;
+    struct s_plane  *next;
 }   t_plane;
 
 // Object3: cylinder
 typedef struct s_cylinder
 {
-    t_colour    colour;
-    t_pos3      center;
-    t_pos3      vector;
-    double    diameter;
-    double    height;
-    struct s_cylinder *next;
+    t_colour            colour;
+    t_vec3              center;
+    t_vec3              vector;
+    double              diameter;
+    double              height;
+    struct s_cylinder   *next;
 }   t_cylinder;
 
 // Struct for objects
@@ -88,8 +102,8 @@ typedef struct s_obj_type
 // Struct for camera
 typedef struct s_camera
 {
-    t_pos3      place;
-    t_pos3      vector;
+    t_vec3      place;
+    t_vec3      vector;
     int         FOV; //field of view
 }   t_camera;
 
@@ -98,7 +112,7 @@ typedef struct s_camera
 typedef struct s_ambient 
 {
     t_colour    colour;
-    double       ratio;
+    double      ratio;
 }   t_ambient;
 
 // -------------------------------------------------------------
@@ -106,8 +120,8 @@ typedef struct s_ambient
 typedef struct s_light 
 {
     t_colour    colour;
-    t_pos3      place;
-    double       ratio;
+    t_vec3      place;
+    double      ratio;
 }   t_light;
 
 // -------------------------------------------------------------
@@ -117,9 +131,11 @@ typedef struct s_screen
     double  viewport_w;
     double  viewport_h;
     double  img_ratio;
-    double  pixel_x;
-    double  pixel_y;
+    double  pixel_delata_x;
+    double  pixel_delata_y;
+    double  total_pixel_num; // might not need
 }   t_screen;
+
 
 // -------------------------------------------------------------
 // Main struct
@@ -138,10 +154,9 @@ typedef struct s_data
 // Ray struct (alone standing)
 typedef struct s_ray
 {
-    t_pos3  place;
-    t_pos3  vector;
+    t_vec3  place;
+    t_vec3  vector;
 }   t_ray;
-
 
 // --- Functions --- 
 // Main functions
@@ -154,6 +169,6 @@ void ft_render(t_data *data);
 void ft_testing(t_data *data, uint32_t x, uint32_t y);
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b);
 t_ray ft_create_ray(t_data *data, int x, int y);
-
+t_vec3 init_vector(t_data *data, t_screen screen);
 
 #endif
