@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/13 00:41:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 16:39:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,32 +26,35 @@
 
 int	sort_a(char **elem_str, t_data *data)
 {
-	(void) data;
-
+	// (void)	data;
 	/////////// RATIO ///////////
 	double		ratio;
 
 	ratio = ft_atof(elem_str[1]);
 	printf("A ratio = %f\n", ratio);
-	/////////// RATIO ///////////
+	data->ambient.ratio = ratio;
+	printf("struct ratio = %f\n", data->ambient.ratio);
+	// /////////// RATIO ///////////
 	
-	//////// RGB   ///////////
-	// convert_rgb(elem_str[2]); // create this func when i can use data...
-	
-	// solution for now for rgb
-	char	**rgb;
-	int			r;
-	int			g;
-	int			b;
 
 	
-	rgb = ft_split(elem_str[2], ',');
-	/// also check we get three strings back
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
-	free_array(rgb);
-	printf("A r = %i, A g = %i, A b = %i\n", r, g, b);
+	// //////// RGB   ///////////
+	// // convert_rgb(elem_str[2]); // create this func when i can use data...
+	
+	// // solution for now for rgb
+	// char	**rgb;
+	// int			r;
+	// int			g;
+	// int			b;
+
+	
+	// rgb = ft_split(elem_str[2], ',');
+	// /// also check we get three strings back
+	// r = ft_atoi(rgb[0]);
+	// g = ft_atoi(rgb[1]);
+	// b = ft_atoi(rgb[2]);
+	// free_array(rgb);
+	// printf("A r = %i, A g = %i, A b = %i\n", r, g, b);
 	//////// RGB   ///////////
 	
 	
@@ -60,14 +63,7 @@ int	sort_a(char **elem_str, t_data *data)
 
 int	sort_l(char **elem_str, t_data *data)
 {
-	// int		i = 0;
-	// while (elem_str[i])
-	// {
-	// 	printf("elem_str = %s\n", elem_str[i]);
-	// 	i++;
-	// }
 	(void) data;
-
 	//////// COORDS ///////////
 	// convert_coords(elem_str[2]); // create this func when i can use data...
 	// t_pos3 struct

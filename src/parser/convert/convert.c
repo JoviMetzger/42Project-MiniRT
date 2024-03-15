@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/13 00:34:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 16:38:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 static int	sort_into_struct(char **elem_str, t_data *data, int type)
 {
-	if (type == A && !sort_a(elem_str, data))
-		return (0);
-	else if (type == L && !sort_l(elem_str, data))
-		return (0);
+	if (type == A)
+	{
+		if (!sort_a(elem_str, data))
+			return (0);
+	}
+	// if (type == A && !sort_a(elem_str, data))
+	// 	return (0);
+	// else if (type == L && !sort_l(elem_str, data))
+	// 	return (0);
 	// else if (type == C && !sort_c(elem_str, data))
 	// 	return (0);
 	// else if (type == sp && sort_sp(elem_str, data))
