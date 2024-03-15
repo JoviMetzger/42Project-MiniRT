@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/15 21:11:04 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/15 22:37:52 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ MLX42			= $(MLX42_PATH)/build/libmlx42.a
 SRC_HEADER		= ./header
 
 SRCS			= main.c											\
+					print.c											\
 					movement.c 										\
 					open_window.c									\
 					colour.c										\
@@ -52,6 +53,8 @@ SRCS			= main.c											\
 					parser/convert/valid_other.c					\
 					parser/convert/add_rgb.c						\
 					parser/convert/add_coord.c						\
+					parser/convert/add_vec.c						\
+					parser/convert/add_info.c						\
 					parser/convert/convert_utils.c					\
 					parser/parse_input.c							\
 					parser/parser_free.c							\

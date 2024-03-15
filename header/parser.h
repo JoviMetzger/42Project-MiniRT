@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 21:10:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 22:37:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_elems
 	bool	pl_b;
 	bool	cy_b;
 }		t_elems;
+
+void		print_parser(t_data *data); // get rid later
 
 // --- parse_input --- //
 void		parse_input(int argc, char **argv, t_data *data);
@@ -98,8 +100,6 @@ int			is_other(char *str);
 // ----------- /convert/ ----------- //
 
 // --- convert --- //
-void		add_coord(t_data *data, int x, int y, int z);
-void		add_rgb(t_data *data, int r, int g, int b);
 void		convert_input(t_data *data, char **arr);
 
 // --- ft_atof --- //
@@ -134,6 +134,12 @@ int			is_rgb(char *str, int i, int num_flag);
 int			convert_rgb(t_data *data, char *str);
 
 // --- valid_nums_2 --- //
+int			convert_vector(t_data *data, char *str);
+
+// --- add_info --- //
+void		add_vec(t_data *data, int x, int y, int z);
+void		add_coord(t_data *data, int x, int y, int z);
+void		add_rgb(t_data *data, int r, int g, int b);
 
 // --- add_coord --- //
 void		coord_light(t_data *data, int x, int y, int z);
@@ -141,6 +147,11 @@ void		coord_camera(t_data *data, int x, int y, int z);
 void		coord_pl(t_data *data, int x, int y, int z);
 void		coord_sp(t_data *data, int x, int y, int z);
 void		coord_cy(t_data *data, int x, int y, int z);
+
+// --- add_vec --- //
+void		vec_camera(t_data *data, int x, int y, int z);
+void		vec_pl(t_data *data, int x, int y, int z);
+void		vec_cy(t_data *data, int x, int y, int z);
 
 // --- add_rgb --- //
 void		rgb_cy(t_data *data, int r, int g, int b);

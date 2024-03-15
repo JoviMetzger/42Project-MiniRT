@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 21:47:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 22:23:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,10 @@ int		is_coord(char *str, int i, int num_flag)
 int	convert_coord(t_data *data, char *str)
 {
 	char	**coord;
-	int		i;
 	int		x;
 	int		y;
 	int		z;
 
-	i = 0;
 	coord = ft_split(str, ',');
 	if (!coord)
 		return (0);

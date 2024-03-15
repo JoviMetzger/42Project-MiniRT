@@ -19,7 +19,9 @@
  **to do**
 
 **1**
-	- vector - i think same as coords
+	- coords 20.6 -> 20.000000000, fix this! atof thing?
+	- check this also for vector
+
 	- diameter - simple number, only use a bit, same as height
 	- height - simple number, only use a bit, same as diameter
 	conversions and lots of testing
