@@ -6,11 +6,30 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 19:02:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 19:11:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
+
+
+	//////// COORDS ///////////
+	// convert_coords(elem_str[2]); // create this func when i can use data...
+	// t_pos3 struct
+	
+	// char	**coords;
+	// double	x;
+	// double	y;
+	// double	z;
+	
+	// coords = ft_split(elem_str[1], ',');
+	// /// also check we get three strings back
+	// x = ft_atof(coords[0]);
+	// y = ft_atof(coords[1]);
+	// z = ft_atof(coords[2]);
+	// free_array(coords);
+	// printf("L x = %f, L y = %f, L z = %f\n", x, y, z);
+	//////// COORDS ///////////
 
 // coordinates -		[decimals] xyz
 // coords

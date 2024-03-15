@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 18:28:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 19:07:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # ifndef BUFF_SIZE
 #  define BUFF_SIZE 100
 # endif
+
 
 # define A 1
 # define L 2
