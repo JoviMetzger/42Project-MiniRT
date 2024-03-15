@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 22:25:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 22:43:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int		convert_vector(t_data *data, char *str)
 
 // FOV		-			[0,180]
 
-// decimal	-			[decimals] (diameter/height)
+// decimal	-			[decimals] (diameter/height) 
+// - similar to ratio, try just use one func and send flag for which data type etc
 
