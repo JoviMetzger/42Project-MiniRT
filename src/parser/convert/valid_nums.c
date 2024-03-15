@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 21:42:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 21:47:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	convert_coord(t_data *data, char *str)
 	x = ft_atof(coord[0]);
 	y = ft_atof(coord[1]);
 	z = ft_atof(coord[2]);
-	printf("x, y, z = %i %i %i\n", x, y, z);
 	add_coord(data, x, y, z);
 	return (free_array(coord), 1);
 }

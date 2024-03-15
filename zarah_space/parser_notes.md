@@ -17,13 +17,16 @@
 
 
  **to do**
- - logic check
- take element by element, convert numbers, check, then add (?)
 
- - organise this GOOOOD before getting too deep
- takes array, creates second array for each element
- think carefully about error handling!! and memory!!
+**1**
+	- vector - i think same as coords
+	- diameter - simple number, only use a bit, same as height
+	- height - simple number, only use a bit, same as diameter
+	conversions and lots of testing
 
- - utils
- already got useful shizz in /validate/ reuse pleaseeee
+**2**
+	check ratio, min/max etc for each in valid_nums & valid_other
+
+**3**
+	testing and done :)
 
