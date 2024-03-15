@@ -31,33 +31,19 @@ void ft_put_image(t_data *data)
 	{
 		while (y < data->mlx->height)
 		{
-			// // 1. Calculate the ray from the “eye” through the pixel,
-			// // 2. Determine which objects the ray intersects, and
-			// ray = ft_create_ray(data, x ,y); // create/calculate ray 
-			// // 3. Compute a color for the closest intersection point.
-			// mlx_put_pixel(data->image, x, y, ft_colour(ray, data));
-
+			// 1. Calculate the ray from the “eye” through the pixel,
+			// 2. Determine which objects the ray intersects, and
+			// 3. Compute a color for the closest intersection point.
 
 			// ------------ eVerYTinG BeloW tHiS liNe iS jUSt ME gOiNg "hhhUUUUUhhhhhh?????????????" -----------
 			// aka. cat meme (https://www.youtube.com/watch?v=xVWeRnStdSA)
-			// -------------- MORE TESTING ------------------------
+		
 			// --> Don't know what I am doning <--
 			ray = ft_create_ray(data, x ,y);
 			uint32_t colour = pixel_colour(ray);
 			mlx_put_pixel(data->image, x, y, colour);
 			// -----------------------------------------------
 			
-			// ray.place.x = 0;
-			// ray.place.y = 0;
-			// ray.place.z = 0;
-
-			// ray.vector.x = 0;
-			// ray.vector.y = 0;
-			// ray.vector.z = 0;
-
-			// uint32_t c = pixel_colour(ray);
-			// exit(1);
-
 			// -------------- TESTING ------------------------
 			// //  Drawing a circle -> rm later
 			// ft_testing(data, x, y);

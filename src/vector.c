@@ -20,8 +20,8 @@ t_vec3  matrix_math(double *matrix, t_vec3 pos)
     (void)matrix;
     (void)pos;
     int i = 0;
-    t_vec3 = 
-    printF("GOT SO FAR, MATRIX NOT HEre YEt!\n");
+    t_vec3 = ;
+    printf("GOT SO FAR, MATRIX NOT HEre YEt!\n");
 }
 
 t_vec3 init_vector(t_data *data, t_screen screen)

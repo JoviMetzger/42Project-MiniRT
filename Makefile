@@ -27,6 +27,7 @@ SRC				= ./src/main.c \
 					./src/colour.c \
 					./src/vector.c \
 					./src/vec_operators.c \
+					./src/ray_matrix.c \
 					./src/
 
 # Objects files

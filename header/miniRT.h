@@ -136,7 +136,6 @@ typedef struct s_screen
     double  total_pixel_num; // might not need
 }   t_screen;
 
-
 // -------------------------------------------------------------
 // Main struct
 typedef struct s_data
@@ -148,6 +147,7 @@ typedef struct s_data
     t_camera    camera;
     t_ambient   ambient;
     t_light     light;
+    double      matrix[16]; // representation for 4x4 matrices. Each element of the array corresponds to a specific position in the matrix, following a specific order. 
 }   t_data;
 
 // -------------------------------------------------------------
@@ -166,9 +166,21 @@ void ft_open_window(t_data *data);
 void ft_parse_input(int argc, char **argv, t_data *data);
 void ft_render(t_data *data);
 
-void ft_testing(t_data *data, uint32_t x, uint32_t y);
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b);
 t_ray ft_create_ray(t_data *data, int x, int y);
 t_vec3 init_vector(t_data *data, t_screen screen);
+
+// operators
+t_vec3 plus(t_vec3 u, t_vec3 v);
+t_vec3 minus(t_vec3 u, t_vec3 v);
+t_vec3 mult_vecvec(t_vec3 u, t_vec3 v);
+t_vec3 mult_vecdub(t_vec3 v, double dub);
+t_vec3 division_vec_dub(t_vec3 v, double dub);
+t_vec3 division_vec_vec(t_vec3 u, t_vec3 v);
+double dot_product(t_vec3 u, t_vec3 v);
+t_vec3 cross_product(t_vec3 u, t_vec3 v);
+double length_squared(t_vec3 vec);
+t_vec3	normalize_vector(t_vec3 v);
+
 
 #endif

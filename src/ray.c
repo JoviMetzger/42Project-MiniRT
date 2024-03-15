@@ -5,8 +5,6 @@ t_ray ft_create_ray(t_data *data, int pos_x, int pos_y)
     t_ray ray;
     t_screen screen = data->screen;
 
-    init_camera(data);
-
     double img_width = data->mlx->width;
     double img_height = data->mlx->height;
     // 1. Calculate the ray from the “eye” through the pixel,
@@ -28,6 +26,8 @@ t_ray ft_create_ray(t_data *data, int pos_x, int pos_y)
     screen.pixel_delata_x = screen.viewport_w * screen.img_ratio * tan((data->camera.FOV / 2) * (M_PI / 180));
     screen.pixel_delata_y = screen.viewport_h * tan((data->camera.FOV / 2) * (M_PI / 180));
 
+    // store the rays in a 'matrix' -> basiclly ctreating 'fake' rays so we can hit the opjects
+    store_ray_matrix(data);
     // 2. Determine which objects the ray intersects, and
     // // give the ray struct it information
     // // need first screen info before we can calculate the ray info
