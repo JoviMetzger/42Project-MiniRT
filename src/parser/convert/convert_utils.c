@@ -6,24 +6,47 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 17:07:54 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 19:10:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 21:29:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
-void	add_rgb(t_data *data, int type, int r, int g, int b)
+int	check_com(char *str, int i)
 {
-	if (type == 1)
-		add_to_ambient(data, r, g, b);
-	else if (type == 2)
-		add_to_light(data, r, g, b);
-	else if (type == 4)
-		add_to_pl(data, r, g, b);
-	else if (type == 5)
-		add_to_sp(data, r, g, b); 
-	else if (type == 6)
-		add_to_cy(data, r, g, b);
+	int	flag;
+
+	flag = 0;
+	while (str[i])
+	{
+		if (str[i] && is_comma(str[i]))
+			flag++;
+		i++;
+	}
+	if (flag != 2)
+		return (0);
+	return (1);
+}
+
+int	check_neg(char *str, int i)
+{
+	while (str[i])
+	{
+		if (str[i] && is_dash(str[i]))
+		{
+			if ((str[i + 1] && !is_num(str[i + 1]))
+				|| !str[i + 1])
+				return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	coord_valid(int c)
+{
+	return (ft_isspace(c) || is_num(c) || is_dot(c) || is_dash(c)
+		|| is_comma(c));
 }
 
 int	ratio_valid(int c)

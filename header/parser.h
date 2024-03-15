@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 19:07:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 21:10:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int			is_other(char *str);
 // ----------- /convert/ ----------- //
 
 // --- convert --- //
+void		add_coord(t_data *data, int x, int y, int z);
+void		add_rgb(t_data *data, int r, int g, int b);
 void		convert_input(t_data *data, char **arr);
 
 // --- ft_atof --- //
@@ -125,22 +127,32 @@ int			sort_cy(char **elem_str, t_data *data);
 // int			validate_pl(char *str);
 
 // --- valid_nums --- //
+int			is_coord(char *str, int i, int num_flag);
+int			convert_coord(t_data *data, char *str);
 int			is_ratio(char *str, int i, int num_flag, int dot_flag);
-int			is_rgb(char *str, int i, int num_flag, int com_flag);
-int			convert_rgb(t_data *data, char *str, int type);
+int			is_rgb(char *str, int i, int num_flag);
+int			convert_rgb(t_data *data, char *str);
 
 // --- valid_nums_2 --- //
 
+// --- add_coord --- //
+void		coord_light(t_data *data, int x, int y, int z);
+void		coord_camera(t_data *data, int x, int y, int z);
+void		coord_pl(t_data *data, int x, int y, int z);
+void		coord_sp(t_data *data, int x, int y, int z);
+void		coord_cy(t_data *data, int x, int y, int z);
 
 // --- add_rgb --- //
-void		add_to_cy(t_data *data, int r, int g, int b);
-void		add_to_sp(t_data *data, int r, int g, int b);
-void		add_to_pl(t_data *data, int r, int g, int b);
-void		add_to_light(t_data *data, int r, int g, int b);
-void		add_to_ambient(t_data *data, int r, int g, int b);
+void		rgb_cy(t_data *data, int r, int g, int b);
+void		rgb_sp(t_data *data, int r, int g, int b);
+void		rgb_pl(t_data *data, int r, int g, int b);
+void		rgb_light(t_data *data, int r, int g, int b);
+void		rgb_ambient(t_data *data, int r, int g, int b);
 
 // --- convert_utils --- //
-void		add_rgb(t_data *data, int type, int r, int g, int b);
+int			check_com(char *str, int i);
+int			check_neg(char *str, int i);
+int			coord_valid(int c);
 int			ratio_valid(int c);
 int			rgb_valid(int c);
 

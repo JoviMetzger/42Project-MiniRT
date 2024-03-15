@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 20:27:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 18:33:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 21:34:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ int	get_type(char *str)
 {
 	if (check_capital(str, 'A') == 1)
 		return (1);
-	else if (check_capital(str, 'L') == 1)
+	if (check_capital(str, 'L') == 1)
 		return (2);
-	else if (check_capital(str, 'C') == 1)
+	if (check_capital(str, 'C') == 1)
 		return (3);
-	else if (check_pl(str) == 1)
+	if (check_pl(str) == 1)
 		return (4);
-	else if (check_sp(str) == 1)
+	if (check_sp(str) == 1)
 		return (5);
-	else if (check_cy(str) == 1)
+	if (check_cy(str) == 1)
 		return (6);
-	else if (ft_strcmp(str, " ") == 0 || is_space(str))
-		return (999);
+	if (ft_strcmp(str, " ") == 0 || is_space(str))
+		return (99);
 	return (0);
 }

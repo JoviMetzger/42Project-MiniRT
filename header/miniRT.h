@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 19:10:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 21:23:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef struct s_data
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		light;
+	int			type;
 }	t_data;
 
 // -------------------------------------------------------------

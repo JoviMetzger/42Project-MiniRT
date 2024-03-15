@@ -6,25 +6,53 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 19:04:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 21:44:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
-static int	sort_into_struct(char **elem_str, t_data *data, int type)
+void	add_coord(t_data *data, int x, int y, int z)
 {
-	if (type == 1 && !sort_a(elem_str, data))
+	if (data->type == 3)
+		coord_camera(data, x, y, z);
+	else if (data->type == 2)
+		coord_light(data, x, y, z);
+	else if (data->type == 4)
+		coord_pl(data, x, y, z);
+	else if (data->type == 5)
+		coord_sp(data, x, y, z); 
+	else if (data->type == 6)
+		coord_cy(data, x, y, z);
+}
+
+void	add_rgb(t_data *data, int r, int g, int b)
+{
+	if (data->type == 1)
+		rgb_ambient(data, r, g, b);
+	else if (data->type == 2)
+		rgb_light(data, r, g, b);
+	else if (data->type == 4)
+		rgb_pl(data, r, g, b);
+	else if (data->type == 5)
+		rgb_sp(data, r, g, b); 
+	else if (data->type == 6)
+		rgb_cy(data, r, g, b);
+}
+
+static int	sort_into_struct(char **elem_str, t_data *data)
+{
+	if (data->type == 1 && !sort_a(elem_str, data))
 		return (0);
-	if (type == 2 && !sort_l(elem_str, data))
+	if (data->type == 2 && !sort_l(elem_str, data))
 		return (0);
-	if (type == 3 && !sort_c(elem_str, data))
+	if (data->type == 3 && !sort_c(elem_str, data))
 		return (0);
-	if (type == 5 && !sort_sp(elem_str, data))
+	if (data->type == 5 && !sort_sp(elem_str, data))
 		return (0);
-	if (type == 6 && !sort_cy(elem_str, data))
+	if (data->type == 6 && !sort_cy(elem_str, data))
 		return (0);
-	if (type == 4 && !sort_pl(elem_str, data))
+	if (data->type == 4 && !sort_pl(elem_str, data))
 		return (0);
 	return (1);
 }
@@ -35,14 +63,14 @@ static int	sort_into_struct(char **elem_str, t_data *data, int type)
  * 			after conversion, check converted info again:
  * 			check - ratio, format, etc but in converted form now not string
 */
-static void	convert_element(char **arr, t_data *data, int type, int i)
+static void	convert_element(char **arr, t_data *data, int i)
 {
 	char	**elem_str;
 
 	elem_str = ft_split(arr[i], ' ');
 	if (!elem_str)
 		free_arr_error("malloc failed", arr, NULL);
-	if (!sort_into_struct(elem_str, data, type))
+	if (!sort_into_struct(elem_str, data))
 	{
 		free_array(elem_str);
 		free_arr_error("Parser error", arr, NULL);
@@ -53,20 +81,18 @@ static void	convert_element(char **arr, t_data *data, int type, int i)
 void	convert_input(t_data *data, char **arr)
 {
 	int		i;
-	int		type;
 
 	i = 0;
-	type = 0;
 	while (arr[i])
 	{
-		type = get_type(arr[i]);
-		if (type == 999)
+		data->type = get_type(arr[i]);
+		if (data->type == 99)
 			i++;
-		else if (type == 0)
+		else if (data->type == 0)
 			free_arr_error("Parser error", arr, NULL);
-		else if (type != 0 && type != 999)
+		else if (data->type != 0 && data->type != 99)
 		{
-			convert_element(arr, data, type, i);
+			convert_element(arr, data, i);
 			i++;
 		}
 	}

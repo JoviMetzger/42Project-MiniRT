@@ -6,36 +6,57 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 19:11:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 21:42:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
+// coordinates -		can be negative [decimals] xyz
+int		is_coord(char *str, int i, int num_flag)
+{
+	if (!check_neg(str, 0))
+		return (0);
+	if (!check_com(str, 0))
+		return (0);
+	while (str[i])
+	{
+		while (str[i] && (is_num(str[i]) || is_dash(str[i]) || is_dot(str[i])))
+			i++;
+		num_flag++;
+		if (str[i] && is_comma(str[i]))
+			i++;
+		if (str[i] && !coord_valid(str[i]))
+			return (0);
+	}
+	if (num_flag != 3)
+		return (0);
+	return (1);
+}
 
-	//////// COORDS ///////////
-	// convert_coords(elem_str[2]); // create this func when i can use data...
-	// t_pos3 struct
-	
-	// char	**coords;
-	// double	x;
-	// double	y;
-	// double	z;
-	
-	// coords = ft_split(elem_str[1], ',');
-	// /// also check we get three strings back
-	// x = ft_atof(coords[0]);
-	// y = ft_atof(coords[1]);
-	// z = ft_atof(coords[2]);
-	// free_array(coords);
-	// printf("L x = %f, L y = %f, L z = %f\n", x, y, z);
-	//////// COORDS ///////////
+int	convert_coord(t_data *data, char *str)
+{
+	char	**coord;
+	int		i;
+	int		x;
+	int		y;
+	int		z;
 
-// coordinates -		[decimals] xyz
-// coords
+	i = 0;
+	coord = ft_split(str, ',');
+	if (!coord)
+		return (0);
+	if (!coord[0] || !coord[1] || !coord[2])
+		return (free_array(coord), 0);
+	x = ft_atof(coord[0]);
+	y = ft_atof(coord[1]);
+	z = ft_atof(coord[2]);
+	printf("x, y, z = %i %i %i\n", x, y, z);
+	add_coord(data, x, y, z);
+	return (free_array(coord), 1);
+}
 
-
-// light	-			[0.0,1.0]
+// light	-			can't be negative [0.0,1.0]
 int	is_ratio(char *str, int i, int num_flag, int dot_flag)
 {
 	while (str[i])
@@ -58,9 +79,11 @@ int	is_ratio(char *str, int i, int num_flag, int dot_flag)
 	return (1);
 }
 
-// r g b	- 			[0 - 255] no decimals
-int	is_rgb(char *str, int i, int num_flag, int com_flag)
+// r g b	- 			[0 - 255] no decimals or negatives
+int	is_rgb(char *str, int i, int num_flag)
 {
+	if (!check_com(str, 0))
+		return (0);
 	while (str[i])
 	{
 		while (str[i] && is_num(str[i]))
@@ -70,11 +93,8 @@ int	is_rgb(char *str, int i, int num_flag, int com_flag)
 		}
 		if (num_flag > 3)
 			return (0);
-		if (str[i] && is_comma(str[i]))
-			com_flag++;
-		if (com_flag > 2)
-			return (0);
-		num_flag = 0;
+		if (is_comma(str[i]))
+			num_flag = 0;
 		if (str[i] && !rgb_valid(str[i]))
 			return (0);
 		i++;
@@ -82,16 +102,13 @@ int	is_rgb(char *str, int i, int num_flag, int com_flag)
 	return (1);
 }
 
-int	convert_rgb(t_data *data, char *str, int type)
+int	convert_rgb(t_data *data, char *str)
 {
 	char	**rgb;
 	int		r;
 	int		g;
 	int		b;
 
-	r = 0;
-	g = 0;
-	b = 0;
 	rgb = ft_split(str, ',');
 	if (!rgb)
 		return (0);
@@ -100,6 +117,6 @@ int	convert_rgb(t_data *data, char *str, int type)
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
-	add_rgb(data, type, r, g, b);
+	add_rgb(data, r, g, b);
 	return (free_array(rgb), 1);
 }

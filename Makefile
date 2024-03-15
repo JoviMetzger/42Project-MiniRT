@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/15 17:55:38 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/15 21:11:04 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRCS			= main.c											\
 					parser/convert/valid_caps.c						\
 					parser/convert/valid_other.c					\
 					parser/convert/add_rgb.c						\
+					parser/convert/add_coord.c						\
 					parser/convert/convert_utils.c					\
 					parser/parse_input.c							\
 					parser/parser_free.c							\

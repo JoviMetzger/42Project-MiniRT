@@ -6,29 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 18:59:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 21:47:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
-
-	//////// COORDS ///////////
-	// convert_coords(elem_str[2]); // create this func when i can use data...
-	// t_pos3 struct
-	
-	// char	**coords;
-	// double	x;
-	// double	y;
-	// double	z;
-	
-	// coords = ft_split(elem_str[1], ',');
-	// /// also check we get three strings back
-	// x = ft_atof(coords[0]);
-	// y = ft_atof(coords[1]);
-	// z = ft_atof(coords[2]);
-	// free_array(coords);
-	// printf("L x = %f, L y = %f, L z = %f\n", x, y, z);
-	//////// COORDS ///////////
 
 /*
  * #Identifier     #Coordinates        #Ratio      #R,G,B
@@ -38,14 +20,17 @@ int	sort_l(char **elem_str, t_data *data)
 {
 	double	ratio;
 
-	//coords
+	if (!is_coord(elem_str[1], 0, 0))
+		return (0);
+	if (!convert_coord(data, elem_str[1]))
+		return (0);
 	if (!is_ratio(elem_str[2], 0, 0, 0))
 		return (0);
 	ratio = ft_atof(elem_str[2]);
 	data->light.ratio = ratio;
-	if (!is_rgb(elem_str[3], 0, 0, 0))
+	if (!is_rgb(elem_str[3], 0, 0))
 		return (0);
-	if (!convert_rgb(data, elem_str[3], 2))
+	if (!convert_rgb(data, elem_str[3]))
 		return (0);
 	return (1);
 }
@@ -56,10 +41,11 @@ int	sort_l(char **elem_str, t_data *data)
 */
 int	sort_c(char **elem_str, t_data *data)
 {
-	(void)	data;
-	(void)	elem_str;
+	if (!is_coord(elem_str[1], 0, 0))
+		return (0);
+	if (!convert_coord(data, elem_str[1]))
+		return (0);
 	return (1);
-	// coords
 	// 3d vector
 	// fov
 }
@@ -76,9 +62,9 @@ int	sort_a(char **elem_str, t_data *data)
 		return (0);
 	ratio = ft_atof(elem_str[1]);
 	data->ambient.ratio = ratio;
-	if (!is_rgb(elem_str[2], 0, 0, 0))
+	if (!is_rgb(elem_str[2], 0, 0))
 		return (0);
-	if (!convert_rgb(data, elem_str[2], 1))
+	if (!convert_rgb(data, elem_str[2]))
 		return (0);
 	return (1);
 }
