@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 16:29:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 17:13:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct s_camera
 // Struct for ambient - background
 typedef struct s_ambient 
 {
-    // t_colour    colour;
+    t_colour    colour;
     double       ratio;
 }   t_ambient;
 

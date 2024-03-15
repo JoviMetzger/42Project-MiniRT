@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/13 00:35:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 17:59:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,22 +108,34 @@ int			sort_l(char **elem_str, t_data *data);
 
 // --- sort_other --- //
 
+// USE THESE TO CHECK NUMBERA ARE IN CORRECT RATIO, FORMAT SHOULD ALREADY BE OK
+// // --- validate_caps --- //
+// int			validate_a(char *str);
+// int			validate_c(char *str);
+// int			validate_l(char *str);
 
-// --- validate_caps --- //
-int			validate_a(char *str);
-int			validate_c(char *str);
-int			validate_l(char *str);
-
-// --- validate_other --- //
-int			validate_sp(char *str);
-int			validate_cy(char *str);
-int			validate_pl(char *str);
+// // --- validate_other --- //
+// int			validate_sp(char *str);
+// int			validate_cy(char *str);
+// int			validate_pl(char *str);
 
 // --- valid_nums --- //
-int			is_rbg(char *str);
-int			is_light(char *str);
+int			is_ratio(char *str, int i, int num_flag, int dot_flag);
+int			is_rbg(char *str, int i, int num_flag, int com_flag);
+int			convert_rgb(t_data *data, char *str, int type);
 
 // --- valid_nums_2 --- //
 
+// --- add_rgb --- //
+void		add_to_cy(t_data *data, int r, int g, int b);
+void		add_to_sp(t_data *data, int r, int g, int b);
+void		add_to_pl(t_data *data, int r, int g, int b);
+void		add_to_light(t_data *data, int r, int g, int b);
+void		add_to_ambient(t_data *data, int r, int g, int b);
+
+// --- convert_utils --- //
+void		add_rgb(t_data *data, int type, int r, int g, int b);
+int			ratio_valid(int c);
+int			rgb_valid(int c);
 
 #endif
