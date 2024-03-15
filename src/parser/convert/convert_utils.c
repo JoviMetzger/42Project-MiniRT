@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 17:07:54 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 18:02:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 19:00:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	add_rgb(t_data *data, int type, int r, int g, int b)
 {
-	if (type == 'A')
+	if (type == 1)
 		add_to_ambient(data, r, g, b);
-	else if (type == 'L')
+	else if (type == 2)
 		add_to_light(data, r, g, b);
 	else if (type == 4)
 		add_to_pl(data, r, g, b);
 	else if (type == 5)
-		add_to_sp(data, r, g, b);
+		add_to_sp(data, r, g, b); 
 	else if (type == 6)
 		add_to_cy(data, r, g, b);
 }

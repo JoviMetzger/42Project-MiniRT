@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 18:03:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 19:04:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 static int	sort_into_struct(char **elem_str, t_data *data, int type)
 {
-	if (type == A && !sort_a(elem_str, data))
+	if (type == 1 && !sort_a(elem_str, data))
 		return (0);
-	else if (type == L && !sort_l(elem_str, data))
+	if (type == 2 && !sort_l(elem_str, data))
 		return (0);
-	else if (type == C && !sort_c(elem_str, data))
+	if (type == 3 && !sort_c(elem_str, data))
 		return (0);
-	// else if (type == sp && sort_sp(elem_str, data))
-	// 	return (0);
-	// else if (type == cy && sort_cy(elem_str, data))
-	// 	return (0);
-	// else if (type == pl && sort_pl(elem_str, data))
-	// 	return (0);
+	if (type == 5 && !sort_sp(elem_str, data))
+		return (0);
+	if (type == 6 && !sort_cy(elem_str, data))
+		return (0);
+	if (type == 4 && !sort_pl(elem_str, data))
+		return (0);
 	return (1);
 }
 
@@ -45,7 +45,7 @@ static void	convert_element(char **arr, t_data *data, int type, int i)
 	if (!sort_into_struct(elem_str, data, type))
 	{
 		free_array(elem_str);
-		free_arr_error("Unknown parser error", arr, NULL);
+		free_arr_error("Parser error", arr, NULL);
 	}
 	free_array(elem_str);
 }
@@ -63,12 +63,12 @@ void	convert_input(t_data *data, char **arr)
 		if (type == 999)
 			i++;
 		else if (type == 0)
-			free_arr_error("Unknown parser error", arr, NULL);
+			free_arr_error("Parser error", arr, NULL);
 		else if (type != 0 && type != 999)
 		{
 			convert_element(arr, data, type, i);
 			i++;
 		}
 	}
-	// validiate_numbers() // validate all data from within t_data struct (check ranges etc)
+	// validiate_numbers() // validate all data from within t_data struct (check ra)
 }

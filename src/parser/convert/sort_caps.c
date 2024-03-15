@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 18:05:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 18:59:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	sort_l(char **elem_str, t_data *data)
 		return (0);
 	ratio = ft_atof(elem_str[2]);
 	data->light.ratio = ratio;
-	if (!is_rbg(elem_str[3], 0, 0, 0))
+	if (!is_rgb(elem_str[3], 0, 0, 0))
 		return (0);
-	if (!convert_rgb(data, elem_str[3], 'L'))
+	if (!convert_rgb(data, elem_str[3], 2))
 		return (0);
 	return (1);
 }
@@ -56,6 +56,9 @@ int	sort_l(char **elem_str, t_data *data)
 */
 int	sort_c(char **elem_str, t_data *data)
 {
+	(void)	data;
+	(void)	elem_str;
+	return (1);
 	// coords
 	// 3d vector
 	// fov
@@ -73,9 +76,9 @@ int	sort_a(char **elem_str, t_data *data)
 		return (0);
 	ratio = ft_atof(elem_str[1]);
 	data->ambient.ratio = ratio;
-	if (!is_rbg(elem_str[2], 0, 0, 0))
+	if (!is_rgb(elem_str[2], 0, 0, 0))
 		return (0);
-	if (!convert_rgb(data, elem_str[2], 'A'))
+	if (!convert_rgb(data, elem_str[2], 1))
 		return (0);
 	return (1);
 }

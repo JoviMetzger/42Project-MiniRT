@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 23:21:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 18:31:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static int	check_no_elems(char *str, int type)
 {
-	if (type == A && (num_elems(str) != 3))
+	if (type == 'A' && (num_elems(str) != 3))
 		return (0);
-	if (type == C && (num_elems(str) != 4))
+	else if (type == 'C' && (num_elems(str) != 4))
 		return (0);
-	if (type == L && (num_elems(str) != 4))
+	else if (type == 'L' && (num_elems(str) != 4))
 		return (0);
-	if (type == sp && (num_elems(str) != 4))
+	else if (type == 5 && (num_elems(str) != 4))
 		return (0);
-	if (type == pl && (num_elems(str) != 4))
+	else if (type == 4 && (num_elems(str) != 4))
 		return (0);
-	if (type == cy && (num_elems(str) != 6))
+	else if (type == 6 && (num_elems(str) != 6))
 		return (0);
 	return (1);
 }

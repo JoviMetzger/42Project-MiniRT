@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 18:06:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/15 19:02:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	is_ratio(char *str, int i, int num_flag, int dot_flag)
 }
 
 // r g b	- 			[0 - 255] no decimals
-int	is_rbg(char *str, int i, int num_flag, int com_flag)
+int	is_rgb(char *str, int i, int num_flag, int com_flag)
 {
 	while (str[i])
 	{
@@ -69,7 +69,10 @@ int	convert_rgb(t_data *data, char *str, int type)
 	int		r;
 	int		g;
 	int		b;
-	
+
+	r = 0;
+	g = 0;
+	b = 0;
 	rgb = ft_split(str, ',');
 	if (!rgb)
 		return (0);
