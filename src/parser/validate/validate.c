@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 16:15:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 16:44:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	validate_elems(char **arr)
 	while (arr[i])
 	{
 		if (!is_valid_no(arr[i]))
-			free_arr_error("Invalid character", arr, NULL);
+			free_arr_error("invalid character", arr, NULL);
 		type = get_type(arr[i]);
 		if (type == 0)
-			free_arr_error("Unknown parser error", arr, NULL);
+			free_arr_error("unknown parser error", arr, NULL);
 		if (!check_no_elems(arr[i], type))
 			free_arr_error(NULL, arr, NULL);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 15:47:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 16:45:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	convert_input(t_data *data, char **arr)
 		if (data->type == 99)
 			i++;
 		else if (data->type == 0)
-			free_arr_error("Parser error", arr, NULL);
+			free_arr_error("parser error", arr, NULL);
 		else if (data->type != 0 && data->type != 99)
 		{
 			convert_element(arr, data, i);

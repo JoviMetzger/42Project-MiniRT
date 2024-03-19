@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:36:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 18:24:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 16:45:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,16 @@ static void	check_other_elements(char **arr)
 	while (arr[i])
 	{
 		if (check_invalid(arr[i]) == 1)
-			free_arr_error("Unknown element declaration", arr, check);
+			free_arr_error("unknown element declaration", arr, check);
 		check_present(arr[i], check);
 		i++;
 	}
 	if (!check->sp_b)
-		free_arr_error("Missing element declaration (sp)", arr, check);
+		free_arr_error("missing element declaration (sp)", arr, check);
 	if (!check->cy_b)
-		free_arr_error("Missing element declaration (cy)", arr, check);
+		free_arr_error("missing element declaration (cy)", arr, check);
 	if (!check->pl_b)
-		free_arr_error("Missing element declaration (pl)", arr, check);
+		free_arr_error("missing element declaration (pl)", arr, check);
 	free(check);
 }
 
