@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 14:38:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 15:07:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,8 @@ void		free_close_util(char *line, int file);
 void		close_protect(int file);
 
 // --- parser_utils --- //
-int			is_num(int c);
-int			ft_isspace(int c);
-int			is_comma(int c);
-int			is_dot(int c);
-char		**rt_malloc(char **arr, int size, int file);
-
-// --- parser_utils_2 --- //
-int			is_alpha(int c);
-int			is_dash(int c);
-int			is_valid(int c);
-int			is_space(char *str);
 int			get_type(char *str);
+char		**rt_malloc(char **arr, int size, int file);
 
 
 // ----------- /check_elements/ ------------ //
@@ -102,9 +92,6 @@ int			is_other(char *str);
 // --- convert --- //
 void		convert_input(t_data *data, char **arr);
 
-// --- ft_atof --- //
-double		ft_atof(char *str);
-
 // --- sort_caps --- //
 int			sort_a(char **elem_str, t_data *data);
 int			sort_l(char **elem_str, t_data *data);
@@ -115,7 +102,17 @@ int			sort_pl(char **elem_str, t_data *data);
 int			sort_sp(char **elem_str, t_data *data);
 int			sort_cy(char **elem_str, t_data *data);
 
-// USE THESE TO CHECK NUMBERA ARE IN CORRECT RATIO, FORMAT SHOULD ALREADY BE OK
+// --- valid_nums --- //
+int			is_coord(char *str, int i, int num_flag);
+int			convert_coord(t_data *data, char *str);
+int			is_ratio(char *str, int i, int num_flag, int dot_flag);
+int			is_rgb(char *str, int i, int num_flag);
+int			convert_rgb(t_data *data, char *str);
+
+// --- valid_nums_2 --- //
+int			convert_vector(t_data *data, char *str);
+int			convert_fov(t_data *data, char *str);
+
 // // --- validate_caps --- //
 // int			validate_a(char *str);
 // int			validate_c(char *str);
@@ -126,15 +123,11 @@ int			sort_cy(char **elem_str, t_data *data);
 // int			validate_cy(char *str);
 // int			validate_pl(char *str);
 
-// --- valid_nums --- //
-int			is_coord(char *str, int i, int num_flag);
-int			convert_coord(t_data *data, char *str);
-int			is_ratio(char *str, int i, int num_flag, int dot_flag);
-int			is_rgb(char *str, int i, int num_flag);
-int			convert_rgb(t_data *data, char *str);
 
-// --- valid_nums_2 --- //
-int			convert_vector(t_data *data, char *str);
+// --- /convert_utils/ --- //
+
+// --- ft_atof --- //
+double		ft_atof(char *str);
 
 // --- add_info --- //
 void		add_vec(t_data *data, double x, double y, double z);
@@ -166,5 +159,19 @@ int			check_neg(char *str, int i);
 int			coord_valid(int c);
 int			ratio_valid(int c);
 int			rgb_valid(int c);
+
+// --- is_funcs --- //
+int			is_valid(int c);
+int			is_num(int c);
+int			ft_isspace(int c);
+int			is_comma(int c);
+int			is_dot(int c);
+
+// --- is_funcs_2 --- //
+int			is_space(char *str);
+int			valid_num(int c);
+int			is_alpha(int c);
+int			is_dash(int c);
+
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 20:43:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 14:37:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 14:58:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../header/parser.h"
+#include "../../../../header/parser.h"
 
 void	coord_light(t_data *data, double x, double y, double z)
 {

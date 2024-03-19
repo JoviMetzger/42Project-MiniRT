@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 22:26:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 14:36:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 14:58:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../header/parser.h"
+#include "../../../../header/parser.h"
 
 void	add_vec(t_data *data, double x, double y, double z)
 {

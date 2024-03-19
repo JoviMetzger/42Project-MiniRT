@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 22:35:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 14:58:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	sort_l(char **elem_str, t_data *data)
 /**
  * #Identifier    #Coordinates         #3D vector     #FOV
  * C              -50.0,0,20           0,0,1          70
+ * 
+ * FOV : Horizontal field of view in degrees in range [0,180]: 70
 */
 int	sort_c(char **elem_str, t_data *data)
 {
@@ -49,7 +51,8 @@ int	sort_c(char **elem_str, t_data *data)
 		return (0);
 	if (!convert_vector(data, elem_str[2]))
 		return (0);
-	// fov
+	if (!convert_fov(data, elem_str[3]))
+		return (0);
 	return (1);
 }
 

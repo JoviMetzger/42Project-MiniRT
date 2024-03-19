@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 17:07:54 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 21:29:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 14:57:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../header/parser.h"
+#include "../../../../header/parser.h"
 
 int	check_com(char *str, int i)
 {

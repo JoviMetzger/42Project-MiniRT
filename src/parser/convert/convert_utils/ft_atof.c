@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:50:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 23:52:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 14:58:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../header/parser.h"
+#include "../../../../header/parser.h"
 
 static int	check_sign(char *str, int *sign)
 {

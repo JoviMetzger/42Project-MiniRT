@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/15 22:37:52 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/19 15:07:57 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,23 +44,24 @@ SRCS			= main.c											\
 					parser/validate/validate.c						\
 					parser/validate/validate_utils.c				\
 					parser/convert/convert.c						\
-					parser/convert/ft_atof.c						\
+					parser/convert/convert_utils/ft_atof.c			\
 					parser/convert/sort_caps.c						\
 					parser/convert/sort_other.c						\
 					parser/convert/valid_nums.c						\
 					parser/convert/valid_nums_2.c					\
 					parser/convert/valid_caps.c						\
 					parser/convert/valid_other.c					\
-					parser/convert/add_rgb.c						\
-					parser/convert/add_coord.c						\
-					parser/convert/add_vec.c						\
-					parser/convert/add_info.c						\
-					parser/convert/convert_utils.c					\
+					parser/convert/convert_utils/add_rgb.c			\
+					parser/convert/convert_utils/add_coord.c		\
+					parser/convert/convert_utils/add_vec.c			\
+					parser/convert/convert_utils/add_info.c			\
+					parser/convert/convert_utils/convert_utils.c	\
+					parser/convert/convert_utils/is_funcs.c			\
+					parser/convert/convert_utils/is_funcs_2.c		\
 					parser/parse_input.c							\
 					parser/parser_free.c							\
 					parser/parser_error.c							\
 					parser/parser_utils.c							\
-					parser/parser_utils_2.c							\
 
 SRC_DIR			= src
 SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))
@@ -100,6 +101,7 @@ $(OBJ_PATH)/%.o: $(SRC_DIR)/%.c $(SRC_HEADER)
 		@mkdir -p $(OBJ_PATH)/parser/check_elements
 		@mkdir -p $(OBJ_PATH)/parser/validate
 		@mkdir -p $(OBJ_PATH)/parser/convert
+		@mkdir -p $(OBJ_PATH)/parser/convert/convert_utils
 		@$(CC) $(CFLAGS) -c -o $@ $<
 
 

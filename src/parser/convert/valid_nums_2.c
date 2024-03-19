@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 14:37:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 14:59:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,23 @@ int		convert_vector(t_data *data, char *str)
 	return (free_array(vec), 1);
 }
 
-
 // FOV		-			[0,180]
+int	convert_fov(t_data *data, char *str)
+{
+	int		i;
+	int		fov;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] && !valid_num(str[i]))
+			return (0);
+		i++;
+	}
+	fov = ft_atoi(str);
+	data->camera.FOV = fov;
+	return (1);
+}
 
 // decimal	-			[decimals] (diameter/height) 
 // - similar to ratio, try just use one func and send flag for which data type etc

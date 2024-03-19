@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 17:53:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 20:50:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 14:58:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../header/parser.h"
+#include "../../../../header/parser.h"
 
 void	rgb_pl(t_data *data, int r, int g, int b)
 {

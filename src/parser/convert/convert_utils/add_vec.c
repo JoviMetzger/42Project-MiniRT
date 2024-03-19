@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 22:27:40 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 14:36:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 14:58:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../header/parser.h"
+#include "../../../../header/parser.h"
 
 void	vec_camera(t_data *data, double x, double y, double z)
 {

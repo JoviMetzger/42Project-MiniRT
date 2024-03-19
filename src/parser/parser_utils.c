@@ -6,34 +6,29 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:20:47 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 23:50:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 15:04:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/parser.h"
 
-
-int	is_num(int c)
+int	get_type(char *str)
 {
-	return (c >= '0' && c <= '9');
-}
-
-int	ft_isspace(int c)
-{
-	if (c == '\n' || c == '\t' || c == ' '
-		|| c == '\v' || c == '\0')
-		return (c);
+	if (check_capital(str, 'A') == 1)
+		return (1);
+	if (check_capital(str, 'L') == 1)
+		return (2);
+	if (check_capital(str, 'C') == 1)
+		return (3);
+	if (check_pl(str) == 1)
+		return (4);
+	if (check_sp(str) == 1)
+		return (5);
+	if (check_cy(str) == 1)
+		return (6);
+	if (ft_strcmp(str, " ") == 0 || is_space(str))
+		return (99);
 	return (0);
-}
-
-int	is_comma(int c)
-{
-	return (c == ',');
-}
-
-int	is_dot(int c)
-{
-	return (c == '.');
 }
 
 char	**rt_malloc(char **arr, int size, int file)
