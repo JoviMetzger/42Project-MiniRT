@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 18:31:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 16:15:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static int	check_no_elems(char *str, int type)
 {
 	if (type == 'A' && (num_elems(str) != 3))
-		return (0);
+		return (par_err("invalid: Abiement: number of arguments"));
 	else if (type == 'C' && (num_elems(str) != 4))
-		return (0);
+		return (par_err("invalid: Camera: number of arguments"));
 	else if (type == 'L' && (num_elems(str) != 4))
-		return (0);
+		return (par_err("invalid: Light: number of arguments"));
 	else if (type == 5 && (num_elems(str) != 4))
-		return (0);
+		return (par_err("invalid: Sphere: number of arguments"));
 	else if (type == 4 && (num_elems(str) != 4))
-		return (0);
+		return (par_err("invalid: Plane: number of arguments"));
 	else if (type == 6 && (num_elems(str) != 6))
-		return (0);
+		return (par_err("invalid: Cylinder: number of arguments"));
 	return (1);
 }
 
@@ -50,9 +50,9 @@ void	validate_elems(char **arr)
 			free_arr_error("Invalid character", arr, NULL);
 		type = get_type(arr[i]);
 		if (type == 0)
-			free_arr_error("Unknow parser error", arr, NULL);
+			free_arr_error("Unknown parser error", arr, NULL);
 		if (!check_no_elems(arr[i], type))
-			free_arr_error("Invalid number of arguments", arr, NULL);
+			free_arr_error(NULL, arr, NULL);
 		i++;
 	}
 }
