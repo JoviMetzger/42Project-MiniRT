@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 22:24:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 15:22:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	sort_sp(char **elem_str, t_data *data)
 		return (0);
 	if (!convert_coord(data, elem_str[1]))
 		return (0);
-	// diameter [2]
+	if (!convert_double(data, elem_str[2], 1, 234))
+		return (0);
 	if (!is_rgb(elem_str[3], 0, 0))
 		return (0);
 	if (!convert_rgb(data, elem_str[3]))
@@ -60,7 +61,6 @@ int	sort_sp(char **elem_str, t_data *data)
 // */
 int	sort_cy(char **elem_str, t_data *data)
 {
-
 	if (!is_coord(elem_str[1], 0, 0))
 		return (0);
 	if (!convert_coord(data, elem_str[1]))
@@ -69,8 +69,10 @@ int	sort_cy(char **elem_str, t_data *data)
 		return (0);
 	if (!convert_vector(data, elem_str[2]))
 		return (0);
-	// diameter [3]
-	// height [4]
+	if (!convert_double(data, elem_str[3], 1, 432))
+		return (0);
+	if (!convert_double(data, elem_str[4], 2, 432))
+		return (0);
 	if (!is_rgb(elem_str[5], 0, 0))
 		return (0);
 	if (!convert_rgb(data, elem_str[5]))

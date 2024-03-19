@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 15:07:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 15:22:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int			convert_rgb(t_data *data, char *str);
 // --- valid_nums_2 --- //
 int			convert_vector(t_data *data, char *str);
 int			convert_fov(t_data *data, char *str);
+int			convert_double(t_data *data, char *str, int flag, int type);
 
 // // --- validate_caps --- //
 // int			validate_a(char *str);

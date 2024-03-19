@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 14:59:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 15:22:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,33 @@ int	convert_fov(t_data *data, char *str)
 	return (1);
 }
 
+// FLAG 1 = diameter, FLAG 2 = height
 // decimal	-			[decimals] (diameter/height) 
 // - similar to ratio, try just use one func and send flag for which data type etc
+int	convert_double(t_data *data, char *str, int flag, int type)
+{
+	double	ratio;
 
+	if (!is_ratio(str, 0, 0, 0))
+		return (0);
+	ratio = ft_atof(str);
+	if (flag == 1)
+	{
+		if (type == 234)
+		{
+			data->objects.sphere.diameter = ratio;
+				return (1);
+		}
+		else if (type == 432)
+		{
+			data->objects.cylinder.diameter = ratio;
+				return (1);
+		}
+	}
+	else if (flag == 2)
+	{
+		data->objects.cylinder.height = ratio;
+			return (1);
+	}
+	return (0);
+}

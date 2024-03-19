@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 22:36:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 15:14:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 15:23:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	print_parser(t_data *data)
 	printf("----------------------------------\n");
 	printf("\tC\n");
 	printf("C coords = %f %f %f\n", data->camera.place.x, data->camera.place.y, data->camera.place.z);
-	printf("C vector = %f %f %f\n\n", data->camera.vector.x, data->camera.vector.y, data->camera.vector.z);
-	printf("C FOV = %i\n", data->camera.FOV);
+	printf("C vector = %f %f %f\n", data->camera.vector.x, data->camera.vector.y, data->camera.vector.z);
+	printf("C FOV = %i\n\n", data->camera.FOV);
 	printf("----------------------------------\n");
 	printf("\tL\n");
-	printf("L coords = %f %f %f\n\n", data->light.place.x, data->light.place.y, data->light.place.z);
+	printf("L coords = %f %f %f\n", data->light.place.x, data->light.place.y, data->light.place.z);
 	printf("L ratio = %f\n", data->light.ratio);
-	printf("L rgb = %i %i %i\n", data->light.colour.r, data->light.colour.g, data->light.colour.b);
+	printf("L rgb = %i %i %i\n\n", data->light.colour.r, data->light.colour.g, data->light.colour.b);
 	printf("----------------------------------\n");
 	printf("\tsp\n");
 	printf("sp coords = %f %f %f\n", data->objects.sphere.center.x, data->objects.sphere.center.y, data->objects.sphere.center.z);
