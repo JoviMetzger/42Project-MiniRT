@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 16:01:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 16:07:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	sort_sp(char **elem_str, t_data *data)
 
 // sort_cy
 // /**
-//  * #Identifier     #Coordinates        #3D vector      #Diameter       #Height     #R,G,B
-//  * cy              50.0,0.0,20.6       0.0,0.0,1.0     14.2            21.42       10,0,255
+//  * #Identifier  #Coordinates     #3D vector    #Diameter   #Height  #R,G,B
+//  * cy           50.0,0.0,20.6    0.0,0.0,1.0   14.2        21.42    10,0,255
 // */
 int	sort_cy(char **elem_str, t_data *data)
 {
@@ -79,4 +79,3 @@ int	sort_cy(char **elem_str, t_data *data)
 		return (par_err("invalid: Cylinder: RGB | [0-255]"));
 	return (1);
 }
-

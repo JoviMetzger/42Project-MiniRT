@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 15:41:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 16:06:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	is_ratio(char *str, int i, int num_flag, int dot_flag)
 }
 
 // coordinates -		can be negative [decimals] xyz
-int		is_coord(char *str, int i, int num_flag)
+int	is_coord(char *str, int i, int num_flag)
 {
 	if (!check_neg(str, 0))
 		return (0);
@@ -75,7 +75,6 @@ int	convert_coord(t_data *data, char *str)
 	add_coord(data, x, y, z);
 	return (free_array(coord), 1);
 }
-
 
 // r g b	- 			[0 - 255] no decimals or negatives
 int	is_rgb(char *str, int i, int num_flag)

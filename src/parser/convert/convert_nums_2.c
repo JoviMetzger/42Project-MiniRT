@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 15:42:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 16:06:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
 // vector	- 			[-1,1] xyz
-int		convert_vector(t_data *data, char *str)
+int	convert_vector(t_data *data, char *str)
 {
 	char		**vec;
 	double		x;
@@ -70,18 +70,18 @@ int	convert_double(t_data *data, char *str, int flag, int type)
 		if (type == 234)
 		{
 			data->objects.sphere.diameter = ratio;
-				return (1);
+			return (1);
 		}
 		else if (type == 432)
 		{
 			data->objects.cylinder.diameter = ratio;
-				return (1);
+			return (1);
 		}
 	}
 	else if (flag == 2)
 	{
 		data->objects.cylinder.height = ratio;
-			return (1);
+		return (1);
 	}
 	return (0);
 }

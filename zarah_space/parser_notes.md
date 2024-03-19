@@ -18,12 +18,10 @@
 
  **to do**
 \
+**1**
+
+	coords, diameter and height, no specification, leave? - ask Jovi
+
 **2**
 
-	check ratio, min/max etc for each in valid_nums & valid_other
-	
-	coords, diameter and height, no specification, leave?
-
-**3**
-	testing and done :)
-
+	test, ask Vincent for edge cases/ things I've forgotten
