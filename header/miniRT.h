@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 21:23:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 14:29:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_cylinder
     t_colour    colour;
     t_pos3      center;
     t_pos3      vector;
-    double    diameter;
+    double   	diameter;
     double    height;
     struct s_cylinder *next;
 }   t_cylinder;

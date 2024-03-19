@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 22:26:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 22:32:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 14:36:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
-void	add_vec(t_data *data, int x, int y, int z)
+void	add_vec(t_data *data, double x, double y, double z)
 {
 	if (data->type == 3)
 		vec_camera(data, x, y, z);
@@ -22,7 +22,7 @@ void	add_vec(t_data *data, int x, int y, int z)
 		vec_cy(data, x, y, z);
 }
 
-void	add_coord(t_data *data, int x, int y, int z)
+void	add_coord(t_data *data, double x, double y, double z)
 {
 	if (data->type == 3)
 		coord_camera(data, x, y, z);

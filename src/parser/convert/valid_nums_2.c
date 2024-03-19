@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 22:43:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 14:37:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 // vector	- 			[-1,1] xyz
 int		convert_vector(t_data *data, char *str)
 {
-	char	**vec;
-	int		x;
-	int		y;
-	int		z;
+	char		**vec;
+	double		x;
+	double		y;
+	double		z;
 
 	vec = ft_split(str, ',');
 	if (!vec)

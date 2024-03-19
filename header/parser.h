@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 22:37:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 14:38:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,21 +137,21 @@ int			convert_rgb(t_data *data, char *str);
 int			convert_vector(t_data *data, char *str);
 
 // --- add_info --- //
-void		add_vec(t_data *data, int x, int y, int z);
-void		add_coord(t_data *data, int x, int y, int z);
+void		add_vec(t_data *data, double x, double y, double z);
+void		add_coord(t_data *data, double x, double y, double z);
 void		add_rgb(t_data *data, int r, int g, int b);
 
 // --- add_coord --- //
-void		coord_light(t_data *data, int x, int y, int z);
-void		coord_camera(t_data *data, int x, int y, int z);
-void		coord_pl(t_data *data, int x, int y, int z);
-void		coord_sp(t_data *data, int x, int y, int z);
-void		coord_cy(t_data *data, int x, int y, int z);
+void		coord_light(t_data *data, double x, double y, double z);
+void		coord_camera(t_data *data, double x, double y, double z);
+void		coord_pl(t_data *data, double x, double y, double z);
+void		coord_sp(t_data *data, double x, double y, double z);
+void		coord_cy(t_data *data, double x, double y, double z);
 
 // --- add_vec --- //
-void		vec_camera(t_data *data, int x, int y, int z);
-void		vec_pl(t_data *data, int x, int y, int z);
-void		vec_cy(t_data *data, int x, int y, int z);
+void		vec_camera(t_data *data, double x, double y, double z);
+void		vec_pl(t_data *data, double x, double y, double z);
+void		vec_cy(t_data *data, double x, double y, double z);
 
 // --- add_rgb --- //
 void		rgb_cy(t_data *data, int r, int g, int b);

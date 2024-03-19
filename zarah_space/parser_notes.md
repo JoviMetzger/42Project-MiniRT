@@ -19,8 +19,6 @@
  **to do**
 
 **1**
-	- coords 20.6 -> 20.000000000, fix this! atof thing?
-	- check this also for vector
 
 	- fov!
 	- diameter - simple number, only use a bit, same as height
