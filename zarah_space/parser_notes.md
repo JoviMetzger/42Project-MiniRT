@@ -17,16 +17,12 @@
 
 
  **to do**
-
-**1**
-
-	- fov!
-	- diameter - simple number, only use a bit, same as height
-	- height - simple number, only use a bit, same as diameter
-	conversions and lots of testing
-
+\
 **2**
+
 	check ratio, min/max etc for each in valid_nums & valid_other
+	
+	coords, diameter and height, no specification, leave?
 
 **3**
 	testing and done :)

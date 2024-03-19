@@ -6,18 +6,28 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:30:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/12 15:34:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 15:52:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/parser.h"
+
+int	par_err(char *msg)
+{
+	ft_putstr_fd("Error: ", 2);
+	ft_putendl_fd(msg, 2);
+	return (0);
+}
 
 void	free_arr_error(char *msg, char **arr, t_elems *check)
 {
 	if (check)
 		free(check);
 	free_array(arr);
-	error_msg(msg);
+	if (msg != NULL)
+		error_msg(msg);
+	else
+		exit(EXIT_FAILURE);
 }
 
 void	free_close_parse_error(char *msg, char **ar, char *line, int file)

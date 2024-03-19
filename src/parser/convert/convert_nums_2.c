@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   valid_nums_2.c                                     :+:    :+:            */
+/*   convert_nums_2.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 15:22:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 15:42:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		convert_vector(t_data *data, char *str)
 	x = ft_atof(vec[0]);
 	y = ft_atof(vec[1]);
 	z = ft_atof(vec[2]);
+	if (!is_valid_vector(x, y, z))
+		return (0);
 	add_vec(data, x, y, z);
 	return (free_array(vec), 1);
 }
@@ -46,13 +48,16 @@ int	convert_fov(t_data *data, char *str)
 		i++;
 	}
 	fov = ft_atoi(str);
+	if (!is_valid_fov(fov))
+		return (0);
 	data->camera.FOV = fov;
 	return (1);
 }
 
-// FLAG 1 = diameter, FLAG 2 = height
-// decimal	-			[decimals] (diameter/height) 
-// - similar to ratio, try just use one func and send flag for which data type etc
+// decimal	-			[decimals] (diameter/height)
+// flag 1 = diameter | flag 2 = height
+// type 234 = sphere
+// type 432 = cylinder
 int	convert_double(t_data *data, char *str, int flag, int type)
 {
 	double	ratio;

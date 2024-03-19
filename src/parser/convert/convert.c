@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 22:26:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 15:47:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	convert_element(char **arr, t_data *data, int i)
 	if (!sort_into_struct(elem_str, data))
 	{
 		free_array(elem_str);
-		free_arr_error("Parser error", arr, NULL);
+		free_arr_error(NULL, arr, NULL);
 	}
 	free_array(elem_str);
 }
@@ -68,5 +68,4 @@ void	convert_input(t_data *data, char **arr)
 			i++;
 		}
 	}
-	// validiate_numbers() // validate all data from within t_data struct (check ra)
 }

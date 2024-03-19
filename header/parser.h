@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 15:22:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 15:53:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		print_parser(t_data *data); // get rid later
 void		parse_input(int argc, char **argv, t_data *data);
 
 // --- parser_error --- //
+int			par_err(char *msg);
 void		free_arr_error(char *msg, char **arr, t_elems *check);
 void		free_close_parse_error(char *msg, char **ar, char *line, int file);
 void		parse_error(char *msg, int file);
@@ -64,6 +65,9 @@ void		check_a(char **arr);
 void		check_c(char **arr);
 void		check_l(char **arr);
 
+// --- check_elements --- //
+void		check_elements(char **arr);
+
 // --- check_utils --- //
 int			check_pl(char *str);
 int			check_sp(char *str);
@@ -71,58 +75,33 @@ int			check_cy(char *str);
 void		check_dup(char **arr, int i, int type);
 int			check_capital(char *str, int type);
 
-// --- check_elements --- //
-void		check_elements(char **arr);
-
-
-// ------------ /validate/ ------------ //
-
-// --- validate --- //
-void		validate_elems(char **arr);
-
-// --- validate_utils --- //
-int			is_valid_no(char *str);
-int			num_elems(char *str);
-int			is_caps(char *str);
-int			is_other(char *str);
-
 
 // ----------- /convert/ ----------- //
 
 // --- convert --- //
 void		convert_input(t_data *data, char **arr);
 
-// --- sort_caps --- //
+// --- convert_caps --- //
 int			sort_a(char **elem_str, t_data *data);
 int			sort_l(char **elem_str, t_data *data);
 int			sort_c(char **elem_str, t_data *data);
 
-// --- sort_other --- //
+// --- convert_other --- //
 int			sort_pl(char **elem_str, t_data *data);
 int			sort_sp(char **elem_str, t_data *data);
 int			sort_cy(char **elem_str, t_data *data);
 
-// --- valid_nums --- //
+// --- convert_nums --- //
 int			is_coord(char *str, int i, int num_flag);
 int			convert_coord(t_data *data, char *str);
 int			is_ratio(char *str, int i, int num_flag, int dot_flag);
 int			is_rgb(char *str, int i, int num_flag);
 int			convert_rgb(t_data *data, char *str);
 
-// --- valid_nums_2 --- //
+// --- convert_nums_2 --- //
 int			convert_vector(t_data *data, char *str);
 int			convert_fov(t_data *data, char *str);
 int			convert_double(t_data *data, char *str, int flag, int type);
-
-// // --- validate_caps --- //
-// int			validate_a(char *str);
-// int			validate_c(char *str);
-// int			validate_l(char *str);
-
-// // --- validate_other --- //
-// int			validate_sp(char *str);
-// int			validate_cy(char *str);
-// int			validate_pl(char *str);
 
 
 // --- /convert_utils/ --- //
@@ -174,5 +153,22 @@ int			valid_num(int c);
 int			is_alpha(int c);
 int			is_dash(int c);
 
+
+// ------------ /validate/ ------------ //
+
+// --- validate --- //
+void		validate_elems(char **arr);
+
+// --- valid_ratio --- //
+int			is_valid_light(double light);
+int			is_valid_rgb(int r, int g, int b);
+int			is_valid_vector(double x, double y, double z);
+int			is_valid_fov(int fov);
+
+// --- validate_utils --- //
+int			is_valid_no(char *str);
+int			num_elems(char *str);
+int			is_caps(char *str);
+int			is_other(char *str);
 
 #endif

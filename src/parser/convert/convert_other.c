@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sort_other.c                                       :+:    :+:            */
+/*   convert_other.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 15:22:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 16:01:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@
 int	sort_pl(char **elem_str, t_data *data)
 {
 	if (!is_coord(elem_str[1], 0, 0))
-		return (0);
+		return (par_err("invalid: Plane: coordinate"));
 	if (!convert_coord(data, elem_str[1]))
-		return (0);
+		return (par_err("invalid: Plane: coordinate"));
 	if (!is_coord(elem_str[2], 0, 0))
-		return (0);
+		return (par_err("invalid: Plane: 3D vector"));
 	if (!convert_vector(data, elem_str[2]))
-		return (0);
+		return (par_err("invalid: Plane: 3D vector"));
 	if (!is_rgb(elem_str[3], 0, 0))
-		return (0);
+		return (par_err("invalid: Plane: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[3]))
-		return (0);
+		return (par_err("invalid: Plane: RGB | [0-255]"));
 	return (1);
 }
 
@@ -42,15 +42,15 @@ int	sort_pl(char **elem_str, t_data *data)
 int	sort_sp(char **elem_str, t_data *data)
 {
 	if (!is_coord(elem_str[1], 0, 0))
-		return (0);
+		return (par_err("invalid: Sphere: coordinate"));
 	if (!convert_coord(data, elem_str[1]))
-		return (0);
+		return (par_err("invalid: Sphere: coordinate"));
 	if (!convert_double(data, elem_str[2], 1, 234))
-		return (0);
+		return (par_err("invalid: Sphere: diameter"));
 	if (!is_rgb(elem_str[3], 0, 0))
-		return (0);
+		return (par_err("invalid: Sphere: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[3]))
-		return (0);
+		return (par_err("invalid: Sphere: RGB | [0-255]"));
 	return (1);
 }
 
@@ -62,21 +62,21 @@ int	sort_sp(char **elem_str, t_data *data)
 int	sort_cy(char **elem_str, t_data *data)
 {
 	if (!is_coord(elem_str[1], 0, 0))
-		return (0);
+		return (par_err("invalid: Cylinder: coordinate"));
 	if (!convert_coord(data, elem_str[1]))
-		return (0);
+		return (par_err("invalid: Cylinder: coordinate"));
 	if (!is_coord(elem_str[2], 0, 0))
-		return (0);
+		return (par_err("invalid: Cylinder: 3D vector"));
 	if (!convert_vector(data, elem_str[2]))
-		return (0);
+		return (par_err("invalid: Cylinder: 3D vector"));
 	if (!convert_double(data, elem_str[3], 1, 432))
-		return (0);
+		return (par_err("invalid: Cylinder: diameter"));
 	if (!convert_double(data, elem_str[4], 2, 432))
-		return (0);
+		return (par_err("invalid: Cylinder: height"));
 	if (!is_rgb(elem_str[5], 0, 0))
-		return (0);
+		return (par_err("invalid: Cylinder: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[5]))
-		return (0);
+		return (par_err("invalid: Cylinder: RGB | [0-255]"));
 	return (1);
 }
 

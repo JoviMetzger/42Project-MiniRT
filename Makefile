@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/19 15:07:57 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/19 15:44:31 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,16 +41,12 @@ SRCS			= main.c											\
 					parser/check_elements/check_caps.c				\
 					parser/check_elements/check_elements.c			\
 					parser/check_elements/check_utils.c				\
-					parser/validate/validate.c						\
-					parser/validate/validate_utils.c				\
 					parser/convert/convert.c						\
+					parser/convert/convert_caps.c					\
+					parser/convert/convert_other.c					\
+					parser/convert/convert_nums.c					\
+					parser/convert/convert_nums_2.c					\
 					parser/convert/convert_utils/ft_atof.c			\
-					parser/convert/sort_caps.c						\
-					parser/convert/sort_other.c						\
-					parser/convert/valid_nums.c						\
-					parser/convert/valid_nums_2.c					\
-					parser/convert/valid_caps.c						\
-					parser/convert/valid_other.c					\
 					parser/convert/convert_utils/add_rgb.c			\
 					parser/convert/convert_utils/add_coord.c		\
 					parser/convert/convert_utils/add_vec.c			\
@@ -58,6 +54,9 @@ SRCS			= main.c											\
 					parser/convert/convert_utils/convert_utils.c	\
 					parser/convert/convert_utils/is_funcs.c			\
 					parser/convert/convert_utils/is_funcs_2.c		\
+					parser/validate/validate.c						\
+					parser/validate/valid_ratio.c					\
+					parser/validate/validate_utils.c				\
 					parser/parse_input.c							\
 					parser/parser_free.c							\
 					parser/parser_error.c							\

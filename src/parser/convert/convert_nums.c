@@ -1,16 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   valid_nums.c                                       :+:    :+:            */
+/*   convert_nums.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 14:35:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 15:41:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
+
+// light	-			can't be negative [0.0,1.0]
+int	is_ratio(char *str, int i, int num_flag, int dot_flag)
+{
+	while (str[i])
+	{
+		while (str[i] && is_num(str[i]))
+		{
+			num_flag++;
+			i++;
+		}
+		if (str[i] && is_dot(str[i]))
+		{
+			dot_flag++;
+			i++;
+		}
+		if (str[i] && !ratio_valid(str[i]))
+			return (0);
+	}
+	if (dot_flag != 1 || num_flag < 2)
+		return (0);
+	return (1);
+}
 
 // coordinates -		can be negative [decimals] xyz
 int		is_coord(char *str, int i, int num_flag)
@@ -53,28 +76,6 @@ int	convert_coord(t_data *data, char *str)
 	return (free_array(coord), 1);
 }
 
-// light	-			can't be negative [0.0,1.0]
-int	is_ratio(char *str, int i, int num_flag, int dot_flag)
-{
-	while (str[i])
-	{
-		while (str[i] && is_num(str[i]))
-		{
-			num_flag++;
-			i++;
-		}
-		if (str[i] && is_dot(str[i]))
-		{
-			dot_flag++;
-			i++;
-		}
-		if (str[i] && !ratio_valid(str[i]))
-			return (0);
-	}
-	if (dot_flag != 1 || num_flag < 2)
-		return (0);
-	return (1);
-}
 
 // r g b	- 			[0 - 255] no decimals or negatives
 int	is_rgb(char *str, int i, int num_flag)
@@ -114,6 +115,8 @@ int	convert_rgb(t_data *data, char *str)
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
+	if (!is_valid_rgb(r, g, b))
+		return (0);
 	add_rgb(data, r, g, b);
 	return (free_array(rgb), 1);
 }
