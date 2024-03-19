@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 16:45:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/19 16:49:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	convert_element(char **arr, t_data *data, int i)
 	free_array(elem_str);
 }
 
+// 99 == space
 void	convert_input(t_data *data, char **arr)
 {
 	int		i;
