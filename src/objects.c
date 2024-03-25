@@ -1,7 +1,7 @@
 #include "../header/miniRT.h"
 
 // obj_data->d = discriminant; -> discriminant = b*b - 4*a*c;
-bool intersect_sphere(t_ray *ray, t_sphere *sphere, t_obj_data *obj_data)
+bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
 {
     double radius = sphere->diameter / 2;
 	t_vec3	oc = minus(ray->place, sphere->center);
@@ -55,10 +55,11 @@ bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
 {
     int i = 0;
 
-    while (i < data->total_obj_num)
+    while (i < data->objs->i)
     {
-		if (intersect_sphere(&ray, &data->objects.sphere, obj_data))
-			return true;
+		if (data->objs[i].type == E_SPHERE)
+			if (intersect_sphere(&ray, &data->objs[i], obj_data))
+				return true;
 		// else 
         // 	return false;
         // intersect_plane(&ray, &data->objects.plane, obj_data);

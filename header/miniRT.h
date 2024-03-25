@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:34:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:55:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <math.h>
-# include "parser.h"
+// # include "parser.h"
 
 // --- Colours ---
 # define BLACK "\033[30;1m"
@@ -67,36 +67,6 @@ typedef struct s_colour
     int     g;  // green
     int     b;  // blue
 }   t_colour;
-
-// -------------------------------------------------------------
-// Object1: sphere
-typedef struct s_sphere
-{
-    t_colour            colour;
-    t_vec3              center;
-    double              diameter;
-    // struct s_sphere     *next; // Do we need this?
-}   t_sphere;
-
-// Object2: plane
-typedef struct s_plane
-{
-    t_colour        colour;
-    t_vec3          center;
-    t_vec3          vector;
-    // struct s_plane  *next; // Do we need this?
-}   t_plane;
-
-// Object3: cylinder
-typedef struct s_cylinder
-{
-    t_colour            colour;
-    t_vec3              center;
-    t_vec3              vector;
-    double              diameter;
-    double              height;
-    // struct s_cylinder   *next; // Do we need this?
-}   t_cylinder;
 
 // Struct for objects
 typedef struct s_objs
@@ -227,9 +197,9 @@ t_vec3	normalize_vector(t_vec3 v);
 // Objects Functions
 // void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
 bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
-bool intersect_sphere(t_ray *ray, t_sphere *sphere, t_obj_data *obj_data);
-void intersect_plane(t_ray *ray, t_plane *plane, t_obj_data *obj_data);
-void intersect_cylinder(t_ray *ray, t_cylinder *cylinder, t_obj_data *obj_data);
+bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
+void intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
+void intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
 
 void	error_msg(char *str);
 

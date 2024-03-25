@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/25 14:49:25 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/25 15:47:47 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,16 @@ SRC_HEADER		= ./header
 
 SRCS			= main.c											\
 					print.c											\
+					movement.c 										\
+					open_window.c									\
+					colour.c										\
+					render.c										\
+					ray.c											\
+					vector.c 										\
+					vec_operators.c 								\
+					ray_matrix.c 									\
+					lightray.c										\
+					objects.c 										\
 					parser/check_elements/check_caps.c				\
 					parser/check_elements/check_elements.c			\
 					parser/check_elements/check_utils.c				\
@@ -58,16 +68,6 @@ SRCS			= main.c											\
 					parser/parser_error.c							\
 					parser/parser_utils.c							\
 
-# movement.c 										\
-# open_window.c									\
-# colour.c										\
-# render.c										\
-# ray.c											\
-# vector.c 										\
-# vec_operators.c 								\
-# ray_matrix.c 									\
-# lightray.c										\
-# objects.c 										\
 
 SRC_DIR			= src
 SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))
