@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/25 13:44:41 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/25 14:49:25 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRCS			= main.c											\
 					parser/convert/convert_caps.c					\
 					parser/convert/convert_cap_input.c				\
 					parser/convert/convert_obj_input.c				\
-					parser/convert/convert_other.c					\
+					parser/convert/convert_obj.c					\
 					parser/convert/convert_nums.c					\
 					parser/convert/convert_nums_2.c					\
 					parser/convert/convert_utils/ft_atof.c			\

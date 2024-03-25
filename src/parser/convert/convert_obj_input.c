@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/25 12:43:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 14:04:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:10:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	convert_obj_input(t_data *data, char **arr, int count)
 	int		i;
 
 	i = 0;
-	data->objects = obj_malloc(data, arr, count);
+	data->objs = obj_malloc(data, arr, count);
 	while (arr[i])
 	{
 		data->type = get_type(arr[i]);
@@ -53,16 +53,15 @@ void	convert_obj_input(t_data *data, char **arr, int count)
 			i++;
 		else if (data->type == 0 || data->type > 6)
 		{
-			free(data->objects);
+			free(data->objs);
 			free_arr_error("parser error", arr, NULL);
 		}
 		else if (data->type == 4 || data->type == 5 || data->type == 6)
 		{
-			data->objects[data->objects->index].type = data->type;
-			printf("object type = %i\n", data->objects[data->objects->index].type);
+			data->objs[data->objs->i].type = data->type;
 			convert_element(arr, data, i);
 			i++;
-			data->objects->index++;
+			data->objs->i++;
 		}
 	}
 }

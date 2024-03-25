@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 13:43:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:10:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,21 @@ typedef struct s_cylinder
 }   t_cylinder;
 
 // Struct for objects
-typedef struct s_objects
+typedef struct s_objs
 {
-	int					index;
+	int					i;
 	int					type;
 	t_colour            colour;
     t_vec3              center;
     t_vec3              vector;
     double              diameter;
     double              height;
-    t_sphere     sphere;
-    t_plane      plane;
-    t_cylinder   cylinder;
+    // t_sphere     sphere;
+    // t_plane      plane;
+    // t_cylinder   cylinder;
     // t_cone       cone; // BONUS
     // struct s_objects    *next;
-}   t_objects;
+}   t_objs;
 
 // -------------------------------------------------------------
 // Struct for camera
@@ -147,8 +147,7 @@ typedef struct s_data
 {
 	mlx_image_t	*image;
 	mlx_t		*mlx;
-	t_objects	*objects;
-	// t_objects	object_list;
+	t_objs		*objs;
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		light;

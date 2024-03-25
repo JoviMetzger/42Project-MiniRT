@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:20:47 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 14:04:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:06:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ char	**rt_malloc(char **arr, int size, int file)
 	return (arr);
 }
 
-t_objects	*obj_malloc(t_data *data, char **arr, int size)
+t_objs	*obj_malloc(t_data *data, char **arr, int size)
 {
-	data->objects = (t_objects *)malloc(sizeof(t_objects) * (size + 1));
-	if (!data->objects)
+	data->objs = (t_objs *)malloc(sizeof(t_objs) * (size + 1));
+	if (!data->objs)
 		free_arr_error("parser error", arr, NULL);
-	ft_bzero(data->objects, sizeof(data->objects));
-	return (data->objects);
+	ft_bzero(data->objs, sizeof(t_objs) * size);
+	return (data->objs);
 }

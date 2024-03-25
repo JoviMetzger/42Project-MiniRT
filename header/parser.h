@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 14:05:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:12:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define pl 4
 # define sp 5
 # define cy 6
+
 
 typedef struct s_elems
 {
@@ -56,7 +57,7 @@ void		close_protect(int file);
 // --- parser_utils --- //
 int			get_type(char *str);
 char		**rt_malloc(char **arr, int size, int file);
-t_objects	*obj_malloc(t_data *data, char **arr, int size);
+t_objs		*obj_malloc(t_data *data, char **arr, int size);
 
 
 // ----------- /check_elements/ ------------ //
@@ -119,14 +120,14 @@ void		add_rgb(t_data *data, int r, int g, int b);
 // --- add_coord --- //
 void		coord_light(t_data *data, double x, double y, double z);
 void		coord_camera(t_data *data, double x, double y, double z);
-void		coord_other(t_data *data, double x, double y, double z);
+void		coord_obj(t_data *data, double x, double y, double z);
 
 // --- add_vec --- //
 void		vec_camera(t_data *data, double x, double y, double z);
-void		vec_other(t_data *data, double x, double y, double z);
+void		vec_obj(t_data *data, double x, double y, double z);
 
 // --- add_rgb --- //
-void		rgb_other(t_data *data, int r, int g, int b);
+void		rgb_obj(t_data *data, int r, int g, int b);
 void		rgb_light(t_data *data, int r, int g, int b);
 void		rgb_ambient(t_data *data, int r, int g, int b);
 
@@ -166,6 +167,6 @@ int			is_valid_fov(int fov);
 int			is_valid_no(char *str);
 int			num_elems(char *str);
 int			is_caps(char *str);
-int			is_other(char *str);
+// int			is_obj(char *str);
 
 #endif
