@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   cylinder.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:59:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:40:40 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/parser.h"
-#include "../header/miniRT.h"
+#include "../../header/miniRT.h"
 
-// main function:
-int main(int argc, char **argv)
-{
-    t_data data;
+//
+// void intersect_cylinder(t_ray ray, t_cylinder cylinder, t_obj_data *obj_data)
+// {
 
-	parse_input(argc, argv, &data);
-
-	ft_open_window(&data); // Open window
-	ft_render(&data); // the whole shazam!
-
-	mlx_loop(data.mlx);		// loop
-	mlx_terminate(data.mlx); // terminate
-
-	free(data.objs);
-
-	return (EXIT_SUCCESS);
-}
+// }

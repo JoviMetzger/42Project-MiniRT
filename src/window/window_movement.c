@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   window_movement.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:59:20 by smclacke      ########   odam.nl         */
+/*   Created: 2024/03/08 16:05:43 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/08 16:05:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/parser.h"
-#include "../header/miniRT.h"
+#include "../../header/miniRT.h"
 
-// main function:
-int main(int argc, char **argv)
+void ft_key_action(mlx_key_data_t keydata, t_data *data)
 {
-    t_data data;
-
-	parse_input(argc, argv, &data);
-
-	ft_open_window(&data); // Open window
-	ft_render(&data); // the whole shazam!
-
-	mlx_loop(data.mlx);		// loop
-	mlx_terminate(data.mlx); // terminate
-
-	free(data.objs);
-
-	return (EXIT_SUCCESS);
+	(void)keydata;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(data->mlx);
 }

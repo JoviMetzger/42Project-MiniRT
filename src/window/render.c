@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/miniRT.h"
+#include "../../header/miniRT.h"
 
 // 1. Calculate the ray from the “eye” through the pixel, -> ft_create_ray();
 // 2. Determine which objects the ray intersects, and -> ft_create_intersects();
@@ -18,7 +18,7 @@
 void ft_put_image(t_data *data)
 {
 	t_ray ray;
-	t_obj_data obj_data;
+	t_obj_data obj_data; // maybe we don't need this.
 	// uint32_t colour;
 	int y = 0;
 	int x = 0;
@@ -33,14 +33,15 @@ void ft_put_image(t_data *data)
 			// ft_create_intersection(data, &obj_data, ray); // -> still need to create
 			
 			// --- TEST FUNCTION ----
-			if (ft_create_intersection(data, &obj_data, ray)) // TESTING RM LATER
-				mlx_put_pixel(data->image, x, y, ft_pixel(10, 0, 255));
-			else 
-        		mlx_put_pixel(data->image, x, y, ft_pixel(0, 0, 0));
-			// ---------------------
+			// =============================================
+			if (ft_create_intersection(data, &obj_data, ray))
+                mlx_put_pixel(data->image, x, y, ft_pixel(10, 0, 255)); // Pixel is inside the sphere
+            else
+                mlx_put_pixel(data->image, x, y, ft_pixel(0, 0, 0)); // Pixel is outside the sphere
+			// =============================================
 
 			// // 3. Compute a color for the closest intersection point.
-			// colour = ft_calculate_colour(data, obj_data, ray); // -> still need to create
+			// colour = ft_calculate_colour(data, &obj_data, ray); // -> still need to create
 			// mlx_put_pixel(data->image, x, y, colour);
 			y++;
 		}

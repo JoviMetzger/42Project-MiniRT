@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:34:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:58:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,36 +68,6 @@ typedef struct s_colour
     int     b;  // blue
 }   t_colour;
 
-// -------------------------------------------------------------
-// Object1: sphere
-typedef struct s_sphere
-{
-    t_colour            colour;
-    t_vec3              center;
-    double              diameter;
-    // struct s_sphere     *next; // Do we need this?
-}   t_sphere;
-
-// Object2: plane
-typedef struct s_plane
-{
-    t_colour        colour;
-    t_vec3          center;
-    t_vec3          vector;
-    // struct s_plane  *next; // Do we need this?
-}   t_plane;
-
-// Object3: cylinder
-typedef struct s_cylinder
-{
-    t_colour            colour;
-    t_vec3              center;
-    t_vec3              vector;
-    double              diameter;
-    double              height;
-    // struct s_cylinder   *next; // Do we need this?
-}   t_cylinder;
-
 // Struct for objects
 typedef struct s_objs
 {
@@ -145,7 +115,6 @@ typedef struct s_screen
     double  img_ratio;
     double  pixel_delata_x;
     double  pixel_delata_y;
-    double  total_pixel_num; // might not need
 }   t_screen;
 
 // -------------------------------------------------------------
@@ -161,7 +130,6 @@ typedef struct s_data
 	t_screen	screen;
 	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
     double      matrix[16]; // representation for 4x4 matrices. Each element of the array corresponds to a specific position in the matrix, following a specific order. 
-    int         total_obj_num; // Sarah need to give it the value in the parser.
 }	t_data;
 
 // -------------------------------------------------------------
@@ -197,9 +165,6 @@ void ft_render(t_data *data);
 // Movement Functions
 void ft_key_action(mlx_key_data_t keydata, t_data *data);
 
-// Parser Functions
-void ft_parse_input(int argc, char **argv, t_data *data);
-
 // Ray Functions
 t_ray ft_create_ray(t_data *data, int x, int y);
 void store_ray_matrix(t_data *data);
@@ -207,7 +172,7 @@ void ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b);
-uint32_t ft_calculate_colour(t_data *data, t_obj_data obj, t_ray ray);
+uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
 
 // Vector Functions
 t_vec3 init_vector(t_data *data, t_screen screen);
@@ -227,7 +192,7 @@ t_vec3	normalize_vector(t_vec3 v);
 // Objects Functions
 // void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
 bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
-bool intersect_sphere(t_ray *ray, t_sphere *sphere, t_obj_data *obj_data);
+bool intersect_sphere(t_ray *ray, t_sphere *sphere, t_obj_data *obj_data, double *t);
 void intersect_plane(t_ray *ray, t_plane *plane, t_obj_data *obj_data);
 void intersect_cylinder(t_ray *ray, t_cylinder *cylinder, t_obj_data *obj_data);
 
