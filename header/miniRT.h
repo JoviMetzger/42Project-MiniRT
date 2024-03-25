@@ -23,26 +23,10 @@
 # define HEIGHT 1080
 
 // Math stuff
-# define M_PI 3.14159265358979323846 // This is a constant representing the value of pi. -> i am pretty sure it is defined in the 'math.h' library, but VScode is not reconizing it. So I defined it here again 
+# define M_PI 3.14159265358979323846 // This is a constant representing the value of pi.
 
-// --- Structs --- 
-// -------------------------------------------------------------
-// // Position - coordinates
-// // Don't understand the difference between a union and struct.
-// // you can just as well use the 'normal' x,y,z position
-// // because to use 'double xyz' you need to do t_pos3.xyz[0], which is same as t_pos3.x
-// typedef union u_vec3
-// {
-//     double   xyz[3];
-//     struct
-//     {
-//         double	x;  // x-axis (left-right)
-//         double	y;  // y-axis (up-down)
-//         double	z;  // z-axis (forward-back forwrd)
-//     };
-// }   t_vec3;
-
-// Position - coordinates
+// --- Structs ---
+// Vector - position - coordinates
 typedef struct s_vec3
 {
     double	x;  // x-axis (left-right)
@@ -66,7 +50,7 @@ typedef struct s_sphere
     t_colour            colour;
     t_vec3              center;
     double              diameter;
-    struct s_sphere     *next;
+    struct s_sphere     *next; // Do we need this?
 }   t_sphere;
 
 // Object2: plane
@@ -75,7 +59,7 @@ typedef struct s_plane
     t_colour        colour;
     t_vec3          center;
     t_vec3          vector;
-    struct s_plane  *next;
+    struct s_plane  *next; // Do we need this?
 }   t_plane;
 
 // Object3: cylinder
@@ -86,17 +70,18 @@ typedef struct s_cylinder
     t_vec3              vector;
     double              diameter;
     double              height;
-    struct s_cylinder   *next;
+    struct s_cylinder   *next; // Do we need this?
 }   t_cylinder;
 
 // Struct for objects
-typedef struct s_obj_type
+typedef struct s_objects
 {
     t_sphere     sphere;
     t_plane      plane;
     t_cylinder   cylinder;
     // t_cone       cone; // BONUS
-}   t_obj_type;
+    struct s_objects    *next;
+}   t_objects;
 
 // -------------------------------------------------------------
 // Struct for camera
@@ -143,44 +128,79 @@ typedef struct s_data
     mlx_image_t *image;
     mlx_t       *mlx;
     t_screen    screen;
-    t_obj_type  objects;
+    t_objects  objects;
     t_camera    camera;
     t_ambient   ambient;
     t_light     light;
     double      matrix[16]; // representation for 4x4 matrices. Each element of the array corresponds to a specific position in the matrix, following a specific order. 
+    int         total_obj_num; // Sarah need to give it the value in the parser.
 }   t_data;
 
 // -------------------------------------------------------------
-// Ray struct (alone standing)
+// Ray struct (standing alone)
 typedef struct s_ray
 {
     t_vec3  place;
     t_vec3  vector;
 }   t_ray;
 
+// -------------------------------------------------------------
+// Object data struct (standing alone)
+typedef struct s_obj_data 
+{
+    t_vec3      place;
+    // double      camera_distance;
+    // t_objects  *objects;
+    double  a;
+    double  b;
+    double  c;
+    double  d;
+    double  t;
+    double  t2;
+
+}   t_obj_data;
+
 // --- Functions --- 
-// Main functions
+// Window Functions
 void ft_put_image(t_data *data);
-void ft_key_action(mlx_key_data_t keydata, t_data *data);
 void ft_open_window(t_data *data);
-void ft_parse_input(int argc, char **argv, t_data *data);
 void ft_render(t_data *data);
 
-int32_t ft_pixel(int32_t r, int32_t g, int32_t b);
+// Movement Functions
+void ft_key_action(mlx_key_data_t keydata, t_data *data);
+
+// Parser Functions
+void ft_parse_input(int argc, char **argv, t_data *data);
+
+// Ray Functions
 t_ray ft_create_ray(t_data *data, int x, int y);
+void store_ray_matrix(t_data *data);
+void ft_create_lightray(t_data *data, t_ray *lightray);
+
+// Colour Functions
+int32_t ft_pixel(int32_t r, int32_t g, int32_t b);
+uint32_t ft_calculate_colour(t_data *data, t_obj_data obj, t_ray ray);
+
+// Vector Functions
 t_vec3 init_vector(t_data *data, t_screen screen);
 
-// operators
+// Operators
 t_vec3 plus(t_vec3 u, t_vec3 v);
 t_vec3 minus(t_vec3 u, t_vec3 v);
 t_vec3 mult_vecvec(t_vec3 u, t_vec3 v);
 t_vec3 mult_vecdub(t_vec3 v, double dub);
 t_vec3 division_vec_dub(t_vec3 v, double dub);
-t_vec3 division_vec_vec(t_vec3 u, t_vec3 v);
-double dot_product(t_vec3 u, t_vec3 v);
+t_vec3 division_vec_vec(t_vec3 u, t_vec3 v); // might remove this
 t_vec3 cross_product(t_vec3 u, t_vec3 v);
+double dot_product(t_vec3 u, t_vec3 v);
 double length_squared(t_vec3 vec);
 t_vec3	normalize_vector(t_vec3 v);
 
+// Objects Functions
+// void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
+bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
+bool intersect_sphere(t_ray *ray, t_sphere *sphere, t_obj_data *obj_data);
+void intersect_plane(t_ray *ray, t_plane *plane, t_obj_data *obj_data);
+void intersect_cylinder(t_ray *ray, t_cylinder *cylinder, t_obj_data *obj_data);
 
 #endif

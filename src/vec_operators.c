@@ -74,7 +74,7 @@ t_vec3 division_vec_vec(t_vec3 u, t_vec3 v)
 // -------------- Other stuff we might need --------------
 // This function calculates the dot product between two vectors u and v. 
 // The dot product of two vectors measures the cosine of the angle between them, scaled by their lenghts (magnitudes).
-double dot_product(t_vec3 u, t_vec3 v) 
+double dot_product(t_vec3 u, t_vec3 v) // Don't know if I need this one 
 {
     double	len;
 

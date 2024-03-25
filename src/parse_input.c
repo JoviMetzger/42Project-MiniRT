@@ -7,6 +7,8 @@ void ft_parse_input(int argc, char **argv, t_data *data)
 
     // check_file() // Check valid input and put everything in the struct.
 
+    data->total_obj_num = 1;
+
     // Ambient lightning (A): 
     data->ambient.ratio = 0.2;
     data->ambient.colour.r = 255;

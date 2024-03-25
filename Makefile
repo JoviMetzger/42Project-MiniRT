@@ -28,7 +28,9 @@ SRC				= ./src/main.c \
 					./src/vector.c \
 					./src/vec_operators.c \
 					./src/ray_matrix.c \
-					./src/
+					./src/lightray.c \
+					./src/objects.c \
+					./src/ \
 
 # Objects files
 OBJ_PATH		= obj

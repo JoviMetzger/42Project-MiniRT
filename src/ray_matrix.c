@@ -1,6 +1,8 @@
 #include "../header/miniRT.h"
 
 
+// --> SORRY FOR ALL THE COMMENTS <---
+
 /*
  * - each column represents a coordinate axis (x, y, z, w)
  * - each row represents a transformation operation (translation, rotation, scaling, etc.)
@@ -32,21 +34,28 @@ t_vec3 compute_forward(double *matrix, t_ray ray_start_point)
  *          | 08  09  10  11 |
  *          | 12  13  14  15 |
  */
+// 0.707 helps in making the condition less sensitive to slight variations while still capturing the general intent of the code, which is to detect when the forward vector is not primarily pointing vertically.
 t_vec3 compute_right(double *matrix, t_vec3 forward)
 {
     t_vec3 right;
     t_vec3 tmp;
 
+    // setting tmp to default values
     tmp.x = 0;
     tmp.y = 1;
     tmp.z = 0; 
+
+    // The y component represents the vertical direction in a standard 3D coordinate system.
     if (fabs(forward.y) == 1)
     {
+        // If y is  exactly 1 or -1, it implies that the forward direction is almost purely vertical.
         tmp.z = -forward.y;
         tmp.y = 0;
     }
-    else if (fabs(forward.y) > 0.707)
+    else if (fabs(forward.y) > 0.707) // threshold value 0.707 is chosen because it corresponds to the sine and cosine of approximately 45 degrees in a unit circle. 
     {
+        // is greater than 0.707 (approximately 45 degrees from the vertical), the forward direction is not purely vertical. 
+        // In this case, the right vector may need to be adjusted to ensure it's perpendicular to both the forward vector and the upward direction. 
         tmp.x = 1;
         if (forward.y < 0)
             tmp.x = -1;
@@ -80,8 +89,6 @@ void compute_up(double *matrix, t_vec3 forward, t_vec3 right)
     matrix[5] = up.y;
     matrix[6] = up.z;
     matrix[7] = 0;
-
-    return (up);
 }
 
 
@@ -151,6 +158,7 @@ void store_ray_matrix(t_data *data)
     t_ray ray_start_point;
     ray_start_point.place = data->camera.place;
     ray_start_point.vector = data->camera.vector;
-    create_matrix(&data->matrix, ray_start_point);
-
+    create_matrix(data->matrix, ray_start_point);
+    
+    // printf("------\n%f\n%f\n%f\n%f\n------\n%f\n%f\n%f\n%f\n------\n%f\n%f\n%f\n%f\n------\n%f\n%f\n%f\n%f\n------\n", data->matrix[0], data->matrix[1], data->matrix[2], data->matrix[3], data->matrix[4], data->matrix[5], data->matrix[6], data->matrix[7], data->matrix[8], data->matrix[9], data->matrix[10], data->matrix[11], data->matrix[12], data->matrix[13], data->matrix[14], data->matrix[15]);
 }
