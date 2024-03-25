@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/19 15:44:31 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/25 12:06:24 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,11 @@ SRCS			= main.c											\
 					colour.c										\
 					render.c										\
 					ray.c											\
+					vector.c \
+					vec_operators.c \
+					ray_matrix.c \
+					lightray.c \
+					objects.c \
 					parser/check_elements/check_caps.c				\
 					parser/check_elements/check_elements.c			\
 					parser/check_elements/check_utils.c				\
@@ -64,6 +69,7 @@ SRCS			= main.c											\
 
 SRC_DIR			= src
 SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))
+
 
 # Objects files
 OBJ_PATH		= obj
