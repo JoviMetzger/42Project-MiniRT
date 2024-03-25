@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:58:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:00:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <math.h>
-# include "parser.h"
 
 // --- Colours ---
 # define BLACK "\033[30;1m"
@@ -192,9 +191,9 @@ t_vec3	normalize_vector(t_vec3 v);
 // Objects Functions
 // void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
 bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
-bool intersect_sphere(t_ray *ray, t_sphere *sphere, t_obj_data *obj_data, double *t);
-void intersect_plane(t_ray *ray, t_plane *plane, t_obj_data *obj_data);
-void intersect_cylinder(t_ray *ray, t_cylinder *cylinder, t_obj_data *obj_data);
+bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data, double *t);
+void intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
+void intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
 
 void	error_msg(char *str);
 

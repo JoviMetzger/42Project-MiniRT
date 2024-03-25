@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 22:38:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:01:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
     int i = 0;
 	double t;
 
-    while (i < data->total_obj_num)
+    while (i < data->objs->i)
     {
-		if (intersect_sphere(&ray, &data->objects.sphere, obj_data, &t))
-			return true;
+		if (data->objs->type == E_SPHERE)
+		{
+
+			if (intersect_sphere(&ray, &data->objs[i], obj_data, &t))
+				return true;
+		}
         // intersect_plane(&ray, &data->objects.plane, obj_data);
         // intersect_cylinder(&ray, &data->objects.cylinder, obj_data);
         i++;

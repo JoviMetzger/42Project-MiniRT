@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:50:09 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 13:47:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:02:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ void	free_close_util(char *line, int file)
 void	close_protect(int file)
 {
 	if (close(file) == -1)
-		error_msg2("closing file errored");
+		error_msg("closing file errored");
 }

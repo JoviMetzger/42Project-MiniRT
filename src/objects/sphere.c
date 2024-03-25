@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 22:38:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:01:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
 // obj_data->d = discriminant; -> discriminant = b*b - 4*a*c;
-bool intersect_sphere(t_ray *ray, t_sphere *sphere, t_obj_data *obj_data, double *t)
+bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data, double *t)
 {
     double radius;
 	t_vec3	oc;
