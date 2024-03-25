@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 12:04:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 12:07:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ typedef struct s_data
 {
 	mlx_image_t	*image;
 	mlx_t		*mlx;
-	t_obj_type	objects;
+	t_objects	objects;
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		light;
