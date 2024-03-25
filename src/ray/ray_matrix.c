@@ -1,5 +1,16 @@
-#include "../header/miniRT.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ray_matrix.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/15 22:38:08 by smclacke      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../../header/miniRT.h"
 
 // --> SORRY FOR ALL THE COMMENTS <---
 
@@ -160,5 +171,5 @@ void store_ray_matrix(t_data *data)
     ray_start_point.vector = data->camera.vector;
     create_matrix(data->matrix, ray_start_point);
     
-    // printf("------\n%f\n%f\n%f\n%f\n------\n%f\n%f\n%f\n%f\n------\n%f\n%f\n%f\n%f\n------\n%f\n%f\n%f\n%f\n------\n", data->matrix[0], data->matrix[1], data->matrix[2], data->matrix[3], data->matrix[4], data->matrix[5], data->matrix[6], data->matrix[7], data->matrix[8], data->matrix[9], data->matrix[10], data->matrix[11], data->matrix[12], data->matrix[13], data->matrix[14], data->matrix[15]);
+    // printf("------ First Row:\n%f\n%f\n%f\n%f\n------ second Row:\n%f\n%f\n%f\n%f\n------ Third Row:\n%f\n%f\n%f\n%f\n------ Fourth Row:\n%f\n%f\n%f\n%f\n------\n\n\n", data->matrix[0], data->matrix[1], data->matrix[2], data->matrix[3], data->matrix[4], data->matrix[5], data->matrix[6], data->matrix[7], data->matrix[8], data->matrix[9], data->matrix[10], data->matrix[11], data->matrix[12], data->matrix[13], data->matrix[14], data->matrix[15]);
 }

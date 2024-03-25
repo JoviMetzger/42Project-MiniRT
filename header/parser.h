@@ -46,7 +46,7 @@ int			par_err(char *msg);
 void		free_arr_error(char *msg, char **arr, t_elems *check);
 void		free_close_parse_error(char *msg, char **ar, char *line, int file);
 void		parse_error(char *msg, int file);
-void 		error_msg2(char *msg);
+void 		error_msg(char *msg);
 
 // --- parser_free --- //
 void		free_array(char **arr);

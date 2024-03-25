@@ -44,7 +44,7 @@ void	parse_error(char *msg, int file)
 	error_msg(msg);
 }
 
-void	error_msg2(char *msg)
+void	error_msg(char *msg)
 {
 	ft_putstr_fd("Error: ", 2);
 	ft_putendl_fd(msg, 2);
