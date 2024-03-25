@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:23:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:34:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,18 +102,12 @@ typedef struct s_cylinder
 typedef struct s_objs
 {
 	int					i;
-	// int					type;
 	t_type				type;
 	t_colour            colour;
     t_vec3              center;
     t_vec3              vector;
     double              diameter;
     double              height;
-    // t_sphere     sphere;
-    // t_plane      plane;
-    // t_cylinder   cylinder;
-    // t_cone       cone; // BONUS
-    // struct s_objects    *next;
 }   t_objs;
 
 // -------------------------------------------------------------
@@ -165,7 +159,7 @@ typedef struct s_data
 	t_ambient	ambient;
 	t_light		light;
 	t_screen	screen;
-	t_type		type;
+	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
     double      matrix[16]; // representation for 4x4 matrices. Each element of the array corresponds to a specific position in the matrix, following a specific order. 
     int         total_obj_num; // Sarah need to give it the value in the parser.
 }	t_data;
