@@ -10,15 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/miniRT.h"
+#include "../../header/miniRT.h"
+#include "../../header/parser.h"
 
-void error_msg(char *msg)
-{
-	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd(msg, 2);
-	exit(EXIT_FAILURE);
-}
-
+//
 void ft_open_window(t_data *data)
 {
 	// Gotta error check this stuff

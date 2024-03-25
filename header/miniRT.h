@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:55:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:13:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <math.h>
-// # include "parser.h"
 
 // --- Colours ---
 # define BLACK "\033[30;1m"
@@ -115,7 +114,6 @@ typedef struct s_screen
     double  img_ratio;
     double  pixel_delata_x;
     double  pixel_delata_y;
-    double  total_pixel_num; // might not need
 }   t_screen;
 
 // -------------------------------------------------------------
@@ -131,7 +129,6 @@ typedef struct s_data
 	t_screen	screen;
 	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
     double      matrix[16]; // representation for 4x4 matrices. Each element of the array corresponds to a specific position in the matrix, following a specific order. 
-    int         total_obj_num; // Sarah need to give it the value in the parser.
 }	t_data;
 
 // -------------------------------------------------------------
@@ -167,9 +164,6 @@ void ft_render(t_data *data);
 // Movement Functions
 void ft_key_action(mlx_key_data_t keydata, t_data *data);
 
-// Parser Functions
-void ft_parse_input(int argc, char **argv, t_data *data);
-
 // Ray Functions
 t_ray ft_create_ray(t_data *data, int x, int y);
 void store_ray_matrix(t_data *data);
@@ -177,7 +171,7 @@ void ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b);
-uint32_t ft_calculate_colour(t_data *data, t_obj_data obj, t_ray ray);
+uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
 
 // Vector Functions
 t_vec3 init_vector(t_data *data, t_screen screen);
@@ -197,7 +191,7 @@ t_vec3	normalize_vector(t_vec3 v);
 // Objects Functions
 // void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
 bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
-bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
+bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data, double *t);
 void intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 void intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
 

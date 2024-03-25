@@ -6,15 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/19 15:26:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 16:09:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:06:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
-
-// coords (no ratio?)
-// diameter (?)
-// heighter (?)
 
 // light [0.0,1.0] (no negative)
 int	is_valid_light(double light)

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 17:21:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 14:51:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:06:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,3 @@ int	is_caps(char *str)
 		return (C);
 	return (0);
 }
-
-// not using this
-// int	is_obj(char *str)
-// {
-// 	if (check_pl(str) == 1)
-// 		return (pl);
-// 	else if (check_sp(str) == 1)
-// 		return (sp);
-// 	else if (check_cy(str) == 1)
-// 		return (cy);
-// 	return (0);
-// }

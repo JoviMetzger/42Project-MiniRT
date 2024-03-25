@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:27:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:10:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,6 @@
 # define sp 5
 # define cy 6
 
-// typedef enum	e_type
-// {
-// 	E_AMBIENT = 1,
-// 	E_LIGHT = 2,
-// 	E_CAMERA = 3,
-// 	E_PLANE = 4,
-// 	E_SPHERE = 5,
-// 	E_CYLINDER = 6
-// }				t_type;
-
 typedef struct s_elems
 {
 	bool	sp_b;
@@ -56,7 +46,7 @@ int			par_err(char *msg);
 void		free_arr_error(char *msg, char **arr, t_elems *check);
 void		free_close_parse_error(char *msg, char **ar, char *line, int file);
 void		parse_error(char *msg, int file);
-void 		error_msg2(char *msg);
+void 		error_msg(char *msg);
 
 // --- parser_free --- //
 void		free_array(char **arr);
@@ -106,7 +96,7 @@ int			sort_cy(char **elem_str, t_data *data);
 // --- convert_nums --- //
 int			is_coord(char *str, int i, int num_flag);
 int			convert_coord(t_data *data, char *str);
-int			is_ratio(char *str, int i, int num_flag, int dot_flag);
+int			is_ratio(char *str, int i, int dot_flag);
 int			is_rgb(char *str, int i, int num_flag);
 int			convert_rgb(t_data *data, char *str);
 
@@ -176,6 +166,5 @@ int			is_valid_fov(int fov);
 int			is_valid_no(char *str);
 int			num_elems(char *str);
 int			is_caps(char *str);
-// int			is_obj(char *str);
 
 #endif

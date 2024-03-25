@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 15:58:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:11:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	sort_l(char **elem_str, t_data *data)
 		return (par_err("invalid: Light: coordinate"));
 	if (!convert_coord(data, elem_str[1]))
 		return (par_err("invalid: Light: coordinate"));
-	if (!is_ratio(elem_str[2], 0, 0, 0))
+	if (!is_ratio(elem_str[2], 0, 0))
 		return (par_err("invalid: Light: light ratio | [0.0,1.0]"));
 	ratio = ft_atof(elem_str[2]);
 	if (!is_valid_light(ratio))
@@ -66,7 +66,7 @@ int	sort_a(char **elem_str, t_data *data)
 {
 	double		ratio;
 
-	if (!is_ratio(elem_str[1], 0, 0, 0))
+	if (!is_ratio(elem_str[1], 0, 0))
 		return (par_err("invalid: Ambient: light ratio | [0.0,1.0]"));
 	ratio = ft_atof(elem_str[1]);
 	if (!is_valid_light(ratio))

@@ -1,38 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser_free.c                                      :+:    :+:            */
+/*   window_movement.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/03/08 16:50:09 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 16:02:58 by smclacke      ########   odam.nl         */
+/*   Created: 2024/03/08 16:05:43 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/08 16:05:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/parser.h"
+#include "../../header/miniRT.h"
 
-void	free_array(char **arr)
+void ft_key_action(mlx_key_data_t keydata, t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-void	free_close_util(char *line, int file)
-{
-	free(line);
-	close_protect(file);
-}
-
-void	close_protect(int file)
-{
-	if (close(file) == -1)
-		error_msg("closing file errored");
+	(void)keydata;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(data->mlx);
 }

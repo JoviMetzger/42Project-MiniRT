@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/25 15:47:47 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/25 16:12:37 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,16 +33,19 @@ SRC_HEADER		= ./header
 
 SRCS			= main.c											\
 					print.c											\
-					movement.c 										\
-					open_window.c									\
-					colour.c										\
-					render.c										\
-					ray.c											\
-					vector.c 										\
-					vec_operators.c 								\
-					ray_matrix.c 									\
-					lightray.c										\
-					objects.c 										\
+					window/window_movement.c 						\
+					window/open_window.c							\
+					window/render.c									\
+					utils/vec_operators.c 							\
+					colour/calculate_colour.c						\
+					objects/loop_objects.c 							\
+					objects/sphere.c 								\
+					objects/plane.c 								\
+					objects/cylinder.c 								\
+					ray/vector.c									\
+					ray/ray.c										\
+					ray/ray_matrix.c								\
+					ray/lightray.c 									\
 					parser/check_elements/check_caps.c				\
 					parser/check_elements/check_elements.c			\
 					parser/check_elements/check_utils.c				\
@@ -67,7 +70,7 @@ SRCS			= main.c											\
 					parser/parser_free.c							\
 					parser/parser_error.c							\
 					parser/parser_utils.c							\
-
+					
 
 SRC_DIR			= src
 SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))
@@ -109,6 +112,11 @@ $(OBJ_PATH)/%.o: $(SRC_DIR)/%.c $(SRC_HEADER)
 		@mkdir -p $(OBJ_PATH)/parser/validate
 		@mkdir -p $(OBJ_PATH)/parser/convert
 		@mkdir -p $(OBJ_PATH)/parser/convert/convert_utils
+		@mkdir -p $(OBJ_PATH)/colour
+		@mkdir -p $(OBJ_PATH)/objects
+		@mkdir -p $(OBJ_PATH)/utils
+		@mkdir -p $(OBJ_PATH)/ray
+		@mkdir -p $(OBJ_PATH)/window
 		@$(CC) $(CFLAGS) -c -o $@ $<
 
 
