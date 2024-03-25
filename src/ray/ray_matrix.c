@@ -6,13 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 22:38:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 17:17:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
 // --> SORRY FOR ALL THE COMMENTS <---
+// --> I LOVE ALL THE COMMENTS <---
 
 /*
  * - each column represents a coordinate axis (x, y, z, w)
