@@ -6,22 +6,19 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 16:06:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:10:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
 // light	-			can't be negative [0.0,1.0]
-int	is_ratio(char *str, int i, int num_flag, int dot_flag)
+int	is_ratio(char *str, int i, int dot_flag)
 {
 	while (str[i])
 	{
 		while (str[i] && is_num(str[i]))
-		{
-			num_flag++;
 			i++;
-		}
 		if (str[i] && is_dot(str[i]))
 		{
 			dot_flag++;
@@ -30,7 +27,7 @@ int	is_ratio(char *str, int i, int num_flag, int dot_flag)
 		if (str[i] && !ratio_valid(str[i]))
 			return (0);
 	}
-	if (dot_flag != 1 || num_flag < 2)
+	if (dot_flag > 1)
 		return (0);
 	return (1);
 }

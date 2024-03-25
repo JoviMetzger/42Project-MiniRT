@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:10:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:11:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	convert_double(t_data *data, char *str, int flag, int type)
 {
 	double	ratio;
 
-	if (!is_ratio(str, 0, 0, 0))
+	if (!is_ratio(str, 0, 0))
 		return (0);
 	ratio = ft_atof(str);
 	if (flag == 1)
