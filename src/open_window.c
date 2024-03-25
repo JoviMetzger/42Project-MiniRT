@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   open_window.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/08 16:05:51 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/08 16:05:54 by smclacke      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/miniRT.h"
 
 void error_msg(char *msg)
 {
 	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd(msg, 2);;
+	ft_putendl_fd(msg, 2);
 	exit(EXIT_FAILURE);
 }
 

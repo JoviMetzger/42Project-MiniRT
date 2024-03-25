@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   render.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/08 16:06:11 by smclacke      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/miniRT.h"
 
 // 1. Calculate the ray from the “eye” through the pixel, -> ft_create_ray();

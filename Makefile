@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: smclacke <smclacke@student.codam.nl>         +#+                      #
+#                                                    +#+                       #
+#    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
+#    Updated: 2024/03/25 12:06:24 by smclacke      ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
+
 # Executable
 NAME 			= miniRT
 INPUT_FILE		= ./images_rt/test1.rt
@@ -6,7 +18,7 @@ INPUT_FILE		= ./images_rt/test1.rt
 CC 				= cc
 CFLAGS 			= -Wall -Wextra
 CFLAGS			+= -Werror
-# CFLAGS			+= -g -fsanitize=address	# For leaks OR 'make && valgrind --leak-check=full ./miniRT ...'
+CFLAGS			+= -g -fsanitize=address
 
 # Libraries
 LIBFT_PATH		= ./libraries/libft
@@ -18,23 +30,50 @@ MLX42			= $(MLX42_PATH)/build/libmlx42.a
 
 # Sources files
 SRC_HEADER		= ./header
-SRC				= ./src/main.c \
-					./src/movement.c \
-					./src/open_window.c \
-					./src/parse_input.c \
-					./src/render.c \
-					./src/ray.c \
-					./src/colour.c \
-					./src/vector.c \
-					./src/vec_operators.c \
-					./src/ray_matrix.c \
-					./src/lightray.c \
-					./src/objects.c \
-					./src/ \
+
+SRCS			= main.c											\
+					print.c											\
+					movement.c 										\
+					open_window.c									\
+					colour.c										\
+					render.c										\
+					ray.c											\
+					vector.c \
+					vec_operators.c \
+					ray_matrix.c \
+					lightray.c \
+					objects.c \
+					parser/check_elements/check_caps.c				\
+					parser/check_elements/check_elements.c			\
+					parser/check_elements/check_utils.c				\
+					parser/convert/convert.c						\
+					parser/convert/convert_caps.c					\
+					parser/convert/convert_other.c					\
+					parser/convert/convert_nums.c					\
+					parser/convert/convert_nums_2.c					\
+					parser/convert/convert_utils/ft_atof.c			\
+					parser/convert/convert_utils/add_rgb.c			\
+					parser/convert/convert_utils/add_coord.c		\
+					parser/convert/convert_utils/add_vec.c			\
+					parser/convert/convert_utils/add_info.c			\
+					parser/convert/convert_utils/convert_utils.c	\
+					parser/convert/convert_utils/is_funcs.c			\
+					parser/convert/convert_utils/is_funcs_2.c		\
+					parser/validate/validate.c						\
+					parser/validate/valid_ratio.c					\
+					parser/validate/validate_utils.c				\
+					parser/parse_input.c							\
+					parser/parser_free.c							\
+					parser/parser_error.c							\
+					parser/parser_utils.c							\
+
+SRC_DIR			= src
+SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))
+
 
 # Objects files
 OBJ_PATH		= obj
-OBJ				= $(addprefix $(OBJ_PATH)/, $(notdir $(SRC:.c=.o)))
+OBJ				= $(addprefix $(OBJ_PATH)/, $(SRCS:%.c=%.o))
 
 # Colours
 PINK 			= \033[35m
@@ -61,13 +100,15 @@ $(MLX42):
 		@cd	$(MLX42_PATH) && cmake -B build && cmake --build build -j4
 		@echo "$(BLUE)$(BOLD) --- Compiling Minilibx Done --- $(RESET)"
 
-$(OBJ_PATH)/%.o: ./src/%.c
+$(OBJ_PATH)/%.o: $(SRC_DIR)/%.c $(SRC_HEADER)
 		@mkdir -p $(OBJ_PATH)
+		@mkdir -p $(OBJ_PATH)/parser
+		@mkdir -p $(OBJ_PATH)/parser/check_elements
+		@mkdir -p $(OBJ_PATH)/parser/validate
+		@mkdir -p $(OBJ_PATH)/parser/convert
+		@mkdir -p $(OBJ_PATH)/parser/convert/convert_utils
 		@$(CC) $(CFLAGS) -c -o $@ $<
 
-# ADD LIKE THIS LATER OTHER FOLDERS
-# $(OBJ_PATH)/%.o: ./src/utils/%.c
-# 		$(CC) $(CFLAGS) -c -o $@ $<
 
 # Executest the program
 open: $(NAME)
@@ -84,6 +125,7 @@ clean:
 
 fclean: clean
 		@$(MAKE) fclean -C $(LIBFT_PATH)
+		@rm -rf $(OBJ_DIR)
 		@rm -rf $(NAME)
 		@echo "$(GREEN) $(ITALIC)   ✅ Cleaned executer ✅$(RESET)"
 

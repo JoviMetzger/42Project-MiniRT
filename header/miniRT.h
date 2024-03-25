@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   miniRT.h                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/25 12:07:30 by smclacke      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -125,16 +137,16 @@ typedef struct s_screen
 // Main struct
 typedef struct s_data
 {
-    mlx_image_t *image;
-    mlx_t       *mlx;
-    t_screen    screen;
-    t_objects  objects;
-    t_camera    camera;
-    t_ambient   ambient;
-    t_light     light;
+	mlx_image_t	*image;
+	mlx_t		*mlx;
+	t_objects	objects;
+	t_camera	camera;
+	t_ambient	ambient;
+	t_light		light;
+	int			type;
     double      matrix[16]; // representation for 4x4 matrices. Each element of the array corresponds to a specific position in the matrix, following a specific order. 
     int         total_obj_num; // Sarah need to give it the value in the parser.
-}   t_data;
+}	t_data;
 
 // -------------------------------------------------------------
 // Ray struct (standing alone)
