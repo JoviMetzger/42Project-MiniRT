@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   objects.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/03/25 16:13:52 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/03/25 16:19:07 by smclacke      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/miniRT.h"
 
 // obj_data->d = discriminant; -> discriminant = b*b - 4*a*c;
@@ -51,7 +63,7 @@ bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
 // }
 
 // TEST FUNCTION,
-bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
+void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
 {
     int i = 0;
 
