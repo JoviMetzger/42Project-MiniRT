@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 13:00:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:24:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static int	sort_into_struct(char **elem_str, t_data *data)
 {
-	if (data->type == 1 && !sort_a(elem_str, data))
+	if (data->type == E_AMBIENT && !sort_a(elem_str, data))
 		return (0);
-	if (data->type == 2 && !sort_l(elem_str, data))
+	if (data->type == E_LIGHT && !sort_l(elem_str, data))
 		return (0);
-	if (data->type == 3 && !sort_c(elem_str, data))
+	if (data->type == E_CAMERA && !sort_c(elem_str, data))
 		return (0);
 	return (1);
 }
@@ -44,7 +44,6 @@ static void	convert_element(char **arr, t_data *data, int i)
 	free_array(elem_str);
 }
 
-// 99 == space
 void	convert_cap_input(t_data *data, char **arr)
 {
 	int		i;
@@ -53,12 +52,13 @@ void	convert_cap_input(t_data *data, char **arr)
 	while (arr[i])
 	{
 		data->type = get_type(arr[i]);
-		if (data->type == 99 || data->type == 4
-			|| data->type == 5 || data->type == 6)
+		if (data->type == E_SPACE || data->type == E_PLANE
+			|| data->type == E_SPHERE || data->type == E_CYLINDER)
 			i++;
-		else if (data->type == 0 || data->type > 6)
+		else if (data->type == 0 || data->type > 7)
 			free_arr_error("parser error", arr, NULL);
-		else if (data->type == 1 || data->type == 2 || data->type == 3)
+		else if (data->type == E_AMBIENT || data->type == E_LIGHT
+			|| data->type == E_CAMERA)
 		{
 			convert_element(arr, data, i);
 			i++;

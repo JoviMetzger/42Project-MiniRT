@@ -6,28 +6,28 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:20:47 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:06:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:22:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/parser.h"
 
-int	get_type(char *str)
+t_type	get_type(char *str)
 {
 	if (check_capital(str, 'A') == 1)
-		return (1);
+		return (E_AMBIENT);
 	if (check_capital(str, 'L') == 1)
-		return (2);
+		return (E_LIGHT);
 	if (check_capital(str, 'C') == 1)
-		return (3);
+		return (E_CAMERA);
 	if (check_pl(str) == 1)
-		return (4);
+		return (E_PLANE);
 	if (check_sp(str) == 1)
-		return (5);
+		return (E_SPHERE);
 	if (check_cy(str) == 1)
-		return (6);
+		return (E_CYLINDER);
 	if (ft_strcmp(str, " ") == 0 || is_space(str))
-		return (99);
+		return (E_SPACE);
 	return (0);
 }
 

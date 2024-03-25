@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:10:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:23:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@
 
 // Math stuff
 # define M_PI 3.14159265358979323846 // This is a constant representing the value of pi.
+
+// Element type enums
+typedef enum	e_type
+{
+	E_AMBIENT = 1,
+	E_LIGHT = 2,
+	E_CAMERA = 3,
+	E_PLANE = 4,
+	E_SPHERE = 5,
+	E_CYLINDER = 6,
+	E_SPACE = 7
+}				t_type;
 
 // --- Structs ---
 // Vector - position - coordinates
@@ -90,7 +102,8 @@ typedef struct s_cylinder
 typedef struct s_objs
 {
 	int					i;
-	int					type;
+	// int					type;
+	t_type				type;
 	t_colour            colour;
     t_vec3              center;
     t_vec3              vector;
@@ -152,7 +165,7 @@ typedef struct s_data
 	t_ambient	ambient;
 	t_light		light;
 	t_screen	screen;
-	int			type;
+	t_type		type;
     double      matrix[16]; // representation for 4x4 matrices. Each element of the array corresponds to a specific position in the matrix, following a specific order. 
     int         total_obj_num; // Sarah need to give it the value in the parser.
 }	t_data;

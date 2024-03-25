@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:12:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:27:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@
 # define sp 5
 # define cy 6
 
+// typedef enum	e_type
+// {
+// 	E_AMBIENT = 1,
+// 	E_LIGHT = 2,
+// 	E_CAMERA = 3,
+// 	E_PLANE = 4,
+// 	E_SPHERE = 5,
+// 	E_CYLINDER = 6
+// }				t_type;
 
 typedef struct s_elems
 {
@@ -55,7 +64,7 @@ void		free_close_util(char *line, int file);
 void		close_protect(int file);
 
 // --- parser_utils --- //
-int			get_type(char *str);
+t_type		get_type(char *str);
 char		**rt_malloc(char **arr, int size, int file);
 t_objs		*obj_malloc(t_data *data, char **arr, int size);
 
