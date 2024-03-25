@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:30:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 15:52:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 13:47:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_arr_error(char *msg, char **arr, t_elems *check)
 		free(check);
 	free_array(arr);
 	if (msg != NULL)
-		error_msg(msg);
+		error_msg2(msg);
 	else
 		exit(EXIT_FAILURE);
 }
@@ -35,13 +35,13 @@ void	free_close_parse_error(char *msg, char **ar, char *line, int file)
 	close_protect(file);
 	free_array(ar);
 	free(line);
-	error_msg(msg);
+	error_msg2(msg);
 }
 
 void	parse_error(char *msg, int file)
 {
 	close_protect(file);
-	error_msg(msg);
+	error_msg2(msg);
 }
 
 void	error_msg2(char *msg)

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 12:07:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 13:43:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <math.h>
+# include "parser.h"
 
 // --- Colours ---
 # define BLACK "\033[30;1m"
@@ -62,7 +63,7 @@ typedef struct s_sphere
     t_colour            colour;
     t_vec3              center;
     double              diameter;
-    struct s_sphere     *next; // Do we need this?
+    // struct s_sphere     *next; // Do we need this?
 }   t_sphere;
 
 // Object2: plane
@@ -71,7 +72,7 @@ typedef struct s_plane
     t_colour        colour;
     t_vec3          center;
     t_vec3          vector;
-    struct s_plane  *next; // Do we need this?
+    // struct s_plane  *next; // Do we need this?
 }   t_plane;
 
 // Object3: cylinder
@@ -82,17 +83,24 @@ typedef struct s_cylinder
     t_vec3              vector;
     double              diameter;
     double              height;
-    struct s_cylinder   *next; // Do we need this?
+    // struct s_cylinder   *next; // Do we need this?
 }   t_cylinder;
 
 // Struct for objects
 typedef struct s_objects
 {
+	int					index;
+	int					type;
+	t_colour            colour;
+    t_vec3              center;
+    t_vec3              vector;
+    double              diameter;
+    double              height;
     t_sphere     sphere;
     t_plane      plane;
     t_cylinder   cylinder;
     // t_cone       cone; // BONUS
-    struct s_objects    *next;
+    // struct s_objects    *next;
 }   t_objects;
 
 // -------------------------------------------------------------
@@ -139,10 +147,12 @@ typedef struct s_data
 {
 	mlx_image_t	*image;
 	mlx_t		*mlx;
-	t_objects	objects;
+	t_objects	*objects;
+	// t_objects	object_list;
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		light;
+	t_screen	screen;
 	int			type;
     double      matrix[16]; // representation for 4x4 matrices. Each element of the array corresponds to a specific position in the matrix, following a specific order. 
     int         total_obj_num; // Sarah need to give it the value in the parser.
@@ -214,5 +224,7 @@ bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
 bool intersect_sphere(t_ray *ray, t_sphere *sphere, t_obj_data *obj_data);
 void intersect_plane(t_ray *ray, t_plane *plane, t_obj_data *obj_data);
 void intersect_cylinder(t_ray *ray, t_cylinder *cylinder, t_obj_data *obj_data);
+
+void	error_msg(char *str);
 
 #endif

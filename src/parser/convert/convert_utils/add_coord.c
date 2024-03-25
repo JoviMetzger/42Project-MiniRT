@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 20:43:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 16:08:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 13:31:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,9 @@ void	coord_camera(t_data *data, double x, double y, double z)
 	data->camera.place.z = z;
 }
 
-void	coord_pl(t_data *data, double x, double y, double z)
+void	coord_other(t_data *data, double x, double y, double z)
 {
-	data->objects.plane.center.x = x;
-	data->objects.plane.center.y = y;
-	data->objects.plane.center.z = z;
-}
-
-void	coord_sp(t_data *data, double x, double y, double z)
-{
-	data->objects.sphere.center.x = x;
-	data->objects.sphere.center.y = y;
-	data->objects.sphere.center.z = z;
-}
-
-void	coord_cy(t_data *data, double x, double y, double z)
-{
-	data->objects.cylinder.center.x = x;
-	data->objects.cylinder.center.y = y;
-	data->objects.cylinder.center.z = z;
+	data->objects[data->objects->index].center.x = x;
+	data->objects[data->objects->index].center.y = y;
+	data->objects[data->objects->index].center.z = z;
 }

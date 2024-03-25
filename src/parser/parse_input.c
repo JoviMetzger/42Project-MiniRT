@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 16:44:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 14:00:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,17 @@
 */
 static void	parse_array(t_data *data, char **arr)
 {
+	int		obj_count;
+
 	check_elements(arr);
-	validate_elems(arr);
-	convert_input(data, arr);
+	obj_count = validate_elems(arr);
+	convert_cap_input(data, arr);
+	convert_obj_input(data, arr, obj_count);
+	if (data->objects->index != obj_count)
+	{
+		free(data->objects);
+		free_arr_error("parser error", arr, NULL);
+	}
 }
 
 /**
@@ -82,11 +90,11 @@ static void	check_file_type(char *arg)
 			if (ft_strcmp(&arg[i], ".rt") == 0)
 				return ;
 			else
-				error_msg("wrong file type");
+				error_msg2("wrong file type");
 		}
 		i++;
 	}
-	error_msg("wrong file type");
+	error_msg2("wrong file type");
 }
 
 void	parse_input(int argc, char **argv, t_data *data)
@@ -95,10 +103,10 @@ void	parse_input(int argc, char **argv, t_data *data)
 
 	file = 0;
 	if (argc != 2)
-		error_msg("wrong number of arguments");
+		error_msg2("wrong number of arguments");
 	check_file_type(argv[1]);
 	file = open(argv[1], O_RDONLY, 0644);
 	if (file == -1)
-		error_msg("couldn't open file");
+		error_msg2("couldn't open file");
 	read_file(data, file);
 }
