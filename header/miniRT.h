@@ -179,7 +179,7 @@ void ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b);
-uint32_t ft_calculate_colour(t_data *data, t_obj_data obj, t_ray ray);
+uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
 
 // Vector Functions
 t_vec3 init_vector(t_data *data, t_screen screen);

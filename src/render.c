@@ -28,7 +28,7 @@ void ft_put_image(t_data *data)
 			// ---------------------
 
 			// // 3. Compute a color for the closest intersection point.
-			// colour = ft_calculate_colour(data, obj_data, ray); // -> still need to create
+			// colour = ft_calculate_colour(data, &obj_data, ray); // -> still need to create
 			// mlx_put_pixel(data->image, x, y, colour);
 			y++;
 		}
