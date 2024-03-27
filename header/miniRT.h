@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 12:07:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/27 12:54:24 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,15 +157,13 @@ typedef struct s_ray
 // Object data struct (standing alone)
 typedef struct s_obj_data 
 {
-    t_vec3      place;
-    // double      camera_distance;
-    // t_objects  *objects;
     double  a;
     double  b;
     double  c;
     double  d;
-    double  t;
-    double  t2;
+    double  root1;
+    double  root2;
+    double t;
 
 }   t_obj_data;
 
@@ -174,21 +172,17 @@ typedef struct s_obj_data
 void ft_put_image(t_data *data);
 void ft_open_window(t_data *data);
 void ft_render(t_data *data);
-
-// Movement Functions
 void ft_key_action(mlx_key_data_t keydata, t_data *data);
 
 // Ray Functions
 t_ray ft_create_ray(t_data *data, int x, int y);
 void store_ray_matrix(t_data *data);
+t_vec3 init_vector(t_data *data, t_screen screen);
 void ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b);
 uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
-
-// Vector Functions
-t_vec3 init_vector(t_data *data, t_screen screen);
 
 // Operators
 t_vec3 plus(t_vec3 u, t_vec3 v);
@@ -203,9 +197,9 @@ double length_squared(t_vec3 vec);
 t_vec3	normalize_vector(t_vec3 v);
 
 // Objects Functions
-// void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
-bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
-bool intersect_sphere(t_ray *ray, t_sphere *sphere, t_obj_data *obj_data, double *t);
+void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
+// bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
+bool intersect_sphere(t_ray *ray, t_sphere *sphere, t_obj_data *obj_data);
 void intersect_plane(t_ray *ray, t_plane *plane, t_obj_data *obj_data);
 void intersect_cylinder(t_ray *ray, t_cylinder *cylinder, t_obj_data *obj_data);
 
