@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/28 15:17:24 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/03/28 17:15:43 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void ft_put_image(t_data *data)
 {
 	t_ray ray;
-	t_obj_data obj_data; // maybe we don't need this. -> can add "a,b,c,d,root1,root2,t" in obj struct
+	t_obj_data obj_data; // maybe we don't need this. -> can add "a,b,c,d,root1,root2,t" in objs struct
 	uint32_t colour;
 	int y = 0;
 	int x = 0;
@@ -42,5 +42,4 @@ void ft_render(t_data *data)
 {
 	ft_put_image(data); // Shazam(MATH)
 	mlx_key_hook(data->mlx, (mlx_keyfunc)ft_key_action, data); // movement aka ESC
-
 }

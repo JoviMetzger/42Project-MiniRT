@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/28 15:13:59 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/03/28 16:45:25 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
 //
-bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
+void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
 {
     int i = 0;
 
@@ -22,11 +22,20 @@ bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
 		if (data->objs->type == E_SPHERE)
 		{
             if (intersect_sphere(&ray, &data->objs[i], obj_data))
-                return (true);
+                return ;
 		}
-        // intersect_plane(&ray, &data->objs[i], obj_data);
-        // intersect_cylinder(&ray, &data->objs[i], obj_data);
+        // // 'if' OR 'if/else if'????
+        // if (data->objs->type == E_PLANE)
+		// {
+        //     if (intersect_plane(&ray, &data->objs[i], obj_data))
+        //         return ;
+		// }
+        // if (data->objs->type == E_CYLINDER)
+		// {
+        //     if (intersect_cylinder(&ray, &data->objs[i], obj_data))
+        //         return ;
+		// }
         i++;
     }
-    return (false);
+    return ;
 }

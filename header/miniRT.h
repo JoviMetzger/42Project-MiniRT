@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/28 15:14:32 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/03/28 17:18:11 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ typedef struct s_ray
 }   t_ray;
 
 // -------------------------------------------------------------
-// Object data struct (standing alone)
+// Object data struct (standing alone) -> saves the calculations of the intersections
 typedef struct s_obj_data 
 {
     double  a;
@@ -186,8 +186,7 @@ double length_squared(t_vec3 vec);
 t_vec3	normalize_vector(t_vec3 v);
 
 // Objects Functions
-// void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
-bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
+void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
 bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
 bool intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 bool intersect_cylinder(t_ray *ray, t_objs*cylinder, t_obj_data *obj_data);
