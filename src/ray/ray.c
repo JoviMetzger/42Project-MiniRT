@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/08 16:06:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/27 13:55:02 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@
 // pixel_x = viewport_w * image_ratio * (tan((fov / 2) * (M_PI / 180)));
 // pixel_y = viewport_h * (tan((fov / 2) * (M_PI / 180)));
 // ---
-// 2. Determine which objects the ray intersects, and
-// // give the ray struct it information
-// // need first screen info before we can calculate the ray info
+// need first screen info before we can calculate the ray info
 t_ray ft_create_ray(t_data *data, int pos_x, int pos_y)
 {
     t_ray ray;
-    // t_ray lightray;
     t_screen screen = data->screen;
 
     double img_width = data->mlx->width;
@@ -47,9 +44,6 @@ t_ray ft_create_ray(t_data *data, int pos_x, int pos_y)
 
     ray.vector = init_vector(data, screen);
     ray.place = data->camera.place;
-
-    // Don't know if this can be done here or if this should be done when we init and calculate the colour.
-    // ft_create_lightray(data, &lightray); // Init & creating the lightray -> Still need TO CREATE THIS!!!!!
 
     return (ray);
 }

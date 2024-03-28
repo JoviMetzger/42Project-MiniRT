@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/27 12:54:24 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/03/27 15:49:03 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,10 +178,12 @@ void ft_key_action(mlx_key_data_t keydata, t_data *data);
 t_ray ft_create_ray(t_data *data, int x, int y);
 void store_ray_matrix(t_data *data);
 t_vec3 init_vector(t_data *data, t_screen screen);
-void ft_create_lightray(t_data *data, t_ray *lightray);
+
+// Lightray Functions
+void ft_create_lightray(t_data *data, t_obj_data *obj_data, t_ray *lightray);
 
 // Colour Functions
-int32_t ft_pixel(int32_t r, int32_t g, int32_t b);
+int32_t ft_get_rgb(int32_t r, int32_t g, int32_t b);
 uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
 
 // Operators
