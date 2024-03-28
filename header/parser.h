@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 15:53:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:10:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void		free_close_util(char *line, int file);
 void		close_protect(int file);
 
 // --- parser_utils --- //
-int			get_type(char *str);
+t_type		get_type(char *str);
 char		**rt_malloc(char **arr, int size, int file);
+t_objs		*obj_malloc(t_data *data, char **arr, int size);
 
 
 // ----------- /check_elements/ ------------ //
@@ -79,7 +80,8 @@ int			check_capital(char *str, int type);
 // ----------- /convert/ ----------- //
 
 // --- convert --- //
-void		convert_input(t_data *data, char **arr);
+void		convert_cap_input(t_data *data, char **arr);
+void		convert_obj_input(t_data *data, char **arr, int count);
 
 // --- convert_caps --- //
 int			sort_a(char **elem_str, t_data *data);
@@ -94,7 +96,7 @@ int			sort_cy(char **elem_str, t_data *data);
 // --- convert_nums --- //
 int			is_coord(char *str, int i, int num_flag);
 int			convert_coord(t_data *data, char *str);
-int			is_ratio(char *str, int i, int num_flag, int dot_flag);
+int			is_ratio(char *str, int i, int dot_flag);
 int			is_rgb(char *str, int i, int num_flag);
 int			convert_rgb(t_data *data, char *str);
 
@@ -117,19 +119,14 @@ void		add_rgb(t_data *data, int r, int g, int b);
 // --- add_coord --- //
 void		coord_light(t_data *data, double x, double y, double z);
 void		coord_camera(t_data *data, double x, double y, double z);
-void		coord_pl(t_data *data, double x, double y, double z);
-void		coord_sp(t_data *data, double x, double y, double z);
-void		coord_cy(t_data *data, double x, double y, double z);
+void		coord_obj(t_data *data, double x, double y, double z);
 
 // --- add_vec --- //
 void		vec_camera(t_data *data, double x, double y, double z);
-void		vec_pl(t_data *data, double x, double y, double z);
-void		vec_cy(t_data *data, double x, double y, double z);
+void		vec_obj(t_data *data, double x, double y, double z);
 
 // --- add_rgb --- //
-void		rgb_cy(t_data *data, int r, int g, int b);
-void		rgb_sp(t_data *data, int r, int g, int b);
-void		rgb_pl(t_data *data, int r, int g, int b);
+void		rgb_obj(t_data *data, int r, int g, int b);
 void		rgb_light(t_data *data, int r, int g, int b);
 void		rgb_ambient(t_data *data, int r, int g, int b);
 
@@ -157,7 +154,7 @@ int			is_dash(int c);
 // ------------ /validate/ ------------ //
 
 // --- validate --- //
-void		validate_elems(char **arr);
+int			validate_elems(char **arr);
 
 // --- valid_ratio --- //
 int			is_valid_light(double light);
@@ -169,6 +166,5 @@ int			is_valid_fov(int fov);
 int			is_valid_no(char *str);
 int			num_elems(char *str);
 int			is_caps(char *str);
-int			is_other(char *str);
 
 #endif

@@ -6,13 +6,13 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/25 12:06:24 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/28 12:51:34 by jmetzger      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # Executable
 NAME 			= miniRT
-INPUT_FILE		= ./images_rt/test1.rt
+INPUT_FILE		= images_rt/parse_me.rt 
 
 # Compiler and flags
 CC 				= cc
@@ -49,9 +49,10 @@ SRCS			= main.c											\
 					parser/check_elements/check_caps.c				\
 					parser/check_elements/check_elements.c			\
 					parser/check_elements/check_utils.c				\
-					parser/convert/convert.c						\
 					parser/convert/convert_caps.c					\
-					parser/convert/convert_other.c					\
+					parser/convert/convert_cap_input.c				\
+					parser/convert/convert_obj_input.c				\
+					parser/convert/convert_obj.c					\
 					parser/convert/convert_nums.c					\
 					parser/convert/convert_nums_2.c					\
 					parser/convert/convert_utils/ft_atof.c			\
@@ -69,6 +70,7 @@ SRCS			= main.c											\
 					parser/parser_free.c							\
 					parser/parser_error.c							\
 					parser/parser_utils.c							\
+					
 
 SRC_DIR			= src
 SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))

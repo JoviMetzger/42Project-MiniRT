@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 22:38:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/28 15:16:34 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_vec3 compute_right(double *matrix, t_vec3 forward)
     // The y component represents the vertical direction in a standard 3D coordinate system.
     if (fabs(forward.y) == 1)
     {
-        // If y is  exactly 1 or -1, it implies that the forward direction is almost purely vertical.
+        // If y is exactly 1 or -1, it implies that the forward direction is almost purely vertical.
         tmp.z = -forward.y;
         tmp.y = 0;
     }

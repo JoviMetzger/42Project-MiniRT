@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 22:26:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 16:08:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:27:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,30 @@
 
 void	add_vec(t_data *data, double x, double y, double z)
 {
-	if (data->type == 3)
+	if (data->type == E_CAMERA)
 		vec_camera(data, x, y, z);
-	else if (data->type == 4)
-		vec_pl(data, x, y, z);
-	else if (data->type == 6)
-		vec_cy(data, x, y, z);
+	else if (data->type == E_PLANE || data->type == E_CYLINDER)
+		vec_obj(data, x, y, z);
 }
 
 void	add_coord(t_data *data, double x, double y, double z)
 {
-	if (data->type == 3)
+	if (data->type == E_CAMERA)
 		coord_camera(data, x, y, z);
-	else if (data->type == 2)
+	else if (data->type == E_LIGHT)
 		coord_light(data, x, y, z);
-	else if (data->type == 4)
-		coord_pl(data, x, y, z);
-	else if (data->type == 5)
-		coord_sp(data, x, y, z);
-	else if (data->type == 6)
-		coord_cy(data, x, y, z);
+	else if (data->type == E_PLANE || data->type == E_SPHERE
+		|| data->type == E_CYLINDER)
+		coord_obj(data, x, y, z);
 }
 
 void	add_rgb(t_data *data, int r, int g, int b)
 {
-	if (data->type == 1)
+	if (data->type == E_AMBIENT)
 		rgb_ambient(data, r, g, b);
-	else if (data->type == 2)
+	else if (data->type == E_LIGHT)
 		rgb_light(data, r, g, b);
-	else if (data->type == 4)
-		rgb_pl(data, r, g, b);
-	else if (data->type == 5)
-		rgb_sp(data, r, g, b);
-	else if (data->type == 6)
-		rgb_cy(data, r, g, b);
+	else if (data->type == E_PLANE || data->type == E_SPHERE
+		|| data->type == E_CYLINDER)
+		rgb_obj(data, r, g, b);
 }

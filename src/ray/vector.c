@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/15 22:38:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/28 15:17:08 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,6 @@ t_vec3  matrix_math(double *matrix, t_vec3 old)
 
 t_vec3 init_vector(t_data *data, t_screen screen)
 {
-    // // ==== TESTING ========
-    // t_vec3 testRay = init_ray_pos(screen.pixel_delata_x, screen.pixel_delata_y, 1);
-    // printf ("TEST - init ray:\n----------------\nvec x: %f\nvec y: %f\nvec z: %f\n\n", testRay.x, testRay.y, testRay.z);
-
-    // t_vec3 testMatrix = matrix_math(data->matrix, init_ray_pos(screen.pixel_delata_x, screen.pixel_delata_y, 1));
-    // printf ("TEST - Matrix ray:\n----------------\nvec x: %f\nvec y: %f\nvec z: %f\n\n", testMatrix.x, testMatrix.y, testMatrix.z);
-
-    // t_vec3 testPrinting = normalize_vector(matrix_math(data->matrix, init_ray_pos(screen.pixel_delata_x, screen.pixel_delata_y, 1)));
-    // printf ("TEST - init vector:\n----------------\nvec x: %f\nvec y: %f\nvec z: %f\n\n", testPrinting.x, testPrinting.y, testPrinting.z);
-    // exit(0);
-    // // =====================
-
     // it returns the normalizes_vectors (scale it and assings a value to each vec3 (xyz)) of the 'matrix calculation';
     // the 'matrix calculation' takes the matrix and the ray-vector;
     // Altough we need the ray-vector we assign x,y,z the pixel_x-y-z -> init_ray_pos() as the ray-vector;

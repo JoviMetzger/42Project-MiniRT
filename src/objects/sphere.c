@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/27 13:24:46 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/03/28 15:16:04 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@
  *  The smaller root is chosen as the parameter 't' for the intersection point 
  *  closer to the ray's origin.
  */
-bool intersect_sphere(t_ray *ray, t_sphere *sphere, t_obj_data *obj_data)
+bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
 {
     double radius;
     t_vec3	oc;
 
+    // printf("----- SPHERE OBJ: -----\ncenter: %f - %f - %f\nvector: %f - %f - %f\n,diameter: %f\nheight: %f", sphere->center.x, sphere->center.y, sphere->center.z, sphere->vector.x, sphere->vector.y, sphere->vector.z, sphere->diameter, sphere->height);
     radius = sphere->diameter / 2;
     oc = minus(ray->place, sphere->center);
     obj_data->a = dot_product(ray->vector, ray->vector);
@@ -40,7 +41,7 @@ bool intersect_sphere(t_ray *ray, t_sphere *sphere, t_obj_data *obj_data)
     obj_data->c = dot_product(oc, oc) - radius * radius;
     obj_data->d = obj_data->b * obj_data->b - 4 * obj_data->a * obj_data->c;
 
-    if (obj_data->d  < 0)
+    if (obj_data->d < 0)
         return (false);	// No intersection
     else 
     {

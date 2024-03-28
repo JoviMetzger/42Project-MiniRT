@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 16:44:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 15:17:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ static int	check_no_elems(char *str, int type)
  * 			size/ratio etc will be checked after conversion
  * 			anything found that shouldn't be there, error and exit
 */
-void	validate_elems(char **arr)
+int	validate_elems(char **arr)
 {
 	int		i;
 	int		type;
+	int		count;
 
 	i = 0;
 	type = 0;
+	count = 0;
 	while (arr[i])
 	{
 		if (!is_valid_no(arr[i]))
@@ -51,8 +53,11 @@ void	validate_elems(char **arr)
 		type = get_type(arr[i]);
 		if (type == 0)
 			free_arr_error("unknown parser error", arr, NULL);
+		if (type == 4 || type == 5 || type == 6)
+			count++;
 		if (!check_no_elems(arr[i], type))
 			free_arr_error(NULL, arr, NULL);
 		i++;
 	}
+	return (count);
 }

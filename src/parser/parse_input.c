@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 16:44:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/25 16:02:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,17 @@
 */
 static void	parse_array(t_data *data, char **arr)
 {
+	int			obj_count;
+
 	check_elements(arr);
-	validate_elems(arr);
-	convert_input(data, arr);
+	obj_count = validate_elems(arr);
+	convert_cap_input(data, arr);
+	convert_obj_input(data, arr, obj_count);
+	if (data->objs->i != obj_count)
+	{
+		free(data->objs);
+		free_arr_error("parser error", arr, NULL);
+	}
 }
 
 /**
