@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 17:33:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 17:41:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	parse_array(t_data *data, char **arr)
 	obj_count = validate_elems(arr);
 	convert_cap_input(data, arr);
 	convert_obj_input(data, arr, obj_count);
-	
 	// do this check and free whole object array
 	// if (data->objs->i != obj_count)
 	// {

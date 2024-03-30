@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/25 12:43:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 17:33:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 17:42:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	convert_element(char **arr, t_data *data, int i)
 	free_array(elem_str);
 }
 
-static void	init_objs(t_data *data, char ** arr)
+static void	init_objs(t_data *data, char **arr)
 {
 	data->objs[data->objs_i] = object_malloc(data, arr);
 	data->objs[data->objs_i]->type = data->type;

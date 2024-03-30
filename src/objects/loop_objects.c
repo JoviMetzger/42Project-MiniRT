@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 17:37:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 17:38:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray, int i
 	(void)	obj_data;
 	(void)	ray;
 
-	if (!data->objs[i])
-		return (false);
 	int		type = data->objs[i]->type;
 
 	printf("type = %i\n", type);

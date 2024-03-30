@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 17:36:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 17:41:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void ft_put_image(t_data *data)
 
 	while (x < data->mlx->width)
 	{
-		while (y < data->mlx->height) // i < obj_i
+		while (y < data->mlx->height && i < data->objs_i)
 		{ 
 			// 1. Calculate the ray from the “eye” through the pixel,
 			ray = ft_create_ray(data, x ,y); // -> ft_create_lightray() is not working yet.
@@ -35,12 +35,8 @@ void ft_put_image(t_data *data)
 			
 			// --- TEST FUNCTION ----
 			// =============================================
-			// printf("objs = %p\n", &data->objs[i]);
 			if (ft_create_intersection(data, &obj_data, ray, i))
-			{	
-				// if (ft_create_intersection(data, &obj_data, ray, i))
 				mlx_put_pixel(data->image, x, y, ft_pixel(10, 0, 255)); // Pixel is inside the sphere
-			}
             else
                 mlx_put_pixel(data->image, x, y, ft_pixel(0, 0, 0)); // Pixel is outside the sphere
 			// =============================================
