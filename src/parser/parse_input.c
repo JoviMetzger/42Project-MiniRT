@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 16:02:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 17:41:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
  * 			all other elements (sp, cy, pl) must be declared, poss multi
  * 			if error/invalid, free in check function, error and exit
  * 			number of arguments and characters checked before conversion
+ * 
+ * @todo		comment thing
 */
 static void	parse_array(t_data *data, char **arr)
 {
@@ -34,11 +36,12 @@ static void	parse_array(t_data *data, char **arr)
 	obj_count = validate_elems(arr);
 	convert_cap_input(data, arr);
 	convert_obj_input(data, arr, obj_count);
-	if (data->objs->i != obj_count)
-	{
-		free(data->objs);
-		free_arr_error("parser error", arr, NULL);
-	}
+	// do this check and free whole object array
+	// if (data->objs->i != obj_count)
+	// {
+	// 	free(data->objs);
+	// 	free_arr_error("parser error", arr, NULL);
+	// }
 }
 
 /**

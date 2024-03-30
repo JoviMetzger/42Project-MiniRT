@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/29 15:04:41 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/03/30 18:09:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 // Math stuff
 # define M_PI 3.14159265358979323846 // This is a constant representing the value of pi.
 
-// Element type enums
+// Element type enums, includes space for parser
 typedef enum	e_type
 {
 	E_AMBIENT = 1,
@@ -50,6 +50,7 @@ typedef enum	e_type
 }				t_type;
 
 // --- Structs ---
+// -------------------------------------------------------------
 // Vector - position - coordinates
 typedef struct s_vec3
 {
@@ -67,10 +68,10 @@ typedef struct s_colour
     int     b;  // blue
 }   t_colour;
 
+// -------------------------------------------------------------
 // Struct for objects
 typedef struct s_objs
 {
-	int					i;
 	t_type				type;
 	t_colour            colour;
     t_vec3              center;
@@ -122,7 +123,8 @@ typedef struct s_data
 {
 	mlx_image_t	*image;
 	mlx_t		*mlx;
-	t_objs		*objs;
+	t_objs		**objs;
+	int			objs_i;
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		light;

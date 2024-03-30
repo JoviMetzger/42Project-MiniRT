@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/28 17:42:25 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/03/30 18:10:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ void ft_put_image(t_data *data)
 
 void ft_render(t_data *data)
 {
+	// printf("i = %i\n", data->objs->i);
+	// while (data->objs->i > 0)
+	// {
+	// 	printf("type = %i\n", data->objs->type);
+	// 	data->objs->i--;
+	// }
+	// exit(EXIT_SUCCESS);
 	ft_put_image(data); // Shazam(MATH)
 	mlx_key_hook(data->mlx, (mlx_keyfunc)ft_key_action, data); // movement aka ESC
 }

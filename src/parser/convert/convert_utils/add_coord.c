@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 20:43:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:08:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 17:13:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	coord_camera(t_data *data, double x, double y, double z)
 
 void	coord_obj(t_data *data, double x, double y, double z)
 {
-	data->objs[data->objs->i].center.x = x;
-	data->objs[data->objs->i].center.y = y;
-	data->objs[data->objs->i].center.z = z;
+	data->objs[data->objs_i]->center.x = x;
+	data->objs[data->objs_i]->center.y = y;
+	data->objs[data->objs_i]->center.z = z;
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/28 12:28:48 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/03/30 18:10:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ int main(int argc, char **argv)
 
 	parse_input(argc, argv, &data);
 
+
+	// print_parser(&data);
 	ft_open_window(&data); // Open window
 	ft_render(&data); // the whole shazam!
 
 	mlx_loop(data.mlx);		// loop
 	mlx_terminate(data.mlx); // terminate
 
-	free(data.objs);
-
+	free_objects(&data);		// needs to be part of the clean up
 	return (EXIT_SUCCESS);
 }

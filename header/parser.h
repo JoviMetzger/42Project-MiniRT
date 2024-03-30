@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 16:10:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 17:23:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PARSER_H
+#ifndef PARSER_H
 # define PARSER_H
 
 # include "miniRT.h"
@@ -21,13 +21,12 @@
 #  define BUFF_SIZE 100
 # endif
 
-
 # define A 1
 # define L 2
 # define C 3
-# define pl 4
-# define sp 5
-# define cy 6
+# define PL 4
+# define SP 5
+# define CY 6
 
 typedef struct s_elems
 {
@@ -46,18 +45,19 @@ int			par_err(char *msg);
 void		free_arr_error(char *msg, char **arr, t_elems *check);
 void		free_close_parse_error(char *msg, char **ar, char *line, int file);
 void		parse_error(char *msg, int file);
-void 		error_msg(char *msg);
+void		error_msg(char *msg);
 
 // --- parser_free --- //
 void		free_array(char **arr);
 void		free_close_util(char *line, int file);
 void		close_protect(int file);
+void		free_objects(t_data *data);
 
 // --- parser_utils --- //
 t_type		get_type(char *str);
 char		**rt_malloc(char **arr, int size, int file);
-t_objs		*obj_malloc(t_data *data, char **arr, int size);
-
+t_objs		**obj_malloc(t_data *data, char **arr, int size);
+t_objs		*object_malloc(t_data *data, char **arr);
 
 // ----------- /check_elements/ ------------ //
 
@@ -75,7 +75,6 @@ int			check_sp(char *str);
 int			check_cy(char *str);
 void		check_dup(char **arr, int i, int type);
 int			check_capital(char *str, int type);
-
 
 // ----------- /convert/ ----------- //
 
@@ -104,7 +103,6 @@ int			convert_rgb(t_data *data, char *str);
 int			convert_vector(t_data *data, char *str);
 int			convert_fov(t_data *data, char *str);
 int			convert_double(t_data *data, char *str, int flag, int type);
-
 
 // --- /convert_utils/ --- //
 
@@ -149,7 +147,6 @@ int			is_space(char *str);
 int			valid_num(int c);
 int			is_alpha(int c);
 int			is_dash(int c);
-
 
 // ------------ /validate/ ------------ //
 
