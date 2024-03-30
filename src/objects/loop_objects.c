@@ -6,12 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 18:09:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 18:33:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
+
+// if sphere, intersect, then get sphere colour, then return colour...
 //
 void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
 {

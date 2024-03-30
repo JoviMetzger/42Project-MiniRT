@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 18:09:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 18:16:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
 uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
-t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray);
+t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
 // t_colour get_sphere_colour(t_data *data, t_ray lightray, t_obj_data *obj_data, t_colour ambient);
 // t_colour get_plane_colour(t_data *data, t_ray lightray, t_obj_data *obj_data, t_colour ambient);
 // t_colour get_cylinder_colour(t_data *data, t_ray lightray, t_obj_data *obj_data, t_colour ambient);

@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/29 14:48:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 18:16:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data, double *t)
+bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
 {
 	double	radius;
 	t_vec3	oc;
@@ -30,7 +30,7 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data, doub
 	{
 		double	root1 = (-obj_data->b - sqrt(obj_data->d)) / (2.0 * obj_data->a);
 		double	root2 = (-obj_data->b + sqrt(obj_data->d)) / (2.0 * obj_data->a);
-		*t = (root1 < root2) ? root1 : root2;
+		obj_data->t = (root1 < root2) ? root1 : root2;
 		return (true); // intersection found
 	
 	}
