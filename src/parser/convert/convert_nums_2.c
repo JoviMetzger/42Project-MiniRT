@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 16:12:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 16:14:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ int	convert_fov(t_data *data, char *str)
 // flag 1 = diameter | flag 2 = height
 // type 234 = sphere
 // type 432 = cylinder
-// @TODO WE DONT NEED SAME FLAGS, CHANGE LATER
+/**
+ * @todo WE CAN DO THIS DIFFERENTLY WITHOUT ALL FLAGS
+*/
 int	convert_double(t_data *data, char *str, int flag, int type)
 {
 	double	ratio;
