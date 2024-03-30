@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 18:10:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 20:33:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int main(int argc, char **argv)
 	mlx_loop(data.mlx);		// loop
 	mlx_terminate(data.mlx); // terminate
 
-	free_objects(&data);		// needs to be part of the clean up
+	free_objects(&data);	// needs to be part of the clean up
 	return (EXIT_SUCCESS);
 }

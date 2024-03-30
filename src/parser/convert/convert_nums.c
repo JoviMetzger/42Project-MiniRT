@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 16:10:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 20:35:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,12 @@ int	is_rgb(char *str, int i, int num_flag)
 		return (0);
 	while (str[i])
 	{
-		while (str[i] && is_num(str[i]))
-		{
+		if (str[i] && is_num(str[i]))
 			num_flag++;
-			i++;
-		}
 		if (num_flag > 3)
 			return (0);
-		if (is_comma(str[i]))
+		if (str[i] && is_comma(str[i]))
 			num_flag = 0;
-		if (str[i] && !rgb_valid(str[i]))
-			return (0);
 		i++;
 	}
 	return (1);

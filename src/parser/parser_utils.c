@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:20:47 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 17:33:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 20:02:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_type	get_type(char *str)
 
 char	**rt_malloc(char **arr, int size, int file)
 {
-	arr = (char **)malloc(sizeof(char *) * size + 1);
+	arr = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!arr)
 		parse_error("malloc failure", file);
 	return (arr);
