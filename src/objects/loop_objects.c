@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/29 15:00:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 16:05:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
 
     while (i < data->objs->i)
     {
-		// if (data->objs->type == E_SPHERE)
-		// {
-		// 	printf("sphere\n");
-		// 	// if (intersect_sphere(&ray, &data->objs[i], obj_data, &t))
-		// 	// 	return true;
-		// }
-		if (data->objs->type == E_CYLINDER)
+		if (data->objs->type == E_SPHERE)
 		{
-			if (intersect_cylinder(&ray, &data->objs[i], obj_data, &t))
+			// printf("sphere\n");
+			if (intersect_sphere(&ray, &data->objs[i], obj_data, &t))
 				return true;
 		}
+		// if (data->objs->type == E_CYLINDER)
+		// {
+		// 	if (intersect_cylinder(&ray, &data->objs[i], obj_data, &t))
+		// 		return true;
+		// }
 		// if (data->objs->type == E_PLANE)
 		// {
 			// if (intersect_plane(&ray, &data->objs[i], obj_data))

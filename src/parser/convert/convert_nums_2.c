@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 16:11:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 16:12:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	convert_vector(t_data *data, char *str)
 	y = ft_atof(vec[1]);
 	z = ft_atof(vec[2]);
 	if (!is_valid_vector(x, y, z))
-		return (0);
+		return (free_array(vec), 0);
 	add_vec(data, x, y, z);
 	return (free_array(vec), 1);
 }
