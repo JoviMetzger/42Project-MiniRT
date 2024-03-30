@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/29 14:47:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 17:06:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef struct s_colour
 // Struct for objects
 typedef struct s_objs
 {
-	int					i;
 	t_type				type;
 	t_colour            colour;
     t_vec3              center;
@@ -124,7 +123,8 @@ typedef struct s_data
 {
 	mlx_image_t	*image;
 	mlx_t		*mlx;
-	t_objs		*objs;
+	t_objs		**objs;
+	int			objs_i;
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		light;
@@ -192,7 +192,7 @@ t_vec3	normalize_vector(t_vec3 v);
 
 // Objects Functions
 // void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
-bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
+bool ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray, int i);
 bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data, double *t);
 void intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 bool intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data, double *t);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 22:36:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:45:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 17:20:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ void	print_parser(t_data *data)
 
 	int		index = 0;
 
-	printf("Object count = %i\n\n", data->objs->i);
+	printf("Object count = %i\n\n", data->objs_i);
 
-	while (index < data->objs->i)
+	while (index < data->objs_i)
 	{
-		printf("obj type = %i\n", data->objs[index].type);
-		printf("diameter = %f\n", data->objs[index].diameter);
-		printf("height = %f\n", data->objs[index].height);
-		printf("coords = %f,%f,%f\n", data->objs[index].center.x, data->objs[index].center.y, data->objs[index].center.z);
-		printf("rgb = %i %i %i\n", data->objs[index].colour.r, data->objs[index].colour.g, data->objs[index].colour.b);
-		printf("vector = %f,%f,%f\n", data->objs[index].vector.x, data->objs[index].vector.y, data->objs[index].vector.z);
+		printf("obj type = %i\n", data->objs[index]->type);
+		printf("diameter = %f\n", data->objs[index]->diameter);
+		printf("height = %f\n", data->objs[index]->height);
+		printf("coords = %f,%f,%f\n", data->objs[index]->center.x, data->objs[index]->center.y, data->objs[index]->center.z);
+		printf("rgb = %i %i %i\n", data->objs[index]->colour.r, data->objs[index]->colour.g, data->objs[index]->colour.b);
+		printf("vector = %f,%f,%f\n", data->objs[index]->vector.x, data->objs[index]->vector.y, data->objs[index]->vector.z);
 		
 		printf("\n\n");
 		index++;

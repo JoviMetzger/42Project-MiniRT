@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 16:57:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 17:23:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ void		error_msg(char *msg);
 void		free_array(char **arr);
 void		free_close_util(char *line, int file);
 void		close_protect(int file);
+void		free_objects(t_data *data);
 
 // --- parser_utils --- //
 t_type		get_type(char *str);
 char		**rt_malloc(char **arr, int size, int file);
-t_objs		*obj_malloc(t_data *data, char **arr, int size);
+t_objs		**obj_malloc(t_data *data, char **arr, int size);
+t_objs		*object_malloc(t_data *data, char **arr);
 
 // ----------- /check_elements/ ------------ //
 

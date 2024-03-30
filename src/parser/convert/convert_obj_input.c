@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/25 12:43:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:30:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 17:33:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ static void	convert_element(char **arr, t_data *data, int i)
 	free_array(elem_str);
 }
 
+static void	init_objs(t_data *data, char ** arr)
+{
+	data->objs[data->objs_i] = object_malloc(data, arr);
+	data->objs[data->objs_i]->type = data->type;
+}
+
 void	convert_obj_input(t_data *data, char **arr, int count)
 {
 	int		i;
@@ -52,16 +58,17 @@ void	convert_obj_input(t_data *data, char **arr, int count)
 			i++;
 		else if (data->type == 0 || data->type > 7)
 		{
-			free(data->objs);
+			free_objects(data);
 			free_arr_error("parser error", arr, NULL);
 		}
 		else if (data->type == E_PLANE || data->type == E_SPHERE
 			|| data->type == E_CYLINDER)
 		{
-			data->objs[data->objs->i].type = data->type;
+			init_objs(data, arr);
 			convert_element(arr, data, i);
 			i++;
-			data->objs->i++;
+			data->objs_i++;
 		}
 	}
+	data->objs[data->objs_i] = NULL;
 }
