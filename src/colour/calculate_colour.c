@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/02 16:25:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/02 16:26:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@ int32_t ft_convert_rgb(int32_t r, int32_t g, int32_t b)
  *	(https://learnopengl.com/Advanced-Lighting/Advanced-Lighting)
  *	(https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_reflection_model)
  *	(https://en.wikipedia.org/wiki/Phong_reflection_model)
-
-
- 			incase i need this: 			
-			// else
-			// {
-			// 	colour.r = 0;
-			// 	colour.g = 0;
-			// 	colour.b = 0;
-			// }
  */
 uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 {

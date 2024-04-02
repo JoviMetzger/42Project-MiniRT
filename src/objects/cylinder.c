@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/02 16:10:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/02 16:27:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 */
 
 // coords, 3D ector, diameter, height, rgb
+// vector for cylinder needs to be used plus height
 bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
 {
 	t_vec3	oc;
