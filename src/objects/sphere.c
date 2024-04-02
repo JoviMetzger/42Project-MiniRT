@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/02 16:02:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/02 17:33:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
     double radius;
     t_vec3	oc;
 
-    // printf("----- SPHERE OBJ: -----\ncenter: %f - %f - %f\nvector: %f - %f - %f\n,diameter: %f\nheight: %f", sphere->center.x, sphere->center.y, sphere->center.z, sphere->vector.x, sphere->vector.y, sphere->vector.z, sphere->diameter, sphere->height);
-    radius = sphere->diameter / 2;
+	radius = sphere->diameter / 2;
     oc = minus(ray->place, sphere->center);
     obj_data->a = dot_product(ray->vector, ray->vector);
     obj_data->b = 2.0 * dot_product(oc, ray->vector);
