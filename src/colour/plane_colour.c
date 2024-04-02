@@ -6,15 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:44:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/02 15:47:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/02 19:18:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
-
-/**
- * @todo this is for sphere, what differences for plane?
-*/
 
 t_colour get_plane_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *plane)
 {

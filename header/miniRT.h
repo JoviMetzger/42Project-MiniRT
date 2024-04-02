@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/02 16:00:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/02 19:15:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 
 // Math stuff
 # define M_PI 3.14159265358979323846 // This is a constant representing the value of pi.
+# define EPSILON 0.000001 // for plane (and maybe cylinder) calculations
 
 // Element type enums, includes space for parser
 typedef enum	e_type
