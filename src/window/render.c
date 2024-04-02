@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 18:42:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 19:35:37 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void ft_put_image(t_data *data)
 		{ 
 			ray = ft_create_ray(data, x ,y);
 			// loop + init object
-			// ft_create_intersection(data, &obj_data, ray);			
+			// ft_create_intersection(data, &obj_data, ray); // DON'T NEED THIS			
 			colour = ft_calculate_colour(data, &obj_data, ray); // eVerYTinG iN heRE iS jUSt ME gOiNg "hhhUUUUUhhhhhh?????????????" -> aka. cat meme (https://www.youtube.com/watch?v=xVWeRnStdSA)
 			mlx_put_pixel(data->image, x, y, colour);
 			y++;

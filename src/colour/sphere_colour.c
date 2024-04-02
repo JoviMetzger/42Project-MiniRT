@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 18:49:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/30 19:37:35 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs
 	double specular_factor = pow(dot_product(reflection_direction, view_direction), SPECULAR_POWER);
 	if (specular_factor < 0.0)
 		specular_factor = 0.0;
-	double specular_red = SPECULAR_INTENSITY * specular_factor * data->light.colour.r;
-	double specular_green= SPECULAR_INTENSITY * specular_factor * data->light.colour.g;
-	double specular_blue = SPECULAR_INTENSITY * specular_factor * data->light.colour.b;
+	double specular_red = SPECULAR_INTENSITY * specular_factor * data->ambient.colour.r;
+	double specular_green= SPECULAR_INTENSITY * specular_factor * data->ambient.colour.g;
+	double specular_blue = SPECULAR_INTENSITY * specular_factor * data->ambient.colour.b;
 
 	// Combine ambient, diffuse, and specular contributions
 	double final_red = ambient_red + diffuse_red + specular_red;
