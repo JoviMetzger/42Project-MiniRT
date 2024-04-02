@@ -6,11 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/02 20:25:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/02 20:42:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
+
+// height, rotation... cylinder vector... 
 
 bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
 {
