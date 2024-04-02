@@ -6,35 +6,40 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/25 16:13:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 16:19:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/02 15:39:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/miniRT.h"
 
-// obj_data->d = discriminant; -> discriminant = b*b - 4*a*c;
-bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
-{
-    double radius = sphere->diameter / 2;
-	t_vec3	oc = minus(ray->place, sphere->center);
-	obj_data->a = dot_product(ray->place, ray->vector);
-	obj_data->b = 2.0 * dot_product(oc, ray->vector);
-	obj_data->c = dot_product(oc, oc) - radius * radius;
-	obj_data->d = obj_data->b * obj_data->b - 4 * obj_data->a * obj_data->c;
-	if (obj_data->d >= 0)
-		return (true);
-	return (false);
 
-	// double radius = sphere->diameter / 2;
-	// t_vec3 oc = minus(sphere->center, ray->place);
-	// obj_data->a = dot_product(ray->vector, ray->vector);
-	// obj_data->b = 2.0 * dot_product(oc, ray->vector);
-	// obj_data->c = dot_product(oc, oc) - radius * radius;
-	// obj_data->d = obj_data->b * obj_data->b - 4 * obj_data->a * obj_data->c;
-	// if (obj_data->d >= 0)
-	// 	return true;
-	// return false;
-}
+/** 
+ * @todo this file can go no?
+*/
+
+// obj_data->d = discriminant; -> discriminant = b*b - 4*a*c;
+// bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
+// {
+//     double radius = sphere->diameter / 2;
+// 	t_vec3	oc = minus(ray->place, sphere->center);
+// 	obj_data->a = dot_product(ray->place, ray->vector);
+// 	obj_data->b = 2.0 * dot_product(oc, ray->vector);
+// 	obj_data->c = dot_product(oc, oc) - radius * radius;
+// 	obj_data->d = obj_data->b * obj_data->b - 4 * obj_data->a * obj_data->c;
+// 	if (obj_data->d >= 0)
+// 		return (true);
+// 	return (false);
+
+// 	// double radius = sphere->diameter / 2;
+// 	// t_vec3 oc = minus(sphere->center, ray->place);
+// 	// obj_data->a = dot_product(ray->vector, ray->vector);
+// 	// obj_data->b = 2.0 * dot_product(oc, ray->vector);
+// 	// obj_data->c = dot_product(oc, oc) - radius * radius;
+// 	// obj_data->d = obj_data->b * obj_data->b - 4 * obj_data->a * obj_data->c;
+// 	// if (obj_data->d >= 0)
+// 	// 	return true;
+// 	// return false;
+// }
 
 //
 // void intersect_plane(t_ray ray, t_plane plane, t_obj_data *obj_data)
@@ -63,23 +68,23 @@ bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
 // }
 
 // TEST FUNCTION,
-void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
-{
-    int i = 0;
+// void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
+// {
+//     int i = 0;
 
-    while (i < data->objs->i)
-    {
-		if (data->objs[i].type == E_SPHERE)
-			if (intersect_sphere(&ray, &data->objs[i], obj_data))
-				return true;
-		// else 
-        // 	return false;
-        // intersect_plane(&ray, &data->objects.plane, obj_data);
-        // intersect_cylinder(&ray, &data->objects.cylinder, obj_data);
-        i++;
-    }
-	return false;
-}
+//     while (i < data->objs->i)
+//     {
+// 		if (data->objs[i].type == E_SPHERE)
+// 			if (intersect_sphere(&ray, &data->objs[i], obj_data))
+// 				return true;
+// 		// else 
+//         // 	return false;
+//         // intersect_plane(&ray, &data->objects.plane, obj_data);
+//         // intersect_cylinder(&ray, &data->objects.cylinder, obj_data);
+//         i++;
+//     }
+// 	return false;
+// }
 
 
 // // ------------------- SOME TESTING ---------------------------

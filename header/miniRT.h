@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 18:16:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/02 15:50:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_colour
 }   t_colour;
 
 // -------------------------------------------------------------
-// Struct for objects
+// Struct for objects, each object has this struct, array of structs in data struct
 typedef struct s_objs
 {
 	t_type				type;
@@ -170,12 +170,11 @@ void store_ray_matrix(t_data *data);
 void ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
-uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
-t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
-// t_colour get_sphere_colour(t_data *data, t_ray lightray, t_obj_data *obj_data, t_colour ambient);
-// t_colour get_plane_colour(t_data *data, t_ray lightray, t_obj_data *obj_data, t_colour ambient);
-// t_colour get_cylinder_colour(t_data *data, t_ray lightray, t_obj_data *obj_data, t_colour ambient);
-t_vec3 ft_reflect(t_vec3 incident, t_vec3 normal);
+uint32_t		ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
+t_colour		get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
+t_colour		get_plane_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *plane);
+t_colour		get_cylinder_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder);
+t_vec3			ft_reflect(t_vec3 incident, t_vec3 normal);
 
 // Vector Functions
 t_vec3 init_vector(t_data *data, t_screen screen);
@@ -193,9 +192,8 @@ double length_squared(t_vec3 vec);
 t_vec3	normalize_vector(t_vec3 v);
 
 // Objects Functions
-void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
 bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
-bool intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
+// bool intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 bool intersect_cylinder(t_ray *ray, t_objs*cylinder, t_obj_data *obj_data);
 
 #endif
