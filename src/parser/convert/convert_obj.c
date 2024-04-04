@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 20:30:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/04 14:51:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	sort_sp(char **elem_str, t_data *data)
 		return (par_err("invalid: Sphere: coordinate"));
 	if (!convert_coord(data, elem_str[1]))
 		return (par_err("invalid: Sphere: coordinate"));
-	if (!convert_double(data, elem_str[2], 1, 234))
+	if (!convert_double(data, elem_str[2], 1))
 		return (par_err("invalid: Sphere: diameter"));
 	if (!is_rgb(elem_str[3], 0, 0))
 		return (par_err("invalid: Sphere: RGB | [0-255]"));
@@ -69,9 +69,9 @@ int	sort_cy(char **elem_str, t_data *data)
 		return (par_err("invalid: Cylinder: 3D vector"));
 	if (!convert_vector(data, elem_str[2]))
 		return (par_err("invalid: Cylinder: 3D vector"));
-	if (!convert_double(data, elem_str[3], 1, 432))
+	if (!convert_double(data, elem_str[3], 1))
 		return (par_err("invalid: Cylinder: diameter"));
-	if (!convert_double(data, elem_str[4], 2, 432))
+	if (!convert_double(data, elem_str[4], 2))
 		return (par_err("invalid: Cylinder: height"));
 	if (!is_rgb(elem_str[5], 0, 0))
 		return (par_err("invalid: Cylinder: RGB | [0-255]"));

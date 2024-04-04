@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 17:17:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/04 14:52:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,7 @@ int	convert_fov(t_data *data, char *str)
 
 // decimal	-			[decimals] (diameter/height)
 // flag 1 = diameter | flag 2 = height
-// type 234 = sphere
-// type 432 = cylinder
-/**
- * @todo WE CAN DO THIS DIFFERENTLY WITHOUT ALL FLAGS
-*/
-int	convert_double(t_data *data, char *str, int flag, int type)
+int	convert_double(t_data *data, char *str, int flag)
 {
 	double	ratio;
 
@@ -70,16 +65,8 @@ int	convert_double(t_data *data, char *str, int flag, int type)
 	ratio = ft_atof(str);
 	if (flag == 1)
 	{
-		if (type == 234)
-		{
-			data->objs[data->objs_i]->diameter = ratio;
-			return (1);
-		}
-		else if (type == 432)
-		{
-			data->objs[data->objs_i]->diameter = ratio;
-			return (1);
-		}
+		data->objs[data->objs_i]->diameter = ratio;
+		return (1);
 	}
 	else if (flag == 2)
 	{

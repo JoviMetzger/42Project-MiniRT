@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/04 14:42:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/04 14:45:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,15 @@
  * 			all other elements (sp, cy, pl) must be declared, poss multi
  * 			if error/invalid, free in check function, error and exit
  * 			number of arguments and characters checked before conversion
- * 
- * @todo		comment thing
 */
 static void	parse_array(t_data *data, char **arr)
 {
-
 	int			obj_count;
 
 	check_elements(arr);
 	obj_count = validate_elems(arr);
 	convert_cap_input(data, arr);
 	convert_obj_input(data, arr, obj_count);
-	// do this check and free whole object array
-	// if (data->objs->i != obj_count)
-	// {
-	// 	free(data->objs);
-	// 	free_arr_error("parser error", arr, NULL);
-	// }
 }
 
 /**
@@ -54,8 +45,6 @@ static void	parse_array(t_data *data, char **arr)
  * 			and adds everything into t_data struct, 
  * 			then frees array and line and returns to main to continue
  * 			rt_malloc is protected :)
- * 
- * @todo	if file has more than BUFF_SIZE (100) lines....
 */
 static void	read_file(t_data *data, int file)
 {
