@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 20:34:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/04 14:42:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	parse_array(t_data *data, char **arr)
  * 			and adds everything into t_data struct, 
  * 			then frees array and line and returns to main to continue
  * 			rt_malloc is protected :)
+ * 
+ * @todo	if file has more than BUFF_SIZE (100) lines....
 */
 static void	read_file(t_data *data, int file)
 {
@@ -64,7 +66,7 @@ static void	read_file(t_data *data, int file)
 	i = 0;
 	line = get_next_line(file);
 	arr = rt_malloc(NULL, BUFF_SIZE, file);
-	while (line)
+	while (line && i < BUFF_SIZE)
 	{
 		if (line)
 		{
@@ -73,7 +75,6 @@ static void	read_file(t_data *data, int file)
 				free_close_parse_error("malloc failure", arr, line, file);
 			free(line);
 			line = get_next_line(file);
-
 			i++;
 		}
 	}
