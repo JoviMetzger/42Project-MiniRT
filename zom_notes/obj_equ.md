@@ -1,3 +1,24 @@
+
+
+
+
+	• obtaining [ t1, t2 ]
+	– The equation of the infinite height cylinder :
+	– xsq + ysq = rsq
+	– Substituting the ray equation in this equation we obtain:
+	tsq . ( dxsq + dysq ) + 2t . (x0 . dx + y0 . dy ) + ( x0sq + y0sq - r2 ) = 0
+	– Solving this equation gives the interval [ t1, t2 ].
+
+	• obtaining [ t3, t4 ]
+	– Let A and B the two values of t resulting from the intersection
+	with the two planes :
+	A = - z0 / dz and B = ( h - z0 ) / dz
+	• We get :
+	t3 = min( A,B ) and t4 = max( A, B )
+
+
+
+
 */
 /**
  * 

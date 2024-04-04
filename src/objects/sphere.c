@@ -6,11 +6,34 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/02 17:33:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/04 14:57:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
+
+/*
+	Sphere
+	• d0: Orthogonal distance between the ray and the
+	center of the sphere of radius r and center C
+	• P = P0 + t . D : the ray equation
+	• P0 = (X0, Y0, Z0) D=(dx,dy,dz)
+	• If d0
+	2 <= r2, then the ray intersects the sphere
+	• Intersection points = solutions of
+	|| P0 - C ||2 + 2t . ( P0 - C ) . D + t2 . || D ||2 = r2
+	• d0 is evaluated by minimizing the
+	distance d between C and a point P on the ray.
+	• This gives:
+	d2 = || P0 + t . D - C ||2 = || P0 - C ||2 +
+	2t . (P0 - C) . D + t2 . || D ||2
+	• By setting to 0 the derivative of d2 , we obtain :
+	t = (( P0 - C ) . D / || D ||2 ) = - ( P0 - C) . D
+	• After substitution : d0
+	2 = || P0 - C ||2
+	–
+	(( P - C ) . D )2
+*/
 
 /* quadratic equation:
  *  a = d * d (dot product of ray direction with itself)
