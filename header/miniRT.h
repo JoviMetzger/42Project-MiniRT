@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 18:16:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/05 16:39:43 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <float.h>
 # include <math.h>
 
 // --- Colours ---
@@ -56,7 +57,7 @@ typedef struct s_vec3
 {
     double	x;  // x-axis (left-right)
     double	y;  // y-axis (up-down)
-    double	z;  // z-axis (forward-back forwrd)
+    double	z;  // z-axis (forward-back forwrd)  
 }   t_vec3;
 
 // -------------------------------------------------------------
@@ -113,8 +114,8 @@ typedef struct s_screen
     double  viewport_w;
     double  viewport_h;
     double  img_ratio;
-    double  pixel_delata_x;
-    double  pixel_delata_y;
+    double  pixel_delta_x;
+    double  pixel_delta_y;
 }   t_screen;
 
 // -------------------------------------------------------------
@@ -130,7 +131,7 @@ typedef struct s_data
 	t_light		light;
 	t_screen	screen;
 	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
-    double      matrix[16]; // representation for 4x4 matrices. Each element of the array corresponds to a specific position in the matrix, following a specific order. 
+    // double      matrix[16]; // representation for 4x4 matrices. Each element of the array corresponds to a specific position in the matrix, following a specific order. 
 }	t_data;
 
 // -------------------------------------------------------------
@@ -163,6 +164,8 @@ void ft_render(t_data *data);
 
 // Movement Functions
 void ft_key_action(mlx_key_data_t keydata, t_data *data);
+void ft_handle_mouse_move(void *data);
+int handle_mouse_click(int button, void *param);
 
 // Ray Functions
 t_ray ft_create_ray(t_data *data, int x, int y);
@@ -172,13 +175,16 @@ void ft_create_lightray(t_data *data, t_ray *lightray);
 // Colour Functions
 uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
 t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
-// t_colour get_sphere_colour(t_data *data, t_ray lightray, t_obj_data *obj_data, t_colour ambient);
-// t_colour get_plane_colour(t_data *data, t_ray lightray, t_obj_data *obj_data, t_colour ambient);
-// t_colour get_cylinder_colour(t_data *data, t_ray lightray, t_obj_data *obj_data, t_colour ambient);
+// t_colour get_plane_colour((t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *plane);
+// t_colour get_cylinder_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder);
 t_vec3 ft_reflect(t_vec3 incident, t_vec3 normal);
 
+// Colour Functions Bonus
+t_colour get_sphere_checherboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
+t_colour get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
+
 // Vector Functions
-t_vec3 init_vector(t_data *data, t_screen screen);
+t_vec3 init_vector(t_screen screen);
 
 // Operators
 t_vec3 plus(t_vec3 u, t_vec3 v);
@@ -193,7 +199,7 @@ double length_squared(t_vec3 vec);
 t_vec3	normalize_vector(t_vec3 v);
 
 // Objects Functions
-void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
+// void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
 bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
 bool intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 bool intersect_cylinder(t_ray *ray, t_objs*cylinder, t_obj_data *obj_data);

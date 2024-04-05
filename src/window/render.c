@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 19:35:37 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/04/05 12:44:59 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
 // 1. Calculate the ray from the “eye” through the pixel,	 -> ft_create_ray();
-// 2. Determine which objects the ray intersects,			 -> ft_create_intersecttions();
+// 2. Determine which objects the ray intersects, and
 // 3. Compute a color for the closest intersection point.	 -> ft_calculate_colour();
 void ft_put_image(t_data *data)
 {
@@ -27,10 +27,8 @@ void ft_put_image(t_data *data)
 	{
 		while (y < data->mlx->height)
 		{ 
-			ray = ft_create_ray(data, x ,y);
-			// loop + init object
-			// ft_create_intersection(data, &obj_data, ray); // DON'T NEED THIS			
-			colour = ft_calculate_colour(data, &obj_data, ray); // eVerYTinG iN heRE iS jUSt ME gOiNg "hhhUUUUUhhhhhh?????????????" -> aka. cat meme (https://www.youtube.com/watch?v=xVWeRnStdSA)
+			ray = ft_create_ray(data, x ,y);		
+			colour = ft_calculate_colour(data, &obj_data, ray);
 			mlx_put_pixel(data->image, x, y, colour);
 			y++;
 		}
@@ -41,13 +39,9 @@ void ft_put_image(t_data *data)
 
 void ft_render(t_data *data)
 {
-	// printf("i = %i\n", data->objs->i);
-	// while (data->objs->i > 0)
-	// {
-	// 	printf("type = %i\n", data->objs->type);
-	// 	data->objs->i--;
-	// }
-	// exit(EXIT_SUCCESS);
 	ft_put_image(data); // Shazam(MATH)
 	mlx_key_hook(data->mlx, (mlx_keyfunc)ft_key_action, data); // movement aka ESC
+	// mlx_loop_hook(data->mlx, ft_handle_mouse_move, data); // Mouse move event
+    // mlx_mouse_hook(data->mlx, (mlx_mousefunc) handle_mouse_click, data); // Mouse click event
+    
 }

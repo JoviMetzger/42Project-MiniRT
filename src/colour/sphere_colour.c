@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 19:37:35 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/04/05 18:43:45 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-// t_colour get_sphere_colour(t_data *data, t_ray lightray, t_obj_data *obj_data, t_colour ambient)
+
 t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere)
 {
     t_colour result;
@@ -66,3 +66,123 @@ t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs
 	return result;	
 	
 }
+
+
+// // ------------------ for checkerboard IS WORKING ----------------------------------------
+// t_colour get_sphere_checherboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere)
+// {
+// 	(void)data;
+//     double radius = sphere->diameter / 2;
+//     int NUM_SQUARES = 150; // Number of squares per side
+//     t_colour colour;
+        
+//     // Using the 'Phong reflection model'
+//     t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_data->t));
+
+//     // Calculate spherical coordinates from intersection point
+//     double phi = atan2(intersection_point.z, intersection_point.x);
+//     double theta = acos(intersection_point.y / radius);
+    
+//     // Map spherical coordinates to UV coordinates
+//     double u = (phi + M_PI) / (2 * M_PI); // Normalize phi to [0, 1]
+//     double v = 1.0 - (theta / M_PI); // Normalize theta to [0, 1] and flip vertically
+    
+//     // Scale UV coordinates based on checker size and sphere dimensions
+//     int checker_x = (int)(u * NUM_SQUARES);
+//     int checker_y = (int)(v * NUM_SQUARES);
+
+//     // Determine checkerboard pattern based on UV coordinates
+//     bool is_black = ((checker_x + checker_y) % 2 == 0);
+
+//     // Determine color based on checkerboard pattern
+//     if (is_black)
+//     {
+// 		colour.r = 0;
+// 		colour.g = 0;
+// 		colour.b = 0;
+//     }
+//     else
+//     {
+
+// 		colour.r = 255;
+// 		colour.g = 255;
+// 		colour.b = 255;
+//     }
+    
+//     return colour;
+// }
+
+
+
+// ------- This is for bumpmap NOT WORKING YET -----------------------
+
+// double texture_sample_bump(double u, double v) 
+// {
+//     // Sample the bump map texture at the given texture coordinates (u, v)
+//     // Return the intensity of the bump map at that point
+
+// 	get_map();
+    
+//     // Example implementation:
+//     int texture_width = bump_map_texture->width;
+//     int texture_height = bump_map_texture->height;
+    
+//     // Map UV coordinates to texture pixel coordinates
+//     int x = (int)(u * texture_width);
+//     int y = (int)(v * texture_height);
+    
+//     // Clamp pixel coordinates to texture bounds
+//     x = fmin(fmax(x, 0), texture_width - 1);
+//     y = fmin(fmax(y, 0), texture_height - 1);
+    
+//     // Sample bump map intensity at the specified pixel
+//     double bump_intensity = bump_map_texture->pixels[y * texture_width + x];
+    
+//     // Return the sampled bump intensity
+//     return bump_intensity;
+// }
+
+
+
+// t_colour get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere)
+// {
+// 	int BUMP_SCALE = 10;
+// 	double DIFFUSE_INTENSITY = data->light.ratio;   // (0.6)
+// 	t_colour colour;
+	
+// 	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_data->t));
+	
+// 	// Original normal calculation
+// 	t_vec3 original_normal = normalize_vector(minus(intersection_point, sphere->center));
+	
+// 	// Sample bump map texture
+// 	double bump_intensity = texture_sample_bump(intersection_point.x, intersection_point.z);
+	
+// 	// Perturb the normal based on bump map
+// 	t_vec3 perturbed_normal = original_normal;
+// 	perturbed_normal.x += bump_intensity * BUMP_SCALE; // Adjust normal based on bump intensity
+// 	perturbed_normal.y += bump_intensity * BUMP_SCALE; // Adjust normal based on bump intensity
+// 	perturbed_normal.z += bump_intensity * BUMP_SCALE; // Adjust normal based on bump intensity
+// 	perturbed_normal = normalize_vector(perturbed_normal);
+	
+// 	// Perform shading using perturbed normal
+// 	// You can use the perturbed normal in your lighting calculations
+	
+// 	// Example: Compute color based on diffuse lighting with perturbed normal
+// 	t_vec3 light_direction = normalize_vector(minus(data->light.place, intersection_point));
+// 	double diffuse_factor = dot_product(perturbed_normal, light_direction);
+// 	double diffuse_red = DIFFUSE_INTENSITY * diffuse_factor * 255;
+// 	double diffuse_green = DIFFUSE_INTENSITY * diffuse_factor * 255;
+// 	double diffuse_blue = DIFFUSE_INTENSITY * diffuse_factor * 255;
+	
+// 	// Clamp final values to [0, 255]
+// 	diffuse_red = fmin(fmax(diffuse_red, 0), 255);
+// 	diffuse_green = fmin(fmax(diffuse_green, 0), 255);
+// 	diffuse_blue = fmin(fmax(diffuse_blue, 0), 255);
+
+// 	colour.r = diffuse_red;
+// 	colour.g = diffuse_green;
+// 	colour.b = diffuse_blue;
+	
+// 	return colour;
+// }

@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/30 18:09:19 by smclacke      ########   odam.nl          #
+#    Updated: 2024/04/05 14:56:22 by jmetzger      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,14 +39,11 @@ SRCS			= main.c											\
 					utils/vec_operators.c 							\
 					colour/calculate_colour.c						\
 					colour/sphere_colour.c 							\
-					objects/loop_objects.c 							\
 					objects/sphere.c 								\
 					objects/plane.c 								\
 					objects/cylinder.c 								\
 					ray/vector.c									\
 					ray/ray.c										\
-					ray/ray_matrix.c								\
-					ray/lightray.c 									\
 					parser/check_elements/check_caps.c				\
 					parser/check_elements/check_elements.c			\
 					parser/check_elements/check_utils.c				\
