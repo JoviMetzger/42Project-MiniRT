@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/10 20:36:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/10 21:24:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,18 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
 	double	height_half = cylinder->height / 2;
 
 	// calculation of coefficients for quadratic equation
-	// obj_data->a = dot_product(ray_dir, ray_dir) - pow(dot_product(ray_dir, cylinder->vector), 2);
-	// obj_data->b = 2.0 * dot_product(oc, ray_dir) - dot_product(oc, cylinder->vector) * dot_product(ray_dir, cylinder->vector);
-	// obj_data->c = dot_product(oc, oc) - pow(dot_product(oc, cylinder->vector), 2) - pow(radius, radius); // radius, radius OR radius, 2
-	
+
+	obj_data->a = dot_product(ray_dir, ray_dir) - pow(dot_product(ray_dir, cylinder->vector), 2);
+
+	obj_data->b = 2.0 * dot_product(oc, cylinder->vector) - dot_product(oc, ray_dir) * dot_product(ray_dir, cylinder->vector);
 
 
-	// obj_data->a = dot_product(ray_dir, cylinder->vector) - (pow(dot_product(ray_dir, cylinder->center), 2));
-	obj_data->a = dot_product(ray_dir, ray_dir) - pow(dot_product(ray_dir, cylinder->center), 2);
+	// obj_data->c = dot_product(oc, oc) - pow(dot_product(oc, cylinder->vector), 2) - radius * radius;
+	obj_data->c = dot_product(oc, oc) - dot_product(ray_dir, oc) * dot_product(ray_dir, oc) - radius * radius;
 	
-	// obj_data->b = 2.0 * dot_product(oc, ray_dir) - dot_product(oc, cylinder->vector) * dot_product(ray_dir, cylinder->vector);
-	obj_data->b = 2.0 * dot_product(oc, ray_dir) - dot_product(ray_dir, cylinder->vector) * dot_product(ray_dir, cylinder->vector); // - radius * radius
+	// obj_data->c = dot_product(ray_dir, ray_dir) * dot_product(oc, oc) - dot_product(ray_dir, oc) * dot_product(ray_dir, oc) - radius * radius;
+	// obj_data->c = dot_product(ray_dir, ray_dir) * dot_product(oc, oc) - pow(dot_product(oc, cylinder->vector), 2) - radius * radius;
 	
-	obj_data->c = dot_product(oc, oc) - pow(dot_product(oc, cylinder->vector), 2) - pow(radius, radius); // radius, radius OR radius, 2
-	// obj_data->c = dot_product(oc, oc) - dot_product(ray_dir, cylinder->vector) * dot_product(oc, cylinder->center);
-	
-	
-	obj_data->a = dot_product(ray_dir, cylinder->vector) - (pow(dot_product(ray_dir, cylinder->center), 2));
-	obj_data->a = dot_product(ray_dir, ray_dir) - pow(dot_product(ray_dir, cylinder->center), 2);
-	
-	obj_data->b = 2.0 * dot_product(oc, ray_dir) - dot_product(oc, cylinder->vector) * dot_product(ray_dir, cylinder->vector);
-	obj_data->b = 2.0 * dot_product(oc, ray_dir) - dot_product(ray_dir, cylinder->vector) * dot_product(ray_dir, cylinder->vector); // - radius * radius
-	
-	obj_data->c = dot_product(oc, oc) - pow(dot_product(oc, cylinder->vector), 2) - pow(radius, radius); // radius, radius OR radius, 2
-	// obj_data->c = dot_product(oc, oc) - dot_product(oc, cylinder->vector) * dot_product(oc, cylinder->center);
-	
-	obj_data->a = dot_product(ray_dir, ray_dir) - pow(dot_product(ray_dir, cylinder->vector), 2) - radius * radius;
-	obj_data->b = 2.0 * dot_product(oc, ray_dir) - dot_product(oc, cylinder->vector) * dot_product(ray_dir, cylinder->vector);
-// 	obj_data->c = dot_product(oc, oc) - pow(dot_product(oc, cylinder->vector), 2) - pow(radius, radius); // radius, radius OR radius, 2
-	
-
 	
 	// discriminant, solve the quadratic
 	obj_data->d = obj_data->b * obj_data->b - 4 * (obj_data->a * obj_data->c);
