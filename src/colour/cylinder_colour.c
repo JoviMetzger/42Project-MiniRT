@@ -6,12 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/02 19:18:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/10 17:19:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
+/**
+ * @todo norm 
+ */
 t_colour get_cylinder_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder)
 {
     t_colour result;

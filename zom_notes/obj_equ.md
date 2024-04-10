@@ -1,4 +1,145 @@
+// trying to figure out a capper cylinder with the below formula...
 
+/**
+ *
+	// cylinder defined by extremes a and b, and radious ra
+	vec4 cylIntersect( in vec3 ro, in vec3 rd, in vec3 a, in vec3 b, float ra )
+	{
+		vec3  ba = b  - a;
+		vec3  oc = ro - a;
+		float baba = dot(ba,ba);
+		float bard = dot(ba,rd);
+		float baoc = dot(ba,oc);
+		float k2 = baba            - bard*bard;
+		float k1 = baba*dot(oc,rd) - baoc*bard;
+		float k0 = baba*dot(oc,oc) - baoc*baoc - ra*ra*baba;
+		float h = k1*k1 - k2*k0;
+		if( h<0.0 ) return vec4(-1.0);//no intersection
+		h = sqrt(h);
+		float t = (-k1-h)/k2;
+		// body
+		float y = baoc + t*bard;
+		if( y>0.0 && y<baba ) return vec4( t, (oc+t*rd - ba*y/baba)/ra );
+		// caps
+		t = ( ((y<0.0) ? 0.0 : baba) - baoc)/bard;
+		if( abs(k1+k2*t)<h )
+		{
+			return vec4( t, ba*sign(y)/sqrt(baba) );
+		}
+		return vec4(-1.0);//no intersection
+	}
+
+	// normal at point p of cylinder (a,b,ra), see above
+	vec3 cylNormal( in vec3 p, in vec3 a, in vec3 b, float ra )
+	{
+		vec3  pa = p - a;
+		vec3  ba = b - a;
+		float baba = dot(ba,ba);
+		float paba = dot(pa,ba);
+		float h = dot(pa,ba)/baba;
+		return (pa - ba*h)/ra;
+	}
+ */
+
+
+// capped cylinder  - (a,b, ra) - ra = radius
+// normal at point p of cylinder (a, b, ra) - ra = radius
+bool	intersect_norm_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
+{
+	t_vec3	oc;
+	double	radius = cylinder->diameter / 2;
+
+	oc = minus(ray->place, cylinder->center);
+
+	obj_data->a = dot_product(ray->vector, ray->vector);
+	obj_data->b = 2.0 * dot_product(oc, ray->vector);
+	obj_data->c = dot_product(oc, oc) - radius * radius;
+	obj_data->d = obj_data->b * obj_data->b - 4 * (obj_data->a * obj_data->c);
+	
+	if (fabs(obj_data->d) < 0.001)
+		return (false);
+
+	obj_data->root1 = (-obj_data->b - sqrt(obj_data->d)) / (2.0 * obj_data->a);
+	obj_data->root2 = (-obj_data->b + sqrt(obj_data->d)) / (2.0 * obj_data->a);
+	if (obj_data->root1 < obj_data->root2)
+		obj_data->t = obj_data->root1;
+	else
+		obj_data->t = obj_data->root2;
+	
+	double r = ray->place.y + obj_data->t * ray->vector.y;
+	
+	if (r >= cylinder->center.y && (r <= cylinder->center.y + cylinder->height))
+		obj_data->t = r;
+
+	return (true);
+	
+		
+// -----------------------------------------------------------------------//
+// -----------------------------------------------------------------------//
+	
+	// double	radius = cylinder->diameter / 2;
+
+	// t_vec3	pa = minus(ray->place, cylinder->vector);
+	// t_vec3	ba = minus(ray->vector, cylinder->vector);
+	// double	baba = dot_product(ba, ba);
+	// double	paba = dot_product(pa, ba);
+	// double	h = dot_product(pa, ba)/baba;
+	
+	// double	poo = paba - baba;
+
+	// obj_data->t = poo * h / radius;
+	// return (true);
+	
+// -----------------------------------------------------------------------//
+// -----------------------------------------------------------------------//
+	// double	radius = cylinder->diameter / 2;
+	// t_vec3	ba = minus(ray->place, cylinder->vector);
+	// t_vec3	oc = minus(ray->vector, cylinder->vector);
+	
+	// double	baba = dot_product(ba, ba);
+	// double	bard = dot_product(ba, cylinder->vector);
+	// double	baoc = dot_product(ba, oc);
+	
+	// double	k2 = baba - bard * bard;
+	// double	k1 = baba * dot_product(oc, cylinder->vector) - baoc * bard;
+	// double	k0 = baba * dot_product(oc, oc) - baoc * baoc - radius * radius * baba;
+	
+	// double	h = k1 * k1 - k2 * k0;
+	// if (h < 0.0)
+	// 	return (false); // no intersection
+	// h = sqrt(h);
+
+	// double	t = (-k1-h)/k2;
+	// double	y = baoc + t * bard;
+	// if (y < 0.0 && y < baba)
+	// {
+	// 	obj_data->t = y;
+	// 	return (true);
+	// }
+	
+	// t = ( ((y < 0.0) ? 0.0 : baba) - baoc)/bard;
+	// if (fabs(k1 + k2 * t) < h)
+	// {
+	// 	obj_data->t = fabs(k1 + k2 * t);
+	// 	return (true);
+	// }
+	// return (false);
+}
+
+// static	t_vec3	create_vector(double x, double y, double z)
+// {
+// 	t_vec3 vec;
+
+// 	vec.x = x;
+// 	vec.y = y;
+// 	vec.z = z;
+// 	return (vec);
+// }
+// infinite cylinder 
+// base point - cb, a (normalised axis), ca, a, cr (radius)
+
+// ro - ray->origin = ray->place
+// cb - base point = cylinder->vector
 
 uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 {

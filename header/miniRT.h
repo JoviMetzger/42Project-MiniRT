@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/10 14:33:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/10 17:18:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,6 @@ t_vec3	normalize_vector(t_vec3 v);
 // Objects Functions
 bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
 bool intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
-bool intersect_infi_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
-// bool intersect_norm_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
+bool intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
 
 #endif

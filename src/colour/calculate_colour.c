@@ -6,11 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/10 14:49:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/10 17:19:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
+
+/**
+ * @todo	norm 
+ */
 
 // Calculate the reflection direction using the incident ray direction and surface normal
 // Reflection direction = Incident direction - 2 * (Incident direction . Normal) * Normal
@@ -63,7 +67,7 @@ uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 		}
 		else if (data->objs[i]->type == E_CYLINDER)
 		{
-			if (intersect_infi_cylinder(&ray, data->objs[i], obj_data))
+			if (intersect_cylinder(&ray, data->objs[i], obj_data))
 			{
 				if (obj_data->t < closest_t)
 				{
