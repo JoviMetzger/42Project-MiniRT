@@ -289,10 +289,14 @@ uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
     float b = 2*(dir.x*(pos.x-center.x) + dir.z*(pos.z-center.z));
     float c = (pos.x - center.x) * (pos.x - center.x) + (pos.z - center.z) * (pos.z - center.z) - (radius*radius);
     
+
+	
     float delta = b*b - 4*(a*c);
 	if(fabs(delta) < 0.001) return -1.0; 
     if(delta < 0.0) return -1.0;
     
+
+
     float t1 = (-b - sqrt(delta))/(2*a);
     float t2 = (-b + sqrt(delta))/(2*a);
     float t;
@@ -300,6 +304,8 @@ uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
     if (t1>t2) t = t2;
     else t = t1;
     
+
+
     float r = pos.y + t*dir.y;
     
     if ((r >= center.y) and (r <= center.y + height))return t;
