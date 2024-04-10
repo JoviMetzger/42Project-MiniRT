@@ -6,21 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/04 19:41:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/10 14:28:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
-
-/**
- * 
-		Plane
-		// plane degined by p (p.xyz must be normalized)
-		float plaIntersect( in vec3 ro, in vec3 rd, in vec4 p )
-		{
-			return -(dot(ro,p.xyz)+p.w)/dot(rd,p.xyz);
-		}
- */
 
 bool intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data)
 {

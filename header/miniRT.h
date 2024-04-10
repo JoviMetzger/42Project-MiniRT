@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/10 14:25:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/10 14:33:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,13 +176,13 @@ void ft_create_lightray(t_data *data, t_ray *lightray);
 // Colour Functions
 uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
 t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
-// t_colour get_plane_colour((t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *plane);
-// t_colour get_cylinder_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder);
+t_colour get_plane_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *plane);
+t_colour get_cylinder_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder);
 t_vec3 ft_reflect(t_vec3 incident, t_vec3 normal);
 
 // Colour Functions Bonus
-t_colour get_sphere_checherboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
-t_colour get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
+// t_colour get_sphere_checherboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
+// t_colour get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
 
 // Vector Functions
 t_vec3 init_vector(t_screen screen);
@@ -200,10 +200,9 @@ double length_squared(t_vec3 vec);
 t_vec3	normalize_vector(t_vec3 v);
 
 // Objects Functions
-// void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray);
 bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
 bool intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 bool intersect_infi_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
-bool intersect_norm_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
+// bool intersect_norm_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/10 14:24:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/10 14:49:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 {
 	t_colour	colour;
 	int		i = 0;
-	double closest_t = DBL_MAX; // Initialize closest intersection distance to a large value
+	double closest_t = DBL_MAX;
 
 	while (i < data->objs_i)
 	{
@@ -43,42 +43,36 @@ uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 		{
 			if (intersect_plane(&ray, data->objs[i], obj_data))
 			{
-				colour = get_plane_colour(data, obj_data, ray, data->objs[i]);
-				return (ft_convert_rgb(colour.r, colour.g, colour.b));
+				if (obj_data->t < closest_t)
+				{
+                    closest_t = obj_data->t;
+					colour = get_plane_colour(data, obj_data, ray, data->objs[i]);
+				}
 			}
 		}
 		else if (data->objs[i]->type == E_SPHERE)
 		{
 			if (intersect_sphere(&ray, data->objs[i], obj_data))
 			{
-				// Check if the intersection point is closer than previous intersections
                 if (obj_data->t < closest_t)
                 {
-                    closest_t = obj_data->t; // Update closest intersection distance
+                    closest_t = obj_data->t;
 					colour = get_sphere_colour(data, obj_data, ray, data->objs[i]);
-					// colour = get_sphere_checherboard(data, obj_data, ray, data->objs[i]);	// will be moved
-					// colour = get_sphere_bumpmap(data, obj_data, ray, data->objs[i]);	// will be moved
-                }
+				}
 			}
 		}
-		// else if (data->objs[i]->type == E_PLANE)
-		// {
-		// 	if (obj_data->t < closest_t)
-        //     {
-        //         closest_t = obj_data->t;
-		// 		colour = get_plane_colour(data, obj_data, ray, data->objs[i]);
-		// 	}
-		// }
-		// else if (data->objs[i]->type == E_CYLINDER)
-		// {
-		// 	if (obj_data->t < closest_t)
-        //     {
-        //         closest_t = obj_data->t;
-		// 		colour = get_cylinder_colour(data, obj_data, ray, data->objs[i]);
-		// 	}
-		// }
+		else if (data->objs[i]->type == E_CYLINDER)
+		{
+			if (intersect_infi_cylinder(&ray, data->objs[i], obj_data))
+			{
+				if (obj_data->t < closest_t)
+				{
+					closest_t = obj_data->t;
+					colour = get_cylinder_colour(data, obj_data, ray, data->objs[i]);
+				}
+			}
+		}
 		i++;
-
 	}
 	if (closest_t != DBL_MAX)
         return (ft_convert_rgb(colour.r, colour.g, colour.b));

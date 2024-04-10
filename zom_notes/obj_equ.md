@@ -1,6 +1,54 @@
 
 
+uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
+{
+	// printf("\n--- OBJ ---\na: %f\nb: %f\nc: %f\nd: %f\nroot1: %f\nroot2: %f\nt: %f\n", obj_data->a, obj_data->b, obj_data->c, obj_data->d, obj_data->root1, obj_data->root2, obj_data->t);
+	// printf("TYPE: %f %f %f\n", data->objs->center.x, data->objs->center.y, data->objs->center.z);
 
+	t_colour	colour;
+	int		i = 0;
+	double closest_t = DBL_MAX; // Initialize closest intersection distance to a large value
+
+	while (i < data->objs_i)
+	{
+		if (data->objs[i]->type == E_SPHERE)
+		{
+			if (intersect_sphere(&ray, data->objs[i], obj_data))
+			{
+				// Check if the intersection point is closer than previous intersections
+                if (obj_data->t < closest_t)
+                {
+                    closest_t = obj_data->t; // Update closest intersection distance
+					colour = get_sphere_colour(data, obj_data, ray, data->objs[i]);
+					// colour = get_sphere_checherboard(data, obj_data, ray, data->objs[i]);	// will be moved
+					// colour = get_sphere_bumpmap(data, obj_data, ray, data->objs[i]);	// will be moved
+                }
+			}
+		}
+		// else if (data->objs[i]->type == E_PLANE)
+		// {
+		// 	if (obj_data->t < closest_t)
+        //     {
+        //         closest_t = obj_data->t;
+		// 		colour = get_plane_colour(data, obj_data, ray, data->objs[i]);
+		// 	}
+		// }
+		// else if (data->objs[i]->type == E_CYLINDER)
+		// {
+		// 	if (obj_data->t < closest_t)
+        //     {
+        //         closest_t = obj_data->t;
+		// 		colour = get_cylinder_colour(data, obj_data, ray, data->objs[i]);
+		// 	}
+		// }
+		i++;
+
+	}
+	if (closest_t != DBL_MAX)
+        return (ft_convert_rgb(colour.r, colour.g, colour.b));
+    else
+        return (ft_convert_rgb(0, 0, 0)); // No intersection found, return black
+}
 
 	• obtaining [ t1, t2 ]
 	– The equation of the infinite height cylinder :
