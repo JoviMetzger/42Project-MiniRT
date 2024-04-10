@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/10 17:32:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/10 17:58:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,28 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
 	t_vec3	ray_dir = ray->vector;
 	t_vec3	oc = minus(ray_og, cylinder->vector);
 	
+	// cylinder params
 	double	radius = cylinder->diameter / 2;
 	double	height_half = cylinder->height / 2;
 	double	axis = dot_product(ray_dir, cylinder->vector);
-	double	y_inter = ray_og.y + obj_data->t * ray_dir.y;
 
-	obj_data->a = axis - pow(dot_product(ray_dir, cylinder->center), 2);
-	obj_data->b = 2 * dot_product(oc, ray_dir) - axis * axis - radius * radius;
+// 	obj_data->a = (dot_product(ray->vector, ray->vector)) - (pow(dot_product(ray->vector, cylinder->center), 2));
+// 	obj_data->b = 2.0 * dot_product(oc, ray->vector) - (dot_product(ray->vector, cylinder->center) * dot_product(oc, cylinder->center));
+// 	obj_data->c = dot_product(oc, oc) - pow(dot_product(oc, 
+
+	// calculation of coefficients for quadratic equation
+	obj_data->a = axis - (pow(dot_product(ray_dir, cylinder->center), 2));
+	obj_data->b = 2.0 * dot_product(oc, ray_dir) - axis * axis - radius * radius;
 	obj_data->c = dot_product(oc, oc) - axis * dot_product(oc, cylinder->center);
-	obj_data->d = obj_data->b * obj_data->b - obj_data->a * obj_data->c;
+	obj_data->d = obj_data->b * obj_data->b - 4 * obj_data->a * obj_data->c;
 
+	// check for intersection
 	if (obj_data->d < 0)
 		return (false); // no intersection
 	else
 	{
-		obj_data->d = sqrt(obj_data->d);
+		// calcuate roots of quadratic equation
+		// obj_data->d = sqrt(obj_data->d);
 		obj_data->root1 = (-obj_data->b - obj_data->d) / obj_data->a;
 		obj_data->root2 = (-obj_data->b + obj_data->d) / obj_data->a;
 		if (obj_data->root1 > obj_data->root2)
@@ -81,9 +88,10 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
 		else
 			obj_data->t = obj_data->root2;
 	}
+	
+	//check if intersection point is within the cpaped ends of the cylinder
+	double	y_inter = ray_og.y + obj_data->t * ray_dir.y;
 	if (y_inter >= (cylinder->center.y - height_half) && y_inter <= (cylinder->center.y + height_half))
 		return (true); // intersection yay!
 	return (false); // no intersection
-	
-	
 }
