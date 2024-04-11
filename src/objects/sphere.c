@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/10 17:19:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/11 17:24:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
  *  The smaller root is chosen as the parameter 't' for the intersection point 
  *  closer to the ray's origin.
  */
-bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
+static bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
 {
     double radius;
     t_vec3	oc;
@@ -54,3 +54,15 @@ bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
     }
 }
 
+bool	calc_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
+{
+	if (intersect_sphere(ray, sphere, obj_data))
+	{
+		if (obj_data->t < obj_data->closest_t)
+		{
+			obj_data->closest_t = obj_data->t;
+			return (true);
+		}
+	}
+	return (false);
+}

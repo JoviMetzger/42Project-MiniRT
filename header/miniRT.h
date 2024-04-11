@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/10 17:18:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/11 17:27:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 // Math stuff
 # define M_PI 3.14159265358979323846 // This is a constant representing the value of pi.
-# define EPSILON 0.000001 // for plane (and maybe cylinder) calculations
+# define EPSILON 0.000001 // for plane (and maybe cylinder) calculations, a math thingy
 
 // Element type enums, includes space for parser
 typedef enum	e_type
@@ -154,6 +154,7 @@ typedef struct s_obj_data
     double  root1;
     double  root2;
     double t;
+	double closest_t;
 
 }   t_obj_data;
 
@@ -177,7 +178,7 @@ void ft_create_lightray(t_data *data, t_ray *lightray);
 uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
 t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
 t_colour get_plane_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *plane);
-t_colour get_cylinder_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder);
+t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder);
 t_vec3 ft_reflect(t_vec3 incident, t_vec3 normal);
 
 // Colour Functions Bonus
@@ -200,8 +201,8 @@ double length_squared(t_vec3 vec);
 t_vec3	normalize_vector(t_vec3 v);
 
 // Objects Functions
-bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
-bool intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
-bool intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
+bool	calc_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
+bool	calc_plane(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
+bool	calc_sphere(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
 
 #endif
