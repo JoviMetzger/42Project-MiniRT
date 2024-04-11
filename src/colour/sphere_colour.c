@@ -6,23 +6,85 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/05 18:43:45 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/04/11 17:48:48 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
 
-t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere)
+// t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere)
+// {
+//     t_colour result;
+//     double AMBIENT_INTENSITY = data->ambient.ratio; // (0.2)
+//     double DIFFUSE_INTENSITY = data->light.ratio;   // (0.6)
+//     double SPECULAR_INTENSITY = 0.2;
+//     double SPECULAR_POWER = 32;
+    
+//     // Using the 'Phong reflection model'
+// 	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_data->t));
+// 	t_vec3	normal = normalize_vector(minus(intersection_point, sphere->center));
+
+// 	// Ambient light contribution
+// 	double ambient_red = AMBIENT_INTENSITY * data->ambient.colour.r;
+// 	double ambient_green = AMBIENT_INTENSITY * data->ambient.colour.g;
+// 	double ambient_blue = AMBIENT_INTENSITY * data->ambient.colour.b;
+
+// 	// Diffuse light contribution
+// 	t_vec3 light_direction = normalize_vector(minus(data->light.place, intersection_point));
+// 	double diffuse_factor = dot_product(normal, light_direction);
+// 	if (diffuse_factor < 0.0)
+// 		diffuse_factor = 0.0;
+// 	double diffuse_red = DIFFUSE_INTENSITY * diffuse_factor * data->light.colour.r;
+// 	double diffuse_green = DIFFUSE_INTENSITY * diffuse_factor * data->light.colour.g;
+// 	double diffuse_blue = DIFFUSE_INTENSITY * diffuse_factor * data->light.colour.b;
+	
+// 	// Specular light contribution
+// 	t_vec3 view_direction = normalize_vector(minus(ray.place, intersection_point));
+// 	t_vec3 reflection_direction = normalize_vector(ft_reflect(light_direction, normal));
+// 	double specular_factor = pow(dot_product(reflection_direction, view_direction), SPECULAR_POWER);
+// 	if (specular_factor < 0.0)
+// 		specular_factor = 0.0;
+// 	double specular_red = SPECULAR_INTENSITY * specular_factor * data->ambient.colour.r;
+// 	double specular_green= SPECULAR_INTENSITY * specular_factor * data->ambient.colour.g;
+// 	double specular_blue = SPECULAR_INTENSITY * specular_factor * data->ambient.colour.b;
+
+// 	// Combine ambient, diffuse, and specular contributions
+// 	double final_red = ambient_red + diffuse_red + specular_red;
+// 	double final_green = ambient_green + diffuse_green + specular_green;
+// 	double final_blue = ambient_blue + diffuse_blue + specular_blue;
+	
+// 	// Clamp final values to [0, 255]
+// 	final_red = fmin(fmax(final_red, sphere->colour.r), 255);
+// 	final_green = fmin(fmax(final_green, sphere->colour.g), 255);
+// 	final_blue = fmin(fmax(final_blue, sphere->colour.b), 255);
+
+// 	result.r = final_red;
+// 	result.g = final_green;
+// 	result.b = final_blue;
+	
+// 	return result;	
+	
+// }
+
+
+// ------------------ for checkerboard IS WORKING ----------------------------------------
+t_colour get_sphere_checherboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere)
 {
-    t_colour result;
+
+	// (void)data;
+    double radius = sphere->diameter / 2;
     double AMBIENT_INTENSITY = data->ambient.ratio; // (0.2)
     double DIFFUSE_INTENSITY = data->light.ratio;   // (0.6)
     double SPECULAR_INTENSITY = 0.2;
     double SPECULAR_POWER = 32;
+    t_colour colour;
     
     // Using the 'Phong reflection model'
 	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_data->t));
+
+	// ===================== Lighting =====================
+	// ====================================================
 	t_vec3	normal = normalize_vector(minus(intersection_point, sphere->center));
 
 	// Ambient light contribution
@@ -54,63 +116,49 @@ t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs
 	double final_green = ambient_green + diffuse_green + specular_green;
 	double final_blue = ambient_blue + diffuse_blue + specular_blue;
 	
-	// Clamp final values to [0, 255]
-	final_red = fmin(fmax(final_red, sphere->colour.r), 255);
-	final_green = fmin(fmax(final_green, sphere->colour.g), 255);
-	final_blue = fmin(fmax(final_blue, sphere->colour.b), 255);
 
-	result.r = final_red;
-	result.g = final_green;
-	result.b = final_blue;
+	// =================== Checkerboard ===================
+	// ====================================================
 	
-	return result;	
-	
+    // Calculate spherical coordinates from intersection point
+    double phi = atan2(intersection_point.z, intersection_point.x);
+    double theta = acos(intersection_point.y / radius);
+
+    // Map spherical coordinates to UV coordinates
+    double u = (phi + M_PI) / (2 * M_PI); // Normalize phi to [0, 1]
+    double v = 1.0 - (theta / M_PI);     // Normalize theta to [0, 1] and flip vertically
+
+    // Define the size of squares in UV space
+    double square_size_u = 0.003; // Adjust as needed
+    double square_size_v = 0.05; // Adjust as needed
+
+    // Determine the checkerboard pattern based on UV coordinates
+    bool is_black = ((int)(u / square_size_u) + (int)(v / square_size_v)) % 2 == 0;
+
+    // Determine color based on checkerboard pattern
+    if (is_black)
+    {
+		// Clamp final values to [0, 255]
+		colour.r = fmin(fmax(final_red, 0), 255);
+		colour.g = fmin(fmax(final_green, 0), 255);
+		colour.b = fmin(fmax(final_blue, 0), 255);
+        // colour.r = 0;
+        // colour.g = 0;
+        // colour.b = 0;
+    }
+    else
+    {
+		// Clamp final values to [0, 255]
+		colour.r = fmin(fmax(final_red, 255), 255);
+		colour.g = fmin(fmax(final_green, 255), 255);
+		colour.b = fmin(fmax(final_blue, 255), 255);
+        // colour.r = 255;
+        // colour.g = 255;
+        // colour.b = 255;
+    }
+    
+    return colour;
 }
-
-
-// // ------------------ for checkerboard IS WORKING ----------------------------------------
-// t_colour get_sphere_checherboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere)
-// {
-// 	(void)data;
-//     double radius = sphere->diameter / 2;
-//     int NUM_SQUARES = 150; // Number of squares per side
-//     t_colour colour;
-        
-//     // Using the 'Phong reflection model'
-//     t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_data->t));
-
-//     // Calculate spherical coordinates from intersection point
-//     double phi = atan2(intersection_point.z, intersection_point.x);
-//     double theta = acos(intersection_point.y / radius);
-    
-//     // Map spherical coordinates to UV coordinates
-//     double u = (phi + M_PI) / (2 * M_PI); // Normalize phi to [0, 1]
-//     double v = 1.0 - (theta / M_PI); // Normalize theta to [0, 1] and flip vertically
-    
-//     // Scale UV coordinates based on checker size and sphere dimensions
-//     int checker_x = (int)(u * NUM_SQUARES);
-//     int checker_y = (int)(v * NUM_SQUARES);
-
-//     // Determine checkerboard pattern based on UV coordinates
-//     bool is_black = ((checker_x + checker_y) % 2 == 0);
-
-//     // Determine color based on checkerboard pattern
-//     if (is_black)
-//     {
-// 		colour.r = 0;
-// 		colour.g = 0;
-// 		colour.b = 0;
-//     }
-//     else
-//     {
-
-// 		colour.r = 255;
-// 		colour.g = 255;
-// 		colour.b = 255;
-//     }
-    
-//     return colour;
-// }
 
 
 

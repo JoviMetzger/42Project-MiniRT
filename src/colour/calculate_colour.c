@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/05 18:43:50 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/04/11 15:52:58 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
                 if (obj_data->t < closest_t)
                 {
                     closest_t = obj_data->t; // Update closest intersection distance
-					colour = get_sphere_colour(data, obj_data, ray, data->objs[i]);
-					// colour = get_sphere_checherboard(data, obj_data, ray, data->objs[i]);	// will be moved
+					// colour = get_sphere_colour(data, obj_data, ray, data->objs[i]);
+					colour = get_sphere_checherboard(data, obj_data, ray, data->objs[i]);	// will be moved
 					// colour = get_sphere_bumpmap(data, obj_data, ray, data->objs[i]);	// will be moved
                 }
 			}
