@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/10 17:20:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/11 16:34:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
 /**
- * @todo		check this... 
+ * @todo		check this... also, light/colour isn't correct yet
  */
 bool intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data)
 {

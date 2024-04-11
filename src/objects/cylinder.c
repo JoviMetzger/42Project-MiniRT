@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/10 22:03:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/11 16:34:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
 /**
- * @todo fix, lopsided, why no pretty ? :(, norm... 
+ * @todo fix, lopsided, why no pretty ? :(, i think I'm missing something when it goes to the colour etc... eventually norm... 
  */
 bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
 {
