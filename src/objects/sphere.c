@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/11 17:24:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/13 20:15:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
             obj_data->t = obj_data->root1;
         else
             obj_data->t = obj_data->root2;
+		if (obj_data->t <= 0)
+			return (false);
         return (true); // Intersection found
     }
 }

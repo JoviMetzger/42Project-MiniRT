@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cylinder.c                                         :+:    :+:            */
+/*   pos_tri.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/13 18:48:18 by smclacke      ########   odam.nl         */
+/*   Created: 2024/04/13 17:57:51 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/04/13 17:58:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../header/miniRT.h"
-
-/**
- * @todo fix, lopsided, why no pretty ? :(, i think I'm missing something when it goes to the colour etc... eventually norm... 
-	// cylinder->center = position
-	// cylinder->vector = direction
-	// ray place = origin
-	// ray vector = direction
- */
+// can of triangle heheh
 static bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
 {
 	t_vec3	ray_og = ray->place;
 	t_vec3	ray_dir = ray->vector;
 	double	radius = cylinder->diameter / 2;
 	double	height_half = cylinder->height / 2;
+
 	t_vec3	oc = minus(ray_og, cylinder->center);
+	// t_vec3	oc = minus(cyl_dir, cyl_pos);
+
 
 
 	// calculation of coefficients for quadratic equation
@@ -34,10 +29,42 @@ static bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_dat
 	// obj_data->b = 2.0 * dot_product(oc, cylinder->vector) - dot_product(oc, ray_dir) * dot_product(ray_dir, cylinder->vector);
 	// obj_data->c = dot_product(cross_product(oc, cylinder->vector), cross_product(oc, cylinder->vector)) - (radius * radius);
 // ------------- og almost working ------------/
-	
-	obj_data->a = dot_product(ray_dir, ray_dir) - pow(dot_product(ray_dir, cylinder->vector), 2);
-	obj_data->b = 2.0 * dot_product(oc, cylinder->vector) - dot_product(ray_dir, cylinder->vector);
-	obj_data->c = dot_product(cross_product(oc, cylinder->vector), cross_product(oc, cylinder->vector)) - (radius * radius);
+
+/**
+ *bool	cylinder_intersect(t_cylinder *cy, t_ray *ray, t_hit *inter)
+{
+	double		t;
+	t_vec3		co;
+	t_equation	equation;
+
+	equation.t1 = -1;
+	equation.t2 = -1;
+	co = vec3_sub(ray->origin, cy->cap1);
+	equation.a = vec3_dot(ray->direction, ray->direction) - \
+		pow(vec3_dot(ray->direction, cy->normal), 2);
+	equation.b = 2 * (vec3_dot(ray->direction, co) - \
+		(vec3_dot(ray->direction, cy->normal) * vec3_dot(co, cy->normal)));
+	equation.c = vec3_dot(co, co) - pow(vec3_dot(co, cy->normal), 2) - \
+		pow(cy->radius, 2);
+	solve(&equation);
+	if (equation.t1 <= 0 && equation.t2 <= 0)
+		return (false);
+	t = verify_intersections(cy, ray, &equation, inter);
+	if (t > 0.0f)
+	{
+		inter->t = t;
+		inter->color = cy->color;
+		return (true);
+	}
+	return (false);
+}
+ * 
+ */
+	// ------------- test 2 ------------/
+	obj_data->a = dot_product(ray_dir, ray_dir) - pow(dot_product(ray_dir, cylinder->vector), 2); // cyl->normal
+	obj_data->b = 2.0 * (dot_product(ray_dir, oc) - (dot_product(ray_dir, cylinder->vector) * dot_product(oc, cylinder->vector)));
+	obj_data->c = dot_product(oc, oc) - pow(dot_product(oc, cylinder->vector), 2) - radius * radius; // pow(radius, 2);
+	// ------------- test 2 ------------/
 
 
 	// discriminant, solve the quadratic equation
@@ -68,17 +95,4 @@ static bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_dat
 	if (obj_data->t > 0)
 		return (true); // intersection found
 	return (false); // no intersection
-}
-
-bool	calc_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
-{
-	if (intersect_cylinder(ray, cylinder, obj_data))
-	{
-		if (obj_data->t < obj_data->closest_t)
-		{
-			obj_data->closest_t = obj_data->t;
-			return (true);
-		}
-	}
-	return (false);
 }

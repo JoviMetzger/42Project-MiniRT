@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/11 17:27:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/13 19:41:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs
 t_colour get_plane_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *plane);
 t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder);
 t_vec3 ft_reflect(t_vec3 incident, t_vec3 normal);
+int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 // Colour Functions Bonus
 // t_colour get_sphere_checherboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);

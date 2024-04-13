@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:44:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/10 17:19:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/13 20:16:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_colour get_plane_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs 
 	double ambient_green = AMBIENT_INTENSITY * data->ambient.colour.g;
 	double ambient_blue = AMBIENT_INTENSITY * data->ambient.colour.b;
 
-	// Diffuse light contribution
+	// Diffuse light contribution	
 	t_vec3 light_direction = normalize_vector(minus(data->light.place, intersection_point));
 	double diffuse_factor = dot_product(normal, light_direction);
 	if (diffuse_factor < 0.0)

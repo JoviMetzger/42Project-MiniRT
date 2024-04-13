@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/10 17:19:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/13 20:17:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere)
 {
     t_colour result;
+
     double AMBIENT_INTENSITY = data->ambient.ratio; // (0.2)
     double DIFFUSE_INTENSITY = data->light.ratio;   // (0.6)
     double SPECULAR_INTENSITY = 0.2;
@@ -64,8 +65,9 @@ t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs
 	result.r = final_red;
 	result.g = final_green;
 	result.b = final_blue;
-	
+
 	return result;	
+	
 	
 }
 
