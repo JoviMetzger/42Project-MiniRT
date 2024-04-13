@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/13 22:57:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/13 22:59:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 /**
  * @todo	is the light correct? looks like the calculation is good..
+ * 
+ * should the plane flip? should it always be seen? how can i get rid of it if its behind camera?
+ * or if we still see it then i dont want it to flip...
  * 
 bool intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data)
 {

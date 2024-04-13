@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/13 18:48:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/13 22:59:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 /**
  * @todo fix, lopsided, why no pretty ? :(, i think I'm missing something when it goes to the colour etc... eventually norm... 
+	soooooo much closer, but still funky and light aint there...
+	
 	// cylinder->center = position
 	// cylinder->vector = direction
 	// ray place = origin
