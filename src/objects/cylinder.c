@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 21:16:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 22:16:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 			
 // m = dot(ray->direction * scalar + (cyl->center - camera->origin), cyl->orientation);
 
+// update obj_data->t here somewhere for the caps but still don't fully understand that...
 			m = mult_vecdub(ray->vector, obj_data->t);
 			n = minus(cyl->center, ray->place);
 			o = plus(m, n);
