@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:20:47 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 20:02:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 19:47:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_objs	**obj_malloc(t_data *data, char **arr, int size)
 	data->objs_i = 0;
 	data->objs = (t_objs **)malloc(sizeof(t_objs *) * (size + 1));
 	if (!data->objs)
-		free_arr_error("parser error", arr, NULL);
+		free_arr_error("parser error", arr);
 	return (data->objs);
 }
 
@@ -54,7 +54,7 @@ t_objs	*object_malloc(t_data *data, char **arr)
 	if (!data->objs[data->objs_i])
 	{
 		free_objects(data);
-		free_arr_error("parser error", arr, NULL);
+		free_arr_error("parser error", arr);
 	}
 	ft_bzero(data->objs[data->objs_i], sizeof(t_objs));
 	return (data->objs[data->objs_i]);

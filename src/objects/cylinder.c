@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 18:45:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 19:45:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,32 @@
 
 // dont have to have objects ... parser todo
 
-static	bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
-{
-	t_vec3	c = // cyl->center - height // start cap cylinder
-	t_vec3	v = cyl->vector;
-	double	radius = cyl->diameter / 2;
-	t_vec3	maxm  = 	// cyl->center + height // following vector from center point to end heigt		// cylinder's end ap point
-}
-m = distance from base (C);
-t = distance to hit location;
-D = ray->direction;
-V = cylinder->orientation;
-X = vector (line) from camera to center of cylinder;
+// static	bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
+// {
+// 	t_vec3	c = // cyl->center - height // start cap cylinder
+// 	t_vec3	v = cyl->vector;
+// 	double	radius = cyl->diameter / 2;
+// 	t_vec3	maxm  = 	// cyl->center + height // following vector from center point to end heigt		// cylinder's end ap point
+// }
+// m = distance from base (C);
+// t = distance to hit location;
+// D = ray->direction;
+// V = cylinder->orientation;
+// X = vector (line) from camera to center of cylinder;
 
 
-m = dot(ray->direction * scalar + (cyl->center - camera->origin), cyl->orientation);
+// m = dot(ray->direction * scalar + (cyl->center - camera->origin), cyl->orientation);
 
 
-a = 1 - pow(dot(ray->dir, cyl->orientation), 2);
-b = 2 * (dot(ray->dir, X) - dot(ray->dir, cyl->orientation) * dot(X, cyl->orientation);
-c = dot(X, X) - pow(dot(X, cyl->orientation), 2) - pow(cyl->radius, 2);
-/**
+// a = 1 - pow(dot(ray->dir, cyl->orientation), 2);
+// b = 2 * (dot(ray->dir, X) - dot(ray->dir, cyl->orientation) * dot(X, cyl->orientation);
+// c = dot(X, X) - pow(dot(X, cyl->orientation), 2) - pow(cyl->radius, 2);
+// /**
 	// cylinder->center = position
 	// cylinder->vector = direction
 	// ray place = origin
 	// ray vector = direction
- */
+//  */
 // static bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
 // {
 // 	t_vec3	ray_og = ray->place;
@@ -91,15 +91,15 @@ c = dot(X, X) - pow(dot(X, cyl->orientation), 2) - pow(cyl->radius, 2);
 // 	return (false); // no intersection
 // }
 
-bool	calc_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
-{
-	if (intersect_cylinder(ray, cylinder, obj_data))
-	{
-		if (obj_data->t < obj_data->closest_t)
-		{
-			obj_data->closest_t = obj_data->t;
-			return (true);
-		}
-	}
-	return (false);
-}
+// bool	calc_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data)
+// {
+// 	if (intersect_cylinder(ray, cylinder, obj_data))
+// 	{
+// 		if (obj_data->t < obj_data->closest_t)
+// 		{
+// 			obj_data->closest_t = obj_data->t;
+// 			return (true);
+// 		}
+// 	}
+// 	return (false);
+// }

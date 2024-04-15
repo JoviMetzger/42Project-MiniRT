@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/25 12:43:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 20:21:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 19:47:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static void	convert_element(char **arr, t_data *data, int i)
 
 	elem_str = ft_split(arr[i], ' ');
 	if (!elem_str)
-		free_arr_error("malloc failed", arr, NULL);
+		free_arr_error("malloc failed", arr);
 	if (!sort_into_struct(elem_str, data))
 	{
 		free_array(elem_str);
-		free_arr_error(NULL, arr, NULL);
+		free_arr_error(NULL, arr);
 	}
 	free_array(elem_str);
 }
@@ -59,7 +59,7 @@ void	convert_obj_input(t_data *data, char **arr, int count)
 		else if (data->type == 0 || data->type > 7)
 		{
 			free_objects(data);
-			free_arr_error("parser error", arr, NULL);
+			free_arr_error("parser error", arr);
 		}
 		else if (data->type == E_PLANE || data->type == E_SPHERE
 			|| data->type == E_CYLINDER)

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/04 14:52:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 19:44:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		parse_input(int argc, char **argv, t_data *data);
 
 // --- parser_error --- //
 int			par_err(char *msg);
-void		free_arr_error(char *msg, char **arr, t_elems *check);
+void		free_arr_error(char *msg, char **arr);
 void		free_close_parse_error(char *msg, char **ar, char *line, int file);
 void		parse_error(char *msg, int file);
 void		error_msg(char *msg);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:30:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 16:03:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 19:42:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ int	par_err(char *msg)
 	return (0);
 }
 
-void	free_arr_error(char *msg, char **arr, t_elems *check)
+void	free_arr_error(char *msg, char **arr)
 {
-	if (check)
-		free(check);
 	free_array(arr);
 	if (msg != NULL)
 		error_msg(msg);

@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/04/15 16:32:38 by smclacke      ########   odam.nl          #
+#    Updated: 2024/04/15 19:40:06 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ CC 				= cc
 CFLAGS 			= -Wall -Wextra
 CFLAGS			+= -Werror
 CFLAGS			+= -g -fsanitize=address
+CFLAGS			+= -Ofast -flto
 
 # Libraries
 LIBFT_PATH		= ./libraries/libft

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 17:30:17 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 16:45:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 19:46:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	check_dup(char **arr, int i, int type)
 	while (arr[i])
 	{
 		if (check_capital(arr[i], type) == 1)
-			free_arr_error("duplicate element", arr, NULL);
+			free_arr_error("duplicate element", arr);
 		i++;
 	}
 }

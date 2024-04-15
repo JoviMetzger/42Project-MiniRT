@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:24:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 19:47:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static void	convert_element(char **arr, t_data *data, int i)
 
 	elem_str = ft_split(arr[i], ' ');
 	if (!elem_str)
-		free_arr_error("malloc failed", arr, NULL);
+		free_arr_error("malloc failed", arr);
 	if (!sort_into_struct(elem_str, data))
 	{
 		free_array(elem_str);
-		free_arr_error(NULL, arr, NULL);
+		free_arr_error(NULL, arr);
 	}
 	free_array(elem_str);
 }
@@ -56,7 +56,7 @@ void	convert_cap_input(t_data *data, char **arr)
 			|| data->type == E_SPHERE || data->type == E_CYLINDER)
 			i++;
 		else if (data->type == 0 || data->type > 7)
-			free_arr_error("parser error", arr, NULL);
+			free_arr_error("parser error", arr);
 		else if (data->type == E_AMBIENT || data->type == E_LIGHT
 			|| data->type == E_CAMERA)
 		{

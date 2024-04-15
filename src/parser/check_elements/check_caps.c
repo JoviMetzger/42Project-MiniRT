@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:25:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/19 16:46:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 19:46:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	check_l(char **arr)
 	type = 'L';
 	flag = check_cap_valid(arr, type);
 	if (flag == 0)
-		free_arr_error("missing Light element (L)", arr, NULL);
+		free_arr_error("missing Light element (L)", arr);
 }
 
 /**
@@ -62,7 +62,7 @@ void	check_c(char **arr)
 	type = 'C';
 	flag = check_cap_valid(arr, type);
 	if (flag == 0)
-		free_arr_error("missing Camera element (C)", arr, NULL);
+		free_arr_error("missing Camera element (C)", arr);
 }
 
 /**
@@ -77,5 +77,5 @@ void	check_a(char **arr)
 	type = 'A';
 	flag = check_cap_valid(arr, type);
 	if (flag == 0)
-		free_arr_error("missing Ambient Light element (A)", arr, NULL);
+		free_arr_error("missing Ambient Light element (A)", arr);
 }
