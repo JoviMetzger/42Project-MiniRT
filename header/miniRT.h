@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/13 19:41:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 20:30:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,8 +202,10 @@ double length_squared(t_vec3 vec);
 t_vec3	normalize_vector(t_vec3 v);
 
 // Objects Functions
-bool	calc_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
-bool	calc_plane(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
-bool	calc_sphere(t_ray *ray, t_objs *cylinder, t_obj_data *obj_data);
+bool	check_closest(t_obj_data *obj_data);
+bool	quadratic(t_obj_data *obj_data);
+bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data);
+bool	intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
+bool 	intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
 
 #endif

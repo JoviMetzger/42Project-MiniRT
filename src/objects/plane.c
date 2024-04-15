@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 16:58:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 20:28:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,7 @@ bool intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data)
 		oc = minus(ray->place, plane->center);
 		obj_data->t = dot_product(oc, plane->vector) / denom;
 		if (obj_data->t >= EPSILON)
-			return (true);
-	}
-	return (false);
-}
-
-bool	calc_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data)
-{
-	if (intersect_plane(ray, plane, obj_data))
-	{
-		if (obj_data->t < obj_data->closest_t)
-		{
-			obj_data->closest_t = obj_data->t;
-			return (true);
-		}
+			return (check_closest(obj_data));
 	}
 	return (false);
 }
