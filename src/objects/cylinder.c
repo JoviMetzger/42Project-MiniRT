@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 20:33:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 21:16:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,38 @@
 
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 {
+	t_vec3	c_c;
+	t_vec3	r_c;
+	t_vec3	m;
+	t_vec3	n;
+	t_vec3	o;
+	double	product;
+	double	radius;
+
+	r_c = cross_product(cyl->vector, ray->vector);
+	c_c = minus(ray->place, cyl->center);
+	c_c = cross_product(c_c, cyl->vector);
+	radius = cyl->diameter / 2;	
 	
+	obj_data->a = dot_product(r_c, r_c);
+	obj_data->b = 2.0 * dot_product(r_c, c_c);
+	obj_data->c = dot_product(c_c, c_c) - pow(radius, 2);
 
-	
-	// if (quadratic(obj_data) == true)
-	// 	return (check_closest(obj_data));
-	// return (false);
-}
-
-
-
-// 	t_vec3	c = // cyl->center - height // start cap cylinder
-// 	t_vec3	v = cyl->vector;
-// 	double	radius = cyl->diameter / 2;
-// 	t_vec3	maxm  = 	// cyl->center + height // following vector from center point to end heigt		// cylinder's end ap point
-
-
-	
-// m = distance from base (C);
-// t = distance to hit location;
-// D = ray->direction;
-// V = cylinder->orientation;
-// X = vector (line) from camera to center of cylinder;
-
-
+	if (quadratic(obj_data) == true)
+	{
+		if (obj_data->t > EPSILON && check_closest(obj_data) == true)
+		{
+			
 // m = dot(ray->direction * scalar + (cyl->center - camera->origin), cyl->orientation);
 
+			m = mult_vecdub(ray->vector, obj_data->t);
+			n = minus(cyl->center, ray->place);
+			o = plus(m, n);
+			product = dot_product(o, cyl->vector);
+			if (fabs(product) <= cyl->height)
+				return (true);
+		}
+	}
+	return (false);
+}
 
-// a = 1 - pow(dot(ray->dir, cyl->orientation), 2);
-// b = 2 * (dot(ray->dir, X) - dot(ray->dir, cyl->orientation) * dot(X, cyl->orientation);
-// c = dot(X, X) - pow(dot(X, cyl->orientation), 2) - pow(cyl->radius, 2);
-
-// obj_data->d = obj_data->b * obj_data->b - 4 * obj_data->a * obj_data->c;
-
-// now quad it

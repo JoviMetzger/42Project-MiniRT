@@ -6,17 +6,38 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:36:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 19:44:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 21:49:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
+
+int	is_hash(int c)
+{
+	return (c == '#');
+}
+
+int	hash_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (is_hash(str[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 static	int	check_invalid(char *str)
 {
 	int		i;
 
 	i = 0;
+	if (hash_str(str))
+		return (0);
 	while (str[i] && ft_isspace(str[i]))
 		i++;
 	if (str[i])

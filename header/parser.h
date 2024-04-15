@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 19:44:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 21:37:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,6 @@
 # define PL 4
 # define SP 5
 # define CY 6
-
-typedef struct s_elems
-{
-	bool	sp_b;
-	bool	pl_b;
-	bool	cy_b;
-}		t_elems;
 
 void		print_parser(t_data *data); // get rid later
 
@@ -67,6 +60,8 @@ void		check_c(char **arr);
 void		check_l(char **arr);
 
 // --- check_elements --- //
+int			is_hash(int c);
+int			hash_str(char *str);
 void		check_elements(char **arr);
 
 // --- check_utils --- //

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 19:47:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 21:40:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static int	check_no_elems(char *str, int type)
 {
-	if (type == 'A' && (num_elems(str) != 3))
+	if (type == 8)
+		return (1);
+	else if (type == 'A' && (num_elems(str) != 3))
 		return (par_err("invalid: Abiement: number of arguments"));
 	else if (type == 'C' && (num_elems(str) != 4))
 		return (par_err("invalid: Camera: number of arguments"));

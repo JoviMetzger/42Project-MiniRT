@@ -1,5 +1,39 @@
 
 
+**********************************************************************************
+								LATEST SHIZZLE
+	
+// m = distance from base (C);
+// t = distance to hit location;
+// D = ray->direction;
+// V = cylinder->orientation;
+// X = vector (line) from camera to center of cylinder;
+
+
+
+
+// a = 1 - pow(dot(ray->dir, cyl->orientation), 2);
+// b = 2 * (dot(ray->dir, X) - dot(ray->dir, cyl->orientation) * dot(X, cyl->orientation);
+// c = dot(X, X) - pow(dot(X, cyl->orientation), 2) - pow(cyl->radius, 2);
+
+
+// now quad it
+
+// 	t_vec3	c = // cyl->center - height // start cap cylinder
+// 	t_vec3	v = cyl->vector;
+// 	double	radius = cyl->diameter / 2;
+// 	t_vec3	maxm  = 	// cyl->center + height // following vector from center point to end heigt		// cylinder's end ap point
+
+
+
+
+	// obj_data->a = 1 - pow(dot_product(ray->vector, cyl->vector), 2);
+	// obj_data->b = 2.0 * (dot_product(ray->vector, c_c) - dot_product(ray->vector, cyl->vector) * dot_product(c_c, cyl->vector));
+
+//  addition c -  //- pow(dot_product(c_c, cyl->vector), 2)
+
+
+
 *****************************************************************************
 								THE VINCENT NOTES		
 

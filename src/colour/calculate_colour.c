@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 20:26:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 20:34:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 			if (intersect_sphere(&ray, data->objs[i], obj_data))
 				colour = get_sphere_colour(data, obj_data, ray, data->objs[i]);
 		}
-		// if (data->objs[i]->type == E_CYLINDER)
-		// {
-		// 	if (intersect_cylinder(&ray, data->objs[i], obj_data))
-		// 		colour = get_cyl_colour(data, obj_data, ray, data->objs[i]);
-		// }
+		if (data->objs[i]->type == E_CYLINDER)
+		{
+			if (intersect_cylinder(&ray, data->objs[i], obj_data))
+				colour = get_cyl_colour(data, obj_data, ray, data->objs[i]);
+		}
 		i++;
 	}
 	return (get_ret(obj_data, colour));

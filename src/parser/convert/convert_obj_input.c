@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/25 12:43:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 19:47:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 21:46:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ static void	init_objs(t_data *data, char **arr)
 	data->objs[data->objs_i]->type = data->type;
 }
 
+/**
+ * @brief 7 == space, 1, 2 + 3 == A L C, 8 == HASH 
+ */
 void	convert_obj_input(t_data *data, char **arr, int count)
 {
 	int		i;
@@ -53,10 +56,10 @@ void	convert_obj_input(t_data *data, char **arr, int count)
 	while (arr[i])
 	{
 		data->type = get_type(arr[i]);
-		if (data->type == E_SPACE || data->type == E_AMBIENT
-			|| data->type == E_LIGHT || data->type == E_CAMERA)
+		if (data->type == 7 || data->type == 1
+			|| data->type == 2 || data->type == 3 || data->type == 8)
 			i++;
-		else if (data->type == 0 || data->type > 7)
+		else if (data->type == 0 || data->type > 8)
 		{
 			free_objects(data);
 			free_arr_error("parser error", arr);

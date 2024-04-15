@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/19 14:59:56 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 20:20:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 21:47:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	is_space(char *str)
 	int	i;
 
 	i = 0;
-
 	while (str[i])
 	{
 		if (str[i] && !ft_isspace(str[i]))
