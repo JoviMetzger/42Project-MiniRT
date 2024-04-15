@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/04/10 14:25:38 by smclacke      ########   odam.nl          #
+#    Updated: 2024/04/15 16:32:38 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,8 +110,8 @@ $(OBJ_PATH)/%.o: $(SRC_DIR)/%.c $(SRC_HEADER)
 		@mkdir -p $(OBJ_PATH)/parser
 		@mkdir -p $(OBJ_PATH)/parser/check_elements
 		@mkdir -p $(OBJ_PATH)/parser/validate
-		@mkdir -p $(OBJ_PATH)/parser/convert
 		@mkdir -p $(OBJ_PATH)/parser/convert/convert_utils
+		@mkdir -p $(OBJ_PATH)/parser/convert
 		@mkdir -p $(OBJ_PATH)/colour
 		@mkdir -p $(OBJ_PATH)/objects
 		@mkdir -p $(OBJ_PATH)/utils
