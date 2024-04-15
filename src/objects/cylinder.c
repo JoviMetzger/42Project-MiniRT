@@ -6,16 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 14:35:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/15 15:48:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
 /**
- * @todo fix, lopsided, why no pretty ? :(, i think I'm missing something when it goes to the colour etc... eventually norm... 
-	soooooo much closer, but still funky and light aint there...
-	
 	// cylinder->center = position
 	// cylinder->vector = direction
 	// ray place = origin
@@ -36,6 +33,7 @@ static bool	intersect_cylinder(t_ray *ray, t_objs *cylinder, t_obj_data *obj_dat
 	// obj_data->b = 2.0 * dot_product(oc, cylinder->vector) - dot_product(oc, ray_dir) * dot_product(ray_dir, cylinder->vector);
 	// obj_data->c = dot_product(cross_product(oc, cylinder->vector), cross_product(oc, cylinder->vector)) - (radius * radius);
 // ------------- og almost working ------------/
+	
 	
 	obj_data->a = dot_product(ray_dir, ray_dir) - pow(dot_product(ray_dir, cylinder->vector), 2);
 	obj_data->b = 2.0 * dot_product(oc, cylinder->vector) - dot_product(ray_dir, cylinder->vector);
