@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 20:04:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 20:49:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void ft_put_image(t_data *data)
 
 void ft_render(t_data *data)
 {
+
 	ft_put_image(data); // Shazam(MATH)
 	
 	mlx_key_hook(data->mlx, (mlx_keyfunc)ft_key_action, data); // movement aka ESC
 	// mlx_loop_hook(data->mlx, ft_handle_mouse_move, data); // Mouse move event
     // mlx_mouse_hook(data->mlx, (mlx_mousefunc) handle_mouse_click, data); // Mouse click event
-	// resize hook
-    
+    // mlx_resize_hook(data->mlx, (mlx_resizefunc)ft_resize, data); // resize window
 }

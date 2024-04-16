@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/03 14:00:42 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/04/16 20:49:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,15 @@ void ft_key_action(mlx_key_data_t keydata, t_data *data)
 //     printf("Mouse clicked at: with button %d\n", button);
 //     return 0;
 // }
+
+
+void	ft_resize(int32_t width, int32_t height, void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	data->mlx->width = width;
+	data->mlx->height = height;
+	mlx_set_window_size(data->mlx, width, height);
+	// data->screen.img_ratio = (double)height / width; // maybe need to do this
+}

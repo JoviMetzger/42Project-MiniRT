@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 19:39:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 20:41:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ typedef struct s_obj_data
 void ft_put_image(t_data *data);
 void ft_open_window(t_data *data);
 void ft_render(t_data *data);
+void ft_resize(int32_t width, int32_t height, void *param);
 
 // Movement Functions
 void ft_key_action(mlx_key_data_t keydata, t_data *data);
