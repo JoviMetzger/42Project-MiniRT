@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/04 14:52:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 21:20:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	convert_fov(t_data *data, char *str)
 	fov = ft_atoi(str);
 	if (!is_valid_fov(fov))
 		return (0);
-	data->camera.FOV = fov;
+	data->camera.fov = fov;
 	return (1);
 }
 

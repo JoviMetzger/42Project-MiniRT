@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 21:15:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 21:21:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
-// # include <float.h> // apparently invalid by norm
+# include <float.h> // apparently invalid by norm
 # include <math.h>
 
 // --- Colours ---
@@ -67,7 +67,7 @@ typedef struct s_vec3
 // Colour - RGB
 typedef struct s_colour
 {
-	int		r; // red
+	int		r; // redfov
 	int		g; // green
 	int		b; // blue
 }	t_colour;

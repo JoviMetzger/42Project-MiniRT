@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/05 18:19:21 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/04/16 21:20:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_ray ft_create_ray(t_data *data, int pos_x, int pos_y)
     screen.viewport_w = 2 * ((pos_x + 0.5) / img_width) - 1;
     screen.viewport_h = (1 - 2 * ((pos_y + 0.5) / img_height)) * screen.img_ratio;
     
-    screen.pixel_delta_x = screen.viewport_w * (tan((data->camera.FOV / 2) * (M_PI / 180)));
-    screen.pixel_delta_y = screen.viewport_h * (tan((data->camera.FOV / 2) * (M_PI / 180)));
+    screen.pixel_delta_x = screen.viewport_w * (tan((data->camera.fov / 2) * (M_PI / 180)));
+    screen.pixel_delta_y = screen.viewport_h * (tan((data->camera.fov / 2) * (M_PI / 180)));
 
     ray.vector = init_vector(screen);
     ray.place = data->camera.place;
