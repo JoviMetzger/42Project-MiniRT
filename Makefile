@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/04/16 20:10:47 by smclacke      ########   odam.nl          #
+#    Updated: 2024/04/16 20:29:41 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ MLX42			= $(MLX42_PATH)/build/libmlx42.a
 SRC_HEADER		= ./header
 
 SRCS			= main.c											\
-					print.c											\
 					utils/vec_operators.c 							\
 					window/window_movement.c 						\
 					window/open_window.c							\
