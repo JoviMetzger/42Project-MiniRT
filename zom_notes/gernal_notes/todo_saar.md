@@ -5,6 +5,8 @@
 
 	 - now go to do something with the texture... hehhee but set up for later now :)
 
+ -- test validate comment bit MAKE SURE I DONT NEED THAT
+
 - cylinder equations...
 
 - triangle + other objects
