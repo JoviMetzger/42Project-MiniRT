@@ -1,6 +1,10 @@
 
 
 
+-- add alowance for textures in parser:
+
+	 - now go to do something with the texture... hehhee but set up for later now :)
+
 - cylinder equations...
 
 - triangle + other objects

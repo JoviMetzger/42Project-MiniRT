@@ -6,13 +6,24 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/04 14:51:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 17:23:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
-// sort_pl
+static int	handle_texture(t_data *data, char *str)
+{
+	int	file;
+
+	file = open(str, O_RDONLY, 0644);
+	if (file == -1)
+		return (0);
+	// read and do something with the texture but like what how....
+	data->objs[data->objs_i]->texture = file;
+	return (1);
+}
+
 // /**
 //  * #Identifier     #Coordinates        #3D vector      #R,G,B
 //  * pl              0.0,0.0,-10.0       0.0,1.0,0.0     0,0,225
@@ -31,10 +42,14 @@ int	sort_pl(char **elem_str, t_data *data)
 		return (par_err("invalid: Plane: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[3]))
 		return (par_err("invalid: Plane: RGB | [0-255]"));
+	if (elem_str[4] && !is_space(elem_str[4]))
+	{
+		if (!handle_texture(data, elem_str[4]))
+			return (par_err("Texture file invalid"));
+	}
 	return (1);
 }
 
-// sort_sp
 /**
  * #Identifier     #Coordinates        #Diameter       #R,G,B
  * sp              0.0,0.0,20.6        12.6            10,0,255
@@ -51,10 +66,14 @@ int	sort_sp(char **elem_str, t_data *data)
 		return (par_err("invalid: Sphere: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[3]))
 		return (par_err("invalid: Sphere: RGB | [0-255]"));
+	if (elem_str[4] && !is_space(elem_str[4]))
+	{
+		if (!handle_texture(data, elem_str[4]))
+			return (par_err("Texture file invalid"));
+	}
 	return (1);
 }
 
-// sort_cy
 // /**
 //  * #Identifier  #Coordinates     #3D vector    #Diameter   #Height  #R,G,B
 //  * cy           50.0,0.0,20.6    0.0,0.0,1.0   14.2        21.42    10,0,255
@@ -77,5 +96,10 @@ int	sort_cy(char **elem_str, t_data *data)
 		return (par_err("invalid: Cylinder: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[5]))
 		return (par_err("invalid: Cylinder: RGB | [0-255]"));
+	if (elem_str[6] && !is_space(elem_str[6]))
+	{
+		if (!handle_texture(data, elem_str[6]))
+			return (par_err("Texture file invalid"));
+	}
 	return (1);
 }

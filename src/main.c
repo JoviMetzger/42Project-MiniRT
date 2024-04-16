@@ -6,22 +6,19 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 20:33:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 16:57:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/parser.h"
 #include "../header/miniRT.h"
 
-// main function:
 int main(int argc, char **argv)
 {
     t_data data;
 
 	parse_input(argc, argv, &data);
 
-
-	// print_parser(&data);
 	ft_open_window(&data); // Open window
 	ft_render(&data); // the whole shazam!
 

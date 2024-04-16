@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 21:40:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 17:25:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static int	check_no_elems(char *str, int type)
 		return (par_err("invalid: Camera: number of arguments"));
 	else if (type == 'L' && (num_elems(str) != 4))
 		return (par_err("invalid: Light: number of arguments"));
-	else if (type == 5 && (num_elems(str) != 4))
+	else if (type == 5 && (num_elems(str) != 4 && num_elems(str) != 5))
 		return (par_err("invalid: Sphere: number of arguments"));
-	else if (type == 4 && (num_elems(str) != 4))
+	else if (type == 4 && (num_elems(str) != 4 && num_elems(str) != 5))
 		return (par_err("invalid: Plane: number of arguments"));
-	else if (type == 6 && (num_elems(str) != 6))
+	else if (type == 6 && (num_elems(str) != 6 && num_elems(str) != 7))
 		return (par_err("invalid: Cylinder: number of arguments"));
 	return (1);
 }
@@ -50,8 +50,10 @@ int	validate_elems(char **arr)
 	count = 0;
 	while (arr[i])
 	{
-		if (!is_valid_no(arr[i]))
-			free_arr_error("invalid character", arr);
+		// DOUBLE CHECK BUT I DONT WANT TO CHECK VALID NO ANYMORE
+		// CHECKED IN CONVERTION + TEXTURE FILE
+		// if (!is_valid_no(arr[i]))
+		// 	free_arr_error("invalid character", arr);
 		type = get_type(arr[i]);
 		if (type == 0)
 			free_arr_error("unknown parser error", arr);
