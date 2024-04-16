@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 20:41:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 21:15:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include <float.h>
+// # include <float.h> // apparently invalid by norm
 # include <math.h>
 
 // --- Colours ---
@@ -36,11 +36,12 @@
 # define HEIGHT 1080
 
 // Math stuff
-# define M_PI 3.14159265358979323846 // This is a constant representing the value of pi.
-# define EPSILON 0.000001 // for plane (and maybe cylinder) calculations, a math thingy
+// This is a constant representing the value of pi.
+# define M_PI 3.14159265358979323846
+# define EPSILON 0.000001
 
 // Element type enums, includes space for parser
-typedef enum	e_type
+typedef enum e_type
 {
 	E_AMBIENT = 1,
 	E_LIGHT = 2,
@@ -57,70 +58,71 @@ typedef enum	e_type
 // Vector - position - coordinates
 typedef struct s_vec3
 {
-    double	x;  // x-axis (left-right)
-    double	y;  // y-axis (up-down)
-    double	z;  // z-axis (forward-back forwrd)  
-}   t_vec3;
+	double	x; // x-axis (left-right)
+	double	y; // y-axis (up-down)
+	double	z; // z-axis (forward-back forwrd)  
+}	t_vec3;
 
 // -------------------------------------------------------------
 // Colour - RGB
 typedef struct s_colour
 {
-    int     r;  // red
-    int     g;  // green
-    int     b;  // blue
-}   t_colour;
+	int		r; // red
+	int		g; // green
+	int		b; // blue
+}	t_colour;
 
 // -------------------------------------------------------------
-// Struct for objects, each object has this struct, array of structs in data struct
+// Struct for objects, each object has this struct
+// array of structs in data struct
 typedef struct s_objs
 {
 	t_type				type;
-	t_colour            colour;
-    t_vec3              center;
-    t_vec3              vector;
-    double              diameter;
-    double              height;
+	t_colour			colour;
+	t_vec3				center;
+	t_vec3				vector;
+	double				diameter;
+	double				height;
 	mlx_texture_t		*texture;
 	// mlx_image_t			*text_img;
-}   t_objs;
+}	t_objs;
 
 // -------------------------------------------------------------
 // Struct for camera
 typedef struct s_camera
 {
-    t_vec3      place;
-    t_vec3      vector;
-    int         FOV; //field of view
-}   t_camera;
+	t_vec3		place;
+	t_vec3		vector;
+	int			fov; //field of view
+}	t_camera;
 
 // -------------------------------------------------------------
 // Struct for ambient - background
-typedef struct s_ambient 
+typedef struct ambient
 {
-    t_colour    colour;
-    double      ratio;
-}   t_ambient;
+	t_colour	colour;
+	double		ratio;
+}	t_ambient;
 
 // -------------------------------------------------------------
 // Struct for light
-typedef struct s_light 
+typedef struct s_light
 {
-    t_colour    colour;
-    t_vec3      place;
-    double      ratio;
-}   t_light;
+	t_colour	colour;
+	t_vec3		place;
+	double		ratio;
+}	t_light;
 
 // -------------------------------------------------------------
 // Screen struct
 typedef struct s_screen
 {
-    double  viewport_w;
-    double  viewport_h;
-    double  img_ratio;
-    double  pixel_delta_x;
-    double  pixel_delta_y;
-}   t_screen;
+	double		viewport_w;
+	double		viewport_h;
+	double		img_ratio;
+	double		pixel_delta_x;
+	double		pixel_delta_y;
+}	t_screen;
 
 // -------------------------------------------------------------
 // Main struct
@@ -134,7 +136,7 @@ typedef struct s_data
 	t_ambient	ambient;
 	t_light		light;
 	t_screen	screen;
-	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
+	t_type		type;
     // double      matrix[16]; // representation for 4x4 matrices. Each element of the array corresponds to a specific position in the matrix, following a specific order. 
 }	t_data;
 
@@ -142,74 +144,80 @@ typedef struct s_data
 // Ray struct (standing alone)
 typedef struct s_ray
 {
-    t_vec3  place;
-    t_vec3  vector;
-}   t_ray;
+	t_vec3	place;
+	t_vec3	vector;
+}	t_ray;
 
 // -------------------------------------------------------------
-// Object data struct (standing alone) -> saves the calculations of the intersections
-typedef struct s_obj_data 
+// Object data struct (standing alone)
+// -> saves the calculations of the intersections
+typedef struct s_obj_data
 {
-    double  a;
-    double  b;
-    double  c;
-    double  d;
-    double  root1;
-    double  root2;
-    double t;
-	double closest_t;
+	double	a;
+	double	b;
+	double	c;
+	double	d;
+	double	root1;
+	double	root2;
+	double	t;
+	double	closest_t;
 
-}   t_obj_data;
+}	t_obj_data;
 
 // --- Functions --- 
 // Window Functions
-void ft_put_image(t_data *data);
-void ft_open_window(t_data *data);
-void ft_render(t_data *data);
-void ft_resize(int32_t width, int32_t height, void *param);
+void		ft_put_image(t_data *data);
+void		ft_open_window(t_data *data);
+void		ft_render(t_data *data);
+void		ft_resize(int32_t width, int32_t height, void *param);
 
 // Movement Functions
-void ft_key_action(mlx_key_data_t keydata, t_data *data);
-void ft_handle_mouse_move(void *data);
-int handle_mouse_click(int button, void *param);
+void		ft_key_action(mlx_key_data_t keydata, t_data *data);
+void		ft_handle_mouse_move(void *data);
+int			handle_mouse_click(int button, void *param);
 
 // Ray Functions
-t_ray ft_create_ray(t_data *data, int x, int y);
-void store_ray_matrix(t_data *data);
-void ft_create_lightray(t_data *data, t_ray *lightray);
+t_ray		ft_create_ray(t_data *data, int x, int y);
+void		store_ray_matrix(t_data *data);
+void		ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
-uint32_t ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
-t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
-t_colour get_plane_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *plane);
-t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder);
-t_vec3 ft_reflect(t_vec3 incident, t_vec3 normal);
-int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b);
+uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
+t_colour	get_sphere_colour(t_data *data, t_obj_data *obj_data,
+				t_ray ray, t_objs *sphere);
+t_colour	get_plane_colour(t_data *data, t_obj_data *obj_data,
+				t_ray ray, t_objs *plane);
+t_colour	get_cyl_colour(t_data *data, t_obj_data *obj_data,
+				t_ray ray, t_objs *cylinder);
+t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
+int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 // Colour Functions Bonus
-// t_colour get_sphere_checherboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
-// t_colour get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
+// t_colour get_sphere_checherboard(t_data *data, t_obj_data *obj_data,
+				// t_ray ray, t_objs *sphere);
+// t_colour get_sphere_bumpmap(t_data *data, t_obj_data *obj_data,
+				//t_ray ray, t_objs *sphere);
 
 // Vector Functions
-t_vec3 init_vector(t_screen screen);
+t_vec3		init_vector(t_screen screen);
 
 // Operators
-t_vec3 plus(t_vec3 u, t_vec3 v);
-t_vec3 minus(t_vec3 u, t_vec3 v);
-t_vec3 mult_vecvec(t_vec3 u, t_vec3 v);
-t_vec3 mult_vecdub(t_vec3 v, double dub);
-t_vec3 division_vec_dub(t_vec3 v, double dub);
-t_vec3 division_vec_vec(t_vec3 u, t_vec3 v); // might remove this
-t_vec3 cross_product(t_vec3 u, t_vec3 v);
-double dot_product(t_vec3 u, t_vec3 v);
-double length_squared(t_vec3 vec);
-t_vec3	normalize_vector(t_vec3 v);
+t_vec3		plus(t_vec3 u, t_vec3 v);
+t_vec3		minus(t_vec3 u, t_vec3 v);
+t_vec3		mult_vecvec(t_vec3 u, t_vec3 v);
+t_vec3		mult_vecdub(t_vec3 v, double dub);
+t_vec3		division_vec_dub(t_vec3 v, double dub);
+t_vec3		division_vec_vec(t_vec3 u, t_vec3 v); // might remove this
+t_vec3		cross_product(t_vec3 u, t_vec3 v);
+double		dot_product(t_vec3 u, t_vec3 v);
+double		length_squared(t_vec3 vec);
+t_vec3		normalize_vector(t_vec3 v);
 
 // Objects Functions
-bool	check_closest(t_obj_data *obj_data);
-bool	quadratic(t_obj_data *obj_data);
-bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data);
-bool	intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
-bool 	intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
+bool		check_closest(t_obj_data *obj_data);
+bool		quadratic(t_obj_data *obj_data);
+bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data);
+bool		intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
+bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
 
 #endif

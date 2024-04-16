@@ -9,6 +9,9 @@ nope.......
 **2**
 hehe
 ??
+fix resize window shizzle
+
+
 
 
 **3**
@@ -17,12 +20,10 @@ Stop procrastinating this...
 
 
 
-
 **4**
 
 - norrrmmm
 	stuff but when it almost definitely wont be changed again...
-
 
 
 
