@@ -6,21 +6,34 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 17:23:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 19:46:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
+static char	*give_null(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	while (str[i] && !ft_isspace(str[i]))
+		i++;
+	str[i] = '\0';
+	return (str);
+}
+
 static int	handle_texture(t_data *data, char *str)
 {
-	int	file;
+	mlx_texture_t	*texture;
 
-	file = open(str, O_RDONLY, 0644);
-	if (file == -1)
+	str = give_null(str);
+	texture = mlx_load_png(str);
+	if (!texture)
 		return (0);
-	// read and do something with the texture but like what how....
-	data->objs[data->objs_i]->texture = file;
+	data->objs[data->objs_i]->texture = texture;
 	return (1);
 }
 

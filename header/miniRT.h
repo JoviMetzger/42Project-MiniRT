@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 17:16:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 19:39:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ typedef struct s_objs
     t_vec3              vector;
     double              diameter;
     double              height;
-	int					texture;
+	mlx_texture_t		*texture;
+	// mlx_image_t			*text_img;
 }   t_objs;
 
 // -------------------------------------------------------------
