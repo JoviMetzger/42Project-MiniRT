@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 19:51:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 20:04:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void ft_put_image(t_data *data)
 		{ 
 			ray = ft_create_ray(data, x ,y);	
 			colour = ft_calculate_colour(data, &obj_data, ray); // eVerYTinG iN heRE iS jUSt ME gOiNg "hhhUUUUUhhhhhh?????????????" -> aka. cat meme (https://www.youtube.com/watch?v=xVWeRnStdSA)
-			if (colour > -1)
-				mlx_put_pixel(data->image, x, y, colour);
+			mlx_put_pixel(data->image, x, y, colour);
 			y++;
 		}
 		y = 0;

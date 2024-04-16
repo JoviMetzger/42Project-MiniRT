@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 19:51:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 20:04:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ static uint32_t	get_ret(t_obj_data *obj_data, t_colour colour)
 		return (ft_convert_rgb(0, 0, 0)); // No intersection found, return black
 }
 
-/* lighting: 
+/** lighting: 
  *	(https://learnopengl.com/Advanced-Lighting/Advanced-Lighting)
  *	(https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_reflection_model)
  *	(https://en.wikipedia.org/wiki/Phong_reflection_model)
+ *
+ * 		@todo texture, colour, image... heh?
  */
 uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 {
@@ -62,13 +64,16 @@ uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 		{
 			if (intersect_plane(&ray, data->objs[i], obj_data))
 			{
-				if (data->objs[i]->texture != NULL)
-				{
-					mlx_texture_to_image(data->mlx, data->objs[i]->texture);
-					return (-1);
-				}
-					// colour = texture_colour(data, data->objs[i]);
-				else
+				// if (data->objs[i]->texture != NULL)
+				// {
+				// 	data->image = mlx_texture_to_image(data->mlx, data->objs[i]->texture);
+				// 	// convert into colour some how...
+				// 	if (!data->image)
+				// 		return (ft_convert_rgb(0, 0, 0));
+				// 	else
+				// 		exit(EXIT_SUCCESS);
+				// }
+				// else
 					colour = get_plane_colour(data, obj_data, ray, data->objs[i]);
 			}
 		}
