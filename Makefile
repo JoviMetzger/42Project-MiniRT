@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/04/15 20:22:27 by smclacke      ########   odam.nl          #
+#    Updated: 2024/04/16 20:10:47 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,6 @@ SRCS			= main.c											\
 					parser/convert/convert_utils/is_funcs_2.c		\
 					parser/validate/validate.c						\
 					parser/validate/valid_ratio.c					\
-					parser/validate/validate_utils.c				\
 					parser/parse_input.c							\
 					parser/parser_free.c							\
 					parser/parser_error.c							\

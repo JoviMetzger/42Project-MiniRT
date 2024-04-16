@@ -6,21 +6,52 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 17:25:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 20:17:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
+static int	num_elems(char *str)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] && ft_isspace(str[i]))
+			i++;
+		if (str[i])
+			count++;
+		while (str[i] && !ft_isspace(str[i]))
+			i++;
+	}
+	return (count);
+}
+
+int	is_caps(char *str)
+{
+	if (check_capital(str, 'A') == 1)
+		return (A);
+	else if (check_capital(str, 'L') == 1)
+		return (L);
+	else if (check_capital(str, 'C') == 1)
+		return (C);
+	return (0);
+}
+
+
 static int	check_no_elems(char *str, int type)
 {
 	if (type == 8)
 		return (1);
-	else if (type == 'A' && (num_elems(str) != 3))
+	else if (type == 1 && (num_elems(str) != 3))
 		return (par_err("invalid: Abiement: number of arguments"));
-	else if (type == 'C' && (num_elems(str) != 4))
+	else if (type == 3 && (num_elems(str) != 4))
 		return (par_err("invalid: Camera: number of arguments"));
-	else if (type == 'L' && (num_elems(str) != 4))
+	else if (type == 2 && (num_elems(str) != 4))
 		return (par_err("invalid: Light: number of arguments"));
 	else if (type == 5 && (num_elems(str) != 4 && num_elems(str) != 5))
 		return (par_err("invalid: Sphere: number of arguments"));
@@ -50,10 +81,6 @@ int	validate_elems(char **arr)
 	count = 0;
 	while (arr[i])
 	{
-		// DOUBLE CHECK BUT I DONT WANT TO CHECK VALID NO ANYMORE
-		// CHECKED IN CONVERTION + TEXTURE FILE
-		// if (!is_valid_no(arr[i]))
-		// 	free_arr_error("invalid character", arr);
 		type = get_type(arr[i]);
 		if (type == 0)
 			free_arr_error("unknown parser error", arr);

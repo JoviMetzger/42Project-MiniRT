@@ -1,21 +1,12 @@
 
 
 **1**
-!!! THEN ADD THIS BUT WHAT AND HOW?
--- add alowance for textures in parser:
 
-	 - now go to do something with the texture... hehhee but set up for later now :)
-
-
+textures....
 
 
 **2**
-!!!!!!!!!!!
- -- test validate comment bit MAKE SURE I DONT NEED THAT
-
-!!!!!!!!!!!
-
-
+hehe
 
 
 **3**

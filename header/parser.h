@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 21:37:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 20:11:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ int			is_dash(int c);
 // ------------ /validate/ ------------ //
 
 // --- validate --- //
+int			is_caps(char *str);
 int			validate_elems(char **arr);
 
 // --- valid_ratio --- //
@@ -154,9 +155,5 @@ int			is_valid_rgb(int r, int g, int b);
 int			is_valid_vector(double x, double y, double z);
 int			is_valid_fov(int fov);
 
-// --- validate_utils --- //
-int			is_valid_no(char *str);
-int			num_elems(char *str);
-int			is_caps(char *str);
 
 #endif
