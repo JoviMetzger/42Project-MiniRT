@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 20:11:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 20:24:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 # define PL 4
 # define SP 5
 # define CY 6
-
-void		print_parser(t_data *data); // get rid later
 
 // --- parse_input --- //
 void		parse_input(int argc, char **argv, t_data *data);
@@ -154,6 +152,5 @@ int			is_valid_light(double light);
 int			is_valid_rgb(int r, int g, int b);
 int			is_valid_vector(double x, double y, double z);
 int			is_valid_fov(int fov);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 20:17:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/16 20:23:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	is_caps(char *str)
 		return (C);
 	return (0);
 }
-
 
 static int	check_no_elems(char *str, int type)
 {

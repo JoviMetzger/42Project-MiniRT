@@ -3,10 +3,12 @@
 **1**
 
 textures....
+nope.......
 
 
 **2**
 hehe
+??
 
 
 **3**
@@ -17,8 +19,9 @@ Stop procrastinating this...
 
 
 **4**
-!! Colours etc....
+
 - norrrmmm
+	stuff but when it almost definitely wont be changed again...
 
 
 
