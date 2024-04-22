@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/05 16:39:43 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/04/22 21:09:04 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,17 @@ typedef struct s_screen
 }   t_screen;
 
 // -------------------------------------------------------------
+// Mouse movemnet struct
+typedef struct s_mouse
+{
+    int16_t		**mouse_map;
+	int 		mouse_y;
+	int			mouse_x;
+	uint32_t	window_h;
+	uint32_t	window_w;
+}   t_mouse;
+
+// -------------------------------------------------------------
 // Main struct
 typedef struct s_data
 {
@@ -131,7 +142,7 @@ typedef struct s_data
 	t_light		light;
 	t_screen	screen;
 	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
-    // double      matrix[16]; // representation for 4x4 matrices. Each element of the array corresponds to a specific position in the matrix, following a specific order. 
+	t_mouse		mouse;
 }	t_data;
 
 // -------------------------------------------------------------
@@ -164,8 +175,8 @@ void ft_render(t_data *data);
 
 // Movement Functions
 void ft_key_action(mlx_key_data_t keydata, t_data *data);
-void ft_handle_mouse_move(void *data);
-int handle_mouse_click(int button, void *param);
+void ft_handle_mouse_click(mouse_key_t btn, action_t act, modifier_key_t m, void *p);
+void init_mouse_map(t_data *data);
 
 // Ray Functions
 t_ray ft_create_ray(t_data *data, int x, int y);
@@ -180,7 +191,7 @@ t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs
 t_vec3 ft_reflect(t_vec3 incident, t_vec3 normal);
 
 // Colour Functions Bonus
-t_colour get_sphere_checherboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
+t_colour get_sphere_checkerboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
 t_colour get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
 
 // Vector Functions

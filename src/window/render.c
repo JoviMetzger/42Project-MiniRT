@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/05 12:44:59 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/04/22 21:06:39 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,20 @@ void ft_put_image(t_data *data)
 	int y = 0;
 	int x = 0;
 
-	while (x < data->mlx->width)
+	while (y < data->mlx->height)
 	{
-		while (y < data->mlx->height)
+		while (x < data->mlx->width)
 		{ 
+			data->mouse.mouse_map[y][x] = -1;
 			ray = ft_create_ray(data, x ,y);		
 			colour = ft_calculate_colour(data, &obj_data, ray);
 			mlx_put_pixel(data->image, x, y, colour);
-			y++;
+			data->mouse.mouse_x = x;
+			x++;
 		}
-		y = 0;
-		x++;
+		x = 0;
+		data->mouse.mouse_y = y;
+		y++;
 	}
 }
 
@@ -41,7 +44,5 @@ void ft_render(t_data *data)
 {
 	ft_put_image(data); // Shazam(MATH)
 	mlx_key_hook(data->mlx, (mlx_keyfunc)ft_key_action, data); // movement aka ESC
-	// mlx_loop_hook(data->mlx, ft_handle_mouse_move, data); // Mouse move event
-    // mlx_mouse_hook(data->mlx, (mlx_mousefunc) handle_mouse_click, data); // Mouse click event
-    
+    mlx_mouse_hook(data->mlx, ft_handle_mouse_click, data); // Mouse click event // NOT working   
 }
