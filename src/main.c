@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/22 21:40:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/22 22:00:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int main(int argc, char **argv)
 
 	parse_input(argc, argv, &data);
 
-	// print_parser(&data);
 	ft_open_window(&data); // Open window
 	ft_render(&data); // the whole shazam!
 
