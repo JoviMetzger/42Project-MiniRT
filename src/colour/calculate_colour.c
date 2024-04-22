@@ -6,19 +6,35 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 20:04:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/22 21:09:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
+/**
+ * 	was attempting this for textures with planes but ... ya know
+ * 
+* 		// if (data->objs[i]->texture != NULL)
+		// {
+		// 	data->image = mlx_texture_to_image(data->mlx, data->objs[i]->texture);
+		// 	// convert into colour some how...
+		// 	if (!data->image)
+		// 		return (ft_convert_rgb(0, 0, 0));
+		// 	else
+		// 		exit(EXIT_SUCCESS);
+		// }
+		// else
+ * 
+ */
+
+// t_colour	texture_colour(t_data *data, t_objs *object)
+// {
 	// data->objs[data->objs_i]->text_img = mlx_texture_to_image(data->mlx, texture);
 	// if (!data->objs[data->objs_i]->text_img)
 	// 	return (printf("ret 2\n"), 0);
-// t_colour	texture_colour(t_data *data, t_objs *object)
-// {
-	
 // }
+
 
 // Calculate the reflection direction using the incident ray direction and surface normal
 // Reflection direction = Incident direction - 2 * (Incident direction . Normal) * Normal
@@ -63,19 +79,7 @@ uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 		if (data->objs[i]->type == E_PLANE)
 		{
 			if (intersect_plane(&ray, data->objs[i], obj_data))
-			{
-				// if (data->objs[i]->texture != NULL)
-				// {
-				// 	data->image = mlx_texture_to_image(data->mlx, data->objs[i]->texture);
-				// 	// convert into colour some how...
-				// 	if (!data->image)
-				// 		return (ft_convert_rgb(0, 0, 0));
-				// 	else
-				// 		exit(EXIT_SUCCESS);
-				// }
-				// else
-					colour = get_plane_colour(data, obj_data, ray, data->objs[i]);
-			}
+				colour = get_plane_colour(data, obj_data, ray, data->objs[i]);
 		}
 		if (data->objs[i]->type == E_SPHERE)
 		{
