@@ -18,8 +18,6 @@ fix resize window shizzle
 		-try using old cylinder equations to see if i can get capping
 
 **4**
-- norming and reconfiging colour funtions
-- make sure i havent broken anything...
 - pretty sure we only need one function for all objects but see what jovi thinkss..
 
 

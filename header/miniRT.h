@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/23 17:10:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/23 17:31:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ typedef	struct s_colour_vars
 {
 	double		ambient_intensity;
 	double		diffuse_intensity;
-	double		specular_intensity;
-	double		specular_power;
+	double		spec_intensity;
+	double		spec_power;
 	t_vec3		inter_point; // intersect_point
 	t_vec3		normal;
 	double		ambient_red;
@@ -79,14 +79,14 @@ typedef	struct s_colour_vars
 	double		diffuse_red;
 	double		diffuse_green;
 	double		diffuse_blue;
-	t_vec3		light_direction;
+	t_vec3		light_dir;
 	double		diffuse_factor;
-	t_vec3		view_direction;
-	t_vec3		reflection_direction;
-	double		specular_factor;
-	double		specular_red;
-	double		specular_green;
-	double		specular_blue;
+	t_vec3		view_dir;
+	t_vec3		reflection_dir;
+	double		spec_factor;
+	double		spec_red;
+	double		spec_green;
+	double		spec_blue;
 	double		final_red;
 	double		final_green;
 	double		final_blue;
