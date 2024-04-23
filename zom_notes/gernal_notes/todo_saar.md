@@ -12,18 +12,23 @@ hehe
 fix resize window shizzle
 
 
-
-
 **3**
-Stop procrastinating this... 
-- cylinder equations...
+- cylinder
 
-
+		-try using old cylinder equations to see if i can get capping
 
 **4**
+- norming and reconfiging colour funtions
+- make sure i havent broken anything...
+- pretty sure we only need one function for all objects but see what jovi thinkss..
 
-- norrrmmm
-	stuff but when it almost definitely wont be changed again...
+
+**5**
+- check lighting...
+
+	- is cylinder working same as sphere and if not whyyyyy
+
+	- if flat 'back wall' facing plane in 0,0,0 black, why gray ?? (light??)
 
 
 
@@ -31,8 +36,5 @@ Stop procrastinating this...
 
 - triangle + other objects
 
-
-- if flat 'back wall' facing plane in 0,0,0 black, why gray ?? (light??)
-
-- mult_vecdub and possibly other funcs with comments "maybe dont need" - NEED
+- finally clean up, remove unused functions, norm and test loadssss
 

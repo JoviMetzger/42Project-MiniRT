@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/04/22 22:24:18 by smclacke      ########   odam.nl          #
+#    Updated: 2024/04/23 17:07:26 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,7 @@ SRCS			= main.c											\
 					window/open_window.c							\
 					window/render.c									\
 					colour/calculate_colour.c						\
-					colour/sphere_colour.c 							\
-					colour/plane_colour.c 							\
-					colour/cylinder_colour.c 						\
-					colour/colour_utils.c 							\
+					colour/get_colour.c 							\
 					objects/sphere.c 								\
 					objects/plane.c 								\
 					objects/cylinder.c 								\

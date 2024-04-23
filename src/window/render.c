@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/22 21:39:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/23 17:14:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void ft_put_image(t_data *data)
 	{
 		while (x < data->mlx->width)
 		{ 
-			data->mouse.mouse_map[y][x] = -1;
+			// data->mouse.mouse_map[y][x] = -1;
 			ray = ft_create_ray(data, x ,y);		
 			colour = ft_calculate_colour(data, &obj_data, ray);
 			mlx_put_pixel(data->image, x, y, colour);
-			data->mouse.mouse_x = x;
+			// data->mouse.mouse_x = x;
 			x++;
 		}
 		x = 0;
-		data->mouse.mouse_y = y;
+		// data->mouse.mouse_y = y;
 		y++;
 	}
 }
@@ -49,5 +49,5 @@ void ft_render(t_data *data)
 	// mlx_loop_hook(data->mlx, ft_handle_mouse_move, data); // Mouse move event
     // mlx_mouse_hook(data->mlx, (mlx_mousefunc) handle_mouse_click, data); // Mouse click event
     // mlx_resize_hook(data->mlx, (mlx_resizefunc)ft_resize, data); // resize window
-    mlx_mouse_hook(data->mlx, ft_handle_mouse_click, data); // Mouse click event // NOT working   
+    // mlx_mouse_hook(data->mlx, ft_handle_mouse_click, data); // Mouse click event // NOT working   
 }

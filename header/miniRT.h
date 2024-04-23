@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/22 22:31:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/23 17:10:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,15 @@ typedef enum e_type
 
 // --- Structs ---
 // -------------------------------------------------------------
+// Vector - position - coordinates
+typedef struct s_vec3
+{
+	double	x; // x-axis (left-right)
+	double	y; // y-axis (up-down)
+	double	z; // z-axis (forward-back forwrd)  
+}	t_vec3;
 
+// -------------------------------------------------------------
 // For getting colour purposes..
 typedef	struct s_colour_vars
 {
@@ -84,15 +92,6 @@ typedef	struct s_colour_vars
 	double		final_blue;
 	
 }			t_colour_vars;
-
-// -------------------------------------------------------------
-// Vector - position - coordinates
-typedef struct s_vec3
-{
-	double	x; // x-axis (left-right)
-	double	y; // y-axis (up-down)
-	double	z; // z-axis (forward-back forwrd)  
-}	t_vec3;
 
 // -------------------------------------------------------------
 // Colour - RGB
@@ -225,17 +224,10 @@ void		ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
 uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
-t_colour	sp_colour(t_data *data, t_obj_data *obj_data,
-				t_ray ray, t_objs *sphere);
-t_colour	pl_colour(t_data *data, t_obj_data *obj_data,
-				t_ray ray, t_objs *plane);
-t_colour	cyl_colour(t_data *data, t_obj_data *obj_data,
+t_colour	get_colour(t_data *data, t_obj_data *obj_data,
 				t_ray ray, t_objs *cylinder);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
-void		specular_light(t_data *data, t_colour_vars *vars, t_ray *ray);
-void		diffuse_light(t_data *data, t_colour_vars *vars);
-void		init_vars(t_data *data, t_colour_vars *vars);
 
 // Colour Functions Bonus
 t_colour get_sphere_checkerboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
