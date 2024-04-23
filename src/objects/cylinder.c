@@ -6,11 +6,26 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/23 18:16:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/23 19:58:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
+
+/**
+ * 	the old capping shizzle
+ *
+	double	t1 = ray->place.y + obj_data->root1 * ray->vector.y;
+	double	t2 = ray->place.y + obj_data->root2 * ray->vector.y;
+	if (t1 < (cyl->vector.y - height_half) || t1 > cyl->vector.y + height_half)
+		obj_data->root1 = INFINITY;
+	if (t2 < (cyl->vector.y - height_half) || t2 > cyl->vector.y + height_half)
+		obj_data->root2 = INFINITY;
+	
+	obj_data->t = fmin(obj_data->root1, obj_data->root2);
+	if (obj_data->t > 0)
+		return (true); 
+ */
 
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 {
@@ -34,10 +49,6 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 
 	if (quadratic(obj_data) == true)
 	{
-		// need check_closest somewhere...
-		// do old cylinder shizzle here and see what happens, are there similarities?
-		// am i loosing my mind?
-		
 		if (obj_data->t > EPSILON && check_closest(obj_data) == true)
 		{
 			double	t1 = ray->place.y + obj_data->root1 * ray->vector.y;
@@ -49,8 +60,7 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 			
 			obj_data->t = fmin(obj_data->root1, obj_data->root2);
 			if (obj_data->t > 0)
-				return (true);
-			
+				return (true); 
 		}
 // --------------------------------------------------------------------- //		
 			
