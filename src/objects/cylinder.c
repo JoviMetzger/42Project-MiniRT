@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/23 19:58:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/23 20:39:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 		return (true); 
  */
 
+// IF CYLINDER HIEGHT = 0, INFINITY CYLINDER WOOOOO
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 {
 	t_vec3	c_c;
@@ -57,11 +58,18 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 				obj_data->root1 = INFINITY;
 			if (t2 < (cyl->vector.y - height_half) || t2 > cyl->vector.y + height_half)
 				obj_data->root2 = INFINITY;
-			
 			obj_data->t = fmin(obj_data->root1, obj_data->root2);
-			if (obj_data->t > 0)
-				return (true); 
+			if (obj_data->t == INFINITY)
+				return (true);
+			// else if (obj_data->t > 0) // capppyyy time
+			// {
+			// 	// solve_capps;
+			// 	return (true);
+			// }
+			// if obj_data->t < 0 - no intersection
 		}
+	}
+
 // --------------------------------------------------------------------- //		
 			
 // // m = dot(ray->direction * scalar + (cyl->center - camera->origin), cyl->orientation);
@@ -73,7 +81,6 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 // 			product = dot_product(o, cyl->vector);
 // 			if (fabs(product) <= cyl->height)
 // 				return (true);
-	}
 	return (false);
 }
 
