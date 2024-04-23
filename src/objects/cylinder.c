@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 22:16:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/23 18:00:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,22 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 
 	if (quadratic(obj_data) == true)
 	{
-		if (obj_data->t > EPSILON && check_closest(obj_data) == true)
-		{
+		// do old cylinder shizzle here and see what happens, are there similarities?
+		// am i loosing my mind?
+		
+// 		if (obj_data->t > EPSILON && check_closest(obj_data) == true)
+// 		{
 			
-// m = dot(ray->direction * scalar + (cyl->center - camera->origin), cyl->orientation);
+// // m = dot(ray->direction * scalar + (cyl->center - camera->origin), cyl->orientation);
 
-// update obj_data->t here somewhere for the caps but still don't fully understand that...
-			m = mult_vecdub(ray->vector, obj_data->t);
-			n = minus(cyl->center, ray->place);
-			o = plus(m, n);
-			product = dot_product(o, cyl->vector);
-			if (fabs(product) <= cyl->height)
-				return (true);
-		}
+// // update obj_data->t here somewhere for the caps but still don't fully understand that...
+// 			m = mult_vecdub(ray->vector, obj_data->t);
+// 			n = minus(cyl->center, ray->place);
+// 			o = plus(m, n);
+// 			product = dot_product(o, cyl->vector);
+// 			if (fabs(product) <= cyl->height)
+// 				return (true);
+// 		}
 	}
 	return (false);
 }

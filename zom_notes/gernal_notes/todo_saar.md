@@ -14,7 +14,6 @@ fix resize window shizzle
 
 **3**
 - cylinder
-
 		-try using old cylinder equations to see if i can get capping
 
 **4**
