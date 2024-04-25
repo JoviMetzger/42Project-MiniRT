@@ -12,6 +12,10 @@ hehe
 fix resize window shizzle
 
 
+!!!!!
+	if camera is 0,0,-1, planes are 1,3,10 amd cylinder is 0,0,-7
+		spheres seems to only work at 0,0,-10 but that would be behind the camera
+
 **3**
 - cylinder
 		-try using old cylinder equations to see if i can get capping

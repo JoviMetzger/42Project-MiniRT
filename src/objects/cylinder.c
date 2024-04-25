@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/23 20:39:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/25 19:09:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 			if (t2 < (cyl->vector.y - height_half) || t2 > cyl->vector.y + height_half)
 				obj_data->root2 = INFINITY;
 			obj_data->t = fmin(obj_data->root1, obj_data->root2);
+			// using infinity here messes with the colour
+			 // good colour with t > 0
+			// if (obj_data->t > 0)
 			if (obj_data->t == INFINITY)
 				return (true);
 			// else if (obj_data->t > 0) // capppyyy time
@@ -66,7 +69,8 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 			// 	// solve_capps;
 			// 	return (true);
 			// }
-			// if obj_data->t < 0 - no intersection
+			if (obj_data->t < 0) //- no intersection
+				return (false);
 		}
 	}
 
