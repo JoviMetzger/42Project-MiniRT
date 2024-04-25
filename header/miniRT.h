@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/22 21:32:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/25 15:35:40 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include <float.h> // apparently invalid by norm
 # include <math.h>
 
 // --- Colours ---
@@ -39,6 +38,7 @@
 // This is a constant representing the value of pi.
 # define M_PI 3.14159265358979323846
 # define EPSILON 0.000001
+# define DBL_MAX 1.79769e+308
 
 // Element type enums, includes space for parser
 typedef enum e_type
@@ -84,6 +84,7 @@ typedef struct s_objs
 	double				diameter;
 	double				height;
 	mlx_texture_t		*texture;
+	// bool			loop_obj_colour;
 	// mlx_image_t			*text_img;
 }	t_objs;
 
@@ -128,11 +129,14 @@ typedef struct s_screen
 // Mouse movemnet struct
 typedef struct s_mouse
 {
-    int16_t		**mouse_map;
-	int 		mouse_y;
-	int			mouse_x;
-	uint32_t	window_h;
-	uint32_t	window_w;
+	mlx_image_t		*highlight_img;
+	int16_t			**mouse_map;
+	int 			mouse_y;
+	int				mouse_x;
+	uint32_t		window_h;
+	uint32_t		window_w;
+	bool			selected;
+	bool			loop_obj_colour;
 }   t_mouse;
 
 // -------------------------------------------------------------
@@ -147,7 +151,7 @@ typedef struct s_data
 	t_ambient	ambient;
 	t_light		light;
 	t_screen	screen;
-	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
+	t_type		type;
 	t_mouse		mouse;
 }	t_data;
 
@@ -183,11 +187,13 @@ void		ft_render(t_data *data);
 void		ft_resize(int32_t width, int32_t height, void *param);
 
 // Movement Functions
-void ft_key_action(mlx_key_data_t keydata, t_data *data);
-void ft_handle_mouse_click(mouse_key_t btn, action_t act, modifier_key_t m, void *p);
-void init_mouse_map(t_data *data);
+void		ft_key_action(mlx_key_data_t keydata, t_data *data);
+void		ft_handle_mouse_click(mouse_key_t key, action_t act, 
+				modifier_key_t m, void *_data);
+void		init_mouse_map(t_data *data);
 
 // Ray Functions
+t_vec3		init_vector(t_screen screen);
 t_ray		ft_create_ray(t_data *data, int x, int y);
 void		store_ray_matrix(t_data *data);
 void		ft_create_lightray(t_data *data, t_ray *lightray);
@@ -204,11 +210,10 @@ t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 // Colour Functions Bonus
-t_colour get_sphere_checkerboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
-t_colour get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
-
-// Vector Functions
-t_vec3		init_vector(t_screen screen);
+t_colour	get_sphere_checkerboard(t_data *data, t_obj_data *obj_data, 
+				t_ray ray, t_objs *sphere);
+t_colour	get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, 
+				t_ray ray, t_objs *sphere);
 
 // Operators
 t_vec3		plus(t_vec3 u, t_vec3 v);
@@ -216,11 +221,11 @@ t_vec3		minus(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecvec(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecdub(t_vec3 v, double dub);
 t_vec3		division_vec_dub(t_vec3 v, double dub);
-t_vec3		division_vec_vec(t_vec3 u, t_vec3 v); // might remove this
+t_vec3		division_vec_vec(t_vec3 u, t_vec3 v);
 t_vec3		cross_product(t_vec3 u, t_vec3 v);
+t_vec3		normalize_vector(t_vec3 v);
 double		dot_product(t_vec3 u, t_vec3 v);
 double		length_squared(t_vec3 vec);
-t_vec3		normalize_vector(t_vec3 v);
 
 // Objects Functions
 bool		check_closest(t_obj_data *obj_data);

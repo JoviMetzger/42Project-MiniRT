@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 20:24:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/25 12:41:32 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # define PL 4
 # define SP 5
 # define CY 6
+
+// --- map_functions --- //
+void		*map_malloc(size_t size);
+void		init_mouse_map(t_data *data);
 
 // --- parse_input --- //
 void		parse_input(int argc, char **argv, t_data *data);
