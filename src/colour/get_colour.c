@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/23 17:44:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/25 16:14:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static void	specular_light(t_data *data, t_colour_vars *vars, t_ray *ray)
 	vars->spec_factor = pow(dot_reflect, vars->spec_power);
 	if (vars->spec_factor < 0.0)
 		vars->spec_factor = 0.0;
-	vars->spec_red = vars->spec_power * vars->spec_factor
+	vars->spec_red = vars->spec_intensity * vars->spec_factor
 		* data->light.colour.r;
-	vars->spec_green = vars->spec_power * vars->spec_factor
+	vars->spec_green = vars->spec_intensity * vars->spec_factor
 		* data->light.colour.g;
-	vars->spec_blue = vars->spec_power * vars->spec_factor
+	vars->spec_blue = vars->spec_intensity * vars->spec_factor
 		* data->light.colour.b;
 }
 
@@ -79,15 +79,20 @@ t_colour	get_colour(t_data *data, t_obj_data *obj, t_ray ray, t_objs *obj_i)
 	ft_bzero(&vars, sizeof(t_colour_vars));
 	init_vars(data, &vars);
 	diffuse_light(data, &vars);
-	specular_light(data, &vars, &ray);
 	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, obj->t));
+
 	vars.normal = normalize_vector(minus(vars.inter_point, obj_i->center));
-	vars.final_red = vars.ambient_red + vars.diffuse_red;
-	vars.final_red += vars.spec_red;
-	vars.final_green = vars.ambient_green + vars.diffuse_green;
-	vars.final_green += vars.spec_green;
-	vars.final_blue = vars.ambient_blue + vars.diffuse_blue;
-	vars.final_blue += vars.spec_blue;
+
+	specular_light(data, &vars, &ray);
+
+	vars.final_red = vars.ambient_red + vars.diffuse_red + vars.spec_red;
+	// vars.final_red += vars.spec_red;
+	vars.final_green = vars.ambient_green + vars.diffuse_green + vars.spec_green;
+	// vars.final_green += vars.spec_green;
+	vars.final_blue = vars.ambient_blue + vars.diffuse_blue + vars.spec_blue;
+	// vars.final_blue += vars.spec_blue;
+
+
 	vars.final_red = fmin(fmax(vars.final_red, obj_i->colour.r), 255);
 	vars.final_green = fmin(fmax(vars.final_green, obj_i->colour.g), 255);
 	vars.final_blue = fmin(fmax(vars.final_blue, obj_i->colour.b), 255);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/23 17:06:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/25 16:09:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 			if (intersect_plane(&ray, data->objs[i], obj_data))
 				colour = get_colour(data, obj_data, ray, data->objs[i]);
 		}
-		if (data->objs[i]->type == E_SPHERE)
+		else if (data->objs[i]->type == E_SPHERE)
 		{
 			if (intersect_sphere(&ray, data->objs[i], obj_data))
 				colour = get_colour(data, obj_data, ray, data->objs[i]);
@@ -88,7 +88,7 @@ uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 				// data->mouse.mouse_map[data->mouse.mouse_y][data->mouse.mouse_x] = i;
 					// colour = get_sphere_bumpmap(data, obj_data, ray, data->objs[i]);	// will be moved
 		}
-		if (data->objs[i]->type == E_CYLINDER)
+		else if (data->objs[i]->type == E_CYLINDER)
 		{
 			if (intersect_cylinder(&ray, data->objs[i], obj_data))
 				colour = get_colour(data, obj_data, ray, data->objs[i]);
