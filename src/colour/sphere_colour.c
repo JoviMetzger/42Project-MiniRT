@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/25 14:49:02 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/04/27 15:10:16 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs
 {
     t_colour result;
     double AMBIENT_INTENSITY = data->ambient.ratio; // (0.2)
-    double DIFFUSE_INTENSITY = data->light.ratio;   // (0.6)
+    double DIFFUSE_INTENSITY = data->light.ratio;   // (0.7)
     double SPECULAR_INTENSITY = 0.2;
     double SPECULAR_POWER = 50; //32
     
@@ -34,12 +34,19 @@ t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs
 	t_vec3 light_direction = normalize_vector(minus(data->light.place, intersection_point));
 	double diffuse_factor = dot_product(normal, light_direction);
 	if (diffuse_factor < 0.0)
+	{
+		DIFFUSE_INTENSITY = 0.0;
+		SPECULAR_INTENSITY = 0.0;
 		diffuse_factor = 0.0;
+		ambient_red *= AMBIENT_INTENSITY;
+		ambient_green *= AMBIENT_INTENSITY;
+		ambient_blue *= AMBIENT_INTENSITY;
+	}
 	double diffuse_red = DIFFUSE_INTENSITY * diffuse_factor * data->light.colour.r;
 	double diffuse_green = DIFFUSE_INTENSITY * diffuse_factor * data->light.colour.g;
 	double diffuse_blue = DIFFUSE_INTENSITY * diffuse_factor * data->light.colour.b;
 	
-	// Specular light contribution
+	// Specular light contribution 
 	t_vec3 view_direction = normalize_vector(minus(ray.place, intersection_point));
 	t_vec3 reflection_direction = normalize_vector(ft_reflect(light_direction, normal));
 	double specular_factor = pow(dot_product(reflection_direction, view_direction), SPECULAR_POWER);

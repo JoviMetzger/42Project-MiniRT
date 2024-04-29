@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/25 14:12:48 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/04/27 15:43:06 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void ft_put_image(t_data *data)
 			data->mouse.mouse_x = x;
 			x++;
 		}
-		x = 0;
 		data->mouse.mouse_y = y;
+		x = 0;
 		y++;
 	}
 }

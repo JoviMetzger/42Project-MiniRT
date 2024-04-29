@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/25 15:35:40 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/04/29 18:31:40 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ typedef struct s_objs
 	double				diameter;
 	double				height;
 	mlx_texture_t		*texture;
-	// bool			loop_obj_colour;
+	int16_t				i_am;	// what obj num this is, basicly ID	
+	int					i;		// i for at what obj pattern we are (checkerboard, normal ...) -> we can rename i.
 	// mlx_image_t			*text_img;
 }	t_objs;
 
@@ -136,7 +137,6 @@ typedef struct s_mouse
 	uint32_t		window_h;
 	uint32_t		window_w;
 	bool			selected;
-	bool			loop_obj_colour;
 }   t_mouse;
 
 // -------------------------------------------------------------
@@ -153,6 +153,7 @@ typedef struct s_data
 	t_screen	screen;
 	t_type		type;
 	t_mouse		mouse;
+	int16_t		i_am; // what object is currently seleted
 }	t_data;
 
 // -------------------------------------------------------------

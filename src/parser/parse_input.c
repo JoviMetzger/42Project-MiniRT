@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/25 15:05:21 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/04/29 18:28:16 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void	init_mouse_map(t_data *data)
 	data->mouse.window_h = HEIGHT;
 	data->mouse.window_w = WIDTH;
 	data->mouse.selected = false;
-	data->mouse.loop_obj_colour = false;
 	if (data->mouse.mouse_map != NULL)
 		error_msg("map failure");
 	map = map_malloc((data->mouse.window_h + 1) * sizeof(int16_t *));
@@ -123,6 +122,7 @@ void	parse_input(int argc, char **argv, t_data *data)
 	ft_bzero(data, sizeof(t_data));
 	if (argc != 2)
 		error_msg("wrong number of arguments");
+	data->i_am = -1;
 	check_file_type(argv[1]);
 	file = open(argv[1], O_RDONLY, 0644);
 	if (file == -1)
