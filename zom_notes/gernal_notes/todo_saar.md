@@ -13,8 +13,14 @@ fix resize window shizzle
 
 
 !!!!!
-	if camera is 0,0,-1, planes are 1,3,10 amd cylinder is 0,0,-7
+	if camera is 0,0,-1, planes are 1,3,10
 		spheres seems to only work at 0,0,-10 but that would be behind the camera
+		the spheres can be seen though infront of the planes
+	also, cylinder at 0,0,7 is in front of a sphere in the middle
+		changing the cylinder to 0,3,7 should move it up the y axis but 
+		it moves down..
+
+	- cylinder and spheres seem to be the wrong way around (neg axis is pos and visversa) - i think for all axises, i planes are ok
 
 **3**
 - cylinder

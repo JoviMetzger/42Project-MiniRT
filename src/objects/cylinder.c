@@ -6,28 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/25 19:09:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/30 16:33:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-/**
- * 	the old capping shizzle
- *
-	double	t1 = ray->place.y + obj_data->root1 * ray->vector.y;
-	double	t2 = ray->place.y + obj_data->root2 * ray->vector.y;
-	if (t1 < (cyl->vector.y - height_half) || t1 > cyl->vector.y + height_half)
-		obj_data->root1 = INFINITY;
-	if (t2 < (cyl->vector.y - height_half) || t2 > cyl->vector.y + height_half)
-		obj_data->root2 = INFINITY;
-	
-	obj_data->t = fmin(obj_data->root1, obj_data->root2);
-	if (obj_data->t > 0)
-		return (true); 
- */
-
-// IF CYLINDER HIEGHT = 0, INFINITY CYLINDER WOOOOO
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 {
 	t_vec3	c_c;
@@ -59,16 +43,14 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data)
 			if (t2 < (cyl->vector.y - height_half) || t2 > cyl->vector.y + height_half)
 				obj_data->root2 = INFINITY;
 			obj_data->t = fmin(obj_data->root1, obj_data->root2);
-			// using infinity here messes with the colour
-			 // good colour with t > 0
-			// if (obj_data->t > 0)
-			if (obj_data->t == INFINITY)
-				return (true);
-			// else if (obj_data->t > 0) // capppyyy time
-			// {
-			// 	// solve_capps;
+			// if (obj_data->t == INFINITY) // for testing infinite
 			// 	return (true);
-			// }
+			if (obj_data->t > 0) // capppyyy time
+			{
+				// solve_capps(ray, cyl, obj_data);
+				
+				return (true);
+			}
 			if (obj_data->t < 0) //- no intersection
 				return (false);
 		}
