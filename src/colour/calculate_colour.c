@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/22 21:36:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/30 16:10:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 		{
 			if (intersect_sphere(&ray, data->objs[i], obj_data))
 				colour = get_sphere_checkerboard(data, obj_data, ray, data->objs[i]);	// will be moved
-				colour = get_sphere_colour(data, obj_data, ray, data->objs[i]);
-				data->mouse.mouse_map[data->mouse.mouse_y][data->mouse.mouse_x] = i;
+				// colour = get_sphere_colour(data, obj_data, ray, data->objs[i]);
+				// data->mouse.mouse_map[data->mouse.mouse_y][data->mouse.mouse_x] = i;
 					// colour = get_sphere_bumpmap(data, obj_data, ray, data->objs[i]);	// will be moved
 		}
 		if (data->objs[i]->type == E_CYLINDER)
