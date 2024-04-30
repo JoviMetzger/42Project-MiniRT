@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/30 15:16:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/30 16:06:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 #include "../../header/parser.h"
 
-//
+// gotta free objects here since error_msg() exits
 void ft_open_window(t_data *data)
 {
 	// Gotta error check this stuff
