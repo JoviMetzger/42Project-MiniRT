@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/23 17:14:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/30 15:19:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int main(int argc, char **argv)
 
 	mlx_loop(data.mlx);		// loop
 
-	//	mlx_delete_image(image); // might need these things if textures but idkk
-	//	mlx_delete_texture(texture);
+	// //	mlx_delete_image(image); // might need these things if textures but idkk
+	// //	mlx_delete_texture(texture);
 	
 	mlx_terminate(data.mlx); // terminate
 
