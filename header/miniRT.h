@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/25 18:20:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/30 16:14:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ typedef	struct s_colour_vars
 	
 }			t_colour_vars;
 
-// -------------------------------------------------------------
+// ---------------------------------------------our = get_sphere_colour(data, obj_data, ray, data->objs[i]);
+				// dat----------------
 // Colour - RGB
 typedef struct s_colour
 {
