@@ -1,20 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   cylinder_colour.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/13 16:36:52 by smclacke      ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../../header/miniRT.h"
-
-/**
- * @todo norm 
- */
 t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder)
 {
     t_colour result;

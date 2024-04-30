@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/22 21:32:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/04/25 18:20:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,36 @@ typedef struct s_vec3
 	double	y; // y-axis (up-down)
 	double	z; // z-axis (forward-back forwrd)  
 }	t_vec3;
+
+// -------------------------------------------------------------
+// For getting colour purposes..
+typedef	struct s_colour_vars
+{
+	double		ambient_intensity;
+	double		diffuse_intensity;
+	double		spec_intensity;
+	double		spec_power;
+	t_vec3		inter_point; // intersect_point
+	t_vec3		normal;
+	double		ambient_red;
+	double		ambient_green;
+	double		ambient_blue;
+	double		diffuse_red;
+	double		diffuse_green;
+	double		diffuse_blue;
+	t_vec3		light_dir;
+	double		diffuse_factor;
+	t_vec3		view_dir;
+	t_vec3		reflection_dir;
+	double		spec_factor;
+	double		spec_red;
+	double		spec_green;
+	double		spec_blue;
+	double		final_red;
+	double		final_green;
+	double		final_blue;
+	
+}			t_colour_vars;
 
 // -------------------------------------------------------------
 // Colour - RGB
@@ -194,11 +224,7 @@ void		ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
 uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
-t_colour	get_sphere_colour(t_data *data, t_obj_data *obj_data,
-				t_ray ray, t_objs *sphere);
-t_colour	get_plane_colour(t_data *data, t_obj_data *obj_data,
-				t_ray ray, t_objs *plane);
-t_colour	get_cyl_colour(t_data *data, t_obj_data *obj_data,
+t_colour	get_colour(t_data *data, t_obj_data *obj_data,
 				t_ray ray, t_objs *cylinder);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
