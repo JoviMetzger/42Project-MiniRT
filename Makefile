@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/04/30 16:17:53 by smclacke      ########   odam.nl          #
+#    Updated: 2024/05/01 14:38:41 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ CFLAGS 			= -Wall -Wextra
 CFLAGS			+= -Werror
 # CFLAGS			+= -g -fsanitize=address
 CFLAGS			+= -Ofast -flto
+MAKEFLAGS		= --no-print-directory
 
 # Libraries
 LIBFT_PATH		= ./libraries/libft
@@ -96,7 +97,7 @@ $(NAME):	$(LIBFT) $(MLX42) $(OBJ)
 		@echo "$(CORAL) $(UNDER) $(BOLD) $(ITALIC)   ✨Compilation Done✨      $(RESET)"
 
 $(LIBFT):
-		@$(MAKE) -C $(LIBFT_PATH)
+		@$(MAKE) $(MAKEFLAGS) -C $(LIBFT_PATH)
 		@echo "$(BLUE)$(BOLD) --- Compiling Libft Done --- $(RESET)"
 
 $(MLX42):
@@ -126,13 +127,13 @@ open: $(NAME)
 
 # Clean
 clean:
-		@$(MAKE) clean -C $(LIBFT_PATH)
+		@$(MAKE) $(MAKEFLAGS) clean -C $(LIBFT_PATH)
 		@rm -rf $(MLX42_PATH)/build
 		@rm -rf $(OBJ_PATH)
 		@echo "$(GREEN) $(ITALIC) ✅ Cleaned object files ✅$(RESET)"
 
 fclean: clean
-		@$(MAKE) fclean -C $(LIBFT_PATH)
+		@$(MAKE) $(MAKEFLAGS) fclean -C $(LIBFT_PATH)
 		@rm -rf $(OBJ_DIR)
 		@rm -rf $(NAME)
 		@echo "$(GREEN) $(ITALIC)   ✅ Cleaned executer ✅$(RESET)"

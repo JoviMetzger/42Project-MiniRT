@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/15 20:17:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/30 20:41:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/01 14:35:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ bool	check_closest(t_obj_data *obj_data)
 	return (false);
 }
 
+/**
+ * @return true - intersection found
+ * @return false - no intersection found
+ */
 bool	quadratic(t_obj_data *obj_data)
 {
 	obj_data->d = obj_data->b * obj_data->b - 4 * obj_data->a * obj_data->c;
 	if (obj_data->d < 0)
-        return (false);	// No intersection
+        return (false);
 	else 
     {
         obj_data->root1 = (-obj_data->b + sqrt(obj_data->d)) / (2.0 * obj_data->a);
@@ -37,6 +41,6 @@ bool	quadratic(t_obj_data *obj_data)
             obj_data->t = obj_data->root2;
 		else
 			return (false);
-        return (true); // Intersection found
+        return (true);
     }
 }

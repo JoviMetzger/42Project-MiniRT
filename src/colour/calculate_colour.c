@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/30 15:21:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/01 14:35:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 	// if (!data->objs[data->objs_i]->text_img)
 	// 	return (printf("ret 2\n"), 0);
 // }
-
 
 // Calculate the reflection direction using the incident ray direction and surface normal
 // Reflection direction = Incident direction - 2 * (Incident direction . Normal) * Normal
