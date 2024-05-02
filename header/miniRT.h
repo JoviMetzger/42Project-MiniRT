@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/25 18:20:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/02 12:55:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,11 @@ typedef struct s_obj_data
 	double	root1;
 	double	root2;
 	double	t;
+	double	tmp_t;
+	double	height_half;
+	double	hit1;
+	double	hit2;
+	double	radius;
 	double	closest_t;
 
 }	t_obj_data;
