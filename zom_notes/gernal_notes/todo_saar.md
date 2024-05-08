@@ -12,6 +12,9 @@ fix resize window shizzle
 - cylinder
 		-try using old cylinder equations to see if i can get capping
 
+**4**
+- triangle
+
 
 **5**
 - check lighting... - colours too intense?
@@ -19,10 +22,6 @@ fix resize window shizzle
 	- if flat 'back wall' facing plane in 0,0,0 black, why gray ?? (light??)
 
 
-
-**NEXTTTT**
-
-- triangle + other objects
-
-- final clean up, remove unused functions, norm and test loadssss
+**6**
+- final clean up, remove unused functions, norm and test
 
