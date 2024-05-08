@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/25 16:03:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/08 20:47:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,15 @@ void ft_put_image(t_data *data)
 // 	}
 // }
 
+static void	ft_resize(int32_t width, int32_t height, void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	data->mlx->width = width;
+	data->mlx->height = height;
+}
+
 void ft_render(t_data *data)
 {
 
@@ -71,6 +80,7 @@ void ft_render(t_data *data)
 	mlx_key_hook(data->mlx, (mlx_keyfunc)ft_key_action, data); // movement aka ESC
 	// mlx_loop_hook(data->mlx, ft_handle_mouse_move, data); // Mouse move event
     // mlx_mouse_hook(data->mlx, (mlx_mousefunc) handle_mouse_click, data); // Mouse click event
+    mlx_resize_hook(data->mlx, &ft_resize, (void *)data); // resize window
     // mlx_resize_hook(data->mlx, (mlx_resizefunc)ft_resize, data); // resize window
     // mlx_mouse_hook(data->mlx, ft_handle_mouse_click, data); // Mouse click event // NOT working   
 }
