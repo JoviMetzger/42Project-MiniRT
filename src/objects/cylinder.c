@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/02 13:17:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/08 17:57:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,16 +135,21 @@ static bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 
 	if (obj->hit1 < (cyl->vector.y - obj->height_half) || obj->hit1 > cyl->vector.y + obj->height_half)
 		obj->hit1 = obj->root1;
+		// obj->root1 = obj->hit1;
 	if (obj->hit2 < (cyl->vector.y - obj->height_half) || obj->hit2 > cyl->vector.y + obj->height_half)
 		obj->hit2 = obj->root2;
+		// obj->root2 = obj->hit2;
+
 	obj->tmp_t = fmin(obj->hit1, obj->hit2);
+	// obj->tmp_t = fmin(obj->root1, obj->root2);
+
 	if (obj->tmp_t > 0)
 	{
 		double	denom = dot_product(ray->vector, cyl->vector);
-		t_vec3	oc = minus(ray->place, cyl->center);
+		t_vec3	oc = minus(cyl->center, ray->place);
 		if (fabs(denom) > EPSILON)
 		{
-			obj->tmp_t = -dot_product(oc, cyl->vector) / denom;
+			obj->tmp_t = dot_product(oc, cyl->vector) / denom;
 			if (obj->tmp_t >= obj->height_half)
 				return (true);
 			else
@@ -162,14 +167,16 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 	r_c = cross_product(cyl->vector, ray->vector);
 	c_c = minus(ray->place, cyl->center);
 	c_c = cross_product(c_c, cyl->vector);
+	
 	obj->radius = cyl->diameter / 2;
 	obj->height_half = cyl->height / 2;
+
 	obj->a = dot_product(r_c, r_c);
 	obj->b = -2.0 * dot_product(r_c, c_c);
 	obj->c = dot_product(c_c, c_c) - pow(obj->radius, 2);
 	if (quadratic(obj) == true)
 	{
-		if (obj->t > EPSILON && check_closest(obj) == true)
+		if (obj->t > EPSILON)
 		{	
 			if (check_caps(obj, cyl, ray) == true)
 			{
@@ -177,7 +184,8 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 				return (check_closest(obj));
 			}
 			else
-				return (check_closest(obj));	
+				return (false);
+				// return (check_closest(obj));	
 		}
 	}
 	return (false);
