@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 18:00:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 14:59:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 15:13:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 	vec1 = minus(tri->point2, tri->point1);
 	vec2 = minus(tri->point3, tri->point1);
 
-	normal = mult_vecvec(vec1, vec2);
+	normal = cross_product(vec1, vec2);
 	dir = dot_product(normal, ray->vector);
 
 	// pvec = cross_product(ray->vector, vec2);
