@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 21:44:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 14:30:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	convert_cap_input(t_data *data, char **arr)
 		data->type = get_type(arr[i]);
 		if (data->type == E_SPACE || data->type == E_PLANE
 			|| data->type == E_SPHERE || data->type == E_CYLINDER
-			|| data->type == E_HASH)
+			|| data->type == E_HASH || data->type == E_TRIANGLE)
 			i++;
-		else if (data->type == 0 || data->type > 8)
+		else if (data->type == 0 || data->type > 9)
 			free_arr_error("parser error", arr);
 		else if (data->type == E_AMBIENT || data->type == E_LIGHT
 			|| data->type == E_CAMERA)

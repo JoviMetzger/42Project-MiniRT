@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/01 14:35:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 13:53:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 		// else
  * 
  */
-
 // t_colour	texture_colour(t_data *data, t_objs *object)
 // {
 	// data->objs[data->objs_i]->text_img = mlx_texture_to_image(data->mlx, texture);

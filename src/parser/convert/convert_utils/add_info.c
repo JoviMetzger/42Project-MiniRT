@@ -6,11 +6,33 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 22:26:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/25 15:27:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 14:24:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../header/parser.h"
+
+void	coord_tri(t_data *data, double x, double y, double z)
+{
+	if (data->objs[data->objs_i]->point_flag == 0)
+	{
+		data->objs[data->objs_i]->point1.x = x;
+		data->objs[data->objs_i]->point1.y = y;
+		data->objs[data->objs_i]->point1.z = z;
+	}
+	else if (data->objs[data->objs_i]->point_flag == 1)
+	{
+		data->objs[data->objs_i]->point2.x = x;
+		data->objs[data->objs_i]->point2.y = y;
+		data->objs[data->objs_i]->point2.z = z;
+	}
+	else if (data->objs[data->objs_i]->point_flag == 2)
+	{
+		data->objs[data->objs_i]->point3.x = x;
+		data->objs[data->objs_i]->point3.y = y;
+		data->objs[data->objs_i]->point3.z = z;
+	}
+}
 
 void	add_vec(t_data *data, double x, double y, double z)
 {
@@ -29,6 +51,8 @@ void	add_coord(t_data *data, double x, double y, double z)
 	else if (data->type == E_PLANE || data->type == E_SPHERE
 		|| data->type == E_CYLINDER)
 		coord_obj(data, x, y, z);
+	else if (data->type == E_TRIANGLE)
+		coord_tri(data, x, y, z);
 }
 
 void	add_rgb(t_data *data, int r, int g, int b)
@@ -38,6 +62,6 @@ void	add_rgb(t_data *data, int r, int g, int b)
 	else if (data->type == E_LIGHT)
 		rgb_light(data, r, g, b);
 	else if (data->type == E_PLANE || data->type == E_SPHERE
-		|| data->type == E_CYLINDER)
+		|| data->type == E_CYLINDER || data->type == E_TRIANGLE)
 		rgb_obj(data, r, g, b);
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 20:23:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 14:28:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static int	check_no_elems(char *str, int type)
 		return (par_err("invalid: Plane: number of arguments"));
 	else if (type == 6 && (num_elems(str) != 6 && num_elems(str) != 7))
 		return (par_err("invalid: Cylinder: number of arguments"));
+	else if (type == 9 && (num_elems(str) != 5 && num_elems(str) != 6))
+		return (par_err("invalid: Triangle: number of arguments"));
 	return (1);
 }
 

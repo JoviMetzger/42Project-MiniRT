@@ -6,13 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 19:46:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 14:23:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
-static char	*give_null(char *str)
+// util for textures
+char	*give_null(char *str)
 {
 	int		i;
 
@@ -25,17 +26,32 @@ static char	*give_null(char *str)
 	return (str);
 }
 
-static int	handle_texture(t_data *data, char *str)
-{
-	mlx_texture_t	*texture;
 
-	str = give_null(str);
-	texture = mlx_load_png(str);
-	if (!texture)
-		return (0);
-	data->objs[data->objs_i]->texture = texture;
+// triangle
+// /**
+//  * #Identifier   #Coordinates point1  #Coordinates point2  #Coordinates point3    #R,G,B
+// */
+int	sort_tr(char **elem_str, t_data *data)
+{
+	data->objs[data->objs_i]->point_flag = 0;
+	if (!is_coord(elem_str[1], 0, 0))
+		return (par_err("invalid: Triangle: coordinate"));
+	data->objs[data->objs_i]->point_flag = 1;
+	if (!is_coord(elem_str[2], 0, 0))
+		return (par_err("invalid: Triangle: coordinate"));
+	data->objs[data->objs_i]->point_flag = 2;
+	if (!is_coord(elem_str[3], 0, 0))
+		return (par_err("invalid: Triangle: coordinate"));
+	if (!convert_rgb(data, elem_str[4]))
+		return (par_err("invalid: Triangle: RGB | [0-255]"));
+	if (elem_str[5] && !is_space(elem_str[5]))
+	{
+		if (!handle_texture(data, elem_str[5]))
+			return (par_err("Texture file invalid"));
+	}
 	return (1);
 }
+
 
 // /**
 //  * #Identifier     #Coordinates        #3D vector      #R,G,B

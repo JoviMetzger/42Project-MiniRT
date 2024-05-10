@@ -6,29 +6,20 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:36:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 15:55:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 14:01:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
 
-int	is_hash(int c)
+void	check_dup(char **arr, int i, int type)
 {
-	return (c == '#');
-}
-
-int	hash_str(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
+	while (arr[i])
 	{
-		if (is_hash(str[i]))
-			return (1);
+		if (check_capital(arr[i], type) == 1)
+			free_arr_error("duplicate element", arr);
 		i++;
 	}
-	return (0);
 }
 
 static	int	check_invalid(char *str)
@@ -44,7 +35,7 @@ static	int	check_invalid(char *str)
 	{
 		if (str[i] != 'A' && str[i] != 'L' && str[i] != 'C'
 			&& !check_sp(&str[i]) && !check_pl(&str[i])
-			&& !check_cy(&str[i]))
+			&& !check_cy(&str[i]) && !check_tr(&str[i]))
 			return (1);
 	}
 	return (0);

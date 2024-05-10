@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/25 12:43:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 21:46:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 14:29:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	sort_into_struct(char **elem_str, t_data *data)
 	if (data->type == E_CYLINDER && !sort_cy(elem_str, data))
 		return (0);
 	if (data->type == E_PLANE && !sort_pl(elem_str, data))
+		return (0);
+	if (data->type == E_TRIANGLE && !sort_tr(elem_str, data))
 		return (0);
 	return (1);
 }
@@ -59,13 +61,13 @@ void	convert_obj_input(t_data *data, char **arr, int count)
 		if (data->type == 7 || data->type == 1
 			|| data->type == 2 || data->type == 3 || data->type == 8)
 			i++;
-		else if (data->type == 0 || data->type > 8)
+		else if (data->type == 0 || data->type > 9)
 		{
 			free_objects(data);
 			free_arr_error("parser error", arr);
 		}
 		else if (data->type == E_PLANE || data->type == E_SPHERE
-			|| data->type == E_CYLINDER)
+			|| data->type == E_CYLINDER || data->type == E_TRIANGLE)
 		{
 			init_objs(data, arr);
 			convert_element(arr, data, i);
