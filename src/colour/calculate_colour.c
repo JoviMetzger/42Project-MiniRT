@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 14:34:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 17:11:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,14 @@ uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 		}
 		else if (data->objs[i]->type == E_TRIANGLE)
 		{
+			// printf("yes triangle\n");
+			// exit(EXIT_SUCCESS);
 			if (intersect_triangle(&ray, data->objs[i], obj_data))
+			{
+				printf("ret\n");
+				exit(EXIT_SUCCESS);
 				colour = get_colour(data, obj_data, ray, data->objs[i]);
+			}
 		}
 		i++;
 	}

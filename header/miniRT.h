@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 14:41:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 17:07:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,7 @@ t_colour get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, t_ray ray, t_obj
 t_vec3		init_vector(t_screen screen);
 
 // Operators
+t_vec3 		plus_vecdub(t_vec3 u, double v);
 t_vec3		plus(t_vec3 u, t_vec3 v);
 t_vec3		minus(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecvec(t_vec3 u, t_vec3 v);

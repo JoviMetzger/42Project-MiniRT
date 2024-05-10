@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/02 12:15:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 17:06:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ t_vec3 plus(t_vec3 u, t_vec3 v)
 	len.x = u.x + v.x;
 	len.y = u.y + v.y;
 	len.z = u.z + v.z;
+	return (len);
+}
+
+t_vec3 plus_vecdub(t_vec3 u, double v) 
+{
+    t_vec3	len;
+
+	len.x = u.x + v;
+	len.y = u.y + v;
+	len.z = u.z + v;
 	return (len);
 }
 
