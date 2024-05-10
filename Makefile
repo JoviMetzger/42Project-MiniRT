@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/05/10 13:59:59 by smclacke      ########   odam.nl          #
+#    Updated: 2024/05/10 14:42:15 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS			= main.c											\
 					objects/sphere.c 								\
 					objects/plane.c 								\
 					objects/cylinder.c 								\
+					objects/triangle.c 								\
 					objects/quad.c 									\
 					ray/vector.c									\
 					ray/ray.c										\

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 18:00:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/08 18:00:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 14:59:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,82 @@
 // don't waste cycles on testing all triangles in a mesh. Perhaps a bounding volume hierarchy is a solution. 
 // Nevertheless every additional thing takes up memory, and that's why triangles are not the most efficient 
 // objects for raytracing, especially in complex scenes.
+
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
+{
+	t_vec3	vec1;
+	t_vec3	vec2;
+	t_vec3	pvec;
+	t_vec3	tvec;
+	t_vec3	normal;
+	float	dir;
+
+	vec1 = minus(tri->point2, tri->point1);
+	vec2 = minus(tri->point3, tri->point1);
+
+	normal = mult_vecvec(vec1, vec2);
+	dir = dot_product(normal, ray->vector);
+
+	// pvec = cross_product(ray->vector, vec2);
+
+	if (fabs(dir) < EPSILON)
+		return (false);
+		
+	obj_data->a = -dot_product(normal, tri->point1);
+	obj_data->t = -(dot_product(ray->place, normal) + obj_data->a) / dir;
+	
+	if (obj_data->t < EPSILON || !check_closest(obj_data))
+		return (false);
+
+	if (quadratic(obj_data))
+	{
+		ray->place = normal;
+	
+	}
+
+	
+		
+	// obj_data->c = 1 / obj_data->t;
+	// tvec = minus(ray->place, tri->point1);
+	// obj_data->a = dot_product(vec1, pvec) * obj_data->c;
+	// if (obj_data->a < 0 || obj_data->a > 1)
+	// 	return (false);
+	// tvec = cross_product(tvec, vec1);
+	// obj_data->b = dot_product(ray->vector, tvec) * obj_data->c;
+	// if (obj_data->b < 0 || obj_data->a + obj_data->b > 1)
+	// 	return (false);
+	// obj_data->t = dot_product(vec2, tvec) * obj_data->c;
+	return (true);
+}
+
+
+// bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
+// {
+// 	t_vec3	vec1;
+// 	t_vec3	vec2;
+// 	t_vec3	pvec;
+// 	t_vec3	tvec;
+// 	t_vec3	normal;
+
+// 	vec1 = minus(tri->point2, tri->point1);
+// 	vec2 = minus(tri->point3, tri->point1);
+
+	// normal = mult_vecvec(vec1, vec2);
+
+// 	pvec = cross_product(ray->vector, vec2);
+// 	obj_data->t = dot_product(vec1, pvec);
+
+// 	if (fabs(obj_data->t) < EPSILON)
+// 		return (false);
+// 	obj_data->c = 1 / obj_data->t;
+// 	tvec = minus(ray->place, tri->point1);
+// 	obj_data->a = dot_product(vec1, pvec) * obj_data->c;
+// 	if (obj_data->a < 0 || obj_data->a > 1)
+// 		return (false);
+// 	tvec = cross_product(tvec, vec1);
+// 	obj_data->b = dot_product(ray->vector, tvec) * obj_data->c;
+// 	if (obj_data->b < 0 || obj_data->a + obj_data->b > 1)
+// 		return (false);
+// 	obj_data->t = dot_product(vec2, tvec) * obj_data->c;
+// 	return (true);
+// }

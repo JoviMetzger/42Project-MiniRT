@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 14:15:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 14:41:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,5 +263,7 @@ bool		quadratic(t_obj_data *obj_data);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data);
+
 
 #endif
