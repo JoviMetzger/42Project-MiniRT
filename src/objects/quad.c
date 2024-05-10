@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/15 20:17:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/08 17:42:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 13:15:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ bool	check_closest(t_obj_data *obj_data)
 /**
  * @return true - intersection found
  * @return false - no intersection found
- * 
- * if root2 is less than root1, swap their vaules?
  */
 bool	quadratic(t_obj_data *obj_data)
 {

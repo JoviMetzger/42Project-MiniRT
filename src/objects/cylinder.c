@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/08 17:57:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 13:21:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,14 +134,14 @@ static bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	obj->hit2 = ray->place.y + obj->root2 * ray->vector.y;
 
 	if (obj->hit1 < (cyl->vector.y - obj->height_half) || obj->hit1 > cyl->vector.y + obj->height_half)
-		obj->hit1 = obj->root1;
-		// obj->root1 = obj->hit1;
+		obj->root1 = obj->hit1;
+		// obj->hit1 = obj->root1;
 	if (obj->hit2 < (cyl->vector.y - obj->height_half) || obj->hit2 > cyl->vector.y + obj->height_half)
-		obj->hit2 = obj->root2;
-		// obj->root2 = obj->hit2;
+		obj->root2 = obj->hit2;
+		// obj->hit2 = obj->root2;
 
-	obj->tmp_t = fmin(obj->hit1, obj->hit2);
-	// obj->tmp_t = fmin(obj->root1, obj->root2);
+	// obj->tmp_t = fmin(obj->hit1, obj->hit2);
+	obj->tmp_t = fmin(obj->root1, obj->root2);
 
 	if (obj->tmp_t > 0)
 	{
