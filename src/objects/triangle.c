@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 18:00:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 19:05:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 19:21:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,39 +64,37 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 	dir = dot_product(edge1, hit);
 
 	
-	if (fabs(dir) > -EPSILON && dir < EPSILON) // fabs?
+	if (dir > -EPSILON && dir < EPSILON)
 		return (false);
 
+	// f
 	obj_data->a = 1.0 / dir;
+
+	// s
 	t_vec3 o_c = minus(ray->place, tri->point1);
 	
 
-	obj_data->b = dot_product(edge1, hit);
+	// check the scalar values (u q || b c) are in range 0-1
+	// u
+	obj_data->b = dot_product(o_c, hit);
 	obj_data->b = obj_data->a * obj_data->b;
-	
 	if (obj_data->b < 0.0 || obj_data->b > 1.0)
 		return (false);
-		
-	o_c = cross_product(o_c, edge1); 
-	
-	obj_data->c = dot_product(o_c, edge1);
+
+	//q	
+	t_vec3 c_c = cross_product(o_c, edge1); 
+
+	// v
+	obj_data->c = dot_product(ray->vector, c_c);
 	obj_data->c = obj_data->a * obj_data->c;
 	if (obj_data->c < 0.0 || obj_data->b + obj_data->c > 1.0)
 		return (false);
 
-		
-	obj_data->d = dot_product(edge2, o_c); // edge2, q
-	obj_data->d = obj_data->a * obj_data->d;
-	if (obj_data->d < 0 || obj_data->b + obj_data->d > 1)
-		return (false);
 
-	obj_data->t = dot_product(edge2, o_c);
+	obj_data->t = dot_product(edge2, c_c);
+	obj_data->t = obj_data->a * obj_data->t;
+	if (obj_data->t < EPSILON)
+		return (false);
 	return (true);
 
-
-	
-	// if (obj_data->t > EPSILON)
-	// 	return (true);
-	// else
-	// 	return (false);
 }
