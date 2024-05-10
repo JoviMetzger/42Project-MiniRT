@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 14:23:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 18:31:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,17 @@ int	sort_tr(char **elem_str, t_data *data)
 	data->objs[data->objs_i]->point_flag = 0;
 	if (!is_coord(elem_str[1], 0, 0))
 		return (par_err("invalid: Triangle: coordinate"));
+	if (!convert_coord(data, elem_str[1]))
+		return (par_err("invalid: Triangle: coordinate"));
 	data->objs[data->objs_i]->point_flag = 1;
 	if (!is_coord(elem_str[2], 0, 0))
 		return (par_err("invalid: Triangle: coordinate"));
+	if (!convert_coord(data, elem_str[2]))
+		return (par_err("invalid: Triangle: coordinate"));
 	data->objs[data->objs_i]->point_flag = 2;
 	if (!is_coord(elem_str[3], 0, 0))
+		return (par_err("invalid: Triangle: coordinate"));
+	if (!convert_coord(data, elem_str[3]))
 		return (par_err("invalid: Triangle: coordinate"));
 	if (!convert_rgb(data, elem_str[4]))
 		return (par_err("invalid: Triangle: RGB | [0-255]"));
