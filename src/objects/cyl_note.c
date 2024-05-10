@@ -1,6 +1,40 @@
 
 //------------------------------//
 
+// bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
+// {
+// 	t_vec3	c_c;
+// 	t_vec3	r_c;
+
+// 	r_c = cross_product(cyl->vector, ray->vector);
+// 	c_c = minus(ray->place, cyl->center);
+// 	c_c = cross_product(c_c, cyl->vector);
+	
+// 	obj->radius = cyl->diameter / 2;
+// 	obj->height_half = cyl->height / 2;
+
+// 	obj->a = dot_product(r_c, r_c);
+// 	obj->b = -2.0 * dot_product(r_c, c_c);
+// 	obj->c = dot_product(c_c, c_c) - pow(obj->radius, 2);
+// 	if (quadratic(obj) == true)
+// 	{
+// 		if (obj->t > EPSILON)
+// 		{	
+// 			if (check_caps(obj, cyl, ray) == true)
+// 			{
+// 				obj->t = obj->tmp_t;
+// 				return (check_closest(obj));
+// 			}
+// 			else
+// 				return (false);
+// 				// return (check_closest(obj));	
+// 		}
+// 	}
+// 	return (false);
+// }
+
+//------------------------------//
+
 static void	check_hit(double root, t_objs *cyl, t_ray *ray, t_obj_data *obj)
 {
 	t_vec3	a;
@@ -64,6 +98,22 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 }
 //------------------------------//
 
+
+	// obj->tmp_t = obj->t;
+	
+	// obj->hit1 = ray->place.y + obj->root1 * ray->vector.y;
+	// obj->hit2 = ray->place.y + obj->root2 * ray->vector.y;
+	
+	// obj->hit1 = ray->place.y + obj->root1 * ray->vector.y;
+	// obj->hit2 = ray->place.y + obj->root2 * ray->vector.y;
+
+	// if (obj->hit1 < (cyl->vector.y - obj->height_half) || obj->hit1 > cyl->vector.y + obj->height_half)
+	// 	obj->root1 = obj->hit1;
+	// 	// obj->hit1 = obj->root1;
+	// if (obj->hit2 < (cyl->vector.y - obj->height_half) || obj->hit2 > cyl->vector.y + obj->height_half)
+	// 	obj->root2 = obj->hit2;
+		// obj->hit2 = obj->root2;
+	// obj->tmp_t = fmin(obj->hit1, obj->hit2);
 
 // without hit variables
 
