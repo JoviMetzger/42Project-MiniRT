@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/05/10 14:42:15 by smclacke      ########   odam.nl          #
+#    Updated: 2024/05/10 20:31:09 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INPUT_FILE		= images_rt/parse_me.rt
 CC 				= cc
 CFLAGS 			= -Wall -Wextra
 CFLAGS			+= -Werror
-# CFLAGS			+= -g -fsanitize=address
+CFLAGS			+= -g -fsanitize=address
 CFLAGS			+= -Ofast -flto
 MAKEFLAGS		= --no-print-directory
 

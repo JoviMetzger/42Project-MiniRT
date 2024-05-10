@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 18:00:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 19:21:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 20:29:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 	obj_data->t = obj_data->a * obj_data->t;
 	if (obj_data->t < EPSILON)
 		return (false);
-	return (true);
+	return (check_closest(obj_data));
 
 }

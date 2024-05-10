@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 20:24:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 20:38:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,11 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 		if (obj->t > EPSILON)
 		{	
 			if (check_caps(obj, cyl, ray) == true)
+			{
+				// im missing the cappy plany bit
+				// if (intersect_plane(ray, cyl, obj))
 				return (check_closest(obj));
+			}
 		}
 	}
 	return (false);
