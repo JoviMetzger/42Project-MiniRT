@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/11 11:29:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/11 15:36:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+bool	check_roots(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 {
 	t_vec3	a;
 	t_vec3	b;
@@ -45,13 +45,17 @@ bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	if (obj->t > 0)
 	{
 		if (obj->t >= cyl->height)
-		{
-			intersect_plane(ray, cyl, obj);
 			return (true);
-		}
+		// else if (obj->t <= cyl->height && obj->t <= dot_product(ray->vector, cyl->vector))
+		// 	return (true);
 	}
 	return (false);
 }
+
+/**
+ * not sure if in root check function, find cap or just in intersect cyl
+ * also, how find cap? and if cap count what do?
+ */
 
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 {
@@ -71,8 +75,13 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 	{
 		if (obj->t > EPSILON)
 		{	
-			if (check_caps(obj, cyl, ray) == true)
+			if (check_roots(obj, cyl, ray) == true)
+			{
+				// if the point is the cap....
+				// if point is on cyl vector but lesss than/more than height?
+				// if (obj->t )
 				return (check_closest(obj));
+			}
 		}
 	}
 	return (false);

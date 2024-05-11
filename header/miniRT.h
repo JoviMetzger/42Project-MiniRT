@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/11 11:17:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/11 15:27:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,7 @@ t_vec3		normalize_vector(t_vec3 v);
 // Objects Functions
 bool		check_closest(t_obj_data *obj_data);
 bool		quadratic(t_obj_data *obj_data);
-bool		check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray);
+bool		check_roots(t_obj_data *obj, t_objs *cyl, t_ray *ray);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
