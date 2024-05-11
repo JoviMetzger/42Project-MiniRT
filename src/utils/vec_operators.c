@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 18:13:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/11 16:39:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,12 @@ t_vec3	normalize_vector(t_vec3 v)
     double normalize = length_squared(v);
     len = division_vec_dub(v, normalize);
 	return (len);
+}
+
+double	distance(t_vec3 pnt1, t_vec3 pnt2)
+{
+	double d;
+
+	d = sqrt(pow(pnt2.x - pnt1.x, 2) + pow(pnt2.y - pnt1.y, 2) + pow(pnt2.z - pnt1.z, 2));
+	return (d);
 }

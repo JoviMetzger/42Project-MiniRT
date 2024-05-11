@@ -1,5 +1,26 @@
 
 
+
+// TRY THIS
+
+double			triangle_intersection(t_p3 o, t_p3 d, t_figures *lst)
+{
+	double	id;
+	t_p3	ip;
+
+	id = solve_plane(o, d, lst->fig.tr.p1, lst->normal);
+	ip = vadd(o, scal_x_vec(id, d));
+	if (p_is_outside(lst->fig.tr.p1, lst->fig.tr.p2, lst->fig.tr.p3, ip))
+		return (INFINITY);
+	if (p_is_outside(lst->fig.tr.p2, lst->fig.tr.p3, lst->fig.tr.p1, ip))
+		return (INFINITY);
+	if (p_is_outside(lst->fig.tr.p3, lst->fig.tr.p1, lst->fig.tr.p2, ip))
+		return (INFINITY);
+	return (id);
+}
+
+
+
 // does not hit triangle
 bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 {

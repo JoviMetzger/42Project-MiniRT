@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/11 15:27:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/11 16:39:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,6 +257,7 @@ t_vec3		cross_product(t_vec3 u, t_vec3 v);
 double		dot_product(t_vec3 u, t_vec3 v);
 double		length_squared(t_vec3 vec);
 t_vec3		normalize_vector(t_vec3 v);
+double		distance(t_vec3 pnt1, t_vec3 pnt2);
 
 // Objects Functions
 bool		check_closest(t_obj_data *obj_data);

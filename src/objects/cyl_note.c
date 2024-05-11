@@ -2,6 +2,40 @@
 //------------------------------//
 //------------------------------//
 //------------------------------//
+//------------------------------//
+ANOTHER EXAMPLE
+
+static double	caps_intersection(t_p3 o, t_p3 d, t_figures *lst)
+{
+	double	id1;
+	double	id2;
+	t_p3	ip1;
+	t_p3	ip2;
+	t_p3	c2;
+
+	c2 = vadd(lst->fig.cy.c, scal_x_vec(lst->fig.cy.h, lst->fig.cy.nv));
+	id1 = solve_plane(o, d, lst->fig.cy.c, lst->fig.cy.nv);
+	id2 = solve_plane(o, d, c2, lst->fig.cy.nv);
+	if (id1 < INFINITY || id2 < INFINITY)
+	{
+		ip1 = vadd(o, scal_x_vec(id1, d));
+		ip2 = vadd(o, scal_x_vec(id2, d));
+		if ((id1 < INFINITY && distance(ip1, lst->fig.cy.c) <= lst->fig.cy.r)
+				&& (id2 < INFINITY && distance(ip2, c2) <= lst->fig.cy.r))
+			return (id1 < id2 ? id1 : id2);
+		else if (id1 < INFINITY
+						&& distance(ip1, lst->fig.cy.c) <= lst->fig.cy.r)
+			return (id1);
+		else if (id2 < INFINITY && distance(ip2, c2) <= lst->fig.cy.r)
+			return (id2);
+		return (INFINITY);
+	}
+	return (INFINITY);
+}
+
+
+//------------------------------//
+//------------------------------//
 FIGURING OUT THE CAP PLANE BIT
 
 	if (obj->t > 0)
