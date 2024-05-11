@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/11 16:39:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/11 17:28:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,6 +262,7 @@ double		distance(t_vec3 pnt1, t_vec3 pnt2);
 // Objects Functions
 bool		check_closest(t_obj_data *obj_data);
 bool		quadratic(t_obj_data *obj_data);
+bool		check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray);
 bool		check_roots(t_obj_data *obj, t_objs *cyl, t_ray *ray);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);

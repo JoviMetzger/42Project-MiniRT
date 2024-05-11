@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/11 17:21:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/11 17:30:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ double	plane_cyl(t_ray *ray, t_vec3 center, t_vec3 vector)
 	denom = dot_product(vector, ray->vector);
 	if (denom == 0)
 		return (INFINITY);
-	x = dot_product(vector, minus(ray->place, center)) / denom; // min?
+	x = -dot_product(vector, minus(ray->place, center)) / denom; // min?
 	return (x > 0 ? x : INFINITY);
 }
 
 
-static bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 {
 	double hit1;
 	double hit2;
@@ -99,11 +99,11 @@ static bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	{
 		pnt1 = plus(ray->place, mult_vecdub(ray->vector, hit1));
 		pnt2 = plus(ray->place, mult_vecdub(ray->vector, hit2));
+		// not sure this bit is necessary.. doesnt seem to ever hit?
 		// if ((hit1 < INFINITY && distance(pnt1, cyl->center) <= obj->radius) 
 		// 	&& (hit2 < INFINITY && distance(pnt2, cent2) <= obj->radius))
 		// {
-		// 	printf("this hit\n");
-		// 	exit(EXIT_FAILURE);
+		// 	// printf("this hit\n");/
 		// 	if (hit1 < hit2) // more or less?
 		// 		obj->t = hit1;
 		// 	else
@@ -153,6 +153,7 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 					obj->t = obj->tmp_t;
 					return (check_closest(obj));
 				}
+				// return (check_closest(obj));
 			}
 		}
 	}
