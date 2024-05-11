@@ -1,5 +1,27 @@
 
 //------------------------------//
+//------------------------------//
+//------------------------------//
+FIGURING OUT THE CAP PLANE BIT
+
+	if (obj->t > 0)
+	{
+		if (obj->t < (cyl->vector.y - obj->height_half) || obj->t > cyl->vector.y + obj->height_half)
+		{
+			
+			double denom = dot_product(ray->vector, cyl->vector);
+			if (fabs(denom) > EPSILON)
+			{
+				t_vec3 oc = minus(ray->place, cyl->center);
+				obj->t = -dot_product(oc, cyl->vector) / denom;
+				if (obj->t >= cyl->height)
+					return (true);
+			}
+		}
+	}
+//------------------------------//
+//------------------------------//
+//------------------------------//
 
 // bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 // {
