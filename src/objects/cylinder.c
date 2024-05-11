@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/11 17:05:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/11 17:21:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,24 @@ bool	check_roots(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
-/**
- * 				t_vec3 hit = plus(ray->place, mult_vecdub(ray->vector, obj->t));
-				t_vec3 ctp = minus(hit, cyl->center);
-				t_vec3 normal = minus(ctp, mult_vecdub(cyl->vector, dot_product(cyl->vector, ctp)));
-				normalize_vector(normal);
-				if (dot_product(normal, ray->vector) > EPSILON)
-					normal = mult_vecdub(normal, -1);
-				cyl->center = normal;
- * 
 
- * not sure if in root check function, find cap or just in intersect cyl
- * also, how find cap? and if cap count what do?
- */
-
-// double			solve_plane(t_p3 o, t_p3 d, t_p3 plane_p, t_p3 plane_nv)
+// infinity shittt
+// double	plane_cyl(t_obj_data *obj, t_ray *ray, t_vec3 center, t_vec3 vector)
 // {
-// 	double	x;
+// 	t_vec3 oc;
 // 	double	denom;
 
-// 	denom = dot(plane_nv, d);
-// 	if (denom == 0)
-// 		return (INFINITY);
-// 	x = (dot(plane_nv, vsubstract(plane_p, o))) / denom;
-// 	return (x > 0 ? x : INFINITY);
+// 	denom = dot_product(ray->vector, vector);
+// 	if (fabs(denom) > EPSILON)
+// 	{
+// 		oc = minus(ray->place, center);
+// 		obj->t = -dot_product(oc, vector) / denom;
+// 		if (obj->t >= EPSILON)
+// 			return (check_closest(obj));
+// 		else
+// 			return (INFINITY);
+// 	}
+// 	return (INFINITY);
 // }
 
 double	plane_cyl(t_ray *ray, t_vec3 center, t_vec3 vector)
@@ -84,9 +78,10 @@ double	plane_cyl(t_ray *ray, t_vec3 center, t_vec3 vector)
 	denom = dot_product(vector, ray->vector);
 	if (denom == 0)
 		return (INFINITY);
-	x = -dot_product(vector, minus(ray->place, center)) / denom; // min?
+	x = dot_product(vector, minus(ray->place, center)) / denom; // min?
 	return (x > 0 ? x : INFINITY);
 }
+
 
 static bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 {
@@ -97,30 +92,31 @@ static bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	t_vec3 cent2;
 
 	cent2 = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height));
+
 	hit1 = plane_cyl(ray, cyl->center, cyl->vector);
 	hit2 = plane_cyl(ray, cent2, cyl->vector);
 	if (hit1 < INFINITY || hit2 < INFINITY)
 	{
 		pnt1 = plus(ray->place, mult_vecdub(ray->vector, hit1));
 		pnt2 = plus(ray->place, mult_vecdub(ray->vector, hit2));
-		if ((hit1 < INFINITY && distance(pnt1, cyl->center) <= obj->radius) 
-			&& (hit2 < INFINITY && distance(pnt2, cent2) <= obj->radius))
-		{
-			if (hit1 < hit2) // more or less?
-				obj->t = hit1;
-			else
-				obj->t = hit2;
-			return (true);
-		}
-		else if (hit1 < INFINITY && distance(pnt1, cyl->center) <= obj->radius)
+		// if ((hit1 < INFINITY && distance(pnt1, cyl->center) <= obj->radius) 
+		// 	&& (hit2 < INFINITY && distance(pnt2, cent2) <= obj->radius))
+		// {
+		// 	printf("this hit\n");
+		// 	exit(EXIT_FAILURE);
+		// 	if (hit1 < hit2) // more or less?
+		// 		obj->t = hit1;
+		// 	else
+		// 		obj->t = hit2;
+		// 	return (true);
+		// }
+		if (hit1 < INFINITY && distance(pnt1, cyl->center) <= obj->radius)
 		{
 			obj->t = hit1;
 			return (true);
 		}
 		else if (hit2 < INFINITY && distance(pnt2, cent2) <= obj->radius)
 		{
-			// printf("this hit\n");
-			// exit(EXIT_FAILURE);
 			obj->t = hit2;
 			return (true);
 		}

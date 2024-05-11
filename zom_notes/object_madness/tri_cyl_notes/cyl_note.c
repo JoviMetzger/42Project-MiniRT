@@ -1,6 +1,32 @@
 
 //------------------------------//
 //------------------------------//
+/**
+ * 				t_vec3 hit = plus(ray->place, mult_vecdub(ray->vector, obj->t));
+				t_vec3 ctp = minus(hit, cyl->center);
+				t_vec3 normal = minus(ctp, mult_vecdub(cyl->vector, dot_product(cyl->vector, ctp)));
+				normalize_vector(normal);
+				if (dot_product(normal, ray->vector) > EPSILON)
+					normal = mult_vecdub(normal, -1);
+				cyl->center = normal;
+ * 
+
+ * not sure if in root check function, find cap or just in intersect cyl
+ * also, how find cap? and if cap count what do?
+ */
+
+// double			solve_plane(t_p3 o, t_p3 d, t_p3 plane_p, t_p3 plane_nv)
+// {
+// 	double	x;
+// 	double	denom;
+
+// 	denom = dot(plane_nv, d);
+// 	if (denom == 0)
+// 		return (INFINITY);
+// 	x = (dot(plane_nv, vsubstract(plane_p, o))) / denom;
+// 	return (x > 0 ? x : INFINITY);
+// }
+
 //------------------------------//
 //------------------------------//
 ANOTHER EXAMPLE
