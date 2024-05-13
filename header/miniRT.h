@@ -6,7 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2024/04/30 16:14:03 by smclacke      ########   odam.nl         */
+=======
+/*   Updated: 2024/05/11 17:28:11 by smclacke      ########   odam.nl         */
+>>>>>>> parser
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +54,8 @@ typedef enum e_type
 	E_SPHERE = 5,
 	E_CYLINDER = 6,
 	E_SPACE = 7,
-	E_HASH = 8
+	E_HASH = 8,
+	E_TRIANGLE = 9
 }				t_type;
 
 // --- Structs ---
@@ -111,6 +116,10 @@ typedef struct s_objs
 	t_type				type;
 	t_colour			colour;
 	t_vec3				center;
+	t_vec3				point1;
+	t_vec3				point2;
+	t_vec3				point3;
+	int					point_flag;
 	t_vec3				vector;
 	double				diameter;
 	double				height;
@@ -202,6 +211,11 @@ typedef struct s_obj_data
 	double	root1;
 	double	root2;
 	double	t;
+	double	tmp_t;
+	double	height_half;
+	double	hit1;
+	double	hit2;
+	double	radius;
 	double	closest_t;
 
 }	t_obj_data;
@@ -211,7 +225,6 @@ typedef struct s_obj_data
 void		ft_put_image(t_data *data);
 void		ft_open_window(t_data *data);
 void		ft_render(t_data *data);
-void		ft_resize(int32_t width, int32_t height, void *param);
 
 // Movement Functions
 void ft_key_action(mlx_key_data_t keydata, t_data *data);
@@ -238,6 +251,7 @@ t_colour get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, t_ray ray, t_obj
 t_vec3		init_vector(t_screen screen);
 
 // Operators
+t_vec3 		plus_vecdub(t_vec3 u, double v);
 t_vec3		plus(t_vec3 u, t_vec3 v);
 t_vec3		minus(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecvec(t_vec3 u, t_vec3 v);
@@ -248,12 +262,17 @@ t_vec3		cross_product(t_vec3 u, t_vec3 v);
 double		dot_product(t_vec3 u, t_vec3 v);
 double		length_squared(t_vec3 vec);
 t_vec3		normalize_vector(t_vec3 v);
+double		distance(t_vec3 pnt1, t_vec3 pnt2);
 
 // Objects Functions
 bool		check_closest(t_obj_data *obj_data);
 bool		quadratic(t_obj_data *obj_data);
+bool		check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray);
+bool		check_roots(t_obj_data *obj, t_objs *cyl, t_ray *ray);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data);
+
 
 #endif

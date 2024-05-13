@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 20:24:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/10 14:23:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define CY 6
 
 // --- parse_input --- //
+int			handle_texture(t_data *data, char *str);
 void		parse_input(int argc, char **argv, t_data *data);
 
 // --- parser_error --- //
@@ -58,15 +59,14 @@ void		check_c(char **arr);
 void		check_l(char **arr);
 
 // --- check_elements --- //
-int			is_hash(int c);
-int			hash_str(char *str);
+void		check_dup(char **arr, int i, int type);
 void		check_elements(char **arr);
 
 // --- check_utils --- //
 int			check_pl(char *str);
 int			check_sp(char *str);
 int			check_cy(char *str);
-void		check_dup(char **arr, int i, int type);
+int			check_tr(char *str);
 int			check_capital(char *str, int type);
 
 // ----------- /convert/ ----------- //
@@ -81,6 +81,8 @@ int			sort_l(char **elem_str, t_data *data);
 int			sort_c(char **elem_str, t_data *data);
 
 // --- convert_other --- //
+char		*give_null(char *str);
+int			sort_tr(char **elem_str, t_data *data);
 int			sort_pl(char **elem_str, t_data *data);
 int			sort_sp(char **elem_str, t_data *data);
 int			sort_cy(char **elem_str, t_data *data);
@@ -103,6 +105,7 @@ int			convert_double(t_data *data, char *str, int flag);
 double		ft_atof(char *str);
 
 // --- add_info --- //
+void		coord_tri(t_data *data, double x, double y, double z);
 void		add_vec(t_data *data, double x, double y, double z);
 void		add_coord(t_data *data, double x, double y, double z);
 void		add_rgb(t_data *data, int r, int g, int b);
@@ -140,6 +143,10 @@ int			is_space(char *str);
 int			valid_num(int c);
 int			is_alpha(int c);
 int			is_dash(int c);
+
+// --- is_funcs_3 --- //
+int			is_hash(int c);
+int			hash_str(char *str);
 
 // ------------ /validate/ ------------ //
 

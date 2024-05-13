@@ -1,41 +1,27 @@
 
 
 **1**
-
 textures....
-nope.......
 
 
-**2**
-hehe
-??
+**2** // KLAAR
 fix resize window shizzle
 
-
-!!!!!
-	if camera is 0,0,-1, planes are 1,3,10 amd cylinder is 0,0,-7
-		spheres seems to only work at 0,0,-10 but that would be behind the camera
 
 **3**
 - cylinder
 		-try using old cylinder equations to see if i can get capping
 
 **4**
-- pretty sure we only need one function for all objects but see what jovi thinkss..
+- triangle
 
 
 **5**
-- check lighting...
-
-	- is cylinder working same as sphere and if not whyyyyy
+- check lighting... - colours too intense?
 
 	- if flat 'back wall' facing plane in 0,0,0 black, why gray ?? (light??)
 
 
-
-**NEXTTTT**
-
-- triangle + other objects
-
-- finally clean up, remove unused functions, norm and test loadssss
+**6**
+- final clean up, remove unused functions, norm and test
 
