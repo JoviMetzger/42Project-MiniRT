@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/11 17:30:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/14 14:53:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ bool	check_roots(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	if (obj->root1 < 0 && obj->root2 < 0)
 		return (false);
 	if ((obj->root2 < obj->root1 && obj->root2 > 0) || (obj->root1 < obj->root2 && obj->root1 <= 0)) 
-		obj->t = obj->root2;
-	else
 		obj->t = obj->root1;
+	else
+		obj->t = obj->root2;
 
 	if (obj->t > 0)
 	{
@@ -97,8 +97,11 @@ bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	hit2 = plane_cyl(ray, cent2, cyl->vector);
 	if (hit1 < INFINITY || hit2 < INFINITY)
 	{
-		pnt1 = plus(ray->place, mult_vecdub(ray->vector, hit1));
-		pnt2 = plus(ray->place, mult_vecdub(ray->vector, hit2));
+		pnt2 = plus(mult_vecdub(ray->vector, hit2), ray->place);
+		pnt1 = plus(mult_vecdub(ray->vector, hit1), ray->place);
+		// pnt2 = plus(ray->place, mult_vecdub(ray->vector, hit2));
+		// pnt1 = plus(ray->place, mult_vecdub(ray->vector, hit1));
+		
 		// not sure this bit is necessary.. doesnt seem to ever hit?
 		// if ((hit1 < INFINITY && distance(pnt1, cyl->center) <= obj->radius) 
 		// 	&& (hit2 < INFINITY && distance(pnt2, cent2) <= obj->radius))
@@ -153,7 +156,6 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 					obj->t = obj->tmp_t;
 					return (check_closest(obj));
 				}
-				// return (check_closest(obj));
 			}
 		}
 	}
