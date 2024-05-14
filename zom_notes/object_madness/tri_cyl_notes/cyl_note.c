@@ -1,4 +1,67 @@
 
+
+
+// COMPARE WITH THIS:
+// double	plane_cyl(t_ray *ray, t_vec3 center, t_vec3 vector)
+// {
+// 	double	x;
+// 	double	denom;
+// 	t_vec3	oc;
+
+// 	denom = dot_product(ray->vector, vector);
+// 	if (fabs(denom))
+// 	{
+// 		oc = minus(ray->place, center);
+// 		x = -dot_product(oc, vector) / denom;
+// 		if (x < 0)
+// 			x = INFINITY;
+// 		return (x);
+// 	}
+// 	return (INFINITY);
+// }
+
+// bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+// {
+// 	double hit1;
+// 	double hit2;
+// 	t_vec3 pnt1;
+// 	t_vec3 pnt2;
+// 	t_vec3 cent2;
+
+// 	cent2 = plus(cyl->center, mult_vecdub(cyl->vector, obj->height_half));
+
+// 	hit1 = plane_cyl(ray, cyl->center, cyl->vector);
+// 	hit2 = plane_cyl(ray, cent2, cyl->vector);
+
+// 	if (hit1 < INFINITY || hit2 < INFINITY)
+// 	{
+// 		pnt2 = plus(mult_vecdub(ray->vector, hit2), ray->place);
+// 		pnt1 = plus(mult_vecdub(ray->vector, hit1), ray->place);
+// 		if ((hit1 < INFINITY && distance(cyl->center, pnt1) <= obj->radius) 
+// 			&& (hit2 < INFINITY && distance(cent2, pnt2) <= obj->radius))
+// 		{
+// 			if (hit1 < hit2)
+// 				obj->t = hit1;
+// 			else
+// 				obj->t = hit2;
+// 			return (true);
+// 		}
+// 		if (hit1 < INFINITY && distance(cyl->center, pnt1) <= obj->radius)
+// 		{
+// 			obj->t = hit1;
+// 			return (true);
+// 		}
+// 		else if (hit2 < INFINITY && distance(cent2, pnt2) <= obj->radius)
+// 		{
+// 			obj->t = hit2;
+// 			return (true);
+// 		}
+// 		return (false);
+// 	}
+// 	return (false);
+// }
+
+
 //------------------------------////------------------------------////------------------------------////------------------------------//
 //------------------------------////------------------------------////------------------------------//
 //------------------------------////------------------------------////------------------------------////------------------------------//
