@@ -1,5 +1,159 @@
 
+//------------------------------////------------------------------////------------------------------////------------------------------//
+//------------------------------////------------------------------////------------------------------//
+//------------------------------////------------------------------////------------------------------////------------------------------//
+//------------------------------////------------------------------////------------------------------//
+
+static int	solve_caps(t_eq *caps, t_object *obj, t_vector ray)
+{
+	short		res[2];
+	t_vector	cap_c[2];
+	t_vector	hit[2];
+
+	ft_memset(&res, 0, sizeof(res));
+	if (caps->dist1 >= MIN_DIST)
+	{
+		hit[0] = vect_mult(ray, caps->dist1);
+		cap_c[0] = vect_add(obj->center, vect_mult(obj->norm_v, caps->m1));
+		res[0] = (fabs(point_dist(hit[0], cap_c[0])) <= obj->radius);
+	}
+	if (caps->dist2 >= MIN_DIST)
+	{
+		hit[1] = vect_mult(ray, caps->dist2);
+		cap_c[1] = vect_add(obj->center, vect_mult(obj->norm_v, caps->m2));
+		res[1] = (fabs(point_dist(hit[1], cap_c[1])) <= obj->radius);
+	}
+	if (!res[0] && !res[1])
+		return (0);
+	if ((res[0] && res[1] && caps->dist2 < caps->dist1) || !res[0])
+	{
+		caps->dist1 = caps->dist2;
+		caps->m1 = caps->m2;
+	}
+	return (1);
+}
+
+int	get_cylinder_caps(t_eq *caps, t_object *obj, t_vector ray, t_vector origin)
+{
+	float		dot_r_nv;
+	t_vector	orig_pl1;
+	t_vector	orig_pl2;
+
+	normalise_vect(&obj->norm_v);
+	dot_r_nv = vect_dot_product(ray, obj->norm_v);
+	if (dot_r_nv == 0 || fabs(dot_r_nv) < MIN_DIST)
+		return (0);
+	caps->m1 = obj->height;
+	caps->m2 = -obj->height;
+	orig_pl1 = vect_substract(origin,
+			vect_add(obj->center, vect_mult(obj->norm_v, caps->m1)));
+	orig_pl2 = vect_substract(origin,
+			vect_add(obj->center, vect_mult(obj->norm_v, caps->m2)));
+	caps->dist1 = -vect_dot_product(orig_pl1, obj->norm_v) / dot_r_nv;
+	caps->dist2 = -vect_dot_product(orig_pl2, obj->norm_v) / dot_r_nv;
+	if (caps->dist1 < MIN_DIST && caps->dist2 < MIN_DIST)
+		return (0);
+	return (solve_caps(caps, obj, ray));
+}
+
+
+
+//------------------------------////------------------------------////------------------------------////------------------------------//
+//------------------------------////------------------------------////------------------------------//
+
+//------------------------------////------------------------------////------------------------------////------------------------------//
+//------------------------------////------------------------------////------------------------------//
+
+new caps aproach: NO
+
+double	pick_cy_inter(t_cylinder inf, t_CamRay *ray, t_objs *cy)
+{
+	inf.t1 = (-inf.b + sqrt(inf.delta)) / (2 * inf.a);
+	inf.t2 = (-inf.b - sqrt(inf.delta)) / (2 * inf.a);
+	if (inf.t1 < EPS)
+		return (-1.0);
+	if (inf.t1 > inf.t2)
+		inf.t = inf.t2;
+	else
+		inf.t = inf.t1;
+
+
+	inf.y0 = dot_product(ray->dir, inf.normal) * inf.t2
+		+ dot_product(inf.oc, inf.normal);
+	inf.y1 = dot_product(ray->dir, inf.normal) * inf.t1
+		+ dot_product(inf.oc, inf.normal);
+	if (inf.y0 >= EPS && inf.y0 <= cy->p.y)
+		return (inf.t2);
+	if (inf.y1 >= EPS && inf.y1 <= cy->p.y)
+		return (inf.t1);
+	return (-1.0);
+}
+
+
 //------------------------------//
+//------------------------------////------------------------------////------------------------------////------------------------------//
+
+
+double	plane_cyl(t_ray *ray, t_vec3 center, t_vec3 vector)
+{
+	double	x;
+	double	denom;
+	t_vec3	oc;
+
+	denom = dot_product(ray->vector, vector);
+	if (fabs(denom))
+	{
+		oc = minus(ray->place, center);
+		x = -dot_product(oc, vector) / denom;
+		if (x < 0)
+			x = INFINITY;
+		return (x);
+	}
+	return (INFINITY);
+}
+
+bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+{
+	double hit1;
+	double hit2;
+	t_vec3 pnt1;
+	t_vec3 pnt2;
+	t_vec3 cent2;
+
+	cent2 = plus(cyl->center, mult_vecdub(cyl->vector, obj->height_half));
+
+	hit1 = plane_cyl(ray, cyl->center, cyl->vector);
+	hit2 = plane_cyl(ray, cent2, cyl->vector);
+
+	if (hit1 < INFINITY || hit2 < INFINITY)
+	{
+		pnt2 = plus(mult_vecdub(ray->vector, hit2), ray->place);
+		pnt1 = plus(mult_vecdub(ray->vector, hit1), ray->place);
+		if ((hit1 < INFINITY && distance(cyl->center, pnt1) <= obj->radius) 
+			&& (hit2 < INFINITY && distance(cent2, pnt2) <= obj->radius))
+		{
+			if (hit1 < hit2)
+				obj->t = hit1;
+			else
+				obj->t = hit2;
+			return (true);
+		}
+		if (hit1 < INFINITY && distance(cyl->center, pnt1) <= obj->radius)
+		{
+			obj->t = hit1;
+			return (true);
+		}
+		else if (hit2 < INFINITY && distance(cent2, pnt2) <= obj->radius)
+		{
+			obj->t = hit2;
+			return (true);
+		}
+		return (false);
+	}
+	return (false);
+}
+
+
 //------------------------------//
 /**
 
