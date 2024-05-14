@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/11 16:15:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/14 17:16:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
  *			v = plane normal
  * 			d = ray direction
  */
-bool intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data)
+bool	intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data)
 {
 	t_vec3	oc;
 	double	denom;
-	
+
 	denom = dot_product(ray->vector, plane->vector);
 	if (fabs(denom) > EPSILON)
 	{

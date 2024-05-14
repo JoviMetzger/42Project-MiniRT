@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/13 19:42:31 by eugene        ########   odam.nl         */
+/*   Updated: 2024/05/14 17:19:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@
 // Reflection direction = Incident direction - 2 * (Incident direction . Normal) * Normal
 t_vec3	ft_reflect(t_vec3 incident, t_vec3 normal)
 {
-	return minus(incident, mult_vecdub(normal, 2 * dot_product(incident, normal)));
+	return (minus(incident, mult_vecdub(normal, 2
+			* dot_product(incident, normal))));
 }
 
 int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b)

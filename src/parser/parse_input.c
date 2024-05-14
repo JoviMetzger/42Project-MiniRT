@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 20:31:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/14 17:22:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ void	parse_input(int argc, char **argv, t_data *data)
 	int		file;
 
 	file = 0;
-	ft_bzero(data, sizeof(t_data)); // Jovi added: to set everything to zero, else the map will be do funny things
+	ft_bzero(data, sizeof(t_data));
+// Jovi added: to set everything to zero, else the map will be do funny things
 	if (argc != 2)
 		error_msg("wrong number of arguments");
 	check_file_type(argv[1]);
@@ -117,5 +118,6 @@ void	parse_input(int argc, char **argv, t_data *data)
 	if (file == -1)
 		error_msg("couldn't open file");
 	read_file(data, file);
-	// init_mouse_map(data); // Jovi added: for our mouse movement -> NOTE: This is not freed yet so it leaks :(
+// init_mouse_map(data); // Jovi added: for our mouse movement -> 
+// NOTE: This is not freed yet so it leaks :(
 }
