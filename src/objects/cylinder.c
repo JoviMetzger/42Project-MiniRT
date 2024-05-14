@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/14 16:13:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/14 17:08:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,37 +44,50 @@ double	plane_cyl(t_ray *ray, t_vec3 center, t_vec3 vector)
 {
 	double	x;
 	double	denom;
+	t_vec3	oc;
 
-	denom = dot_product(vector, ray->vector);
-	if (denom == 0)
-		return (INFINITY);
-	x = -dot_product(vector, minus(ray->place, center)) / denom; // min?
-	return (x > 0 ? x : INFINITY);
+	denom = dot_product(ray->vector, vector);
+	if (fabs(denom))
+	{
+		oc = minus(ray->place, center);
+		x = -dot_product(oc, vector) / denom;
+		if (x < 0)
+			x = INFINITY;
+		return (x);
+	}
+	return (INFINITY);
 }
 
 bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 {
-	(void) obj;
 	double hit1;
 	double hit2;
 	t_vec3 pnt1;
 	t_vec3 pnt2;
 	t_vec3 cent2;
 
-	cent2 = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height));
+	cent2 = plus(cyl->center, mult_vecdub(cyl->vector, obj->height_half));
 
 	hit1 = plane_cyl(ray, cyl->center, cyl->vector);
 	hit2 = plane_cyl(ray, cent2, cyl->vector);
+	
+	// printf("hit1: %f | hit2: %f\n", hit1, hit2);
+	// exit(EXIT_SUCCESS);
+
 	if (hit1 < INFINITY || hit2 < INFINITY)
 	{
 		pnt2 = plus(mult_vecdub(ray->vector, hit2), ray->place);
 		pnt1 = plus(mult_vecdub(ray->vector, hit1), ray->place);
-		if (hit1 < INFINITY && distance(pnt1, cyl->center) <= obj->radius)
+
+		// printf("pnt1: %f, %f, %f | pnt2: %f, %f, %f\n", pnt1.x, pnt1.y, pnt1.z, pnt2.x, pnt2.y, pnt2.z);
+		// exit(EXIT_SUCCESS);
+		
+		if (hit1 < INFINITY && distance(cyl->center, pnt1) <= obj->radius)
 		{
 			obj->t = hit1;
 			return (true);
 		}
-		else if (hit2 < INFINITY && distance(pnt2, cent2) <= obj->radius)
+		else if (hit2 < INFINITY && distance(cent2, pnt2) <= obj->radius)
 		{
 			obj->t = hit2;
 			return (true);
@@ -84,6 +97,10 @@ bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
+/**
+ * after checking roots, save t in tmp, check if body or cap, if body, use og t, otherwise
+ * if cap, use updated t 
+ */
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 {
 
@@ -107,14 +124,11 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 				obj->tmp_t = obj->t;
 				if (check_caps(obj, cyl, ray) == true)
 					return (check_closest(obj));
-					
-				else // if no cap, no cyl... remove this after testing
+				else
 				{
-					// return (false);
 					obj->t = obj->tmp_t;
 					return (check_closest(obj));
 				}
-					// return (check_closest(obj));
 			}
 		}
 	}
