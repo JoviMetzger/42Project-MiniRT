@@ -2,6 +2,41 @@
 //------------------------------//
 //------------------------------//
 /**
+
+ * 
+ * 
+
+// // infinity shittt
+// // double	plane_cyl(t_obj_data *obj, t_ray *ray, t_vec3 center, t_vec3 vector)
+// // {
+// // 	t_vec3 oc;
+// // 	double	denom;
+
+// // 	denom = dot_product(ray->vector, vector);
+// // 	if (fabs(denom) > EPSILON)
+// // 	{
+// // 		oc = minus(ray->place, center);
+// // 		obj->t = -dot_product(oc, vector) / denom;
+// // 		if (obj->t >= EPSILON)
+// // 			return (check_closest(obj));
+// // 		else
+// // 			return (INFINITY);
+// // 	}
+// // 	return (INFINITY);
+// // }
+ * 
+ * 		// not sure this bit is necessary.. doesnt seem to ever hit?
+		// if ((hit1 < INFINITY && distance(pnt1, cyl->center) <= obj->radius) 
+		// 	&& (hit2 < INFINITY && distance(pnt2, cent2) <= obj->radius))
+		// {
+		// 	// printf("this hit\n");/
+		// 	if (hit1 < hit2) // more or less?
+		// 		obj->t = hit1;
+		// 	else
+		// 		obj->t = hit2;
+		// 	return (true);
+		// }
+ * 
  * 				t_vec3 hit = plus(ray->place, mult_vecdub(ray->vector, obj->t));
 				t_vec3 ctp = minus(hit, cyl->center);
 				t_vec3 normal = minus(ctp, mult_vecdub(cyl->vector, dot_product(cyl->vector, ctp)));

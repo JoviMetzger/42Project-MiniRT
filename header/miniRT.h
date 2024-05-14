@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/14 14:41:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/14 16:07:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,8 @@ typedef struct s_obj_data
 	double	b;
 	double	c;
 	double	d;
+	t_vec3	e;
+	t_vec3	f;
 	double	root1;
 	double	root2;
 	double	t;
