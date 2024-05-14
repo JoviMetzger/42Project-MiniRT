@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/14 18:21:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/14 20:46:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,58 +14,35 @@
 
 bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 {
-	t_vec3	hit[2];
-	t_vec3	cap[2];
-	t_vec3	og_pnt[2];
-	double dist1;
-	double dist2;
-	double hit1 = 0;
-	double hit2 = 0;
-	double	denom;
-	// (void) obj;
-
-	denom = dot_product(ray->vector, cyl->vector);
-	if (denom == 0 || fabs(denom) < 0)
-		return (false);
+	t_objs	tmppl;
 	
-	obj->hit1 = cyl->height;
-	obj->hit2 = -cyl->height;
-	og_pnt[0] = minus(ray->place, plus(cyl->center, mult_vecdub(cyl->vector, obj->hit1)));
-	og_pnt[1] = minus(ray->place, plus(cyl->center, mult_vecdub(cyl->vector, obj->hit2)));
+	obj->base = mult_vecdub(minus(cyl->center, cyl->vector), cyl->height / 2);
+	obj->top = mult_vecdub(plus(cyl->center, cyl->vector), cyl->height / 2);
 	
-	dist1 = -dot_product(og_pnt[0], cyl->vector) / denom;
-	dist2 = -dot_product(og_pnt[1], cyl->vector) / denom;
+	obj->denom = dot_product(ray->vector, cyl->vector);
+	obj->distance = dot_product(obj->top, cyl->vector) / obj->denom;
+	obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->distance));
 
-	if (dist1 < 0 && dist2 < 0)
-		return (false);
-	
-	if (dist1 >= 0)
+	ft_bzero(&tmppl, sizeof(t_objs));
+	tmppl.center = obj->top;
+	tmppl.vector = cyl->vector;
+	if (intersect_plane(ray, &tmppl, obj) == true)
 	{
-		hit[0] = mult_vecdub(ray->vector, dist1);
-		cap[0] = plus(cyl->center, mult_vecdub(cyl->vector, obj->hit1));
-		hit1 =(fabs(distance(hit[0], cap[0])) <= obj->radius);
-		obj->t = hit1;
+		if (vec_length(obj->top, obj->hit_pos) <= obj->radius)
+			return (true);
 	}
-	if (dist2 >= 0)
+	ft_bzero(&tmppl, sizeof(t_objs));
+	tmppl.center = obj->base;
+	tmppl.vector = cyl->vector;
+	if (intersect_plane(ray, &tmppl, obj) == true)
 	{
-		hit[1] = mult_vecdub(ray->vector, dist2);
-		cap[1] = plus(cyl->center, mult_vecdub(cyl->vector, obj->hit2));
-		hit2 =(fabs(distance(hit[1], cap[1])) <= obj->radius);
-		obj->t = hit2;
+		if (vec_length(obj->top, obj->hit_pos) <= obj->radius)
+			return (true);
 	}
-	if (!hit1 && !hit2)
-		return (false);
-	if ((hit1 && hit2 && dist2 < dist1) || !hit1)
-	{
-		// dist1 = dist2;
-		// obj->hit1 = obj->hit2;
-		obj->t =  obj->hit2;
-	}
-	return (true);
-
+	return (false);
 }
 
-bool	check_roots(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+bool	cut_chop(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 {
 	obj->f = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height));
 	obj->e = plus(ray->place, mult_vecdub(ray->vector, obj->t));
@@ -96,16 +73,16 @@ bool	check_roots(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 static void	set_points(t_obj_data *obj, t_ray *ray, t_objs *cyl)
 {
 	t_vec3	vector_cross;
-	t_vec3	distance;
+	t_vec3	to_cyl_center;
 
 	obj->radius = cyl->diameter / 2;
 	obj->height_half = cyl->height / 2;
 	vector_cross = cross_product(cyl->vector, ray->vector);
-	distance = minus(ray->place, cyl->center);
-	distance = cross_product(distance, cyl->vector);
+	to_cyl_center = minus(ray->place, cyl->center);
+	to_cyl_center = cross_product(to_cyl_center, cyl->vector);
 	obj->a = dot_product(vector_cross, vector_cross);
-	obj->b = -2.0 * dot_product(vector_cross, distance);
-	obj->c = dot_product(distance, distance) - pow(obj->radius, 2);
+	obj->b = -2.0 * dot_product(vector_cross, to_cyl_center);
+	obj->c = dot_product(to_cyl_center, to_cyl_center) - pow(obj->radius, 2);
 }
 
 /**
@@ -119,15 +96,11 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 	{
 		if (obj->t > EPSILON)
 		{	
-			if (check_roots(obj, cyl, ray) == true)
+			if (cut_chop(obj, cyl, ray) == true)
 			{
 				obj->tmp_t = obj->t;
 				if (check_caps(obj, cyl, ray) == true)
-				{
-					// printf("yeah cap\n");
-					// exit(EXIT_SUCCESS);
 					return (check_closest(obj));
-				}
 				else
 				{
 					obj->t = obj->tmp_t;

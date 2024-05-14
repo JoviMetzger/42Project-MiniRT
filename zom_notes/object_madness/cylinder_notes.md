@@ -1,5 +1,104 @@
 
 
+
+// cappies
+bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+{
+	t_objs	tmppl;
+	double denom = dot_product(ray->vector, cyl->vector);
+	double distance = dot_product(obj->top, cyl->vector) / denom;
+	t_vec3 hit_pos = plus(ray->place, mult_vecdub(ray->vector, distance));
+
+	ft_bzero(&tmppl, sizeof(t_objs));
+	tmppl.center = obj->top;
+	tmppl.vector = cyl->vector;
+	if (intersect_plane(ray, &tmppl, obj) == true)
+	{
+		if (vec_length(obj->top, hit_pos) <= obj->radius)
+			return (true);
+	}
+	ft_bzero(&tmppl, sizeof(t_objs));
+	tmppl.center = obj->base;
+	tmppl.vector = cyl->vector;
+	if (intersect_plane(ray, &tmppl, obj) == true)
+	{
+		if (vec_length(obj->top, hit_pos) <= obj->radius)
+			return (true);
+	}
+	return (false);
+}
+
+// vincent version //
+
+// bool	check_cappies(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+// {
+// 	t_objs	tmpplane;
+
+// 	ft_bzero(&tmpplane, sizeof(t_objs));
+// 	tmpplane.center = obj->top;
+// 	tmpplane.vector = cyl->vector;
+// 	if (intersect_plane(ray, &tmpplane, obj) == true)
+// 	{
+// 		if (vector_length(cyl->top, intersectionlocation) <= cyl->radius)
+// 			GREAT SUCCESS;
+// 	}
+// }
+
+//// ollllllddd
+// bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+// {
+// 	t_vec3	hit[2];
+// 	t_vec3	cap[2];
+// 	t_vec3	og_pnt[2];
+// 	double dist1;
+// 	double dist2;
+// 	double hit1 = 0;
+// 	double hit2 = 0;
+// 	double	denom;
+// 	// (void) obj;
+
+// 	denom = dot_product(ray->vector, cyl->vector);
+// 	if (denom == 0 || fabs(denom) < 0)
+// 		return (false);
+	
+// 	obj->hit1 = cyl->height;
+// 	obj->hit2 = -cyl->height;
+// 	og_pnt[0] = minus(ray->place, plus(cyl->center, mult_vecdub(cyl->vector, obj->hit1)));
+// 	og_pnt[1] = minus(ray->place, plus(cyl->center, mult_vecdub(cyl->vector, obj->hit2)));
+	
+// 	dist1 = -dot_product(og_pnt[0], cyl->vector) / denom;
+// 	dist2 = -dot_product(og_pnt[1], cyl->vector) / denom;
+
+// 	if (dist1 < 0 && dist2 < 0)
+// 		return (false);
+	
+// 	if (dist1 >= 0)
+// 	{
+// 		hit[0] = mult_vecdub(ray->vector, dist1);
+// 		cap[0] = plus(cyl->center, mult_vecdub(cyl->vector, obj->hit1));
+// 		hit1 =(fabs(distance(hit[0], cap[0])) <= obj->radius);
+// 		obj->t = hit1;
+// 	}
+// 	if (dist2 >= 0)
+// 	{
+// 		hit[1] = mult_vecdub(ray->vector, dist2);
+// 		cap[1] = plus(cyl->center, mult_vecdub(cyl->vector, obj->hit2));
+// 		hit2 =(fabs(distance(hit[1], cap[1])) <= obj->radius);
+// 		obj->t = hit2;
+// 	}
+// 	if (!hit1 && !hit2)
+// 		return (false);
+// 	if ((hit1 && hit2 && dist2 < dist1) || !hit1)
+// 	{
+// 		// dist1 = dist2;
+// 		// obj->hit1 = obj->hit2;
+// 		obj->t =  obj->hit2;
+// 	}
+// 	return (true);
+
+// }
+
+
 **********************************************************************************
 								LATEST SHIZZLE
 	

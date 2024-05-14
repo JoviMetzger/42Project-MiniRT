@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/14 16:07:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/14 20:40:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,8 +211,11 @@ typedef struct s_obj_data
 	double	t;
 	double	tmp_t;
 	double	height_half;
-	double	hit1;
-	double	hit2;
+	t_vec3	top;
+	t_vec3	base;
+	t_vec3	hit_pos;
+	double	distance;
+	double	denom;
 	double	radius;
 	double	closest_t;
 
@@ -261,12 +264,15 @@ double		dot_product(t_vec3 u, t_vec3 v);
 double		length_squared(t_vec3 vec);
 t_vec3		normalize_vector(t_vec3 v);
 double		distance(t_vec3 pnt1, t_vec3 pnt2);
+float		vec_length(const t_vec3 v1, const t_vec3 v2);
+float		pythagoras(const float a, const float b);
+float		vec_length(const t_vec3 v1, const t_vec3 v2);
 
 // Objects Functions
 bool		check_closest(t_obj_data *obj_data);
 bool		quadratic(t_obj_data *obj_data);
 bool		check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray);
-bool		check_roots(t_obj_data *obj, t_objs *cyl, t_ray *ray);
+bool		cut_chop(t_obj_data *obj, t_objs *cyl, t_ray *ray);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
