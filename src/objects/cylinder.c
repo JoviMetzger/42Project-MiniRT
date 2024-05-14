@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/14 20:46:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/14 21:08:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,25 @@
 bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 {
 	t_objs	tmppl;
-	
-	obj->base = mult_vecdub(minus(cyl->center, cyl->vector), cyl->height / 2);
-	obj->top = mult_vecdub(plus(cyl->center, cyl->vector), cyl->height / 2);
-	
-	obj->denom = dot_product(ray->vector, cyl->vector);
-	obj->distance = dot_product(obj->top, cyl->vector) / obj->denom;
-	obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->distance));
 
 	ft_bzero(&tmppl, sizeof(t_objs));
 	tmppl.center = obj->top;
 	tmppl.vector = cyl->vector;
 	if (intersect_plane(ray, &tmppl, obj) == true)
 	{
-		if (vec_length(obj->top, obj->hit_pos) <= obj->radius)
+		if (vec_length(obj->hit_pos, obj->top) <= obj->radius)
 			return (true);
 	}
-	ft_bzero(&tmppl, sizeof(t_objs));
-	tmppl.center = obj->base;
-	tmppl.vector = cyl->vector;
-	if (intersect_plane(ray, &tmppl, obj) == true)
-	{
-		if (vec_length(obj->top, obj->hit_pos) <= obj->radius)
-			return (true);
-	}
+	
+	// do same for base...
+	// ft_bzero(&tmppl, sizeof(t_objs));
+	// tmppl.center = obj->base;
+	// tmppl.vector = cyl->vector;
+	// if (intersect_plane(ray, &tmppl, obj) == true)
+	// {
+	// 	if (vec_length(obj->top, obj->hit_pos) <= obj->radius)
+	// 		return (true);
+	// }
 	return (false);
 }
 
@@ -83,6 +78,18 @@ static void	set_points(t_obj_data *obj, t_ray *ray, t_objs *cyl)
 	obj->a = dot_product(vector_cross, vector_cross);
 	obj->b = -2.0 * dot_product(vector_cross, to_cyl_center);
 	obj->c = dot_product(to_cyl_center, to_cyl_center) - pow(obj->radius, 2);
+
+//------//
+
+	obj->base = mult_vecdub(minus(cyl->center, cyl->vector), cyl->height / 2);
+	obj->top = mult_vecdub(plus(cyl->center, cyl->vector), cyl->height / 2);
+	
+	obj->denom = dot_product(ray->vector, cyl->vector);
+	obj->distance = dot_product(obj->top, cyl->vector) / obj->denom;
+	obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->distance));
+
+	obj->normal = normalize_vector(cyl->vector);
+
 }
 
 /**

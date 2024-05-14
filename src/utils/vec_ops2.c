@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/14 17:10:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/14 20:24:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/14 20:57:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_vec3	normalize_vector(t_vec3 v)
 	return (len);
 }
 
-double	distance(const t_vec3 pnt1, const t_vec3 pnt2)
+double	distance(t_vec3 pnt1, t_vec3 pnt2)
 {
 	double	d;
 
@@ -36,15 +36,15 @@ double	distance(const t_vec3 pnt1, const t_vec3 pnt2)
 	return (d);
 }
 
-float	pythagoras(const float a, const float b)
+double	pythagoras(double a, double b)
 {
 	return (sqrt(a * a + b * b));
 }
 
-float	vec_length(const t_vec3 v1, const t_vec3 v2)
+double	vec_length(t_vec3 v1, t_vec3 v2)
 {
-	float	len;
+	double	result;
 
-	len = pythagoras(v1.x - v2.x, v1.y - v2.y);
-	return (pythagoras(len, v1.z - v2.z));
+	result = pythagoras(v1.x - v2.x, v1.y - v2.y);
+	return (pythagoras(result, v1.z - v2.z));
 }
