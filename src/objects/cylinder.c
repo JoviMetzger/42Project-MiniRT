@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/14 21:13:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/14 21:26:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@ bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	t_objs	tmppl;
 
 	ft_bzero(&tmppl, sizeof(t_objs));
+	tmppl.center = obj->base;
+	tmppl.vector = cyl->vector;
+	double tmp = obj->t;
+	if (intersect_plane(ray, &tmppl, obj) == true)
+	{
+		if (vec_length(obj->hit_pos, obj->base) <= obj->radius)
+			return (true);
+	}
+	obj->t = tmp;
+	// do same for top...
+	ft_bzero(&tmppl, sizeof(t_objs));
 	tmppl.center = obj->top;
 	tmppl.vector = cyl->vector;
 	if (intersect_plane(ray, &tmppl, obj) == true)
@@ -24,16 +35,6 @@ bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 		if (vec_length(obj->hit_pos, obj->top) <= obj->radius)
 			return (true);
 	}
-	
-	// do same for base...
-	// ft_bzero(&tmppl, sizeof(t_objs));
-	// tmppl.center = obj->base;
-	// tmppl.vector = cyl->vector;
-	// if (intersect_plane(ray, &tmppl, obj) == true)
-	// {
-	// 	if (vec_length(obj->top, obj->hit_pos) <= obj->radius)
-	// 		return (true);
-	// }
 	return (false);
 }
 
@@ -65,6 +66,25 @@ bool	cut_chop(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
+/**
+
+Base Vector:
+
+Given the cylinder's center at (-3, 0, -20) and height 3, 
+
+the base vector should be (x=0, y=-1.5, z=10.5) relative to the cylinder's center.
+Adding this to the center coordinates gives (x=-3, y=-1.5, z=-9.5), 
+which matches with your provided coordinates.
+
+Top Vector:
+
+Similarly, the top vector should be (x=0, y=1.5, z=-10.5) relative 
+to the cylinder's center.
+Adding this to the center coordinates gives (x=-3, y=1.5, z=-30.5), 
+which matches with your provided coordinates.
+
+*/
+
 static void	set_points(t_obj_data *obj, t_ray *ray, t_objs *cyl)
 {
 	t_vec3	vector_cross;
@@ -81,9 +101,12 @@ static void	set_points(t_obj_data *obj, t_ray *ray, t_objs *cyl)
 
 //------//
 
-	obj->base = mult_vecdub(minus(cyl->center, cyl->vector), cyl->height / 2);
-	obj->top = mult_vecdub(plus(cyl->center, cyl->vector), cyl->height / 2);
+	obj->base = mult_vecdub(minus(cyl->vector, cyl->center), (cyl->height / 2));
+	obj->top = mult_vecdub(plus(cyl->vector, cyl->center), (cyl->height / 2));
 	
+	// printf("base: %f, %f, %f | top: %f, %f, %f\n", obj->base.x, obj->base.y, obj->base.z, obj->top.x, obj->top.y, obj->top.z);
+	// exit (EXIT_SUCCESS);
+
 	obj->denom = dot_product(ray->vector, cyl->vector);
 	obj->distance = dot_product(obj->top, cyl->vector) / obj->denom;
 	obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->distance));
