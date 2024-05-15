@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/15 15:18:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/15 19:15:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdbool.h>
 # include <float.h> // apparently invalid by norm
 # include <math.h>
+# include <limits.h>
 
 // --- Colours ---
 # define BLACK "\033[30;1m"

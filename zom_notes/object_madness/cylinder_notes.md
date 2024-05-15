@@ -1,4 +1,48 @@
 
+// getting desperate
+// Function to check if a ray intersects with the body (curved surface) of a cylinder
+int rayIntersectsCylinder(Vector3 rayOrigin, Vector3 rayDir, Cylinder cylinder, float* t) {
+    // Compute cylinder parameters
+    Vector3 cylinderAxis = {0, 1, 0}; // Assume cylinder is aligned with y-axis
+    Vector3 oc = subtract(rayOrigin, cylinder.center);
+    
+    // Compute coefficients for quadratic equation
+    float a = dot(rayDir, rayDir) - pow(dot(rayDir, cylinderAxis), 2);
+    float b = 2 * (dot(rayDir, oc) - dot(rayDir, cylinderAxis) * dot(oc, cylinderAxis));
+    float c = dot(oc, oc) - pow(dot(oc, cylinderAxis), 2) - pow(cylinder.radius, 2);
+    
+    // Solve quadratic equation
+    float discriminant = b * b - 4 * a * c;
+    if (discriminant < 0) {
+        // No intersection
+        return 0;
+    }
+    
+    // Compute intersection distances along the ray
+    float t1 = (-b - sqrt(discriminant)) / (2 * a);
+    float t2 = (-b + sqrt(discriminant)) / (2 * a);
+    
+    // Check if intersection points are within height range of cylinder
+    float t_min = MIN(t1, t2);
+    float t_max = MAX(t1, t2);
+    float t_bottom = (cylinder.center.y - rayOrigin.y) / rayDir.y;
+    float t_top = (cylinder.center.y + cylinder.height - rayOrigin.y) / rayDir.y;
+    t_min = MAX(t_min, MIN(t_bottom, t_top));
+    t_max = MIN(t_max, MAX(t_bottom, t_top));
+    
+    if (t_min <= t_max && t_max > 0) {
+        // Intersection with the curved surface
+        *t = t_min;
+        return 1;
+    }
+    
+    // No intersection with the curved surface
+    return 0;
+}
+
+
+
+
 bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 {
 	obj->base = mult_vecdub(minus(cyl->vector, cyl->center), (cyl->height / 2));
