@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/15 15:37:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/15 16:17:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	{
 		obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->t));
 		if (vec_length(obj->hit_pos, obj->top) <= cyl->radius)
-			return (true);
+		{
+			if (obj->t > 0) 
+				return (true);
+		}
 	}
 	obj->t = tmp;
 	ft_bzero(&tmppl, sizeof(t_objs));
@@ -56,7 +59,10 @@ bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	{
 		obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->t));
 		if (vec_length(obj->hit_pos, obj->base) <= cyl->radius)
-			return (true);
+		{
+			if (obj->t > 0) 
+				return (true);
+		}
 	}
 	return (false);
 }
