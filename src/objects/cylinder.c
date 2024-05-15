@@ -6,54 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/15 19:31:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/15 19:59:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
-
-/**
- * typedef struct {
-    float x, y, z;
-} Vector3;
-
-typedef struct {
-    Vector3 center;
-    float radius;
-    float height;
-} Cylinder;
-
-// Function to check if a ray intersects with a cylinder's end caps
-int rayIntersectsCaps(Vector3 rayOrigin, Vector3 rayDir, Cylinder cylinder) {
-    float t;
-    
-    // Check intersection with bottom cap
-    t = (cylinder.center.y - rayOrigin.y) / rayDir.y;
-    if (t > 0) {
-        Vector3 intersectionPoint = {rayOrigin.x + t * rayDir.x, rayOrigin.y + t * rayDir.y, rayOrigin.z + t * rayDir.z};
-       
-	    if (intersectionPoint.x >= cylinder.center.x - cylinder.radius && intersectionPoint.x <= cylinder.center.x + cylinder.radius &&
-            intersectionPoint.z >= cylinder.center.z - cylinder.radius && intersectionPoint.z <= cylinder.center.z + cylinder.radius) {
-            // Intersection with bottom cap
-            return 1;
-        }
-    }
-    
-    // Check intersection with top cap
-    t = (cylinder.center.y + cylinder.height - rayOrigin.y) / rayDir.y;
-    if (t > 0) {
-        Vector3 intersectionPoint = {rayOrigin.x + t * rayDir.x, rayOrigin.y + t * rayDir.y, rayOrigin.z + t * rayDir.z};
-        if (intersectionPoint.x >= cylinder.center.x - cylinder.radius && intersectionPoint.x <= cylinder.center.x + cylinder.radius &&
-            intersectionPoint.z >= cylinder.center.z - cylinder.radius && intersectionPoint.z <= cylinder.center.z + cylinder.radius) {
-            // Intersection with top cap
-            return 1;
-        }
-    }
-    
-    return 0; // No intersection with caps
-}
-
- */
 
 bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 {
@@ -116,12 +73,6 @@ bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 // 	return (false);
 // }
 
-// #Identifier     #Coordinates        #3D vector      #Diameter       #Height
-// cy              -7,-1,-20           0.0,0.0,1.0         4               8
-// e = -6.599499, 0.959489, -7.602938 | f = -7.000000, -1.000000, -12.000000
-// e = -6.599499, 0.959489, -7.602938 | f = -7.000000, -1.000000, -12.000000
-	// printf("e = %f, %f, %f | f = %f, %f, %f\n", obj->e.x, obj->e.y, obj->e.z, obj->f.x, obj->f.y, obj->f.z);
-	// exit(EXIT_SUCCESS);
 bool	cut_ends(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 {
 	obj->cut[0] = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height));
@@ -169,22 +120,9 @@ static void	set_points(t_obj_data *obj, t_ray *ray, t_objs *cyl)
  */
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 {
-	// ray vector not normalizedddddddd
-	// cyl center not normalized
-	ray->vector = normalize_vector(ray->vector);
 	cyl->center = normalize_vector(cyl->center);
-	printf("cyl->vector.x = %f\n", cyl->vector.x);
-	printf("cyl->vector.y = %f\n", cyl->vector.y);
-	printf("cyl->vector.z = %f\n", cyl->vector.z);
-	printf("-----------------------\n");
-	printf("cyl->center.x = %f\n", cyl->center.x);
-	printf("cyl->center.y = %f\n", cyl->center.y);
-	printf("cyl->center.z = %f\n", cyl->center.z);
-	printf("-----------------------\n");
-	printf("ray->vector.x = %f\n", ray->vector.x);
-	printf("ray->vector.y = %f\n", ray->vector.y);
-	printf("ray->vector.z = %f\n", ray->vector.z);
-	exit(EXIT_SUCCESS);
+	ray->vector = normalize_vector(ray->vector);
+
 	set_points(obj, ray, cyl);
 	if (quadratic(obj) == true)
 	{
@@ -192,14 +130,14 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 		{
 			if (cut_ends(obj, cyl, ray) == true)
 			{
-				obj->tmp_t = obj->t;
-				if (check_caps(obj, cyl, ray) == true)
+				// obj->tmp_t = obj->t;
+				// if (check_caps(obj, cyl, ray) == true)
+				// 	return (check_closest(obj));
+				// else
+				// {
+				// 	obj->t = obj->tmp_t;
 					return (check_closest(obj));
-				else
-				{
-					obj->t = obj->tmp_t;
-					return (check_closest(obj));
-				}
+				// }
 			}
 		}
 	}
