@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/14 21:32:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/15 15:29:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ bool	intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data)
 	{
 		oc = minus(ray->place, plane->center);
 		obj_data->t = -dot_product(oc, plane->vector) / denom;
-		obj_data->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj_data->t));
 		if (obj_data->t >= EPSILON)
-			return (check_closest(obj_data));
+			return (true);
+			// return (check_closest(obj_data)); // somehow this is making
+			// things infinite colour
 	}
 	return (false);
 }

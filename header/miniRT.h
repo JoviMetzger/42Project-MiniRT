@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/14 21:02:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/15 15:18:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,25 +105,6 @@ typedef struct s_colour
 }	t_colour;
 
 // -------------------------------------------------------------
-// Struct for objects, each object has this struct
-// array of structs in data struct
-typedef struct s_objs
-{
-	t_type				type;
-	t_colour			colour;
-	t_vec3				center;
-	t_vec3				point1;
-	t_vec3				point2;
-	t_vec3				point3;
-	int					point_flag;
-	t_vec3				vector;
-	double				diameter;
-	double				height;
-	mlx_texture_t		*texture;
-	// mlx_image_t			*text_img;
-}	t_objs;
-
-// -------------------------------------------------------------
 // Struct for camera
 typedef struct s_camera
 {
@@ -171,6 +152,54 @@ typedef struct s_mouse
 	uint32_t	window_w;
 }   t_mouse;
 
+
+// -------------------------------------------------------------
+// Ray struct (standing alone)
+typedef struct s_ray
+{
+	t_vec3	place;
+	t_vec3	vector;
+}	t_ray;
+
+// -------------------------------------------------------------
+// Struct for objects, each object has this struct
+// array of structs in data struct
+typedef struct s_objs
+{
+	t_type				type;
+	t_colour			colour;
+	t_vec3				center;
+	t_vec3				vector;
+	t_vec3				normal; // might need but not using
+	double				diameter;
+	double				height;
+	double				height_half;
+	double				radius;
+	t_vec3				point[3];
+	int					point_flag;
+	mlx_texture_t		*texture;
+}	t_objs;
+
+// -------------------------------------------------------------
+// Object data struct (standing alone)
+// -> saves the calculations of the intersections
+typedef struct s_obj_data
+{
+	double	a;
+	double	b;
+	double	c;
+	double	d;
+	double	root1;
+	double	root2;
+	double	t;
+	double	tmp_t;
+	t_vec3	cut[2];
+	t_vec3	top;
+	t_vec3	base;
+	t_vec3	hit_pos;
+	double	closest_t;
+}	t_obj_data;
+
 // -------------------------------------------------------------
 // Main struct
 typedef struct s_data
@@ -186,41 +215,6 @@ typedef struct s_data
 	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
 	t_mouse		mouse;
 }	t_data;
-
-// -------------------------------------------------------------
-// Ray struct (standing alone)
-typedef struct s_ray
-{
-	t_vec3	place;
-	t_vec3	vector;
-}	t_ray;
-
-// -------------------------------------------------------------
-// Object data struct (standing alone)
-// -> saves the calculations of the intersections
-typedef struct s_obj_data
-{
-	double	a;
-	double	b;
-	double	c;
-	double	d;
-	t_vec3	e;
-	t_vec3	f;
-	double	root1;
-	double	root2;
-	double	t;
-	double	tmp_t;
-	double	height_half;
-	t_vec3	top;
-	t_vec3	base;
-	t_vec3	hit_pos;
-	double	distance;
-	double	denom;
-	double	radius;
-	t_vec3	normal;
-	double	closest_t;
-
-}	t_obj_data;
 
 // --- Functions --- 
 // Window Functions
@@ -273,7 +267,7 @@ double		vec_length(t_vec3 v1, t_vec3 v2);
 bool		check_closest(t_obj_data *obj_data);
 bool		quadratic(t_obj_data *obj_data);
 bool		check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray);
-bool		cut_chop(t_obj_data *obj, t_objs *cyl, t_ray *ray);
+bool		cut_ends(t_obj_data *obj, t_objs *cyl, t_ray *ray);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);

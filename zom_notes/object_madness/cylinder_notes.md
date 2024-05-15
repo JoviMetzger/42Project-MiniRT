@@ -1,5 +1,35 @@
 
+bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+{
+	obj->base = mult_vecdub(minus(cyl->vector, cyl->center), (cyl->height / 2));
+	obj->top = mult_vecdub(plus(cyl->vector, cyl->center), (cyl->height / 2));
 
+	t_objs	tmppl;
+
+	ft_bzero(&tmppl, sizeof(t_objs));
+	tmppl.center = obj->top;
+	tmppl.vector = cyl->vector;
+	double tmp = obj->t;
+	if (intersect_plane(ray, &tmppl, obj) == true)
+	{
+		// printf("hit_pos = %f, %f, %f\n", obj->hit_pos.x, obj->hit_pos.y, obj->hit_pos.z);
+		// exit(EXIT_SUCCESS);
+		obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->t));
+		// if (vec_length(obj->hit_pos, obj->top) <= cyl->radius)
+		if (vec_length(obj->hit_pos, obj->top) <= cyl->height)
+			return (true);
+	}
+	obj->t = tmp;
+	ft_bzero(&tmppl, sizeof(t_objs));
+	tmppl.center = obj->top;
+	tmppl.vector = cyl->vector;
+	if (intersect_plane(ray, &tmppl, obj) == true)
+	{
+		if (vec_length(obj->hit_pos, obj->top) <= cyl->radius)
+			return (true);
+	}
+	return (false);
+}
 
 // cappies
 bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)

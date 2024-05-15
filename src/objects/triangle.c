@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 18:00:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 20:29:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/15 15:16:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 	t_vec3	hit;
 	float	dir;
 
-	edge1 = minus(tri->point2, tri->point1);
-	edge2 = minus(tri->point3, tri->point1);
+	edge1 = minus(tri->point[1], tri->point[0]);
+	edge2 = minus(tri->point[2], tri->point[0]);
 
 	hit = cross_product(ray->vector, edge2);
 	dir = dot_product(edge1, hit);
@@ -71,7 +71,7 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 	obj_data->a = 1.0 / dir;
 
 	// s
-	t_vec3 o_c = minus(ray->place, tri->point1);
+	t_vec3 o_c = minus(ray->place, tri->point[0]);
 	
 
 	// check the scalar values (u q || b c) are in range 0-1
