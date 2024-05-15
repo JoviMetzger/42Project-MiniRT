@@ -6,89 +6,92 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/15 19:59:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/15 20:50:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
-{
-	(void) obj;
-	double	t;
-
-	// bottom
-	t = (cyl->center.y = ray->place.y) / ray->vector.y;
-	if (t > 0)
-	{
-		t_vec3 inter_pnt = {ray->place.x + t * ray->vector.x, ray->place.y + t * ray->vector.y, ray->place.z + t * ray->vector.z};
-		if (inter_pnt.x >= cyl->center.x - cyl->radius && inter_pnt.x <= cyl->center.x + cyl->radius &&
-			inter_pnt.z >= cyl->center.z - cyl->radius && inter_pnt.z <= cyl->center.z + cyl->radius)
-				return (true);
-	}
-	// top
-	t = (cyl->center.y + cyl->height - ray->place.y) / ray->vector.y;
-	if (t > 0)
-	{
-		t_vec3 inter_pnt2 = {ray->place.x + t * ray->vector.x, ray->place.y + t * ray->vector.y, ray->place.z + t * ray->vector.z};
-		if (inter_pnt2.x >= cyl->center.x - cyl->radius && inter_pnt2.x <= cyl->center.x + cyl->radius &&
-			inter_pnt2.z >= cyl->center.z - cyl->radius && inter_pnt2.z <= cyl->center.z + cyl->radius)
-				return (true);
-	}
-	return (false);
-}
-
 // bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 // {
-// 	// obj->base = plus(cyl->center, mult_vecdub(cyl->vector, -cyl->height / 2));
-// 	// obj->top = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height / 2));
-// 	obj->base = mult_vecdub(plus(cyl->vector, cyl->center), -cyl->height / 2);
-// 	obj->top = mult_vecdub(plus(cyl->vector, cyl->center), cyl->height / 2);
+// 	// (void) obj;
+// 	double	t;
 
-// 	t_objs	tmppl;
 
-// 	ft_bzero(&tmppl, sizeof(t_objs));
-// 	tmppl.center = obj->top;
-// 	tmppl.vector = cyl->vector;
-// 	double tmp = obj->t;
-// 	if (intersect_plane(ray, &tmppl, obj) == true)
+// 	// bottom
+// 	t = (cyl->center.y - ray->place.y) / ray->vector.y;
+// 	if (t > 0)
 // 	{
-// 		obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->t));
-// 		if (vec_length(obj->hit_pos, obj->top) <= cyl->radius)
+// 		t_vec3 inter_pnt = {ray->place.x + t * ray->vector.x, ray->place.y + t * ray->vector.y, ray->place.z + t * ray->vector.z};
+// 		if (inter_pnt.x >= cyl->center.x - cyl->radius && inter_pnt.x <= cyl->center.x + cyl->radius &&
+// 			inter_pnt.z >= cyl->center.z - cyl->radius && inter_pnt.z <= cyl->center.z + cyl->radius)
+// 			{
+// 				obj->t = t;
 // 				return (true);
+// 			}
 // 	}
-// 	obj->t = tmp;
-// 	ft_bzero(&tmppl, sizeof(t_objs));
-// 	tmppl.center = obj->base;
-// 	tmppl.vector = cyl->vector;
-// 	if (intersect_plane(ray, &tmppl, obj) == true)
+// 	// top
+// 	t = (cyl->center.y + cyl->height - ray->place.y) / ray->vector.y;
+// 	if (t > 0)
 // 	{
-// 		obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->t));
-// 		if (vec_length(obj->hit_pos, obj->base) <= cyl->radius)
-// 		{
-// 			if (obj->t <= cyl->height) 
+// 		t_vec3 inter_pnt2 = {ray->place.x + t * ray->vector.x, ray->place.y + t * ray->vector.y, ray->place.z + t * ray->vector.z};
+// 		if (inter_pnt2.x >= cyl->center.x - cyl->radius && inter_pnt2.x <= cyl->center.x + cyl->radius &&
+// 			inter_pnt2.z >= cyl->center.z - cyl->radius && inter_pnt2.z <= cyl->center.z + cyl->radius)	
+// 			{
+// 				obj->t = t;
 // 				return (true);
-// 		}
+// 			}
 // 	}
 // 	return (false);
 // }
 
+bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+{
+	// cyl->vector = normalize_vector(cyl->vector);
+	// ray->vector = normalize_vector(ray->vector);
+	// obj->base = plus(cyl->center, mult_vecdub(cyl->vector, -cyl->height / 2));
+	// obj->top = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height / 2));
+	obj->base = mult_vecdub(plus(cyl->center, cyl->vector), -cyl->height / 2);
+	obj->top = mult_vecdub(plus(cyl->center, cyl->vector), cyl->height / 2);
+
+	t_objs	tmppl;
+
+	ft_bzero(&tmppl, sizeof(t_objs));
+	tmppl.center = obj->top;
+	tmppl.vector = cyl->vector;
+	double tmp = obj->t;
+	if (intersect_plane(ray, &tmppl, obj) == true)
+	{
+		obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->t));
+		if (vec_length(obj->hit_pos, obj->top) <= cyl->radius)
+				return (true);
+	}
+	obj->t = tmp;
+	ft_bzero(&tmppl, sizeof(t_objs));
+	tmppl.center = obj->base;
+	tmppl.vector = cyl->vector;
+	if (intersect_plane(ray, &tmppl, obj) == true)
+	{
+		obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->t));
+		if (vec_length(obj->hit_pos, obj->base) <= cyl->radius)
+		{
+			if (obj->t <= cyl->height) 
+				return (true);
+		}
+	}
+	return (false);
+}
+
 bool	cut_ends(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 {
 	obj->cut[0] = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height));
-	obj->cut[1] = plus(ray->place, mult_vecdub(ray->vector, obj->t));
-	if (obj->root1 > 0)
-	{	
-		if (dot_product(cyl->vector, minus(obj->cut[1], cyl->center)) <= 0
-			|| dot_product(cyl->vector, minus(obj->cut[1], obj->cut[0])) >= 0)
-			obj->root1 = -1;
-	}
-	if (obj->root2 > 0)
-	{	
-		if (dot_product(cyl->vector, minus(obj->cut[1], cyl->center)) <= 0
-			|| dot_product(cyl->vector, minus(obj->cut[1], obj->cut[0])) >= 0)
-			obj->root2 = -1;
-	}
+	obj->cut[1] = plus(ray->place, mult_vecdub(ray->vector, obj->t));	
+	if ((obj->root1 > 0) && (dot_product(cyl->vector, minus(obj->cut[1], cyl->center)) <= 0
+		|| dot_product(cyl->vector, minus(obj->cut[1], obj->cut[0])) >= 0))
+		obj->root1 = -1;	
+	if ((obj->root2 > 0) && (dot_product(cyl->vector, minus(obj->cut[1], cyl->center)) <= 0
+		|| dot_product(cyl->vector, minus(obj->cut[1], obj->cut[0])) >= 0))
+		obj->root2 = -1;
 	if (obj->root1 < 0 && obj->root2 < 0)
 		return (false);
 	if ((obj->root2 < obj->root1 && obj->root2 > 0)
@@ -120,9 +123,11 @@ static void	set_points(t_obj_data *obj, t_ray *ray, t_objs *cyl)
  */
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 {
-	cyl->center = normalize_vector(cyl->center);
-	ray->vector = normalize_vector(ray->vector);
+	// when how what where normalize?
+	// cyl->center = normalize_vector(cyl->center);
+	// ray->vector = normalize_vector(ray->vector);
 
+	obj->tmp_t = 0;
 	set_points(obj, ray, cyl);
 	if (quadratic(obj) == true)
 	{
@@ -130,14 +135,14 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 		{
 			if (cut_ends(obj, cyl, ray) == true)
 			{
-				// obj->tmp_t = obj->t;
-				// if (check_caps(obj, cyl, ray) == true)
-				// 	return (check_closest(obj));
-				// else
-				// {
-				// 	obj->t = obj->tmp_t;
+				obj->tmp_t = obj->t;
+				if (check_caps(obj, cyl, ray) == true)
 					return (check_closest(obj));
-				// }
+				else
+				{
+					obj->t = obj->tmp_t;
+					return (check_closest(obj));
+				}
 			}
 		}
 	}
