@@ -12,6 +12,8 @@
 - viniRT idea, rotate camera + objects to be (in correct position) but turned in the scene to be in the center, simplifying everythhing 
 (normalize scene)
 
+- rework the structs a bit and just calculate some things once per object at the start.. 
+
 
 //------------------------------------------------------------------------------------------------------------------------------//
 
