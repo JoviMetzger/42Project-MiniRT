@@ -1,4 +1,19 @@
 
+//------------------------------------------------------------------------------------------------------------------------------//
+
+- normal ** 
+
+	sphere good in colour but for rest, need to do a little more calculating
+
+- idea - loop through objs, keep updating closest t, then go through pixels using closest t to decide which colour/obj
+
+- why are we facing backwards?
+
+- viniRT idea, rotate camera + objects to be (in correct position) but turned in the scene to be in the center, simplifying everythhing 
+(normalize scene)
+
+
+//------------------------------------------------------------------------------------------------------------------------------//
 
 // bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 // {
