@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/15 20:39:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/16 16:55:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ bool	intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data)
 		if (obj_data->t >= EPSILON)
 			return (true);
 			// return (check_closest(obj_data)); 
-			// somehow this is making
-			// things infinite colour
 	}
 	return (false);
 }

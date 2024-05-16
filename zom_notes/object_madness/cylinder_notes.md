@@ -1,4 +1,38 @@
 
+
+// bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+// {
+// 	// (void) obj;
+// 	double	t;
+
+
+// 	// bottom
+// 	t = (cyl->center.y - ray->place.y) / ray->vector.y;
+// 	if (t > 0)
+// 	{
+// 		t_vec3 inter_pnt = {ray->place.x + t * ray->vector.x, ray->place.y + t * ray->vector.y, ray->place.z + t * ray->vector.z};
+// 		if (inter_pnt.x >= cyl->center.x - cyl->radius && inter_pnt.x <= cyl->center.x + cyl->radius &&
+// 			inter_pnt.z >= cyl->center.z - cyl->radius && inter_pnt.z <= cyl->center.z + cyl->radius)
+// 			{
+// 				obj->t = t;
+// 				return (true);
+// 			}
+// 	}
+// 	// top
+// 	t = (cyl->center.y + cyl->height - ray->place.y) / ray->vector.y;
+// 	if (t > 0)
+// 	{
+// 		t_vec3 inter_pnt2 = {ray->place.x + t * ray->vector.x, ray->place.y + t * ray->vector.y, ray->place.z + t * ray->vector.z};
+// 		if (inter_pnt2.x >= cyl->center.x - cyl->radius && inter_pnt2.x <= cyl->center.x + cyl->radius &&
+// 			inter_pnt2.z >= cyl->center.z - cyl->radius && inter_pnt2.z <= cyl->center.z + cyl->radius)	
+// 			{
+// 				obj->t = t;
+// 				return (true);
+// 			}
+// 	}
+// 	return (false);
+// }
+
 // getting desperate
 // Function to check if a ray intersects with the body (curved surface) of a cylinder
 int rayIntersectsCylinder(Vector3 rayOrigin, Vector3 rayDir, Cylinder cylinder, float* t) {
