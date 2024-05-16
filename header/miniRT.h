@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/16 17:09:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/16 18:14:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # define RESET "\033[0m"
 
 // Window
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1900
+# define HEIGHT 1700
 
 // Math stuff
 // This is a constant representing the value of pi.
