@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 21:01:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/02 11:41:20 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,4 @@ bool intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data)
 		return (check_closest(obj_data));
 	return (false);
 }
+

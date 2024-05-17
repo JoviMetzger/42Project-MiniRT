@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/23 15:47:58 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/05/13 14:29:48 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@
 int main(int argc, char **argv)
 {
     t_data data;
-
+		
 	parse_input(argc, argv, &data);
 
-	// print_parser(&data);
 	ft_open_window(&data); // Open window
 	ft_render(&data); // the whole shazam!
 

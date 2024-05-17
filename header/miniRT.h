@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/29 18:31:40 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/05/17 18:21:48 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_vec3
 // Colour - RGB
 typedef struct s_colour
 {
-	int		r; // redfov
+	int		r; // red
 	int		g; // green
 	int		b; // blue
 }	t_colour;
@@ -85,7 +85,8 @@ typedef struct s_objs
 	double				height;
 	mlx_texture_t		*texture;
 	int16_t				i_am;	// what obj num this is, basicly ID	
-	int					i;		// i for at what obj pattern we are (checkerboard, normal ...) -> we can rename i.
+	int					i;		// iterate through the different obj patterns (checkerboard, normal ...) -> resrets to 0 after 2 iterations.
+	int					what_pattern; //what patten that object currently has.
 	// mlx_image_t			*text_img;
 }	t_objs;
 
@@ -115,6 +116,13 @@ typedef struct s_light
 	double		ratio;
 }	t_light;
 
+typedef struct s_lightS
+{
+	t_colour	colour;
+	t_vec3		place;
+	double		ratio;
+}	t_lightS;
+
 // -------------------------------------------------------------
 // Screen struct
 typedef struct s_screen
@@ -140,29 +148,32 @@ typedef struct s_mouse
 }   t_mouse;
 
 // -------------------------------------------------------------
-// Main struct
-typedef struct s_data
-{
-	mlx_image_t	*image;
-	mlx_t		*mlx;
-	t_objs		**objs;
-	int			objs_i;
-	t_camera	camera;
-	t_ambient	ambient;
-	t_light		light;
-	t_screen	screen;
-	t_type		type;
-	t_mouse		mouse;
-	int16_t		i_am; // what object is currently seleted
-}	t_data;
-
-// -------------------------------------------------------------
-// Ray struct (standing alone)
+// Ray struct
 typedef struct s_ray
 {
 	t_vec3	place;
 	t_vec3	vector;
 }	t_ray;
+
+// -------------------------------------------------------------
+// Main struct
+typedef struct s_data
+{
+	mlx_image_t		*image;
+	mlx_t			*mlx;
+	t_objs			**objs;
+	int				objs_i;
+	int 			lights_i; // how many light we have
+	t_camera		camera;
+	t_ambient		ambient;
+	t_light			light;	//Rm this one
+	t_lightS			**lightS;
+	t_screen		screen;
+	t_type			type;
+	t_mouse			mouse;
+	t_ray			ray;
+	int16_t			i_am; // what object is currently seleted
+}	t_data;
 
 // -------------------------------------------------------------
 // Object data struct (standing alone)
@@ -179,6 +190,34 @@ typedef struct s_obj_data
 	double	closest_t;
 
 }	t_obj_data;
+
+// -------------------------------------------------------------
+// Struct for all colour variables (standing alone)
+typedef	struct s_colour_vars
+{
+	t_colour	result;
+	t_lightS	*current_light;
+	t_vec3		intersection_point;
+	t_vec3		normal;
+    t_vec3		reflection_direction;
+    t_vec3		view_direction;
+	t_vec3		light_direction;
+	double		ambient_ratio;
+	double		specular_intensity;
+	double		specular_power;
+	double		ambient_red;
+	double		ambient_green;
+	double		ambient_blue;
+	double		diffuse_red;
+	double		diffuse_green;
+	double		diffuse_blue;
+	double		specular_red;
+    double		specular_green;
+    double		specular_blue;
+	double		diffuse_factor;
+	double		specular_factor;
+	
+}	t_colour_vars;
 
 // --- Functions --- 
 // Window Functions
@@ -233,6 +272,11 @@ bool		check_closest(t_obj_data *obj_data);
 bool		quadratic(t_obj_data *obj_data);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
+bool		intersect_plane_for_colour(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
+
+// Utils
+t_vec3	ft_reflect(t_vec3 incident, t_vec3 normal);
+int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 #endif
