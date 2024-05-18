@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:50:09 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/22 21:57:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/18 18:09:03 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ void	close_protect(int file)
 	}
 }
 
+void	free_map(int16_t **map)
+{
+	int16_t **temp;
+	
+	temp = map;
+	while (*map != NULL)
+	{
+		free(*map);
+		map++;
+	}
+	free(temp);
+	return ;
+}
+
 void	free_objects(t_data *data)
 {
 	int		i;
@@ -57,5 +71,6 @@ void	free_objects(t_data *data)
 			i++;
 		}
 	}
+	free_map(data->mouse.mouse_map);
 	free(data->objs);
 }

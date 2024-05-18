@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/14 14:41:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/18 18:27:26 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include <float.h> // apparently invalid by norm
 # include <math.h>
 
 // --- Colours ---
@@ -39,6 +38,7 @@
 // This is a constant representing the value of pi.
 # define M_PI 3.14159265358979323846
 # define EPSILON 0.000001
+# define DBL_MAX 1.79769e+308
 
 // Element type enums, includes space for parser
 typedef enum e_type
@@ -65,41 +65,10 @@ typedef struct s_vec3
 }	t_vec3;
 
 // -------------------------------------------------------------
-// For getting colour purposes..
-typedef	struct s_colour_vars
-{
-	double		ambient_intensity;
-	double		diffuse_intensity;
-	double		spec_intensity;
-	double		spec_power;
-	t_vec3		inter_point; // intersect_point
-	t_vec3		normal;
-	double		ambient_red;
-	double		ambient_green;
-	double		ambient_blue;
-	double		diffuse_red;
-	double		diffuse_green;
-	double		diffuse_blue;
-	t_vec3		light_dir;
-	double		diffuse_factor;
-	t_vec3		view_dir;
-	t_vec3		reflection_dir;
-	double		spec_factor;
-	double		spec_red;
-	double		spec_green;
-	double		spec_blue;
-	double		final_red;
-	double		final_green;
-	double		final_blue;
-	
-}			t_colour_vars;
-
-// ---------------------------------------------our = get_sphere_colour(data, obj_data, ray, data->objs[i]);
-				// dat----------------
 // Colour - RGB
 typedef struct s_colour
 {
-	int		r; // redfov
+	int		r; // red
 	int		g; // green
 	int		b; // blue
 }	t_colour;
@@ -120,6 +89,9 @@ typedef struct s_objs
 	double				diameter;
 	double				height;
 	mlx_texture_t		*texture;
+	int16_t				i_am;	// what obj num this is, basicly ID	
+	int					i;		// iterate through the different obj patterns (checkerboard, normal ...) -> resrets to 0 after 2 iterations.
+	int					what_pattern; //what patten that object currently has.
 	// mlx_image_t			*text_img;
 }	t_objs;
 
@@ -149,6 +121,13 @@ typedef struct s_light
 	double		ratio;
 }	t_light;
 
+typedef struct s_lightS
+{
+	t_colour	colour;
+	t_vec3		place;
+	double		ratio;
+}	t_lightS;
+
 // -------------------------------------------------------------
 // Screen struct
 typedef struct s_screen
@@ -164,36 +143,42 @@ typedef struct s_screen
 // Mouse movemnet struct
 typedef struct s_mouse
 {
-    int16_t		**mouse_map;
-	int 		mouse_y;
-	int			mouse_x;
-	uint32_t	window_h;
-	uint32_t	window_w;
+	mlx_image_t		*highlight_img;
+	int16_t			**mouse_map;
+	int 			mouse_y;
+	int				mouse_x;
+	uint32_t		window_h;
+	uint32_t		window_w;
+	bool			selected;
 }   t_mouse;
 
 // -------------------------------------------------------------
-// Main struct
-typedef struct s_data
-{
-	mlx_image_t	*image;
-	mlx_t		*mlx;
-	t_objs		**objs;
-	int			objs_i;
-	t_camera	camera;
-	t_ambient	ambient;
-	t_light		light;
-	t_screen	screen;
-	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
-	t_mouse		mouse;
-}	t_data;
-
-// -------------------------------------------------------------
-// Ray struct (standing alone)
+// Ray struct
 typedef struct s_ray
 {
 	t_vec3	place;
 	t_vec3	vector;
 }	t_ray;
+
+// -------------------------------------------------------------
+// Main struct
+typedef struct s_data
+{
+	mlx_image_t		*image;
+	mlx_t			*mlx;
+	t_objs			**objs;
+	int				objs_i;
+	int 			lights_i; // how many light we have
+	t_camera		camera;
+	t_ambient		ambient;
+	t_light			light;	//Rm this one
+	t_lightS			**lightS;
+	t_screen		screen;
+	t_type			type;
+	t_mouse			mouse;
+	t_ray			ray;
+	int16_t			i_am; // what object is currently seleted
+}	t_data;
 
 // -------------------------------------------------------------
 // Object data struct (standing alone)
@@ -216,6 +201,34 @@ typedef struct s_obj_data
 
 }	t_obj_data;
 
+// -------------------------------------------------------------
+// Struct for all colour variables (standing alone)
+typedef	struct s_colour_vars
+{
+	t_colour	result;
+	t_lightS	*current_light;
+	t_vec3		intersection_point;
+	t_vec3		normal;
+    t_vec3		reflection_direction;
+    t_vec3		view_direction;
+	t_vec3		light_direction;
+	double		ambient_ratio;
+	double		specular_intensity;
+	double		specular_power;
+	double		ambient_red;
+	double		ambient_green;
+	double		ambient_blue;
+	double		diffuse_red;
+	double		diffuse_green;
+	double		diffuse_blue;
+	double		specular_red;
+    double		specular_green;
+    double		specular_blue;
+	double		diffuse_factor;
+	double		specular_factor;
+	
+}	t_colour_vars;
+
 // --- Functions --- 
 // Window Functions
 void		ft_put_image(t_data *data);
@@ -223,28 +236,27 @@ void		ft_open_window(t_data *data);
 void		ft_render(t_data *data);
 
 // Movement Functions
-void ft_key_action(mlx_key_data_t keydata, t_data *data);
-void ft_handle_mouse_click(mouse_key_t btn, action_t act, modifier_key_t m, void *p);
-void init_mouse_map(t_data *data);
+void		ft_key_action(mlx_key_data_t keydata, t_data *data);
+void		ft_handle_mouse_click(mouse_key_t key, action_t act, 
+				modifier_key_t m, void *_data);
+void		init_mouse_map(t_data *data);
 
 // Ray Functions
+t_vec3		init_vector(t_screen screen);
 t_ray		ft_create_ray(t_data *data, int x, int y);
 void		store_ray_matrix(t_data *data);
 void		ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
 uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
-t_colour	get_colour(t_data *data, t_obj_data *obj_data,
-				t_ray ray, t_objs *cylinder);
+t_colour	get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
+t_colour	get_plane_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *plane);
+t_colour	get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 // Colour Functions Bonus
-t_colour get_sphere_checkerboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
-t_colour get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
-
-// Vector Functions
-t_vec3		init_vector(t_screen screen);
+t_colour	get_checkerboard_colour(t_vec3 normal);
 
 // Operators
 t_vec3 		plus_vecdub(t_vec3 u, double v);
@@ -253,11 +265,11 @@ t_vec3		minus(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecvec(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecdub(t_vec3 v, double dub);
 t_vec3		division_vec_dub(t_vec3 v, double dub);
-t_vec3		division_vec_vec(t_vec3 u, t_vec3 v); // might remove this
+t_vec3		division_vec_vec(t_vec3 u, t_vec3 v);
 t_vec3		cross_product(t_vec3 u, t_vec3 v);
+t_vec3		normalize_vector(t_vec3 v);
 double		dot_product(t_vec3 u, t_vec3 v);
 double		length_squared(t_vec3 vec);
-t_vec3		normalize_vector(t_vec3 v);
 double		distance(t_vec3 pnt1, t_vec3 pnt2);
 
 // Objects Functions
@@ -267,8 +279,13 @@ bool		check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray);
 bool		check_roots(t_obj_data *obj, t_objs *cyl, t_ray *ray);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
+bool		intersect_plane_for_colour(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
 bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
 bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data);
 
+
+// Utils
+t_vec3	ft_reflect(t_vec3 incident, t_vec3 normal);
+int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 #endif
