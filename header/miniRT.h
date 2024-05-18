@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/17 18:21:48 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/05/18 16:47:25 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,10 +250,7 @@ t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 // Colour Functions Bonus
-t_colour	get_sphere_checkerboard(t_data *data, t_obj_data *obj_data, 
-				t_ray ray, t_objs *sphere);
-t_colour	get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, 
-				t_ray ray, t_objs *sphere);
+t_colour	get_checkerboard_colour(t_vec3 normal);
 
 // Operators
 t_vec3		plus(t_vec3 u, t_vec3 v);

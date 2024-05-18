@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/16 17:47:02 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/05/18 17:00:55 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,49 +64,31 @@ uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
 		{
 			if (intersect_sphere(&ray, data->objs[i], obj_data))
 			{		
-				if (data->objs[i]->what_pattern == 1)		
-					colour = get_sphere_checkerboard(data, obj_data, ray, data->objs[data->i_am]);
-				else
-				{
-					data->objs[i]->i_am = i;
-					colour = get_sphere_colour(data, obj_data, ray, data->objs[i]);
-					data->mouse.mouse_map[data->mouse.mouse_y][data->mouse.mouse_x] = i; // for the mouse_map, so that we can select obj
-					
-				}
+				data->objs[i]->i_am = i;
+				colour = get_sphere_colour(data, obj_data, ray, data->objs[i]);
+				data->mouse.mouse_map[data->mouse.mouse_y][data->mouse.mouse_x] = i; // for the mouse_map, so that we can select obj
 			}
 		}
 		if (data->objs[i]->type == E_PLANE)
 		{
 			if (intersect_plane(&ray, data->objs[i], obj_data))
 			{
-				if (data->objs[i]->what_pattern == 1)
-				{
-					printf("PLANE -> NOT working yet\n");
-					// colour = get_plane_checkerboard(data, obj_data, ray, data->objs[data->i_am]);
-				}
-				else
-				{
-					data->objs[i]->i_am = i;
-					colour = get_plane_colour(data, obj_data, ray, data->objs[i]);
-					data->mouse.mouse_map[data->mouse.mouse_y][data->mouse.mouse_x] = i; // for the mouse_map, so that we can select obj	
-				}
+				data->objs[i]->i_am = i;
+				// colour = get_sphere_colour(data, obj_data, ray, data->objs[i]);
+				colour = get_plane_colour(data, obj_data, ray, data->objs[i]);
+				data->mouse.mouse_map[data->mouse.mouse_y][data->mouse.mouse_x] = i; // for the mouse_map, so that we can select obj	
+				
 			}
 		}
 		if (data->objs[i]->type == E_CYLINDER)
 		{
 			if (intersect_cylinder(&ray, data->objs[i], obj_data))
 			{
-				if (data->objs[i]->what_pattern == 1)
-				{
-					printf("CYLINDER -> NOT working yet\n");
-					// colour = get_cylinder_checkerboard(data, obj_data, ray, data->objs[data->i_am]);
-				}
-				else
-				{
-					data->objs[i]->i_am = i;
-					colour = get_cyl_colour(data, obj_data, ray, data->objs[i]);
-					data->mouse.mouse_map[data->mouse.mouse_y][data->mouse.mouse_x] = i; // for the mouse_map, so that we can select obj	
-				}
+				data->objs[i]->i_am = i;
+				// colour = get_sphere_colour(data, obj_data, ray, data->objs[i]);
+				colour = get_cyl_colour(data, obj_data, ray, data->objs[i]);
+				data->mouse.mouse_map[data->mouse.mouse_y][data->mouse.mouse_x] = i; // for the mouse_map, so that we can select obj	
+				
 			}
 		}
 		i++;
