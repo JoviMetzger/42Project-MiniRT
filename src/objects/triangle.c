@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 18:00:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/15 15:16:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/21 18:37:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 // objects for raytracing, especially in complex scenes.
 
 // does hit
-bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit_data)
 {
 	t_vec3	edge1;
 	t_vec3	edge2;
@@ -68,7 +68,7 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 		return (false);
 
 	// f
-	obj_data->a = 1.0 / dir;
+	hit_data->a = 1.0 / dir;
 
 	// s
 	t_vec3 o_c = minus(ray->place, tri->point[0]);
@@ -76,25 +76,47 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 
 	// check the scalar values (u q || b c) are in range 0-1
 	// u
-	obj_data->b = dot_product(o_c, hit);
-	obj_data->b = obj_data->a * obj_data->b;
-	if (obj_data->b < 0.0 || obj_data->b > 1.0)
+	hit_data->b = dot_product(o_c, hit);
+	hit_data->b = hit_data->a * hit_data->b;
+	if (hit_data->b < 0.0 || hit_data->b > 1.0)
 		return (false);
 
 	//q	
 	t_vec3 c_c = cross_product(o_c, edge1); 
 
 	// v
-	obj_data->c = dot_product(ray->vector, c_c);
-	obj_data->c = obj_data->a * obj_data->c;
-	if (obj_data->c < 0.0 || obj_data->b + obj_data->c > 1.0)
+	hit_data->c = dot_product(ray->vector, c_c);
+	hit_data->c = hit_data->a * hit_data->c;
+	if (hit_data->c < 0.0 || hit_data->b + hit_data->c > 1.0)
 		return (false);
 
 
-	obj_data->t = dot_product(edge2, c_c);
-	obj_data->t = obj_data->a * obj_data->t;
-	if (obj_data->t < EPSILON)
+	hit_data->t = dot_product(edge2, c_c);
+	hit_data->t = hit_data->a * hit_data->t;
+	if (hit_data->t < EPSILON)
 		return (false);
-	return (check_closest(obj_data));
+	return (check_closest(hit_data));
 
+}
+
+// Clamp final values to [0, 255]
+t_colour	get_tr_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj)
+{
+	t_colour		result;
+	t_colour_vars	vars;
+	
+	ft_bzero(&vars, sizeof(t_colour_vars));
+	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, hit->t));
+	get_colour(data, &vars, ray);
+
+	// need for triangle
+	// vars.normal = 
+	
+	vars.final_red = fmin(fmax(vars.final_red, obj->colour.r), 255);
+	vars.final_green = fmin(fmax(vars.final_green, obj->colour.g), 255);
+	vars.final_blue = fmin(fmax(vars.final_blue, obj->colour.b), 255);
+	result.r = vars.final_red;
+	result.g = vars.final_green;
+	result.b = vars.final_blue;
+	return (result);
 }

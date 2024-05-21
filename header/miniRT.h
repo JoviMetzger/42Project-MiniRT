@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/16 18:14:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/21 18:33:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef	struct s_colour_vars
 	double		diffuse_intensity;
 	double		spec_intensity;
 	double		spec_power;
-	t_vec3		inter_point; // intersect_point
+	t_vec3		inter_point;
 	t_vec3		normal;
 	double		ambient_red;
 	double		ambient_green;
@@ -95,7 +95,7 @@ typedef	struct s_colour_vars
 	
 }			t_colour_vars;
 
-// ---------------------------------------------our = get_sphere_colour(data, obj_data, ray, data->objs[i]);
+// ---------------------------------------------our = get_sphere_colour(data, hit_data, ray, data->objs[i]);
 				// dat----------------
 // Colour - RGB
 typedef struct s_colour
@@ -171,11 +171,13 @@ typedef struct s_objs
 	t_colour			colour;
 	t_vec3				center;
 	t_vec3				vector;
-	t_vec3				normal; // might need but not using
+	t_vec3				normal;
 	double				diameter;
 	double				height;
 	double				height_half;
 	double				radius;
+	t_vec3				top;
+	t_vec3				base;
 	t_vec3				point[3];
 	int					point_flag;
 	mlx_texture_t		*texture;
@@ -184,7 +186,7 @@ typedef struct s_objs
 // -------------------------------------------------------------
 // Object data struct (standing alone)
 // -> saves the calculations of the intersections
-typedef struct s_obj_data
+typedef struct s_hit_data
 {
 	double	a;
 	double	b;
@@ -192,14 +194,11 @@ typedef struct s_obj_data
 	double	d;
 	double	root1;
 	double	root2;
+	t_vec3	hit_pos;
 	double	t;
 	double	tmp_t;
-	t_vec3	cut[2];
-	t_vec3	top;
-	t_vec3	base;
-	t_vec3	hit_pos;
 	double	closest_t;
-}	t_obj_data;
+}	t_hit_data;
 
 // -------------------------------------------------------------
 // Main struct
@@ -224,9 +223,9 @@ void		ft_open_window(t_data *data);
 void		ft_render(t_data *data);
 
 // Movement Functions
-void ft_key_action(mlx_key_data_t keydata, t_data *data);
-void ft_handle_mouse_click(mouse_key_t btn, action_t act, modifier_key_t m, void *p);
-void init_mouse_map(t_data *data);
+void		ft_key_action(mlx_key_data_t keydata, t_data *data);
+void		ft_handle_mouse_click(mouse_key_t btn, action_t act, modifier_key_t m, void *p);
+void		init_mouse_map(t_data *data);
 
 // Ray Functions
 t_ray		ft_create_ray(t_data *data, int x, int y);
@@ -234,15 +233,18 @@ void		store_ray_matrix(t_data *data);
 void		ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
-uint32_t	ft_calculate_colour(t_data *data, t_obj_data *obj, t_ray ray);
-t_colour	get_colour(t_data *data, t_obj_data *obj_data,
-				t_ray ray, t_objs *cylinder);
+t_colour	get_pl_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
+t_colour	get_sp_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
+t_colour	get_cy_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
+t_colour	get_tr_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
+uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj, t_ray ray);
+void		get_colour(t_data *data, t_colour_vars *vars, t_ray ray);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 // Colour Functions Bonus
-t_colour get_sphere_checkerboard(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
-t_colour get_sphere_bumpmap(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *sphere);
+t_colour	get_sphere_checkerboard(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *sphere);
+t_colour	get_sphere_bumpmap(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *sphere);
 
 // Vector Functions
 t_vec3		init_vector(t_screen screen);
@@ -265,14 +267,14 @@ double		pythagoras(double a, double b);
 double		vec_length(t_vec3 v1, t_vec3 v2);
 
 // Objects Functions
-bool		check_closest(t_obj_data *obj_data);
-bool		quadratic(t_obj_data *obj_data);
-bool		check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray);
-bool		cut_ends(t_obj_data *obj, t_objs *cyl, t_ray *ray);
-bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj_data);
-bool		intersect_plane(t_ray *ray, t_objs *plane, t_obj_data *obj_data);
-bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_data *obj_data);
-bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data);
+bool		check_closest(t_hit_data *hit_data);
+bool		quadratic(t_hit_data *hit_data);
+bool		check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray);
+bool		cut_ends(t_hit_data *obj, t_objs *cyl, t_ray *ray);
+bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit_data);
+bool		intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit_data);
+bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit_data);
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit_data);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/16 20:57:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/21 18:36:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // checking more than zero for if behind
 
-bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 {
 	// obj->base = mult_vecdub(plus(cyl->center, cyl->vector), -cyl->height_half);
 	// obj->top = mult_vecdub(plus(cyl->center, cyl->vector), cyl->height_half);
@@ -27,13 +27,13 @@ bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	bool	truth_or_dare = false;
 
 	ft_bzero(&tmppl, sizeof(t_objs));
-	tmppl.center = obj->top;
+	tmppl.center = cyl->top;
 	tmppl.vector = cyl->vector;
 	if (intersect_plane(ray, &tmppl, obj) == true)
 	{
 		obj->hit_pos = mult_vecdub(ray->vector, obj->t);
 
-		double distance = vec_length(obj->hit_pos, obj->top);
+		double distance = vec_length(obj->hit_pos, cyl->top);
 		if (distance <= cyl->radius && obj->t > 0 && obj->t < obj->closest_t)
 		{
 			obj->closest_t = obj->t;
@@ -41,13 +41,13 @@ bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 		}
 	}
 	ft_bzero(&tmppl, sizeof(t_objs));
-	tmppl.center = obj->base;
+	tmppl.center = cyl->base;
 	tmppl.vector = mult_vecdub(cyl->vector, -1);
 	if (intersect_plane(ray, &tmppl, obj) == true)
 	{
 		obj->hit_pos = mult_vecdub(ray->vector, obj->t);
 
-		double distance = vec_length(obj->hit_pos, obj->base);
+		double distance = vec_length(obj->hit_pos, cyl->base);
 		if (distance <= cyl->radius && obj->t > 0 && obj->t < obj->closest_t)
 		{
 			obj->closest_t = obj->t;
@@ -57,7 +57,7 @@ bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	return (truth_or_dare);
 }
 
-bool	cut_ends(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+bool	cut_ends(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 {
 	t_vec3	to_center;
 
@@ -90,7 +90,7 @@ bool	cut_ends(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
-static void	set_points(t_obj_data *obj, t_ray *ray, t_objs *cyl)
+static void	set_points(t_hit_data *obj, t_ray *ray, t_objs *cyl)
 {
 	t_vec3	vector_cross;
 	t_vec3	oc;
@@ -110,14 +110,14 @@ static void	set_points(t_obj_data *obj, t_ray *ray, t_objs *cyl)
 	// cyl->center = normalize_vector(cyl->center);
 	// ray->vector = normalize_vector(ray->vector);
  */
-bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
+bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 {
 	// mult vector height_half, minus center
-	// obj->base = mult_vecdub(plus(cyl->center, cyl->vector), -cyl->height_half);
-	// obj->top = mult_vecdub(plus(cyl->center, cyl->vector), cyl->height_half);
+	// cyl->base = mult_vecdub(plus(cyl->center, cyl->vector), -cyl->height_half);
+	// cyl->top = mult_vecdub(plus(cyl->center, cyl->vector), cyl->height_half);
 
-	obj->base = plus(cyl->center, mult_vecdub(cyl->vector, -cyl->height_half));
-	obj->top = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height_half));
+	cyl->base = plus(cyl->center, mult_vecdub(cyl->vector, -cyl->height_half));
+	cyl->top = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height_half));
 
 	// printf("base x: %f y: %f z: %f\n", obj->base.x, obj->base.y, obj->base.z);
 	// printf("top x: %f y: %f z: %f\n", obj->top.x, obj->top.y, obj->top.z);
@@ -133,8 +133,32 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 				return (true);
 			}
 			return (check_closest(obj));
-
 		}
+
 	}
 	return (false);
+}
+
+
+// Clamp final values to [0, 255]
+t_colour	get_cy_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj)
+{
+	t_colour		result;
+	t_colour_vars	vars;
+	
+	ft_bzero(&vars, sizeof(t_colour_vars));
+	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, hit->t));
+	get_colour(data, &vars, ray);
+
+	// bewaar normal ook in obj struct
+	// need cylinder
+	// vars.normal = 
+
+	vars.final_red = fmin(fmax(vars.final_red, obj->colour.r), 255);
+	vars.final_green = fmin(fmax(vars.final_green, obj->colour.g), 255);
+	vars.final_blue = fmin(fmax(vars.final_blue, obj->colour.b), 255);
+	result.r = vars.final_red;
+	result.g = vars.final_green;
+	result.b = vars.final_blue;
+	return (result);
 }

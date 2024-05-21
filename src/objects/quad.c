@@ -6,17 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/15 20:17:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/15 19:11:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/21 17:54:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-bool	check_closest(t_obj_data *obj_data)
+bool	check_closest(t_hit_data *hit_data)
 {
-	if (obj_data->t < obj_data->closest_t)
+	if (hit_data->t < hit_data->closest_t)
 	{
-		obj_data->closest_t = obj_data->t;
+		hit_data->closest_t = hit_data->t;
 		return (true);
 	}
 	return (false);
@@ -26,21 +26,21 @@ bool	check_closest(t_obj_data *obj_data)
  * @return true - intersection found
  * @return false - no intersection found
  */
-bool	quadratic(t_obj_data *obj_data)
+bool	quadratic(t_hit_data *hit_data)
 {
-	obj_data->d = obj_data->b * obj_data->b - 4 * obj_data->a * obj_data->c;
-	if (obj_data->d < 0)
+	hit_data->d = hit_data->b * hit_data->b - 4 * hit_data->a * hit_data->c;
+	if (hit_data->d < 0)
 		return (false);
 	else
 	{
-		obj_data->root1 = (-obj_data->b
-				+ sqrt(obj_data->d)) / (2.0 * obj_data->a);
-		obj_data->root2 = (-obj_data->b
-				- sqrt(obj_data->d)) / (2.0 * obj_data->a);
-		if (obj_data->root1 < obj_data->root2 && obj_data->root1 > 0)
-			obj_data->t = obj_data->root1;
-		else if (obj_data->root2 > 0)
-			obj_data->t = obj_data->root2;
+		hit_data->root1 = (-hit_data->b
+				+ sqrt(hit_data->d)) / (2.0 * hit_data->a);
+		hit_data->root2 = (-hit_data->b
+				- sqrt(hit_data->d)) / (2.0 * hit_data->a);
+		if (hit_data->root1 < hit_data->root2 && hit_data->root1 > 0)
+			hit_data->t = hit_data->root1;
+		else if (hit_data->root2 > 0)
+			hit_data->t = hit_data->root2;
 		else
 			return (false);
 		return (true);

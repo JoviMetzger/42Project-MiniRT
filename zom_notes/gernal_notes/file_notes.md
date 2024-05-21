@@ -25,7 +25,7 @@ cy              50.0,0.0,20.6       0.0,0.0,1.0     14.2     21.42   10,0,255
 cy              50.0,0.0,20.6       0.0,0.0,1.0     14.2     21.42   10,0,255
 cy              50.0,0.0,20.6       0.0,0.0,1.0     14.2     21.42   10,0,255
 
-void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
+void ft_create_intersection(t_data *data, t_hit_data *hit_data, t_ray ray)
 {
     int i = 0;
 
@@ -33,18 +33,18 @@ void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
     {
 		if (data->objs->type == E_SPHERE)
 		{
-            if (intersect_sphere(&ray, &data->objs[i], obj_data))
+            if (intersect_sphere(&ray, &data->objs[i], hit_data))
                 return ;
 		}
         // // 'if' OR 'if/else if'????
         // if (data->objs->type == E_PLANE)
 		// {
-        //     if (intersect_plane(&ray, &data->objs[i], obj_data))
+        //     if (intersect_plane(&ray, &data->objs[i], hit_data))
         //         return ;
 		// }
         // if (data->objs->type == E_CYLINDER)
 		// {
-        //     if (intersect_cylinder(&ray, &data->objs[i], obj_data))
+        //     if (intersect_cylinder(&ray, &data->objs[i], hit_data))
         //         return ;
 		// }
         i++;
@@ -61,7 +61,7 @@ void ft_create_intersection(t_data *data, t_obj_data *obj_data, t_ray ray)
 void ft_put_image(t_data *data)
 {
 	t_ray ray;
-	t_obj_data obj_data; // maybe we don't need this. -> can add "a,b,c,d,root1,root2,t" in objs struct
+	t_hit_data hit_data; // maybe we don't need this. -> can add "a,b,c,d,root1,root2,t" in objs struct
 	uint32_t colour;
 	int y = 0;
 	int x = 0;
@@ -71,8 +71,8 @@ void ft_put_image(t_data *data)
 		while (y < data->mlx->height)
 		{ 
 			ray = ft_create_ray(data, x ,y);
-			ft_create_intersection(data, &obj_data, ray);			
-			colour = ft_calculate_colour(data, &obj_data, ray); // eVerYTinG iN heRE iS jUSt ME gOiNg "hhhUUUUUhhhhhh?????????????" -> aka. cat meme (https://www.youtube.com/watch?v=xVWeRnStdSA)
+			ft_create_intersection(data, &hit_data, ray);			
+			colour = ft_calculate_colour(data, &hit_data, ray); // eVerYTinG iN heRE iS jUSt ME gOiNg "hhhUUUUUhhhhhh?????????????" -> aka. cat meme (https://www.youtube.com/watch?v=xVWeRnStdSA)
 			mlx_put_pixel(data->image, x, y, colour);
 			y++;
 		}

@@ -6,18 +6,18 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/08 20:47:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/21 18:00:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-// old version x and y are switched...
+
 void ft_put_image(t_data *data)
 {
-	t_ray ray;
-	t_obj_data obj_data; // maybe we don't need this. -> can add "a,b,c,d,root1,root2,t" in objs struct
-	uint32_t colour;
+	t_ray			ray;
+	t_hit_data		hit_data;
+	uint32_t		colour;
 	int y = 0;
 	int x = 0;
 
@@ -25,9 +25,8 @@ void ft_put_image(t_data *data)
 	{
 		while (y < data->mlx->height)
 		{ 
-			ray = ft_create_ray(data, x ,y);	
-			colour = ft_calculate_colour(data, &obj_data, ray); // eVerYTinG iN heRE iS jUSt ME gOiNg "hhhUUUUUhhhhhh?????????????" -> aka. cat meme (https://www.youtube.com/watch?v=xVWeRnStdSA)
-			mlx_put_pixel(data->image, x, y, colour);
+			ray = ft_create_ray(data, x ,y);
+			colour = ft_calculate_colour(data, &hit_data, ray);
 			y++;
 		}
 		y = 0;
@@ -41,7 +40,7 @@ void ft_put_image(t_data *data)
 // void ft_put_image(t_data *data)
 // {
 // 	t_ray		ray;
-// 	t_obj_data	obj_data;
+// 	t_hit_data	hit_data;
 // 	uint32_t	colour;
 // 	int y = 0;
 // 	int x = 0;
@@ -52,7 +51,7 @@ void ft_put_image(t_data *data)
 // 		{ 
 // 			// data->mouse.mouse_map[y][x] = -1;
 // 			ray = ft_create_ray(data, x ,y);		
-// 			colour = ft_calculate_colour(data, &obj_data, ray);
+// 			colour = ft_calculate_colour(data, &hit_data, ray);
 // 			mlx_put_pixel(data->image, x, y, colour);
 // 			// data->mouse.mouse_x = x;
 // 			x++;
