@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/21 19:16:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/21 19:22:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@
 bool	intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit_data)
 {
 	t_vec3	oc;
+	double radius;
+
+	radius = sphere->diameter / 2;
 
 	oc = minus(ray->place, sphere->center);
 	hit_data->a = dot_product(ray->vector, ray->vector);
 	hit_data->b = 2.0 * dot_product(ray->vector, oc);
-	hit_data->c = dot_product(oc, oc) - sphere->radius * sphere->radius;
+	hit_data->c = dot_product(oc, oc) - radius * radius;
 	if (quadratic(hit_data) == true)
 		return (check_closest(hit_data));
 	return (false);

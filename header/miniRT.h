@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/21 18:33:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/21 19:18:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ t_colour	get_sp_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
 t_colour	get_cy_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
 t_colour	get_tr_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
 uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj, t_ray ray);
+t_colour	get_old_colour(t_data *data, t_hit_data *obj, t_ray ray, t_objs *obj_i);
 void		get_colour(t_data *data, t_colour_vars *vars, t_ray ray);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
