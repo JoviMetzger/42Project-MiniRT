@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/21 18:36:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/21 19:16:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ t_colour	get_sp_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj)
 	
 	ft_bzero(&vars, sizeof(t_colour_vars));
 	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, hit->t));
+	vars.normal = normalize_vector(minus(vars.inter_point, obj->center));
 	get_colour(data, &vars, ray);
 
 	// specifically for sphere
-	vars.normal = normalize_vector(minus(vars.inter_point, obj->center));
 	
 	vars.final_red = fmin(fmax(vars.final_red, obj->colour.r), 255);
 	vars.final_green = fmin(fmax(vars.final_green, obj->colour.g), 255);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/21 17:59:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/21 19:01:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	sort_pl(char **elem_str, t_data *data)
 		return (par_err("invalid: Plane: 3D vector"));
 	if (!convert_vector(data, elem_str[2]))
 		return (par_err("invalid: Plane: 3D vector"));
+	data->objs[data->objs_i]->normal =
+		normalize_vector(data->objs[data->objs_i]->vector);
 	if (!is_rgb(elem_str[3], 0, 0))
 		return (par_err("invalid: Plane: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[3]))
