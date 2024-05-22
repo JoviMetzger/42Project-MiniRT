@@ -6,12 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/21 18:00:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 14:19:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
-
 
 void ft_put_image(t_data *data)
 {
