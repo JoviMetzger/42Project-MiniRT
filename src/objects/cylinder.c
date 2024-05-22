@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 17:12:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 17:21:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 		{
 			puts("top");
 			obj->closest_t = obj->t;
-			cyl->normal = normalize_vector(cyl->vector);
+			// cyl->normal = normalize_vector(cyl->vector);
 			truth_or_dare = true;
 		}
 	}
@@ -51,7 +51,7 @@ bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 		{
 			puts("bottom");
 			obj->closest_t = obj->t;
-			cyl->normal = normalize_vector(mult_vecdub(cyl->vector, -1)); // yes? for opposite 
+			// cyl->normal = normalize_vector(mult_vecdub(cyl->vector, -1)); // yes? for opposite 
 			truth_or_dare = true;
 		}
 	}
@@ -92,16 +92,14 @@ static void	set_points(t_hit_data *obj, t_ray *ray, t_objs *cyl)
  */
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 {
-	// mult vector height_half, minus center
-	// cyl->base = mult_vecdub(plus(cyl->center, cyl->vector), -cyl->height_half);
-	// cyl->top = mult_vecdub(plus(cyl->center, cyl->vector), cyl->height_half);
-
 	cyl->base = plus(cyl->center, mult_vecdub(cyl->vector, -cyl->height_half));
 	cyl->top = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height_half));
-
 	set_points(obj, ray, cyl);
 	if (quadratic(obj) == true)
 	{
+		obj->tmp_t = dot_product(minus(obj->to_center, cyl->center), cyl->vector);
+		obj->pnt = plus(cyl->center, mult_vecdub(cyl->vector, obj->tmp_t));
+		cyl->normal = normalize_vector(minus(obj->to_center, obj->pnt));
 		if (cut_ends(obj, cyl, ray) == true)
 		{
 			// if (check_caps(obj, cyl, ray) == true)
@@ -109,12 +107,7 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 			// 	// puts("HI");
 			// 	return (true);
 			// }
-			//  t = dot((hit_pt - cy.bottom_center), cy.ori); // cy.ori should be normalized and so has the length of 1.
 
-			// normal of body
-			obj->tmp_t = dot_product(minus(obj->hit_pos, cyl->center), cyl->vector);
-			obj->pnt = plus(cyl->center, mult_vecdub(cyl->vector, obj->tmp_t));
-			cyl->normal = normalize_vector(minus(obj->hit_pos, obj->pnt));
 			return (check_closest(obj));
 		}
 	}
@@ -132,8 +125,6 @@ t_colour	get_cy_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj)
 	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, hit->t));
 	get_colour(data, &vars, ray);
 
-	// bewaar normal ook in obj struct
-	// need cylinder
 	vars.normal = obj->normal;
 
 	vars.final_red = fmin(fmax(vars.final_red, obj->colour.r), 255);
