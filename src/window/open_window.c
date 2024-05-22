@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/21 15:05:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 14:35:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ void ft_open_window(t_data *data)
 	{
 		mlx_close_window(data->mlx);
 		free_objects(data);
+		error_msg("Failed to create a new image.");
+	}
+	data->mouse.highlight_img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (data->mouse.highlight_img == NULL)
+	{
+		mlx_close_window(data->mlx);
 		error_msg("Failed to create a new image.");
 	}
 	if (mlx_image_to_window(data->mlx, data->image, 0, 0) == -1)

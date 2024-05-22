@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/14 17:22:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 14:35:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,20 +104,41 @@ static void	check_file_type(char *arg)
 	error_msg("wrong file type");
 }
 
+void	init_mouse_map(t_data *data) 
+{
+	int16_t	**map;
+	uint32_t	i;
+
+	i = 0;
+	data->mouse.window_h = HEIGHT;
+	data->mouse.window_w = WIDTH;
+	data->mouse.selected = false;
+	if (data->mouse.mouse_map != NULL)
+		error_msg("map failure");
+	map = map_malloc((data->mouse.window_h + 1) * sizeof(int16_t *));
+	data->mouse.mouse_map = map;
+	while (i < data->mouse.window_h)
+	{
+		map[i] = map_malloc(data->mouse.window_w  * sizeof(int16_t));
+		i++;
+	}
+	map[i] = NULL;
+	data->mouse.mouse_map = map;
+}
+
 void	parse_input(int argc, char **argv, t_data *data)
 {
 	int		file;
 
 	file = 0;
 	ft_bzero(data, sizeof(t_data));
-// Jovi added: to set everything to zero, else the map will be do funny things
 	if (argc != 2)
 		error_msg("wrong number of arguments");
+	// data->i_am = -1;
 	check_file_type(argv[1]);
 	file = open(argv[1], O_RDONLY, 0644);
 	if (file == -1)
 		error_msg("couldn't open file");
 	read_file(data, file);
-// init_mouse_map(data); // Jovi added: for our mouse movement -> 
-// NOTE: This is not freed yet so it leaks :(
+	init_mouse_map(data);
 }

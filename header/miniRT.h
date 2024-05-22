@@ -6,7 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2024/05/22 14:27:27 by smclacke      ########   odam.nl         */
+=======
+/*   Updated: 2024/05/18 18:27:26 by jmetzger      ########   odam.nl         */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +23,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include <float.h> // apparently invalid by norm
 # include <math.h>
 # include <limits.h>
 
@@ -40,6 +43,7 @@
 // This is a constant representing the value of pi.
 # define M_PI 3.14159265358979323846
 # define EPSILON 0.000001
+# define DBL_MAX 1.79769e+308
 
 // Element type enums, includes space for parser
 typedef enum e_type
@@ -100,7 +104,7 @@ typedef	struct s_colour_vars
 // Colour - RGB
 typedef struct s_colour
 {
-	int		r; // redfov
+	int		r; // red
 	int		g; // green
 	int		b; // blue
 }	t_colour;
@@ -131,6 +135,13 @@ typedef struct s_light
 	double		ratio;
 }	t_light;
 
+typedef struct s_lightS
+{
+	t_colour	colour;
+	t_vec3		place;
+	double		ratio;
+}	t_lightS;
+
 // -------------------------------------------------------------
 // Screen struct
 typedef struct s_screen
@@ -146,11 +157,13 @@ typedef struct s_screen
 // Mouse movemnet struct
 typedef struct s_mouse
 {
-    int16_t		**mouse_map;
-	int 		mouse_y;
-	int			mouse_x;
-	uint32_t	window_h;
-	uint32_t	window_w;
+	mlx_image_t		*highlight_img;
+	int16_t			**mouse_map;
+	int 			mouse_y;
+	int				mouse_x;
+	uint32_t		window_h;
+	uint32_t		window_w;
+	bool			selected;
 }   t_mouse;
 
 
@@ -211,6 +224,7 @@ typedef struct s_data
 	t_camera	camera;
 	t_ambient	ambient;
 	t_light		light;
+	t_ray		ray;
 	t_screen	screen;
 	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
 	t_mouse		mouse;
@@ -228,6 +242,7 @@ void		ft_handle_mouse_click(mouse_key_t btn, action_t act, modifier_key_t m, voi
 void		init_mouse_map(t_data *data);
 
 // Ray Functions
+t_vec3		init_vector(t_screen screen);
 t_ray		ft_create_ray(t_data *data, int x, int y);
 void		store_ray_matrix(t_data *data);
 void		ft_create_lightray(t_data *data, t_ray *lightray);
@@ -257,11 +272,11 @@ t_vec3		minus(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecvec(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecdub(t_vec3 v, double dub);
 t_vec3		division_vec_dub(t_vec3 v, double dub);
-t_vec3		division_vec_vec(t_vec3 u, t_vec3 v); // might remove this
+t_vec3		division_vec_vec(t_vec3 u, t_vec3 v);
 t_vec3		cross_product(t_vec3 u, t_vec3 v);
+t_vec3		normalize_vector(t_vec3 v);
 double		dot_product(t_vec3 u, t_vec3 v);
 double		length_squared(t_vec3 vec);
-t_vec3		normalize_vector(t_vec3 v);
 double		distance(t_vec3 pnt1, t_vec3 pnt2);
 double		vec_length(t_vec3 v1, t_vec3 v2);
 double		pythagoras(double a, double b);

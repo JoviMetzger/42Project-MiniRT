@@ -6,7 +6,11 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
+<<<<<<< HEAD
 #    Updated: 2024/05/14 17:10:45 by smclacke      ########   odam.nl          #
+=======
+#    Updated: 2024/05/18 18:38:05 by jmetzger      ########   odam.nl          #
+>>>>>>> main
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,12 +39,18 @@ SRC_HEADER		= ./header
 
 SRCS			= main.c											\
 					utils/vec_operators.c 							\
+<<<<<<< HEAD
 					utils/vec_ops1.c 								\
 					utils/vec_ops2.c 								\
+=======
+					utils/utils.c 									\
+>>>>>>> main
 					window/window_movement.c 						\
 					window/open_window.c							\
 					window/render.c									\
 					colour/calculate_colour.c						\
+					colour/sphere_colour.c 							\
+					colour/plane_colour.c							\
 					colour/get_colour.c 							\
 					objects/sphere.c 								\
 					objects/plane.c 								\

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:20:47 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 14:28:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/18 18:09:09 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ t_type	get_type(char *str)
 	if (hash_str(str))
 		return (E_HASH);
 	return (0);
+}
+
+void	*map_malloc(size_t size)
+{
+	void	*alloc;
+
+	alloc = malloc(size);
+	if (alloc == NULL)
+		error_msg("malloc failure");
+	return (alloc);
 }
 
 char	**rt_malloc(char **arr, int size, int file)
