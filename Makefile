@@ -6,11 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-<<<<<<< HEAD
-#    Updated: 2024/05/14 17:10:45 by smclacke      ########   odam.nl          #
-=======
-#    Updated: 2024/05/18 18:38:05 by jmetzger      ########   odam.nl          #
->>>>>>> main
+#    Updated: 2024/05/22 15:00:33 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,12 +35,9 @@ SRC_HEADER		= ./header
 
 SRCS			= main.c											\
 					utils/vec_operators.c 							\
-<<<<<<< HEAD
 					utils/vec_ops1.c 								\
 					utils/vec_ops2.c 								\
-=======
 					utils/utils.c 									\
->>>>>>> main
 					window/window_movement.c 						\
 					window/open_window.c							\
 					window/render.c									\
@@ -83,7 +76,7 @@ SRCS			= main.c											\
 					parser/parser_free.c							\
 					parser/parser_error.c							\
 					parser/parser_utils.c							\
-					
+
 
 SRC_DIR			= src
 SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))

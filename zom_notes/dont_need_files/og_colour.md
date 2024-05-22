@@ -2,7 +2,7 @@
 t_colour get_cyl_colour(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *cylinder)
 =======
 <<<<<<< HEAD:zom_notes/dont_need_files/og_colour.md
-t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder)
+t_colour get_cyl_colour(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *cylinder)
 =======
 /* ************************************************************************** */
 /*                                                                            */
@@ -21,7 +21,7 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
 /**
  * @todo norm 
  */
-// t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder)
+// t_colour get_cyl_colour(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *cylinder)
 // {
 //     t_colour result;
 //     double AMBIENT_INTENSITY = data->ambient.ratio; // (0.2)
@@ -30,7 +30,7 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
 //     double SPECULAR_POWER = 32;
     
 //     // Using the 'Phong reflection model'
-// 	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_data->t));
+// 	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, hit_data->t));
 // 	t_vec3	normal = normalize_vector(minus(intersection_point, cylinder->center));
 
 // 	// Ambient light contribution
@@ -75,7 +75,7 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
 	
 // }
 
-t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder) 
+t_colour get_cyl_colour(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *cylinder) 
 >>>>>>> putPixel:src/colour/cylinder_colour.c
 >>>>>>> main
 {
@@ -95,7 +95,7 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
 	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, hit_data->t));
 	t_vec3	normal = normalize_vector(minus(intersection_point, cylinder->center));
 =======
-    intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_data->t));
+    intersection_point = plus(ray.place, mult_vecdub(ray.vector, hit_data->t));
     normal = normalize_vector(minus(intersection_point, cylinder->center));
 >>>>>>> main
 
@@ -132,7 +132,7 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
 		int j = 0;
         while (j < data->objs_i) 
 		{
-            if (intersect_sphere(&shadow_ray, data->objs[j], obj_data) || intersect_plane(&shadow_ray, data->objs[j], obj_data) || intersect_cylinder(&shadow_ray, data->objs[j], obj_data)) 
+            if (intersect_sphere(&shadow_ray, data->objs[j], hit_data) || intersect_plane(&shadow_ray, data->objs[j], hit_data) || intersect_cylinder(&shadow_ray, data->objs[j], hit_data)) 
 			{
                 in_shadow = true;
                 break;

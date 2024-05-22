@@ -5,12 +5,8 @@
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2024/05/22 14:27:27 by smclacke      ########   odam.nl         */
-=======
-/*   Updated: 2024/05/18 18:27:26 by jmetzger      ########   odam.nl         */
->>>>>>> main
+/*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/05/22 14:50:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +95,7 @@ typedef	struct s_colour_vars
 	
 }			t_colour_vars;
 
-// ---------------------------------------------our = get_sphere_colour(data, hit_data, ray, data->objs[i]);
-				// dat----------------
+
 // Colour - RGB
 typedef struct s_colour
 {
@@ -194,6 +189,9 @@ typedef struct s_objs
 	t_vec3				point[3];
 	int					point_flag;
 	mlx_texture_t		*texture;
+	int16_t				i_am;	// what obj num this is, basicly ID	
+	int					i;		// iterate through the different obj patterns (checkerboard, normal ...) -> resrets to 0 after 2 iterations.
+	int					what_pattern; //what patten that object currently has.
 }	t_objs;
 
 // -------------------------------------------------------------
@@ -228,6 +226,7 @@ typedef struct s_data
 	t_screen	screen;
 	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
 	t_mouse		mouse;
+	int16_t		i_am; // what object is currently seleted
 }	t_data;
 
 // --- Functions --- 

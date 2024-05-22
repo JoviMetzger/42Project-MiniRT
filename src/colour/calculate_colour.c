@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 14:32:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 14:53:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 	// 	return (printf("ret 2\n"), 0);
 // }
 
-static uint32_t	get_ret(t_obj_data *obj_data, t_colour colour)
+static uint32_t	get_ret(t_hit_data *hit_data, t_colour colour)
 {
 	if (hit_data->closest_t != DBL_MAX)
 		return (ft_convert_rgb(colour.r, colour.g, colour.b));

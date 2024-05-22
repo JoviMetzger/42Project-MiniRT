@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:44:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/18 18:24:45 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/05/22 14:53:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 /**
  * @todo add comments/description here
  */
-// t_colour get_plane_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *plane)
+// t_colour get_plane_colour(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *plane)
 // {
 //     t_colour result;
 //     double AMBIENT_INTENSITY = data->ambient.ratio; // (0.2)
@@ -59,7 +59,7 @@
 //     double SPECULAR_POWER = 50; //32
     
 //     // Using the 'Phong reflection model'
-// 	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_data->t));
+// 	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, hit_data->t));
 // 	t_vec3	normal = normalize_vector(minus(intersection_point, plane->center));
 
 // 	// Ambient light contribution
@@ -111,87 +111,87 @@
 	
 // }
 
-t_colour get_plane_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *plane) 
-{
-    t_colour result;
-    t_vec3 intersection_point;
-    t_vec3 normal;
-    t_ray shadow_ray;
-    t_vec3 reflection_direction;
-    t_vec3 view_direction;
+// t_colour get_plane_colour(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *plane) 
+// {
+//     t_colour result;
+//     t_vec3 intersection_point;
+//     t_vec3 normal;
+//     t_ray shadow_ray;
+//     t_vec3 reflection_direction;
+//     t_vec3 view_direction;
 
-    double AMBIENT_INTENSITY = data->ambient.ratio;
-    double SPECULAR_INTENSITY = 0.2;
-    double SPECULAR_POWER = 32;
+//     double AMBIENT_INTENSITY = data->ambient.ratio;
+//     double SPECULAR_INTENSITY = 0.2;
+//     double SPECULAR_POWER = 32;
 
-    // Using the 'Phong reflection model'
-    intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_data->t));
-    normal = normalize_vector(minus(intersection_point, plane->center));
+//     // Using the 'Phong reflection model'
+//     intersection_point = plus(ray.place, mult_vecdub(ray.vector, hit_data->t));
+//     normal = normalize_vector(minus(intersection_point, plane->center));
 
-    // Ambient light contribution
-    double ambient_red = AMBIENT_INTENSITY * data->ambient.colour.r;
-    double ambient_green = AMBIENT_INTENSITY * data->ambient.colour.g;
-    double ambient_blue = AMBIENT_INTENSITY * data->ambient.colour.b;
+//     // Ambient light contribution
+//     double ambient_red = AMBIENT_INTENSITY * data->ambient.colour.r;
+//     double ambient_green = AMBIENT_INTENSITY * data->ambient.colour.g;
+//     double ambient_blue = AMBIENT_INTENSITY * data->ambient.colour.b;
 
-    // Initialize result color with ambient light contribution
-    result.r = ambient_red;
-    result.g = ambient_green;
-    result.b = ambient_blue;
+//     // Initialize result color with ambient light contribution
+//     result.r = ambient_red;
+//     result.g = ambient_green;
+//     result.b = ambient_blue;
 
-	int i = 0;
-    while (i < data->lights_i) 
-	{
-        t_lightS *current_light = data->lightS[i];
+// 	int i = 0;
+//     while (i < data->lights_i) 
+// 	{
+//         t_lightS *current_light = data->lightS[i];
 
-        // Shadow ray
-        t_vec3 light_direction = normalize_vector(minus(current_light->place, intersection_point));
-        shadow_ray.place = plus(intersection_point, mult_vecdub(normal, EPSILON)); // Add small offset to avoid self-intersection
-        shadow_ray.vector = light_direction;
+//         // Shadow ray
+//         t_vec3 light_direction = normalize_vector(minus(current_light->place, intersection_point));
+//         shadow_ray.place = plus(intersection_point, mult_vecdub(normal, EPSILON)); // Add small offset to avoid self-intersection
+//         shadow_ray.vector = light_direction;
 
-        bool in_shadow = false;
-		int j = 0;
-        while (j < data->objs_i) 
-		{
-            if (intersect_plane(&shadow_ray, data->objs[j], obj_data) || intersect_sphere(&shadow_ray, data->objs[j], obj_data) || intersect_cylinder(&shadow_ray, data->objs[j], obj_data)) 
-			{
-                in_shadow = true;
-                break;
-            }
-			j++;
-        }
+//         bool in_shadow = false;
+// 		int j = 0;
+//         while (j < data->objs_i) 
+// 		{
+//             if (intersect_plane(&shadow_ray, data->objs[j], hit_data) || intersect_sphere(&shadow_ray, data->objs[j], hit_data) || intersect_cylinder(&shadow_ray, data->objs[j], hit_data)) 
+// 			{
+//                 in_shadow = true;
+//                 break;
+//             }
+// 			j++;
+//         }
 
-        if (!in_shadow) 
-		{
-            // Diffuse light contribution
-            double diffuse_factor = dot_product(normal, light_direction);
-            if (diffuse_factor < 0.0) 
-                diffuse_factor = 0.0;
-            double diffuse_red = current_light->ratio * diffuse_factor * current_light->colour.r;
-            double diffuse_green = current_light->ratio * diffuse_factor * current_light->colour.g;
-            double diffuse_blue = current_light->ratio * diffuse_factor * current_light->colour.b;
+//         if (!in_shadow) 
+// 		{
+//             // Diffuse light contribution
+//             double diffuse_factor = dot_product(normal, light_direction);
+//             if (diffuse_factor < 0.0) 
+//                 diffuse_factor = 0.0;
+//             double diffuse_red = current_light->ratio * diffuse_factor * current_light->colour.r;
+//             double diffuse_green = current_light->ratio * diffuse_factor * current_light->colour.g;
+//             double diffuse_blue = current_light->ratio * diffuse_factor * current_light->colour.b;
 
-            // Specular light contribution
-            view_direction = normalize_vector(minus(ray.place, intersection_point));
-            reflection_direction = normalize_vector(ft_reflect(light_direction, normal));
-            double specular_factor = pow(dot_product(reflection_direction, view_direction), SPECULAR_POWER);
-            if (specular_factor < 0.0) 
-                specular_factor = 0.0;
-            double specular_red = SPECULAR_INTENSITY * specular_factor * current_light->colour.r;
-            double specular_green = SPECULAR_INTENSITY * specular_factor * current_light->colour.g;
-            double specular_blue = SPECULAR_INTENSITY * specular_factor * current_light->colour.b;
+//             // Specular light contribution
+//             view_direction = normalize_vector(minus(ray.place, intersection_point));
+//             reflection_direction = normalize_vector(ft_reflect(light_direction, normal));
+//             double specular_factor = pow(dot_product(reflection_direction, view_direction), SPECULAR_POWER);
+//             if (specular_factor < 0.0) 
+//                 specular_factor = 0.0;
+//             double specular_red = SPECULAR_INTENSITY * specular_factor * current_light->colour.r;
+//             double specular_green = SPECULAR_INTENSITY * specular_factor * current_light->colour.g;
+//             double specular_blue = SPECULAR_INTENSITY * specular_factor * current_light->colour.b;
 
-            // Add the contributions from this light to the result
-            result.r += diffuse_red + specular_red;
-            result.g += diffuse_green + specular_green;
-            result.b += diffuse_blue + specular_blue;
-        }
-		i++;
-    }
+//             // Add the contributions from this light to the result
+//             result.r += diffuse_red + specular_red;
+//             result.g += diffuse_green + specular_green;
+//             result.b += diffuse_blue + specular_blue;
+//         }
+// 		i++;
+//     }
 
-    // Clamp final values to [0, 255] and apply the object's base color
-    result.r = fmin(result.r * plane->colour.r / 255, 255.0);
-    result.g = fmin(result.g * plane->colour.g / 255, 255.0);
-    result.b = fmin(result.b * plane->colour.b / 255, 255.0);
+//     // Clamp final values to [0, 255] and apply the object's base color
+//     result.r = fmin(result.r * plane->colour.r / 255, 255.0);
+//     result.g = fmin(result.g * plane->colour.g / 255, 255.0);
+//     result.b = fmin(result.b * plane->colour.b / 255, 255.0);
 
-    return result;        
-}
+//     return result;        
+// }

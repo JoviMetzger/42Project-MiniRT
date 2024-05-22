@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 14:34:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 14:51:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ t_colour	get_pl_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj)
 	
 	ft_bzero(&vars, sizeof(t_colour_vars));
 	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, hit->t));
-	// vars.normal = obj->normal;
+	vars.normal = obj->normal;
 	get_colour(data, &vars, ray);
-	// exit(EXIT_FAILURE);
 
 	
 	vars.final_red = vars.ambient_red + vars.diffuse_red;
