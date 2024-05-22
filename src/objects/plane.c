@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 16:11:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 16:29:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit_data)
 	if (fabs(denom) > EPSILON)
 	{
 		oc = minus(ray->place, plane->center);
-		hit_data->t = dot_product(oc, plane->vector) / denom; // negative?
+		hit_data->t = -dot_product(oc, plane->vector) / denom;
 		if (hit_data->t >= EPSILON)
 		{
 			if (denom > 0)
@@ -48,7 +48,7 @@ t_colour	get_pl_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj)
 	t_colour_vars	vars;
 	
 	ft_bzero(&vars, sizeof(t_colour_vars));
-	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, hit->t));
+	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, hit->closest_t));
 	vars.normal = obj->normal;
 	get_colour(data, &vars, ray);
 	
