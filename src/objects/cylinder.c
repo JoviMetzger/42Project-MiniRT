@@ -6,17 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 17:21:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 18:54:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-		// printf("hit = %f %f %f | t = %f\n", obj->hit_pos.x, obj->hit_pos.y, obj->hit_pos.z, obj->t);
-		// printf("closest = %f\n", obj->closest_t);
-		// printf("distance = %f\n", distance);
-		// printf("radius = %f\n", cyl->radius);
-		// exit(EXIT_SUCCESS);
 // checking more than zero for if behind
 
 bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
@@ -30,12 +25,19 @@ bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 	if (intersect_plane(ray, &tmppl, obj) == true)
 	{
 		obj->hit_pos = mult_vecdub(ray->vector, obj->t);
-		double distance = vec_length(obj->hit_pos, cyl->top);
-		if (distance <= cyl->radius && obj->t > 0 && obj->t <= obj->closest_t)
+		double distance = -vec_length(cyl->top, obj->hit_pos);
+		
+		// printf("radius = %f\n", cyl->radius);
+		// printf("t = %f\n", obj->t);
+		// printf("closest = %f\n", obj->closest_t);
+		// printf("hit = %f %f %f\n", obj->hit_pos.x, obj->hit_pos.y, obj->hit_pos.z);
+		// printf("distance = %f\n", distance);
+		// exit(EXIT_SUCCESS);
+		if (distance <= cyl->radius && obj->t > 0) // && obj->t <= obj->closest_t - in plane calculation
 		{
-			puts("top");
-			obj->closest_t = obj->t;
-			// cyl->normal = normalize_vector(cyl->vector);
+			// puts("top");
+			// obj->closest_t = obj->t;
+			cyl->normal = normalize_vector(cyl->vector);
 			truth_or_dare = true;
 		}
 	}
@@ -45,13 +47,13 @@ bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 	if (intersect_plane(ray, &tmppl, obj) == true)
 	{
 		obj->hit_pos = mult_vecdub(ray->vector, obj->t);
+		double distance = vec_length(cyl->base, obj->hit_pos);
 
-		double distance = vec_length(obj->hit_pos, cyl->base);
-		if (distance <= cyl->radius && obj->t > 0 && obj->t <= obj->closest_t)
+		if (distance <= cyl->radius && obj->t > 0)
 		{
-			puts("bottom");
-			obj->closest_t = obj->t;
-			// cyl->normal = normalize_vector(mult_vecdub(cyl->vector, -1)); // yes? for opposite 
+			// puts("bottom");
+			// obj->closest_t = obj->t;
+			cyl->normal = normalize_vector(mult_vecdub(cyl->vector, -1)); // yes? for opposite 
 			truth_or_dare = true;
 		}
 	}
@@ -62,8 +64,6 @@ bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 // ray->vector * t + ray->place - cyl->center
 bool	cut_ends(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 {
-	// t_vec3	to_center;
-
 	obj->to_center = plus(minus(ray->place, cyl->center), mult_vecdub(ray->vector, obj->t));
 	if (fabs(dot_product(obj->to_center, cyl->vector)) <= cyl->height_half)
 		return (true);
@@ -76,11 +76,28 @@ static void	set_points(t_hit_data *obj, t_ray *ray, t_objs *cyl)
 	t_vec3	oc;
 
 	vector_cross = cross_product(cyl->vector, ray->vector);
-	oc = minus(cyl->center, ray->place);
-	oc = cross_product(oc, cyl->vector);
+	// oc = minus(cyl->center, ray->place);
+	oc = minus(ray->place, cyl->center);
+	// oc = cross_product(oc, cyl->vector);
+	oc = cross_product(oc, ray->vector); // andersom?
 	obj->a = dot_product(vector_cross, vector_cross);
 	obj->b = 2.0 * dot_product(vector_cross, oc);
 	obj->c = dot_product(oc, oc) - pow(cyl->radius, 2);
+}
+
+static void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *obj)
+{
+	// FOR BODY
+	// normal bullshit
+	// The cylinder normal vector starts at the centerline of the 
+	// cylinder at the same z-height of the point where the ray 
+	// intersects the cylinder, ends at the radial point of intersection. 
+	// Normalize it and you have your unit normal vector.
+	obj->hit_pos = mult_vecdub(ray->vector, obj->t);
+
+	obj->tmp_t = dot_product(minus(obj->hit_pos, cyl->center), cyl->vector);
+	obj->pnt = plus(cyl->center, mult_vecdub(cyl->vector, obj->tmp_t));
+	cyl->normal = normalize_vector(minus(ray->vector, obj->pnt));
 }
 
 /**
@@ -97,9 +114,6 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 	set_points(obj, ray, cyl);
 	if (quadratic(obj) == true)
 	{
-		obj->tmp_t = dot_product(minus(obj->to_center, cyl->center), cyl->vector);
-		obj->pnt = plus(cyl->center, mult_vecdub(cyl->vector, obj->tmp_t));
-		cyl->normal = normalize_vector(minus(obj->to_center, obj->pnt));
 		if (cut_ends(obj, cyl, ray) == true)
 		{
 			// if (check_caps(obj, cyl, ray) == true)
@@ -107,31 +121,9 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 			// 	// puts("HI");
 			// 	return (true);
 			// }
-
+			cyl_normal(ray, cyl, obj);
 			return (check_closest(obj));
 		}
 	}
 	return (false);
-}
-
-
-// Clamp final values to [0, 255]
-t_colour	get_cy_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj)
-{
-	t_colour		result;
-	t_colour_vars	vars;
-	
-	ft_bzero(&vars, sizeof(t_colour_vars));
-	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, hit->t));
-	get_colour(data, &vars, ray);
-
-	vars.normal = obj->normal;
-
-	vars.final_red = fmin(fmax(vars.final_red, obj->colour.r), 255);
-	vars.final_green = fmin(fmax(vars.final_green, obj->colour.g), 255);
-	vars.final_blue = fmin(fmax(vars.final_blue, obj->colour.b), 255);
-	result.r = vars.final_red;
-	result.g = vars.final_green;
-	result.b = vars.final_blue;
-	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 17:13:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 18:55:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,13 +252,8 @@ void		store_ray_matrix(t_data *data);
 void		ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
-t_colour	get_pl_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
-t_colour	get_sp_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
-t_colour	get_cy_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
-t_colour	get_tr_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
 uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj, t_ray ray);
-t_colour	get_old_colour(t_data *data, t_hit_data *obj, t_ray ray, t_objs *obj_i);
-void		get_colour(t_data *data, t_colour_vars *vars, t_ray ray);
+t_colour	get_colour(t_data *data, t_hit_data *obj, t_ray ray, t_objs *obj_i);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 

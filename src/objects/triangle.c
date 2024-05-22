@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 18:00:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/21 18:37:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 18:55:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,26 +97,4 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit_data)
 		return (false);
 	return (check_closest(hit_data));
 
-}
-
-// Clamp final values to [0, 255]
-t_colour	get_tr_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj)
-{
-	t_colour		result;
-	t_colour_vars	vars;
-	
-	ft_bzero(&vars, sizeof(t_colour_vars));
-	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, hit->t));
-	get_colour(data, &vars, ray);
-
-	// need for triangle
-	// vars.normal = 
-	
-	vars.final_red = fmin(fmax(vars.final_red, obj->colour.r), 255);
-	vars.final_green = fmin(fmax(vars.final_green, obj->colour.g), 255);
-	vars.final_blue = fmin(fmax(vars.final_blue, obj->colour.b), 255);
-	result.r = vars.final_red;
-	result.g = vars.final_green;
-	result.b = vars.final_blue;
-	return (result);
 }
