@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 15:46:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 17:12:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,8 +203,11 @@ typedef struct s_hit_data
 	double	b;
 	double	c;
 	double	d;
+	t_vec3	pnt;
 	double	root1;
 	double	root2;
+	// t_vec3	cut[2];
+	t_vec3	to_center;
 	t_vec3	hit_pos;
 	double	t;
 	double	tmp_t;
@@ -218,6 +221,7 @@ typedef struct s_data
 	mlx_image_t	*image;
 	mlx_t		*mlx;
 	t_objs		**objs;
+	t_hit_data	*hit_data; // bezeroed but might move
 	int			objs_i;
 	t_camera	camera;
 	t_ambient	ambient;
