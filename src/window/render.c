@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 14:36:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 15:50:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void ft_put_image(t_data *data)
 	// if (data->lightS == NULL) 
 	// 	return ;
 	
-	t_lightS one;
-	t_lightS two;
-	t_lightS three;
-	init_LIGHTS(&one, &two, &three);
+	// t_lightS one;
+	// t_lightS two;
+	// t_lightS three;
+	// init_LIGHTS(&one, &two, &three);
 	
 	// data->lightS[0] = &one;
 	// data->lightS[1] = &two;
@@ -85,18 +85,18 @@ void ft_put_image(t_data *data)
 	{
 		while (x < data->mlx->width)
 		{ 
-			data->mouse.mouse_map[y][x] = -1;
+			// data->mouse.mouse_map[y][x] = -1;
 			data->ray = ft_create_ray(data, x ,y);		
 			colour = ft_calculate_colour(data, &hit_data, data->ray);
 			mlx_put_pixel(data->image, x, y, colour);
-			data->mouse.mouse_x = x;
+			// data->mouse.mouse_x = x;
 			x++;
 		}
 		data->mouse.mouse_y = y;
 		x = 0;
 		y++;
 	}
-	puts("DONE BITCHES!!!!");
+	// puts("DONE BITCHES!!!!");
 }
 
 // static void	ft_resize(int32_t width, int32_t height, void *param)

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 14:53:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/22 16:03:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,27 @@ uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit_data, t_ray ray)
 		if (data->objs[i]->type == E_PLANE)
 		{
 			if (intersect_plane(&ray, data->objs[i], hit_data))
-				colour = get_old_colour(data, hit_data, ray, data->objs[i]);
+				colour = get_pl_colour(data, hit_data, ray, data->objs[i]);
+				// colour = get_old_colour(data, hit_data, ray, data->objs[i]);
 		}
-		// if (data->objs[i]->type == E_SPHERE)
-		// {
-		// 	if (intersect_sphere(&ray, data->objs[i], hit_data))
-		// 		colour = get_old_colour(data, hit_data, ray, data->objs[i]);
-		// 		// colour = get_sp_colour(data, hit_data, ray, data->objs[i]);
-		// }
-		// else if (data->objs[i]->type == E_CYLINDER)
-		// {
-		// 	if (intersect_cylinder(&ray, data->objs[i], hit_data))
-		// 		colour = get_cy_colour(data, hit_data, ray, data->objs[i]);
-		// }
-		// else if (data->objs[i]->type == E_TRIANGLE)
-		// {
-		// 	if (intersect_triangle(&ray, data->objs[i], hit_data))
-		// 		colour = get_tr_colour(data, hit_data, ray, data->objs[i]);
-		// }
+		else if (data->objs[i]->type == E_SPHERE)
+		{
+			if (intersect_sphere(&ray, data->objs[i], hit_data))
+				colour = get_sp_colour(data, hit_data, ray, data->objs[i]);
+				// colour = get_old_colour(data, hit_data, ray, data->objs[i]);
+		}
+		else if (data->objs[i]->type == E_CYLINDER)
+		{
+			if (intersect_cylinder(&ray, data->objs[i], hit_data))
+				colour = get_old_colour(data, hit_data, ray, data->objs[i]);
+				// colour = get_cy_colour(data, hit_data, ray, data->objs[i]);
+		}
+		else if (data->objs[i]->type == E_TRIANGLE)
+		{
+			if (intersect_triangle(&ray, data->objs[i], hit_data))
+				colour = get_old_colour(data, hit_data, ray, data->objs[i]);
+				// colour = get_tr_colour(data, hit_data, ray, data->objs[i]);
+		}
 		i++;
 	}
 	return (get_ret(hit_data, colour));
