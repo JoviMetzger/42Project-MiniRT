@@ -1,5 +1,16 @@
 
+		obj->t = obj->tmp_t;
+		if (check_top(obj, cyl, ray) == true)
+			return (check_closest(obj));
+		// obj->t = obj->tmp_t;
+		// if (check_bottom(obj, cyl, ray) == true)
+		// 	return (check_closest(obj));
 
+CYLINDER POOOOO
+
+- if i save t with tmp in cap functions, i get an 'extra' cut in the cylinder
+	so kind of like two different/separate cylinders with infinite yellow running through it all
+- without using tmp the body stays in tact
 
 
 general situation:

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/23 17:23:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/23 23:32:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,6 @@ typedef struct s_objs
 // -> saves the calculations of the intersections
 typedef struct s_hit_data
 {
-	t_vec3				cut[2];
 	double	a;
 	double	b;
 	double	c;
@@ -285,8 +284,10 @@ double		vec_length(t_vec3 v1, t_vec3 v2);
 // Objects Functions
 bool		check_closest(t_hit_data *hit_data);
 bool		quadratic(t_hit_data *hit_data);
-bool		check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray);
-bool		cut_ends(t_hit_data *obj, t_objs *cyl, t_ray *ray);
+bool		tap_top(t_hit_data *obj, t_objs *cyl, t_ray *ray);
+bool		boop_bottom(t_hit_data *obj, t_objs *cyl, t_ray *ray);
+void		set_points(t_hit_data *obj, t_ray *ray, t_objs *cyl);
+bool		cut_ends_hit_bod(t_hit_data *obj, t_objs *cyl, t_ray *ray);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit_data);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit_data);
 bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit_data);
