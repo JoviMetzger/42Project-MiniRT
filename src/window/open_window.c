@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 15:01:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/23 15:21:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void ft_open_window(t_data *data)
 {
 	// Gotta error check this stuff
-	mlx_set_setting(MLX_STRETCH_IMAGE, 1); // For stretching image - but when resizing, should not stretch!
+	// mlx_set_setting(MLX_STRETCH_IMAGE, 1); // For stretching image - but when resizing, should not stretch!
 	if (!(data->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", 1)))
 	{
 		free_objects(data);

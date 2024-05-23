@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 14:35:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/23 15:10:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ static void	check_file_type(char *arg)
 	error_msg("wrong file type");
 }
 
-void	init_mouse_map(t_data *data) 
+void	init_mouse_map(t_data *data)
 {
-	int16_t	**map;
+	int16_t		**map;
 	uint32_t	i;
 
 	i = 0;
