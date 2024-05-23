@@ -6,17 +6,19 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 22:56:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/23 16:54:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-// checking more than zero for if behind
-		
-
 bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 {
+	cyl->base = plus(cyl->center, mult_vecdub(cyl->vector, -cyl->height_half));
+	cyl->top = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height_half));
+	// printf("base = %f %f %f\n", cyl->base.x,  cyl->base.y,  cyl->base.z);
+	// printf("top = %f %f %f\n", cyl->top.x,  cyl->top.y,  cyl->top.z);
+	// exit(EXIT_SUCCESS);
 	t_objs	tmppl;
 	bool	truth_or_dare = false;
 
@@ -32,7 +34,7 @@ bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 		if (distance <= cyl->radius && obj->t > 0 && distance > 0)
 		{
 			puts("top");
-			// cyl->normal = normalize_vector(cyl->vector);
+			cyl->normal = normalize_vector(cyl->vector);
 			truth_or_dare = true;
 		}
 	}
@@ -52,7 +54,7 @@ bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 		if (distance <= cyl->radius && obj->t > 0 && distance > 0)
 		{
 			// puts("bottom");
-			// cyl->normal = normalize_vector(mult_vecdub(cyl->vector, -1)); // yes? for opposite 
+			cyl->normal = normalize_vector(mult_vecdub(cyl->vector, -1)); // yes? for opposite 
 			truth_or_dare = true;
 		}
 	}
@@ -101,31 +103,21 @@ static void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 	obj->to_center = minus(obj->hit_pos, cyl->center);
 	obj->pnt = plus(cyl->center, mult_vecdub(cyl->vector, dot_product(obj->to_center, cyl->vector)));
 	cyl->normal = normalize_vector(obj->pnt);
-
-//------------------------------------------------------------------------------//
-
-	// obj->hit_pos = mult_vecdub(ray->vector, obj->t);
-	// obj->tmp_t = dot_product(minus(obj->hit_pos, cyl->center), cyl->vector);
-	// obj->pnt = plus(cyl->center, mult_vecdub(cyl->vector, obj->tmp_t));
-	// cyl->normal = normalize_vector(minus(ray->vector, obj->pnt));
 }
 
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 {
-	cyl->base = plus(cyl->center, mult_vecdub(cyl->vector, -cyl->height_half));
-	cyl->top = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height_half));
 	set_points(obj, ray, cyl);
 	if (quadratic(obj) == true)
 	{
 		if (cut_ends(obj, cyl, ray) == true)
 		{
 			cyl_normal(ray, cyl, obj);
-			if (check_caps(obj, cyl, ray) == true) // separate into two funcs, check the hits
-			{
-				// puts("HI");
-				return (check_closest(obj));
-				// return (true); // see weird middle plane cause NOT CLOSEST
-			}
+			// if (check_caps(obj, cyl, ray) == true) // separate into two funcs, check the hits
+			// {
+			// 	return (check_closest(obj));
+			// 	// return (true); // see weird middle plane cause NOT CLOSEST
+			// }
 			return (check_closest(obj));
 			// return (true);
 		}

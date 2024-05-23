@@ -4,6 +4,7 @@
 
 general situation:
 
+
 - image stretching... we aren't supposed to stretch when resizing the window (remove stretching?)
 
 - i keep crashing/it takes too long, im not sure exactly where that's coming from
@@ -37,3 +38,4 @@ general situation:
 - we leak 
 
 - inside of objects!! (at least cylinder...)
+
