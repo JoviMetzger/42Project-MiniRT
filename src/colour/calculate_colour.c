@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/23 22:04:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/24 17:58:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,12 @@ uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit_data, t_ray ray)
 		}
 		else if (data->objs[i]->type == E_CYLINDER)
 		{
-			if (intersect_cylinder(&ray, data->objs[i], hit_data))
+			// hit_data->t = hit_data->tmp_t;
+			if (intersect_body(&ray, data->objs[i], hit_data))
 				colour = get_colour(data, hit_data, ray, data->objs[i]);
+			if (intersect_caps(&ray, data->objs[i], hit_data))
+				colour = get_colour(data, hit_data, ray, data->objs[i]);
+			// if (intersect_cylinder(&ray, data->objs[i], hit_data))
 				
 		}
 		else if (data->objs[i]->type == E_TRIANGLE)
