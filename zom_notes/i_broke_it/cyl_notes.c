@@ -1,46 +1,46 @@
 
-bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
-{
-	cyl->base = plus(cyl->center, mult_vecdub(cyl->vector, -cyl->height_half));
-	cyl->top = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height_half));
+// bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
+// {
+// 	cyl->base = plus(cyl->center, mult_vecdub(cyl->vector, -cyl->height_half));
+// 	cyl->top = plus(cyl->center, mult_vecdub(cyl->vector, cyl->height_half));
 
-	t_objs	tmppl;
+// 	t_objs	tmppl;
 
-	ft_bzero(&tmppl, sizeof(t_objs));
-	tmppl.center = cyl->top;
-	tmppl.vector = cyl->vector;
-	obj->tmp_t = obj->t;
-	if (intersect_plane(ray, &tmppl, obj) == true)
-	{
-		// obj->hit_pos = normalize_vector(mult_vecdub(cyl->vector, obj->t));
-		obj->hit_pos = mult_vecdub(ray->vector, obj->t);
+// 	ft_bzero(&tmppl, sizeof(t_objs));
+// 	tmppl.center = cyl->top;
+// 	tmppl.vector = cyl->vector;
+// 	obj->tmp_t = obj->t;
+// 	if (intersect_plane(ray, &tmppl, obj) == true)
+// 	{
+// 		// obj->hit_pos = normalize_vector(mult_vecdub(cyl->vector, obj->t));
+// 		obj->hit_pos = mult_vecdub(ray->vector, obj->t);
 
-		// double distance = vec_length(obj->hit_pos, cyl->top);
-		double distance = vec_length(cyl->top, obj->hit_pos);
+// 		// double distance = vec_length(obj->hit_pos, cyl->top);
+// 		double distance = vec_length(cyl->top, obj->hit_pos);
 
-		if (distance <= cyl->radius)
-		{
-			puts("top");
-			return (true);
-		}
-	}
-	obj->t = obj->tmp_t;
-	ft_bzero(&tmppl, sizeof(t_objs));
-	tmppl.center = cyl->base;
-	tmppl.vector = cyl->vector;
-	if (intersect_plane(ray, &tmppl, obj) == true)
-	{
-		obj->hit_pos = mult_vecdub(ray->vector, obj->t);
+// 		if (distance <= cyl->radius)
+// 		{
+// 			puts("top");
+// 			return (true);
+// 		}
+// 	}
+// 	obj->t = obj->tmp_t;
+// 	ft_bzero(&tmppl, sizeof(t_objs));
+// 	tmppl.center = cyl->base;
+// 	tmppl.vector = cyl->vector;
+// 	if (intersect_plane(ray, &tmppl, obj) == true)
+// 	{
+// 		obj->hit_pos = mult_vecdub(ray->vector, obj->t);
 
-		double distance = vec_length(cyl->base, obj->hit_pos);
-		if (distance <= cyl->radius)
-		{
-			puts("bottom");
-			return (true);
-		}
-	}
-	return (false);
-}
+// 		double distance = vec_length(cyl->base, obj->hit_pos);
+// 		if (distance <= cyl->radius)
+// 		{
+// 			puts("bottom");
+// 			return (true);
+// 		}
+// 	}
+// 	return (false);
+// }
 
 // THE COMMENTS
 
@@ -51,19 +51,7 @@ bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 	// printf("top = %f %f %f\n", cyl->top.x,  cyl->top.y,  cyl->top.z);
 	// exit(EXIT_SUCCESS);
 
-		// printf("hit = %f %f %f\n", obj->hit_pos.x, obj->hit_pos.y, obj->hit_pos.z);
-		// printf("distance = %f\n", distance);
-
-
-
-		// printf("radius = %f\n", cyl->radius);
-		// printf("t = %f\n", obj->t);
-		// exit(EXIT_SUCCESS);
-
-
-	// (void) obj;
-
-	// t_vec3	cap_middle = minus(cyl->center, ray->place);
+>center, ray->place);
 	// double	difference = dot_product(cyl->vector, ray->vector);
 
 	// double	distance1 = dot_product(cap_middle, cyl->center) / difference;
@@ -120,6 +108,7 @@ bool	check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 // 	bool	truth_or_dare = false;
 
 // 	ft_bzero(&tmppl, sizeof(t_objs));
+
 // 	tmppl.center = cyl->top;
 // 	tmppl.vector = cyl->vector;
 // 	if (intersect_plane(ray, &tmppl, obj) == true)
