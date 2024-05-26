@@ -6,12 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/26 18:57:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/26 21:51:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
+// / 1.41999999
 bool	tap_top(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 {
 	cyl->top = minus(cyl->center, mult_vecdub(cyl->vector, cyl->height_half / 2));
@@ -31,7 +32,6 @@ bool	tap_top(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 	}
 	return (false);
 }
-// / 1.41999999
 
 // need to figure out what vector addition im missing to get plane on top for bottom cap
 // i.e. test vector...
@@ -40,8 +40,9 @@ bool	boop_bottom(t_hit_data *obj, t_objs *cyl, t_ray *ray)
  	// t_vec3 test = {0, 2.1, 0};
  	// t_vec3 test = {-0.5, 1, 0};
  	// t_vec3 test = {0, 0, 0};
-	// cyl->base = plus(test, plus(cyl->center, mult_vecdub(ray->vector, -(cyl->height_half / 2))));
-	cyl->base = plus(cyl->center, mult_vecdub(ray->vector, (cyl->height_half)));
+	// cyl->base = plus(test, plus(cyl->center, mult_vecdub(ray->vector, -(cyl->height_half/ 2))));
+	// cyl->base = plus(cyl->center, plus(cyl->vector, mult_vecdub(ray->vector, -(cyl->height_half / 2))));
+	cyl->base = plus(division_vec_dub(cyl->center, 2), plus(cyl->vector, mult_vecdub(ray->vector, -(cyl->height_half / 2))));
 
 	t_objs	tmppl;
 
