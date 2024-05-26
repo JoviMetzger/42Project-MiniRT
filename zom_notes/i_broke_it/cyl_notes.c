@@ -51,7 +51,7 @@
 	// printf("top = %f %f %f\n", cyl->top.x,  cyl->top.y,  cyl->top.z);
 	// exit(EXIT_SUCCESS);
 
->center, ray->place);
+// >center, ray->place);
 	// double	difference = dot_product(cyl->vector, ray->vector);
 
 	// double	distance1 = dot_product(cap_middle, cyl->center) / difference;
