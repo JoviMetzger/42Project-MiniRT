@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 22:39:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/26 22:49:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,13 @@ t_colour	get_colour(t_data *data, t_hit_data *obj, t_ray ray, t_objs *obj_i)
 {
 	t_colour		result;
 	t_colour_vars	vars;
-	// (void) obj; // check this!
 
 	ft_bzero(&vars, sizeof(t_colour_vars));
 	vars.ambient_intensity = data->ambient.ratio;
 	vars.diffuse_intensity = data->light.ratio;
 	vars.spec_intensity = 0.2;
 	vars.spec_power = 32;
-	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, obj->t));
+	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, obj->t)); // closest?
 	vars.normal = obj_i->normal;
 	light_funcs(data, &vars, &ray);
 	vars.final_red = vars.ambient_red + vars.diffuse_red;

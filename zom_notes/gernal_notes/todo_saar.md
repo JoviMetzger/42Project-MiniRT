@@ -1,20 +1,15 @@
 
-		obj->t = obj->tmp_t;
-		if (check_top(obj, cyl, ray) == true)
-			return (check_closest(obj));
-		// obj->t = obj->tmp_t;
-		// if (check_bottom(obj, cyl, ray) == true)
-		// 	return (check_closest(obj));
-
 CYLINDER POOOOO
 
-- if i save t with tmp in cap functions, i get an 'extra' cut in the cylinder
-	so kind of like two different/separate cylinders with infinite yellow running through it all
-- without using tmp the body stays in tact
+- can't seem to get more than one at one time...
+- background is some fucked up plane situation, something (sp) behind it can't been seen
+- surface normals
+- if return the closest_t check, things get messy...
 
 
 general situation:
 
+- sphere stretches when close up
 
 - image stretching... we aren't supposed to stretch when resizing the window (remove stretching?)
 
@@ -48,5 +43,5 @@ general situation:
 
 - we leak 
 
-- inside of objects!! (at least cylinder...)
+- inside of objects!! (at least cylinder...) - NOPE
 

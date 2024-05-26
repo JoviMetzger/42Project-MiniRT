@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/26 22:19:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/26 23:05:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,32 @@ void	set_points(t_hit_data *obj, t_ray *ray, t_objs *cyl)
 	obj->c = dot_product(oc, oc) - pow(cyl->radius, 2);
 }
 
-bool	intersect_caps(t_ray *ray, t_objs *cyl, t_hit_data *obj)
+// static void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *obj)
+// {
+// 	obj->hit_pos = mult_vecdub(ray->vector, obj->t);
+// 	obj->to_center = minus(obj->hit_pos, cyl->center);
+// 	obj->pnt = plus(cyl->center, mult_vecdub(cyl->vector, dot_product(obj->to_center, cyl->vector)));
+// 	cyl->normal = normalize_vector(obj->pnt);
+// }
+
+bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 {
 	if (tap_top(obj, cyl, ray) == true)
 		return (true);
-	if (boop_bottom(obj, cyl, ray) == true)
+	else if (boop_bottom(obj, cyl, ray) == true)
 		return (true);
-	return (false);
-}
-
-bool	intersect_body(t_ray *ray, t_objs *cyl, t_hit_data *obj)
-{
-	set_points(obj, ray, cyl);
-	if (quadratic(obj) == true)
+	else
 	{
-		if (cut_ends_hit_bod( obj, cyl, ray) == true)
-			return (check_closest(obj));
+		set_points(obj, ray, cyl);
+		if (quadratic(obj) == true)
+		{
+			if (cut_ends_hit_bod( obj, cyl, ray) == true)
+			{
+				// cyl_normal(ray, cyl, obj);
+				cyl->normal = normalize_vector(minus(obj->hit_pos, cyl->center));
+				return (true);
+			}
+		}
 	}
 	return (false);
 }
