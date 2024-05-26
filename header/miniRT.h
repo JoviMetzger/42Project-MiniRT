@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/26 23:11:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/26 23:40:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ typedef struct s_objs
 // -> saves the calculations of the intersections
 typedef struct s_hit_data
 {
+	int cyl_flag;
 	double	a;
 	double	b;
 	double	c;
