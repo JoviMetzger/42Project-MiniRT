@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/26 23:05:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/26 23:10:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void ft_put_image(t_data *data)
 		x = 0;
 		y++;
 	}
-	// puts("DONE BITCHES!!!!");
+	puts("DONE BITCHES!!!!");
 }
 
 // static void	ft_resize(int32_t width, int32_t height, void *param)

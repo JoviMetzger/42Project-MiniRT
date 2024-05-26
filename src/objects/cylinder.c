@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/26 23:05:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/26 23:23:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-//                                            ^ ^
+//                                           ^ ^
 //  1.41, not quite perfect but good enough  0_0
 
 bool	tap_top(t_hit_data *obj, t_objs *cyl, t_ray *ray)
@@ -78,20 +78,26 @@ void	set_points(t_hit_data *obj, t_ray *ray, t_objs *cyl)
 	obj->c = dot_product(oc, oc) - pow(cyl->radius, 2);
 }
 
-// static void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *obj)
-// {
-// 	obj->hit_pos = mult_vecdub(ray->vector, obj->t);
-// 	obj->to_center = minus(obj->hit_pos, cyl->center);
-// 	obj->pnt = plus(cyl->center, mult_vecdub(cyl->vector, dot_product(obj->to_center, cyl->vector)));
-// 	cyl->normal = normalize_vector(obj->pnt);
-// }
+void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *obj)
+{
+	obj->hit_pos = mult_vecdub(ray->vector, obj->t);
+	obj->to_center = minus(obj->hit_pos, cyl->center);
+	obj->pnt = plus(cyl->center, mult_vecdub(cyl->vector, dot_product(obj->to_center, cyl->vector)));
+	cyl->normal = normalize_vector(obj->pnt);
+}
 
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 {
 	if (tap_top(obj, cyl, ray) == true)
+	{
+		// cyl->normal = normalize_vector(minus(obj->hit_pos, cyl->center));
 		return (true);
+	}
 	else if (boop_bottom(obj, cyl, ray) == true)
+	{
+		// cyl->normal = normalize_vector(minus(obj->hit_pos, cyl->center));
 		return (true);
+	}
 	else
 	{
 		set_points(obj, ray, cyl);
@@ -99,8 +105,8 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 		{
 			if (cut_ends_hit_bod( obj, cyl, ray) == true)
 			{
-				// cyl_normal(ray, cyl, obj);
 				cyl->normal = normalize_vector(minus(obj->hit_pos, cyl->center));
+				// cyl_normal(ray, cyl, obj);
 				return (true);
 			}
 		}

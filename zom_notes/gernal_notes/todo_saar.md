@@ -3,7 +3,7 @@ CYLINDER POOOOO
 
 - can't seem to get more than one at one time...
 - background is some fucked up plane situation, something (sp) behind it can't been seen
-- surface normals
+- trying to get the surface normal of cylinder, got the equations but not really behaving correctly
 - if return the closest_t check, things get messy...
 
 
@@ -13,11 +13,7 @@ general situation:
 
 - image stretching... we aren't supposed to stretch when resizing the window (remove stretching?)
 
-- i keep crashing/it takes too long, im not sure exactly where that's coming from
-
-- trying to get the surface normal of cylinder, got the equations but not really behaving correctly
-
-- cylinder caps function (checked by vinny too) but stilllllllll no caps...
+- i keep crashing/it takes too long, im not sure exactly where that's coming from/oplossing
 
 - new jovi stuff
 

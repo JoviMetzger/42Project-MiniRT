@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/26 23:07:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/26 23:21:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ bool	intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit_data)
 		oc = minus(plane->center, ray->place);
 		hit_data->t = dot_product(oc, plane->vector) / denom;
 		if (hit_data->t >= EPSILON)
-		{
-			if (denom > 0)
-				plane->normal = normalize_vector(mult_vecdub(plane->vector, -1)); // reverse surface normal
 			return (check_closest(hit_data));
-		}
 	}
 	return (false);
 }
