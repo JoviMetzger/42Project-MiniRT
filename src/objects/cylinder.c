@@ -6,13 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/26 22:12:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/26 22:19:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-// / 1.41999999
+//                                            ^ ^
+//  1.41, not quite perfect but good enough  0_0
+
 bool	tap_top(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 {
 	cyl->top = minus(cyl->center, mult_vecdub(cyl->vector, cyl->height_half / 2));
@@ -27,27 +29,16 @@ bool	tap_top(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 		obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->t));
 		double distance = vec_length(cyl->top, obj->hit_pos);
 
-		if (distance <= cyl->radius / 1.41999999)
+		if (distance <= cyl->radius / 1.41)
 			return (true);
 	}
 	return (false);
 }
 
-// need to figure out what vector addition im missing to get plane on top for bottom cap
-// i.e. test vector...
 bool	boop_bottom(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 {
- 	// t_vec3 test = {0, 2.1, 0};
- 	// t_vec3 test = {-0.5, 1, 0};
- 	// t_vec3 test = {0, 0, 0};
-	// cyl->base = plus(test, plus(cyl->center, mult_vecdub(ray->vector, -(cyl->height_half/ 2))));
-	// cyl->base = plus(cyl->center, plus(cyl->vector, mult_vecdub(ray->vector, -(cyl->height_half / 2))));
-	// cyl->base = plus(division_vec_dub(cyl->vector, 2), plus(cyl->center, mult_vecdub(ray->vector, -(cyl->height_half / 2))));
-	// cyl->base = plus(division_vec_dub(cyl->vector, cyl->height_half), plus(cyl->center, mult_vecdub(ray->vector, -(cyl->height_half / 2))));
 	cyl->base = minus(cyl->center, mult_vecdub(cyl->vector, -(cyl->height_half / 2)));
-	// cyl->base = plus(division_vec_dub(cyl->vector, cyl->height_half), plus(cyl->center, mult_vecdub(ray->vector, -(cyl->height_half / 2))));
-// 3 = -0.75
-// 6 = -1.5
+
 	t_objs	tmppl;
 
 	ft_bzero(&tmppl, sizeof(t_objs));
@@ -56,7 +47,7 @@ bool	boop_bottom(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 	if (intersect_plane(ray, &tmppl, obj) == true)
 	{
 		obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->t));
-		double distance = vec_length(obj->hit_pos, cyl->base);
+		double distance = vec_length(cyl->base, obj->hit_pos);
 
 		if (distance <= cyl->radius / 1.41)
 			return (true);
