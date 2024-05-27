@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 20:35:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/27 20:48:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	convert_coord(t_data *data, char *str)
 // r g b	- 			[0 - 255] no decimals or negatives
 int	is_rgb(char *str, int i, int num_flag)
 {
+	if (str == NULL)
+		return (0);
 	if (!check_com(str, 0))
 		return (0);
 	while (str[i])

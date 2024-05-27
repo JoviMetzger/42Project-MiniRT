@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/27 18:57:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/27 20:22:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ bool	boop_bottom(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
-// hit cylinder body check
-// ray->vector * t + ray->place - cyl->center
 bool	cut_ends_hit_bod(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 {
 	obj->to_center = plus(minus(ray->place, cyl->center), mult_vecdub(ray->vector, obj->t));
@@ -100,10 +98,11 @@ bool	bodyody(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
-// check this, think im seeing both caps when i should just see one and body untouched
+// if intersect one of these things, save t, update per 'thing' if newest 'thing' closest
+// i.e. if we hit the top and bottom cap, one of them will be closer so if it's the bottom,
+// tmp is updated with bottom t, else tmp stays as it is for top
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 {
-	// if bottoms function, check which blah blah, then also check against body right?
 	double	tmp;
 	
 	tmp = DBL_MAX;
@@ -117,15 +116,12 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 		if (obj->t < tmp)
 			tmp = obj->t;
 	}
+	if (bodyody(obj, cyl, ray) == true)
+	{
+		if (obj->t < tmp)
+			tmp = obj->t;
+	}
 	if (tmp != DBL_MAX)
-	{
-		if (tmp < obj->closest_t)
-			obj->closest_t = tmp;
-		return (true);
-	}
-	else if (bodyody(obj, cyl, ray) == true)
-	{
 		return (check_closest(obj));
-	}
 	return (false);
 }

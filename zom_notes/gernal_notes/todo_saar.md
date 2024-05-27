@@ -1,24 +1,36 @@
+**key**
 
-UPDATE
-
-- multiple cylinders woohooo
-- NOTHINGG is interacting correctly when it comes to which is infront of the other - so that's 
-	my next task
-- check my cylinder function, think im putting bottoms on bodies which i dont want
-- still need to do the normals correctly too
-- fucked up colour is fixed now too tho :d
+!! - done, triple check but no longer a to do
+** - in progress with notes/reminders elsewhere
+0_0 - omg noooo
 
 
-CYLINDER POOOOO
+**CURRENT SHIZZLE**
 
-- can't seem to get more than one at one time...
-- background is some fucked up plane situation, something (sp) behind it can't been seen
-	trying for this to focus the colour on the cylinder with flags but get too much black...
-- trying to get the surface normal of cylinder, got the equations but not really behaving correctly
-- if return the closest_t check, things get messy...
+- all objects need a working system to see which is closest...
+- sphere surface normal looks good, need to check rest
+
+- check cylinder when looking straight on with z vec
+	- if we look straight on, we get circle which is nice, also if move 
+		around the x axix
+		if move up y (or down) cylinder body gets disconnected from the caps...
+	- $$$ i think it might be due to missing the other half of the cylinder... if 
+		from looking straight, there is a floating cylinder above, you'll see 
+		the bottom of the body, and a cap (closest to you) but also the top bit of the cap (otherwise you'd need to be right underneath the cylinder)
+		so we are actually seeing the stuff correctly but seeing that part of the cylinder is missing....
+	- $$$ if we only just radius, it fits better when looking from up close, straight on...
 
 
-general situation:
+**general situation / to do's / concerns:**
+
+
+0_0 - SEGFAULT
+
+CHECK - everything time in parser i pass a string to a checking or converting func, 
+	CHECK IT'S NOT NULL FS
+
+		ORRRR DONT CHECK FOR TABS AND SHIT AND CALLL IT A SPACE MAYYYBBEEE
+
 
 - sphere stretches when close up
 
@@ -38,9 +50,9 @@ general situation:
 
 - we are sharing quite a lot - structs !!
 
-- triple check quadratic, might work for sphere but just incase it's fucking other stuff up
+!!- triple check quadratic, might work for sphere but just incase it's fucking other stuff up
 
-- check closest_t stuff, cause updating that but not actually resetting t or using closest
+**- check closest_t stuff, cause updating that but not actually resetting t or using closest
 
 - i believe plane is good but questioning literally everything at this point...
 
