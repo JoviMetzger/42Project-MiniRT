@@ -5,6 +5,8 @@ UPDATE
 - NOTHINGG is interacting correctly when it comes to which is infront of the other - so that's 
 	my next task
 - check my cylinder function, think im putting bottoms on bodies which i dont want
+- still need to do the normals correctly too
+- fucked up colour is fixed now too tho :d
 
 
 CYLINDER POOOOO

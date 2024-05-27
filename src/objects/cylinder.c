@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/27 18:55:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/27 18:57:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ bool	bodyody(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 // check this, think im seeing both caps when i should just see one and body untouched
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 {
+	// if bottoms function, check which blah blah, then also check against body right?
 	double	tmp;
 	
 	tmp = DBL_MAX;
