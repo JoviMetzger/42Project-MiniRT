@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/26 23:40:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/27 18:20:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,6 +289,7 @@ bool		tap_top(t_hit_data *obj, t_objs *cyl, t_ray *ray);
 bool		boop_bottom(t_hit_data *obj, t_objs *cyl, t_ray *ray);
 void		set_points(t_hit_data *obj, t_ray *ray, t_objs *cyl);
 bool		cut_ends_hit_bod(t_hit_data *obj, t_objs *cyl, t_ray *ray);
+bool		bodyody(t_hit_data *obj, t_objs *cyl, t_ray *ray);
 // bool		intersect_caps(t_ray *ray, t_objs *cyl, t_hit_data *hit_data);
 // bool		intersect_body(t_ray *ray, t_objs *cyl, t_hit_data *hit_data);
 void		cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *obj);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/26 23:23:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/27 18:29:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,30 +86,46 @@ void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 	cyl->normal = normalize_vector(obj->pnt);
 }
 
+bool	bodyody(t_hit_data *obj, t_objs *cyl, t_ray *ray)
+{
+	set_points(obj, ray, cyl);
+	if (quadratic(obj) == true)
+	{
+		if (cut_ends_hit_bod( obj, cyl, ray) == true)
+		{
+			// cyl->normal = normalize_vector(minus(obj->hit_pos, cyl->center));
+			return (true);
+		}
+	}
+	return (false);
+}
+
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 {
+	double	tmp;
+	
+	tmp = DBL_MAX;
 	if (tap_top(obj, cyl, ray) == true)
 	{
-		// cyl->normal = normalize_vector(minus(obj->hit_pos, cyl->center));
-		return (true);
+		if (obj->t < tmp)
+			tmp = obj->t;
 	}
-	else if (boop_bottom(obj, cyl, ray) == true)
+	if (boop_bottom(obj, cyl, ray) == true)
 	{
-		// cyl->normal = normalize_vector(minus(obj->hit_pos, cyl->center));
-		return (true);
+		if (obj->t < tmp)
+			tmp = obj->t;
 	}
-	else
+	if (bodyody(obj, cyl, ray) == true)
 	{
-		set_points(obj, ray, cyl);
-		if (quadratic(obj) == true)
-		{
-			if (cut_ends_hit_bod( obj, cyl, ray) == true)
-			{
-				cyl->normal = normalize_vector(minus(obj->hit_pos, cyl->center));
-				// cyl_normal(ray, cyl, obj);
-				return (true);
-			}
-		}
+		if (obj->t < tmp)
+			tmp = obj->t;
+	}
+	if (tmp != DBL_MAX)
+	{
+		obj->t = tmp;
+		// printf("t = %f\n", obj->t);
+		// exit(EXIT_SUCCESS);
+		return (check_closest(obj));
 	}
 	return (false);
 }

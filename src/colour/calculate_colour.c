@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/26 23:42:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/27 17:58:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@
 
 static uint32_t	get_ret(t_hit_data *hit_data, t_colour colour)
 {
-	if (hit_data->closest_t == DBL_MAX || hit_data->cyl_flag == 0)
-		return (ft_convert_rgb(0, 0, 0)); // No intersection found, return black
-	else
+	if (hit_data->closest_t != DBL_MAX)
 		return (ft_convert_rgb(colour.r, colour.g, colour.b));
+	else
+		return (ft_convert_rgb(0, 0, 0)); // No intersection found, return black
 }
 
 /** lighting: 
@@ -54,42 +54,30 @@ uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit_data, t_ray ray)
 	t_colour	colour;
 	int			i;
 
-	hit_data->cyl_flag = 0;
 	i = 0;
 	hit_data->closest_t = DBL_MAX;
+	bzero(&colour, sizeof(t_colour));
 	while (i < data->objs_i)
 	{
 		if (data->objs[i]->type == E_PLANE)
 		{
 			if (intersect_plane(&ray, data->objs[i], hit_data))
-			{
 				colour = get_colour(data, hit_data, ray, data->objs[i]);
-				hit_data->cyl_flag = 2;
-			}
 		}
 		else if (data->objs[i]->type == E_SPHERE)
 		{
 			if (intersect_sphere(&ray, data->objs[i], hit_data))
-			{
 				colour = get_colour(data, hit_data, ray, data->objs[i]);
-				hit_data->cyl_flag = 2;
-			}
 		}
 		else if (data->objs[i]->type == E_CYLINDER)
 		{
 			if (intersect_cylinder(&ray, data->objs[i], hit_data))
-			{
 				colour = get_colour(data, hit_data, ray, data->objs[i]);
-				hit_data->cyl_flag = 1;
-			}
 		}
 		else if (data->objs[i]->type == E_TRIANGLE)
 		{
 			if (intersect_triangle(&ray, data->objs[i], hit_data))
-			{
 				colour = get_colour(data, hit_data, ray, data->objs[i]);
-				hit_data->cyl_flag = 2;
-			}
 		}
 		i++;
 	}
