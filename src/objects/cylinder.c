@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/27 18:29:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/27 18:55:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	tap_top(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 	ft_bzero(&tmppl, sizeof(t_objs));
 	tmppl.center = cyl->top;
 	tmppl.vector = cyl->vector;
-	if (intersect_plane(ray, &tmppl, obj) == true)
+	if (intersect_cyl_plane(ray, &tmppl, obj) == true)
 	{
 		obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->t));
 		double distance = vec_length(cyl->top, obj->hit_pos);
@@ -44,7 +44,7 @@ bool	boop_bottom(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 	ft_bzero(&tmppl, sizeof(t_objs));
 	tmppl.center = cyl->base;
 	tmppl.vector = cyl->vector;
-	if (intersect_plane(ray, &tmppl, obj) == true)
+	if (intersect_cyl_plane(ray, &tmppl, obj) == true)
 	{
 		obj->hit_pos = plus(ray->place, mult_vecdub(ray->vector, obj->t));
 		double distance = vec_length(cyl->base, obj->hit_pos);
@@ -100,6 +100,7 @@ bool	bodyody(t_hit_data *obj, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
+// check this, think im seeing both caps when i should just see one and body untouched
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 {
 	double	tmp;
@@ -115,16 +116,14 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *obj)
 		if (obj->t < tmp)
 			tmp = obj->t;
 	}
-	if (bodyody(obj, cyl, ray) == true)
-	{
-		if (obj->t < tmp)
-			tmp = obj->t;
-	}
 	if (tmp != DBL_MAX)
 	{
-		obj->t = tmp;
-		// printf("t = %f\n", obj->t);
-		// exit(EXIT_SUCCESS);
+		if (tmp < obj->closest_t)
+			obj->closest_t = tmp;
+		return (true);
+	}
+	else if (bodyody(obj, cyl, ray) == true)
+	{
 		return (check_closest(obj));
 	}
 	return (false);

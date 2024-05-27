@@ -1,4 +1,12 @@
 
+UPDATE
+
+- multiple cylinders woohooo
+- NOTHINGG is interacting correctly when it comes to which is infront of the other - so that's 
+	my next task
+- check my cylinder function, think im putting bottoms on bodies which i dont want
+
+
 CYLINDER POOOOO
 
 - can't seem to get more than one at one time...
