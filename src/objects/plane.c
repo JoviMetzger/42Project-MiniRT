@@ -6,23 +6,23 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/27 18:46:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/29 17:15:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-bool	intersect_cyl_plane(t_ray *ray, t_objs *plane, t_hit_data *hit_data)
+bool	intersect_cyl_plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
 {
-	t_vec3	oc;
+	// t_vec3	oc;  // make sure by using the struct one, i did break shit
 	double denom;
 
 	denom = dot_product(ray->vector, plane->vector);
 	if (fabs(denom) > EPSILON)
 	{
-		oc = minus(plane->center, ray->place);
-		hit_data->t = dot_product(oc, plane->vector) / denom;
-		if (hit_data->t >= EPSILON)
+		hit->o_c = minus(plane->center, ray->place);
+		hit->t = dot_product(hit->o_c, plane->vector) / denom;
+		if (hit->t >= EPSILON)
 			return (true);
 	}
 	return (false);
@@ -37,18 +37,18 @@ bool	intersect_cyl_plane(t_ray *ray, t_objs *plane, t_hit_data *hit_data)
  *			v = plane normal
  * 			d = ray direction
  */
-bool	intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit_data)
+bool	intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
 {
-	t_vec3	oc;
+	// t_vec3	oc;
 	double denom;
 
 	denom = dot_product(ray->vector, plane->vector);
 	if (fabs(denom) > EPSILON)
 	{
-		oc = minus(plane->center, ray->place);
-		hit_data->t = dot_product(oc, plane->vector) / denom;
-		if (hit_data->t >= EPSILON)
-			return (check_closest(hit_data));
+		hit->o_c = minus(plane->center, ray->place);
+		hit->t = dot_product(hit->o_c, plane->vector) / denom;
+		if (hit->t >= EPSILON)
+			return (check_closest(hit));
 	}
 	return (false);
 }

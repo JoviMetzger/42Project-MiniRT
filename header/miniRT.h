@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/28 12:17:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/29 17:18:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ typedef struct s_objs
 	double				radius;
 	t_vec3				top;
 	t_vec3				base;
+	t_vec3				edge[2];
 	t_vec3				point[3];
 	int					point_flag;
 	mlx_texture_t		*texture;
@@ -199,16 +200,17 @@ typedef struct s_objs
 // -> saves the calculations of the intersections
 typedef struct s_hit_data
 {
-	int cyl_flag;
 	double	a;
 	double	b;
 	double	c;
 	double	d;
+	t_vec3	o_c; // origin center (?)
+	t_vec3	c_c; // cross center (?)
 	t_vec3	pnt;
 	double	root1;
 	double	root2;
-	t_vec3	to_center;
 	t_vec3	hit_pos;
+	t_vec3	to_center;
 	double	t;
 	double	tmp_t;
 	double	closest_t;
@@ -253,14 +255,14 @@ void		store_ray_matrix(t_data *data);
 void		ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
-uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj, t_ray ray);
-t_colour	get_colour(t_data *data, t_hit_data *obj, t_ray ray, t_objs *obj_i);
+uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit, t_ray ray);
+t_colour	get_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj_i);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 // Colour Functions Bonus
-t_colour	get_sphere_checkerboard(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *sphere);
-t_colour	get_sphere_bumpmap(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *sphere);
+t_colour	get_sphere_checkerboard(t_data *data, t_hit_data *hit, t_ray ray, t_objs *sphere);
+t_colour	get_sphere_bumpmap(t_data *data, t_hit_data *hit, t_ray ray, t_objs *sphere);
 
 // Vector Functions
 t_vec3		init_vector(t_screen screen);
@@ -283,18 +285,18 @@ double		pythagoras(double a, double b);
 double		vec_length(t_vec3 v1, t_vec3 v2);
 
 // Objects Functions
-bool		check_closest(t_hit_data *hit_data);
-bool		quadratic(t_hit_data *hit_data);
-bool		tap_top(t_hit_data *obj, t_objs *cyl, t_ray *ray);
-bool		boop_bottom(t_hit_data *obj, t_objs *cyl, t_ray *ray);
-void		set_points(t_hit_data *obj, t_ray *ray, t_objs *cyl);
-bool		cut_ends_hit_bod(t_hit_data *obj, t_objs *cyl, t_ray *ray);
-bool		bodyody(t_hit_data *obj, t_objs *cyl, t_ray *ray);
-void		cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *obj);
-bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit_data);
-bool		intersect_cyl_plane(t_ray *ray, t_objs *plane, t_hit_data *hit_data);
-bool		intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit_data);
-bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit_data);
-bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit_data);
+bool		check_closest(t_hit_data *hit);
+bool		quadratic(t_hit_data *hit);
+bool		tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray);
+bool		boop_bottom(t_hit_data *hit, t_objs *cyl, t_ray *ray);
+void		set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl);
+bool		cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray);
+bool		bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray);
+void		cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit);
+bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit);
+bool		intersect_cyl_plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
+bool		intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
+bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit);
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit);
 
 #endif

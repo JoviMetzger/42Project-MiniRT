@@ -19,8 +19,6 @@
 		so we are actually seeing the stuff correctly but seeing that part of the cylinder is missing....
 	- $$$ if we only just radius, it fits better when looking from up close, straight on...
 
-- triangle where you at broooo
-
 **general situation / to do's / concerns:**
 
 
