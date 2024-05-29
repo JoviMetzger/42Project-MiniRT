@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/27 18:10:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/29 15:01:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ t_colour	get_colour(t_data *data, t_hit_data *obj, t_ray ray, t_objs *obj_i)
 	vars.spec_intensity = 0.2;
 	vars.spec_power = 32;
 	vars.inter_point = plus(ray.place, mult_vecdub(ray.vector, obj->t));
-	// vars.normal = obj_i->normal;
-	vars.normal = normalize_vector(minus(vars.inter_point, obj_i->center));
+	vars.normal = obj_i->normal;
 	light_funcs(data, &vars, &ray);
 	vars.final_red = vars.ambient_red + vars.diffuse_red;
 	vars.final_red += vars.spec_red;

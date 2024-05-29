@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 18:00:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/22 18:55:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/29 15:02:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,48 +49,33 @@
 // Nevertheless every additional thing takes up memory, and that's why triangles are not the most efficient 
 // objects for raytracing, especially in complex scenes.
 
-// does hit
+
 bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit_data)
 {
 	t_vec3	edge1;
 	t_vec3	edge2;
-	t_vec3	hit;
+	t_vec3	c_c;
+	t_vec3	o_c;
 	float	dir;
 
 	edge1 = minus(tri->point[1], tri->point[0]);
 	edge2 = minus(tri->point[2], tri->point[0]);
-
-	hit = cross_product(ray->vector, edge2);
-	dir = dot_product(edge1, hit);
-
-	
+	hit_data->hit_pos = cross_product(ray->vector, edge2);
+	dir = dot_product(edge1, hit_data->hit_pos);
 	if (dir > -EPSILON && dir < EPSILON)
 		return (false);
-
-	// f
 	hit_data->a = 1.0 / dir;
-
-	// s
-	t_vec3 o_c = minus(ray->place, tri->point[0]);
-	
-
+	o_c = minus(ray->place, tri->point[0]);
 	// check the scalar values (u q || b c) are in range 0-1
-	// u
-	hit_data->b = dot_product(o_c, hit);
+	hit_data->b = dot_product(o_c, hit_data->hit_pos);
 	hit_data->b = hit_data->a * hit_data->b;
 	if (hit_data->b < 0.0 || hit_data->b > 1.0)
 		return (false);
-
-	//q	
-	t_vec3 c_c = cross_product(o_c, edge1); 
-
-	// v
+	c_c = cross_product(o_c, edge1); 
 	hit_data->c = dot_product(ray->vector, c_c);
 	hit_data->c = hit_data->a * hit_data->c;
 	if (hit_data->c < 0.0 || hit_data->b + hit_data->c > 1.0)
 		return (false);
-
-
 	hit_data->t = dot_product(edge2, c_c);
 	hit_data->t = hit_data->a * hit_data->t;
 	if (hit_data->t < EPSILON)
