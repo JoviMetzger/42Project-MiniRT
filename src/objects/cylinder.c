@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/30 17:23:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 18:47:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,11 @@ bool	cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 
 void	set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl)
 {
-	t_vec3	vector_cross;
-
-	vector_cross = cross_product(cyl->vector, ray->vector);
+	hit->vector_cross = cross_product(cyl->vector, ray->vector);
 	hit->o_c = minus(cyl->center, ray->place);
 	hit->o_c = cross_product(hit->o_c, cyl->vector);
-	hit->a = dot_product(vector_cross, vector_cross);
-	hit->b = 2.0 * dot_product(vector_cross, hit->o_c);
+	hit->a = dot_product(hit->vector_cross, hit->vector_cross);
+	hit->b = 2.0 * dot_product(hit->vector_cross, hit->o_c);
 	hit->c = dot_product(hit->o_c, hit->o_c) - pow(cyl->radius, 2);
 }
 
@@ -99,12 +97,10 @@ void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
 	if (cyl->cyl_flag == 1)
 	{
-		// t_vec3 inter_point = plus(ray->place, mult_vecdub(ray->vector, hit->t));
-		// cyl->normal = normalize_vector(minus(inter_point, cyl->center));
-		hit->hit_pos = mult_vecdub(ray->vector, hit->t);
+		hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
 		hit->to_center = minus(hit->hit_pos, cyl->center);
-		hit->norm_vec = plus(cyl->center, mult_vecdub(cyl->vector, dot_product(hit->to_center, cyl->vector)));
-		cyl->normal = normalize_vector(hit->norm_vec);
+		hit->norm_vec = minus(hit->to_center, mult_vecdub(cyl->vector, dot_product(cyl->vector, hit->to_center)));
+		cyl->normal = hit->norm_vec;
 	}
 	else if (cyl->cyl_flag == 2)
 		cyl->normal = cyl->vector;

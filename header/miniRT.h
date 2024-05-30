@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/30 17:14:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 17:56:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ typedef struct s_hit_data
 	double	root2;
 	t_vec3	hit_pos;
 	t_vec3	to_center;
+	t_vec3	vector_cross;
 	double	t;
 	double	tmp_t;
 	double	closest_t;
