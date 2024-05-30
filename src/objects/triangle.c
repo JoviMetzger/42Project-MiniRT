@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 18:00:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/29 17:10:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 15:29:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit)
 	tri->edge[1] = minus(tri->point[2], tri->point[0]);
 	hit->hit_pos = cross_product(ray->vector, tri->edge[1]);
 	dir = dot_product(tri->edge[0], hit->hit_pos);
-	if (dir > -EPSILON && dir < EPSILON)
+	if (dir > -EPSILON && dir < EPSILON) // ?
 		return (false);
 	hit->a = 1.0 / dir;
 	hit->o_c = minus(ray->place, tri->point[0]);

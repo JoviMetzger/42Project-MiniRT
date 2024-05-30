@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/29 17:16:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 15:37:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,21 @@
  * 		len(D*t+X) = r
   		dot(D*t+X) = r^2
   		D|D*(t^2) + 2*D|X*t + X|X - r^2 = 0 
+
+		The equation for a sphere of radius r
+		that is centered at the origin is an important mathematical equation:
+
+		x2+y2+z2=r2
+		You can also think of this as saying that if a given point (x,y,z)
+		is on the surface of the sphere, then x2+y2+z2=r2
+		. If a given point (x,y,z)
+		is inside the sphere, then x2+y2+z2<r2
+		, and if a given point (x,y,z)
+		is outside the sphere, then x2+y2+z2>r2
+.
  */
 bool	intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit)
 {
-	// t_vec3	oc; // make sure by using the struct one, i did break shit
 	double radius;
 
 	radius = sphere->diameter / 2;

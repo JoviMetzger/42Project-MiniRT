@@ -19,16 +19,8 @@
 		so we are actually seeing the stuff correctly but seeing that part of the cylinder is missing....
 	- $$$ if we only just radius, it fits better when looking from up close, straight on...
 
+
 **general situation / to do's / concerns:**
-
-
-0_0 - SEGFAULT
-
-CHECK - everything time in parser i pass a string to a checking or converting func, 
-	CHECK IT'S NOT NULL FS
-
-		ORRRR DONT CHECK FOR TABS AND SHIT AND CALLL IT A SPACE MAYYYBBEEE 
-			- make sure this is legit, no other breakage and no SEGFAUUUUUULTING omgver
 
 
 - sphere stretches when close up

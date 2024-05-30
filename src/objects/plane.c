@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/29 17:15:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 15:32:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 bool	intersect_cyl_plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
 {
-	// t_vec3	oc;  // make sure by using the struct one, i did break shit
 	double denom;
 
 	denom = dot_product(ray->vector, plane->vector);
@@ -39,7 +38,6 @@ bool	intersect_cyl_plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
  */
 bool	intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
 {
-	// t_vec3	oc;
 	double denom;
 
 	denom = dot_product(ray->vector, plane->vector);

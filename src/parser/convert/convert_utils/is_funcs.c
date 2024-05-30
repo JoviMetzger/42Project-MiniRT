@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/19 14:57:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/27 20:46:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 15:18:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	is_num(int c)
 	return (c >= '0' && c <= '9');
 }
 
-// removing tab since no no
 int	ft_isspace(int c)
 {
 	if (c == ' ' || c == '\n' || c == '\0')

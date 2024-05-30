@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/29 17:15:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 15:57:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ bool	tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 		double distance = vec_length(cyl->top, hit->hit_pos);
 
 		if (distance <= cyl->radius / 1.41)
+		{
+			cyl->cyl_flag = 2;
 			return (true);
+		}
 	}
 	return (false);
 }
@@ -50,7 +53,10 @@ bool	boop_bottom(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 		double distance = vec_length(cyl->base, hit->hit_pos);
 
 		if (distance <= cyl->radius / 1.41)
+		{
+			cyl->cyl_flag = 2;
 			return (true);
+		}
 	}
 	return (false);
 }
@@ -59,14 +65,16 @@ bool	cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 {
 	hit->to_center = plus(minus(ray->place, cyl->center), mult_vecdub(ray->vector, hit->t));
 	if (fabs(dot_product(hit->to_center, cyl->vector)) <= cyl->height_half)
-			return (true);
+	{
+			cyl->cyl_flag = 1;
+			return (true);	
+	}
 	return (false);
 }
 
 void	set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl)
 {
 	t_vec3	vector_cross;
-	// t_vec3	o_c;
 
 	vector_cross = cross_product(cyl->vector, ray->vector);
 	hit->o_c = minus(cyl->center, ray->place);
@@ -78,10 +86,15 @@ void	set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl)
 
 void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
-	hit->hit_pos = mult_vecdub(ray->vector, hit->t);
-	hit->to_center = minus(hit->hit_pos, cyl->center);
-	hit->pnt = plus(cyl->center, mult_vecdub(cyl->vector, dot_product(hit->to_center, cyl->vector)));
-	cyl->normal = normalize_vector(hit->pnt);
+	if (cyl->cyl_flag == 1)
+	{
+		hit->hit_pos = mult_vecdub(ray->vector, hit->t);
+		hit->to_center = minus(hit->hit_pos, cyl->center);
+		hit->pnt = plus(cyl->center, mult_vecdub(cyl->vector, dot_product(hit->to_center, cyl->vector)));
+		cyl->normal = normalize_vector(hit->pnt);
+	}
+	else if (cyl->cyl_flag == 2)
+		cyl->normal = normalize_vector(cyl->vector);	
 }
 
 bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
@@ -90,10 +103,7 @@ bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	if (quadratic(hit) == true)
 	{
 		if (cut_ends_hit_bod( hit, cyl, ray) == true)
-		{
-			// cyl->normal = normalize_vector(minus(hit->hit_pos, cyl->center));
 			return (true);
-		}
 	}
 	return (false);
 }
@@ -103,25 +113,26 @@ bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 // tmp is updated with bottom t, else tmp stays as it is for top
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
-	double	tmp;
-	
-	tmp = DBL_MAX;
+	hit->tmp_t = DBL_MAX;
 	if (tap_top(hit, cyl, ray) == true)
 	{
-		if (hit->t < tmp)
-			tmp = hit->t;
+		if (hit->t < hit->tmp_t)
+			hit->tmp_t = hit->t;
 	}
 	if (boop_bottom(hit, cyl, ray) == true)
 	{
-		if (hit->t < tmp)
-			tmp = hit->t;
+		if (hit->t < hit->tmp_t)
+			hit->tmp_t = hit->t;
 	}
 	if (bodyody(hit, cyl, ray) == true)
 	{
-		if (hit->t < tmp)
-			tmp = hit->t;
+		if (hit->t < hit->tmp_t)
+			hit->tmp_t = hit->t;
 	}
-	if (tmp != DBL_MAX)
+	if (hit->tmp_t != DBL_MAX)
+	{
+		cyl_normal(ray, cyl, hit);
 		return (check_closest(hit));
+	}
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/29 14:59:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 15:16:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,11 @@ char	*give_null(char *str)
 	return (str);
 }
 
-// triangle
 // /**
-//  * #Identifier   #Coordinates point1  #Coordinates point2  
-//				#Coordinates point3    #R,G,B
+//  * #Identifier   #Coordinates: point1  point2  point3    #R,G,B
 // */
 int	sort_tr(char **elem_str, t_data *data)
 {
-	data->objs[data->objs_i]->vector.x = 0;
-	data->objs[data->objs_i]->vector.y = 0;
-	data->objs[data->objs_i]->vector.z = 1;
 	data->objs[data->objs_i]->point_flag = 0;
 	if (!is_coord(elem_str[1], 0, 0))
 		return (par_err("invalid: Triangle: coordinate"));
@@ -53,6 +48,7 @@ int	sort_tr(char **elem_str, t_data *data)
 		return (par_err("invalid: Triangle: coordinate"));
 	if (!convert_rgb(data, elem_str[4]))
 		return (par_err("invalid: Triangle: RGB | [0-255]"));
+	vec_obj(data, 0, 0, 1);
 	data->objs[data->objs_i]->normal = data->objs[data->objs_i]->vector;
 	if (elem_str[5] && !is_space(elem_str[5]))
 	{
@@ -77,7 +73,6 @@ int	sort_pl(char **elem_str, t_data *data)
 	if (!convert_vector(data, elem_str[2]))
 		return (par_err("invalid: Plane: 3D vector"));
 	data->objs[data->objs_i]->normal = data->objs[data->objs_i]->vector;
-		// normalize_vector(data->objs[data->objs_i]->vector);
 	if (!is_rgb(elem_str[3], 0, 0))
 		return (par_err("invalid: Plane: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[3]))

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/29 17:18:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 15:55:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ typedef struct s_objs
 	double				radius;
 	t_vec3				top;
 	t_vec3				base;
+	int					cyl_flag;
 	t_vec3				edge[2];
 	t_vec3				point[3];
 	int					point_flag;
@@ -232,7 +233,7 @@ typedef struct s_data
 	t_lightS	**lightS;
 	t_ray		ray;
 	t_screen	screen;
-	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
+	t_type		type;	// parser util which gets overwritten for each element, objects do have a type
 	t_mouse		mouse;
 	int16_t		i_am; // what object is currently seleted
 }	t_data;
