@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/30 15:57:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 17:23:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,6 @@ void	set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl)
 	hit->c = dot_product(hit->o_c, hit->o_c) - pow(cyl->radius, 2);
 }
 
-void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
-{
-	if (cyl->cyl_flag == 1)
-	{
-		hit->hit_pos = mult_vecdub(ray->vector, hit->t);
-		hit->to_center = minus(hit->hit_pos, cyl->center);
-		hit->pnt = plus(cyl->center, mult_vecdub(cyl->vector, dot_product(hit->to_center, cyl->vector)));
-		cyl->normal = normalize_vector(hit->pnt);
-	}
-	else if (cyl->cyl_flag == 2)
-		cyl->normal = normalize_vector(cyl->vector);	
-}
-
 bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 {
 	set_points(hit, ray, cyl);
@@ -108,11 +95,27 @@ bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
+void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
+{
+	if (cyl->cyl_flag == 1)
+	{
+		// t_vec3 inter_point = plus(ray->place, mult_vecdub(ray->vector, hit->t));
+		// cyl->normal = normalize_vector(minus(inter_point, cyl->center));
+		hit->hit_pos = mult_vecdub(ray->vector, hit->t);
+		hit->to_center = minus(hit->hit_pos, cyl->center);
+		hit->norm_vec = plus(cyl->center, mult_vecdub(cyl->vector, dot_product(hit->to_center, cyl->vector)));
+		cyl->normal = normalize_vector(hit->norm_vec);
+	}
+	else if (cyl->cyl_flag == 2)
+		cyl->normal = cyl->vector;
+}
+
 // if intersect one of these things, save t, update per 'thing' if newest 'thing' closest
 // i.e. if we hit the top and bottom cap, one of them will be closer so if it's the bottom,
 // tmp is updated with bottom t, else tmp stays as it is for top
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
+	cyl->cyl_flag = 0;
 	hit->tmp_t = DBL_MAX;
 	if (tap_top(hit, cyl, ray) == true)
 	{

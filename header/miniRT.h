@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/30 15:55:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 17:14:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ typedef struct s_objs
 	t_vec3				top;
 	t_vec3				base;
 	int					cyl_flag;
+	int					cyl_pl_flag;
 	t_vec3				edge[2];
 	t_vec3				point[3];
 	int					point_flag;
@@ -207,7 +208,7 @@ typedef struct s_hit_data
 	double	d;
 	t_vec3	o_c; // origin center (?)
 	t_vec3	c_c; // cross center (?)
-	t_vec3	pnt;
+	t_vec3	norm_vec;
 	double	root1;
 	double	root2;
 	t_vec3	hit_pos;
