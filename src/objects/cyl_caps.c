@@ -6,16 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/01 19:12:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 19:12:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/01 20:09:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-//                                           ^ ^
-//  1.41, not quite perfect but good enough  0_0
-
-// to FIX cap calculation makes sloooowwww
 bool	tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 {
 	t_objs	tmppl;
