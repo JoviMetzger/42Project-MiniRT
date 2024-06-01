@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 17:22:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/01 18:41:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	sort_tr(char **elem_str, t_data *data)
 	if (!convert_rgb(data, elem_str[4]))
 		return (par_err("invalid: Triangle: RGB | [0-255]"));
 	vec_obj(data, 0, 0, 1);
-		data->objs[data->objs_i]->normal = normalize_vector(data->objs[data->objs_i]->vector);
+	data->objs[data->objs_i]->normal = normalize_vector(data->objs[data->objs_i]->vector);
 	if (elem_str[5] && !is_space(elem_str[5]))
 	{
 		if (!handle_texture(data, elem_str[5]))
@@ -72,7 +72,8 @@ int	sort_pl(char **elem_str, t_data *data)
 		return (par_err("invalid: Plane: 3D vector"));
 	if (!convert_vector(data, elem_str[2]))
 		return (par_err("invalid: Plane: 3D vector"));
-	data->objs[data->objs_i]->normal = normalize_vector(data->objs[data->objs_i]->vector);
+	data->objs[data->objs_i]->normal = 
+		normalize_vector(data->objs[data->objs_i]->vector);
 	if (!is_rgb(elem_str[3], 0, 0))
 		return (par_err("invalid: Plane: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[3]))
@@ -106,8 +107,10 @@ int	sort_sp(char **elem_str, t_data *data)
 		if (!handle_texture(data, elem_str[4]))
 			return (par_err("Texture file invalid"));
 	}
+	normalize_vector(data->objs[data->objs_i]->vector);
 	return (1);
 }
+
 
 // /**
 //  * #Identifier  #Coordinates     #3D vector    #Diameter   #Height  #R,G,B
@@ -136,5 +139,6 @@ int	sort_cy(char **elem_str, t_data *data)
 		if (!handle_texture(data, elem_str[6]))
 			return (par_err("Texture file invalid"));
 	}
+	normalize_vector(data->objs[data->objs_i]->vector);
 	return (1);
 }
