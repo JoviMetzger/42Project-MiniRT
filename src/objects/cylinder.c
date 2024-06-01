@@ -6,61 +6,18 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 18:44:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/01 19:12:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-//                                           ^ ^
-//  1.41, not quite perfect but good enough  0_0
-
-// to FIX cap calculation makes sloooowwww
-bool	tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray)
-{
-	cyl->top = minus(cyl->center, mult_vecdub(cyl->vector, cyl->height_half / 2));
-
-	t_objs	tmppl;
-
-	ft_bzero(&tmppl, sizeof(t_objs));
-	tmppl.center = cyl->top;
-	tmppl.vector = cyl->vector;
-	if (intersect_cyl_plane(ray, &tmppl, hit) == true)
-	{
-		hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
-		double distance = vec_length(cyl->top, hit->hit_pos);
-
-		if (distance <= cyl->radius / 1.41)
-			return (true);
-	}
-	return (false);
-}
-
-bool	boop_bottom(t_hit_data *hit, t_objs *cyl, t_ray *ray)
-{
-	cyl->base = minus(cyl->center, mult_vecdub(cyl->vector, -(cyl->height_half / 2)));
-
-	t_objs	tmppl;
-
-	ft_bzero(&tmppl, sizeof(t_objs));
-	tmppl.center = cyl->base;
-	tmppl.vector = cyl->vector;
-	if (intersect_cyl_plane(ray, &tmppl, hit) == true)
-	{
-		hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
-		double distance = vec_length(cyl->base, hit->hit_pos);
-
-		if (distance <= cyl->radius / 1.41)
-			return (true);
-	}
-	return (false);
-}
-
 bool	cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 {
-	hit->to_center = plus(minus(ray->place, cyl->center), mult_vecdub(ray->vector, hit->t));
+	hit->to_center = plus(minus(ray->place, cyl->center),
+			mult_vecdub(ray->vector, hit->t));
 	if (fabs(dot_product(hit->to_center, cyl->vector)) <= cyl->height_half)
-			return (true);
+		return (true);
 	return (false);
 }
 
@@ -79,7 +36,7 @@ bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	set_points(hit, ray, cyl);
 	if (quadratic(hit) == true)
 	{
-		if (cut_ends_hit_bod( hit, cyl, ray) == true)
+		if (cut_ends_hit_bod(hit, cyl, ray) == true)
 			return (true);
 	}
 	return (false);
@@ -89,12 +46,15 @@ void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
 	hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
 	hit->to_center = minus(hit->hit_pos, cyl->center);
-	cyl->normal = minus(hit->to_center, mult_vecdub(normalize_vector(cyl->vector), 
-		dot_product(normalize_vector(cyl->vector), hit->to_center)));
+	cyl->normal = minus(hit->to_center,
+			mult_vecdub(normalize_vector(cyl->vector),
+				dot_product(normalize_vector(cyl->vector), hit->to_center)));
 }
 
-// if intersect one of these things, save t, update per 'thing' if newest 'thing' closest
-// i.e. if we hit the top and bottom cap, one of them will be closer so if it's the bottom,
+// if intersect one of these things, save t, update per 'thing' 
+// if newest 'thing' closest
+// i.e. if we hit the top and bottom cap, one of them will be 
+// closer so if it's the bottom,
 // tmp is updated with bottom t, else tmp stays as it is for top
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {

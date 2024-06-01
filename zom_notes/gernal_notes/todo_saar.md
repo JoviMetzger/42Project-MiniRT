@@ -7,8 +7,7 @@
 
 **CURRENT SHIZZLE**
 
-- sphere surface normal looks good, need to check rest
-
+0_0 ** !! bleh...
 - check cylinder when looking straight on with z vec
 	- if we look straight on, we get circle which is nice, also if move 
 		around the x axix
@@ -21,7 +20,6 @@
 
 
 **general situation / to do's / concerns:**
-
 
 - sphere stretches when close up
 
