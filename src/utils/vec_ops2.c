@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/14 17:10:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 15:29:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/01 17:23:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@ t_vec3	normalize_vector(t_vec3 v)
 	double	normalize;
 
 	normalize = length_squared(v);
-	if (normalize == 0)
-	{
-		v.x = 0;
-		v.y = 0;
-		v.z = 0;
-		return (v);
-	}
 	len = division_vec_dub(v, normalize);
 	return (len);
 }
@@ -54,14 +47,4 @@ double	vec_length(t_vec3 v1, t_vec3 v2)
 
 	result = pythagoras(v1.x - v2.x, v1.y - v2.y);
 	return (pythagoras(result, v1.z - v2.z));
-}
-
-t_vec3	init_vec(t_vec3 vec, t_vec3 v1, t_vec3 v2)
-{
-	vec.x = 0;
-	vec.y = 0;
-	vec.z = 0;
-	vec = minus(v2, v1);
-	vec = normalize_vector(vec);
-	return (vec);
 }
