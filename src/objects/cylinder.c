@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 14:03:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/01 15:41:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 //                                           ^ ^
 //  1.41, not quite perfect but good enough  0_0
 
+// to FIX cap calculation makes sloooowwww
 bool	tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 {
 	cyl->top = minus(cyl->center, mult_vecdub(cyl->vector, cyl->height_half / 2));
@@ -30,11 +31,7 @@ bool	tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 		double distance = vec_length(cyl->top, hit->hit_pos);
 
 		if (distance <= cyl->radius / 1.41)
-		{
-			cyl->normal = cyl->vector;
-			// cyl->cyl_flag = 2;
 			return (true);
-		}
 	}
 	return (false);
 }
@@ -54,11 +51,7 @@ bool	boop_bottom(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 		double distance = vec_length(cyl->base, hit->hit_pos);
 
 		if (distance <= cyl->radius / 1.41)
-		{
-			cyl->normal = cyl->vector;
-			// cyl->cyl_flag = 2;
 			return (true);
-		}
 	}
 	return (false);
 }
@@ -67,10 +60,7 @@ bool	cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 {
 	hit->to_center = plus(minus(ray->place, cyl->center), mult_vecdub(ray->vector, hit->t));
 	if (fabs(dot_product(hit->to_center, cyl->vector)) <= cyl->height_half)
-	{
-			// cyl->cyl_flag = 1;
-			return (true);	
-	}
+			return (true);
 	return (false);
 }
 
@@ -95,23 +85,13 @@ bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
+// why are you affecting the caps??
 void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
-	// (void) ray;
-	// (void) hit;
-	// if (cyl->cyl_flag == 1)
-	// {
-		// cyl->normal = cyl->vector;
-		hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
-		hit->to_center = minus(hit->hit_pos, cyl->center);
-		hit->norm_vec = minus(hit->to_center, mult_vecdub(cyl->vector, dot_product(cyl->vector, hit->to_center)));
-		cyl->normal = hit->norm_vec;
-	// }
-	// else if (cyl->cyl_flag == 2)
-	// 	cyl->normal = cyl->vector;
-	// else if (cyl->cyl_flag == 3)
-	// 	cyl->normal = cyl->vector;
-		// cyl->normal = plus(cyl->vector, ray->vector);
+	hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
+	hit->to_center = normalize_vector(minus(hit->hit_pos, cyl->center));
+	hit->norm_vec = minus(hit->to_center, mult_vecdub(cyl->vector, dot_product(hit->to_center, cyl->vector)));
+	cyl->normal = init_vec(cyl->normal, hit->norm_vec, hit->hit_pos);
 }
 
 // if intersect one of these things, save t, update per 'thing' if newest 'thing' closest
@@ -119,17 +99,22 @@ void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 // tmp is updated with bottom t, else tmp stays as it is for top
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
-	// cyl->cyl_flag = 0;
 	hit->tmp_t = DBL_MAX;
 	if (tap_top(hit, cyl, ray) == true)
 	{
 		if (hit->t < hit->tmp_t)
+		{
+			cyl->normal = normalize_vector(cyl->vector);
+			// cyl->normal = normalize_vector(cyl->vector);
 			hit->tmp_t = hit->t;
+		}
 	}
 	if (boop_bottom(hit, cyl, ray) == true)
 	{
 		if (hit->t < hit->tmp_t)
-		{
+		{	
+			cyl->normal = normalize_vector(mult_vecdub(cyl->vector, -1));
+			// cyl->normal = normalize_vector(cyl->vector);
 			hit->tmp_t = hit->t;
 		}
 	}
@@ -137,13 +122,11 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 	{
 		if (hit->t < hit->tmp_t)
 		{
-			cyl_normal(ray, cyl, hit);
+			// cyl_normal(ray, cyl, hit);
 			hit->tmp_t = hit->t;
 		}
 	}
 	if (hit->tmp_t != DBL_MAX)
-	{
 		return (check_closest(hit));
-	}
 	return (false);
 }

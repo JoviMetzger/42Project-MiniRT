@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/30 17:56:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/01 15:28:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,7 @@ double		distance(t_vec3 pnt1, t_vec3 pnt2);
 double		vec_length(t_vec3 v1, t_vec3 v2);
 double		pythagoras(double a, double b);
 double		vec_length(t_vec3 v1, t_vec3 v2);
+t_vec3		init_vec(t_vec3 vec, t_vec3 v1, t_vec3 v2);
 
 // Objects Functions
 bool		check_closest(t_hit_data *hit);
