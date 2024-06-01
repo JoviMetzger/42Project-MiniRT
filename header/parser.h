@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/18 18:03:34 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/01 19:38:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int			sort_l(char **elem_str, t_data *data);
 int			sort_c(char **elem_str, t_data *data);
 
 // --- convert_other --- //
-char		*give_null(char *str);
 int			sort_tr(char **elem_str, t_data *data);
 int			sort_pl(char **elem_str, t_data *data);
 int			sort_sp(char **elem_str, t_data *data);
@@ -134,6 +133,9 @@ int			check_neg(char *str, int i);
 int			coord_valid(int c);
 int			ratio_valid(int c);
 int			rgb_valid(int c);
+
+// --- convert_utils_2 --- //
+char		*give_null(char *str);
 
 // --- is_funcs --- //
 int			is_valid(int c);

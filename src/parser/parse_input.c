@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/23 15:10:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/01 19:34:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	init_mouse_map(t_data *data)
 	data->mouse.mouse_map = map;
 	while (i < data->mouse.window_h)
 	{
-		map[i] = map_malloc(data->mouse.window_w  * sizeof(int16_t));
+		map[i] = map_malloc(data->mouse.window_w * sizeof(int16_t));
 		i++;
 	}
 	map[i] = NULL;

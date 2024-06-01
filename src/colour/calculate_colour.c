@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 18:56:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/01 19:33:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 //----------------------------------------------------------//
 
 
- // No intersection found, return black
+// No intersection found, return black
 static uint32_t	get_ret(t_hit_data *hit, t_colour colour)
 {
 	if (hit->closest_t != DBL_MAX)

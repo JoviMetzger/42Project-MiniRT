@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/06/01 19:13:46 by smclacke      ########   odam.nl          #
+#    Updated: 2024/06/01 19:42:19 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ SRCS			= main.c											\
 					parser/convert/convert_utils/add_vec.c			\
 					parser/convert/convert_utils/add_info.c			\
 					parser/convert/convert_utils/convert_utils.c	\
+					parser/convert/convert_utils/utils_2.c			\
 					parser/convert/convert_utils/is_funcs.c			\
 					parser/convert/convert_utils/is_funcs_2.c		\
 					parser/convert/convert_utils/is_funcs_3.c		\
