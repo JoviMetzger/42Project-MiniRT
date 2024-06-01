@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 20:07:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/01 20:19:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool	cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 {
 	hit->to_center = plus(minus(ray->place, cyl->center),
 			mult_vecdub(ray->vector, hit->t));
-	if (fabs(dot_product(hit->to_center, cyl->vector)) <= cyl->height_half)
+	if (fabs(dot_product(hit->to_center, normalize_vector(cyl->vector))) <= cyl->height_half)
 		return (true);
 	return (false);
 }
@@ -51,11 +51,6 @@ void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 				dot_product(normalize_vector(cyl->vector), hit->to_center)));
 }
 
-// if intersect one of these things, save t, update per 'thing' 
-// if newest 'thing' closest
-// i.e. if we hit the top and bottom cap, one of them will be 
-// closer so if it's the bottom,
-// tmp is updated with bottom t, else tmp stays as it is for top
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
 	hit->tmp_t = DBL_MAX;
