@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 17:24:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/01 18:55:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ typedef	struct s_colour_vars
 	double		final_red;
 	double		final_green;
 	double		final_blue;
-	
 }			t_colour_vars;
 
 
@@ -204,8 +203,8 @@ typedef struct s_hit_data
 	double	b;
 	double	c;
 	double	d;
-	t_vec3	o_c; // origin center (?)
-	t_vec3	c_c; // cross center (?)
+	t_vec3	o_c; // origin center
+	t_vec3	c_c; // cross center / perp to cent
 	t_vec3	norm_vec;
 	double	root1;
 	double	root2;
