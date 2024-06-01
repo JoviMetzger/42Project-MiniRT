@@ -6,12 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/29 17:17:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/01 18:56:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
+//----------------------------------------------------------//
 /**
  * 	was attempting this for textures with planes but ... ya know
  * 
@@ -34,12 +35,16 @@
 	// 	return (printf("ret 2\n"), 0);
 // }
 
+//----------------------------------------------------------//
+
+
+ // No intersection found, return black
 static uint32_t	get_ret(t_hit_data *hit, t_colour colour)
 {
 	if (hit->closest_t != DBL_MAX)
 		return (ft_convert_rgb(colour.r, colour.g, colour.b));
 	else
-		return (ft_convert_rgb(0, 0, 0)); // No intersection found, return black
+		return (ft_convert_rgb(0, 0, 0));
 }
 
 /** lighting: 
