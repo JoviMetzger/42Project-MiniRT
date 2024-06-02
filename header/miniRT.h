@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 18:34:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/02 18:42:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,8 @@ typedef struct s_data
 	t_type		type;	// parser util which gets overwritten for each element, objects do have a type
 	t_mouse		mouse;
 	int16_t		i_am; // what object is currently seleted
+	int			x;
+	int			y;
 }	t_data;
 
 // --- Functions --- 

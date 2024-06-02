@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 18:33:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/02 18:59:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void init_LIGHTS(t_lightS *one, t_lightS *two, t_lightS *three)
 // 1. Calculate the ray from the “eye” through the pixel,	 -> ft_create_ray();
 // 2. Determine which objects the ray intersects,			 -> ft_create_intersecttions();
 // 3. Compute a color for the closest intersection point.	 -> ft_calculate_colour();
-void ft_put_image(t_data *data)
-{
-	t_hit_data hit_data;
-	uint32_t colour;
-	int y = 0;
-	int x = 0;
+// void ft_put_image(t_data *data)
+// {
+// 	t_hit_data hit_data;
+// 	uint32_t colour;
+// 	int y = 0;
+// 	int x = 0;
 
 	/* 
 	-> NOTE FOR SARAH <-
@@ -81,22 +81,69 @@ void ft_put_image(t_data *data)
 
 	// --------------------------------------------
 
-	while (y < data->mlx->height)
+// 	while (y < data->mlx->height)
+// 	{
+// 		while (x < data->mlx->width)
+// 		{ 
+// 			// data->mouse.mouse_map[y][x] = -1;
+// 			data->ray = ft_create_ray(data, x ,y);	
+// 			colour = ft_calculate_colour(data, &hit_data, data->ray);
+// 			mlx_put_pixel(data->image, x, y, colour);
+// 			// data->mouse.mouse_x = x;
+// 			x++;
+// 		}
+// 		data->mouse.mouse_y = y;
+// 		x = 0;
+// 		y++;
+// 	}
+// 	puts("DONE BITCHES!!!!");
+// }
+
+static void	create_ray(t_data *data)
+{
+	data->x = 0;
+	data->y = 0;
+	while (data->y < data->mlx->height)
 	{
-		while (x < data->mlx->width)
-		{ 
-			// data->mouse.mouse_map[y][x] = -1;
-			data->ray = ft_create_ray(data, x ,y);	
-			colour = ft_calculate_colour(data, &hit_data, data->ray);
-			mlx_put_pixel(data->image, x, y, colour);
-			// data->mouse.mouse_x = x;
-			x++;
+		while (data->x < data->mlx->width)
+		{
+			data->ray = ft_create_ray(data, data->x, data->y);
+			data->x++;
 		}
-		data->mouse.mouse_y = y;
-		x = 0;
-		y++;
+		data->x = 0;
+		data->y++;
 	}
-	puts("DONE BITCHES!!!!");
+}
+
+static void	cal_objs(t_data *data)
+{
+	uint32_t	colour;
+	t_hit_data	hit;
+
+	data->x = 0;
+	data->y = 0;
+	while (data->y < data->mlx->height)
+	{
+		while (data->x < data->mlx->width)
+		{
+			// data->ray = ft_create_ray(data, data->x, data->y);
+			colour = ft_calculate_colour(data, &hit, data->ray);
+			mlx_put_pixel(data->image, data->x, data->y, colour);
+			data->x++;
+		}
+		data->x = 0;
+		data->y++;
+	}
+}
+
+void ft_put_image(t_data *data)
+{
+	// t_hit_data hit_data;
+	// uint32_t colour;
+
+	create_ray(data);
+	cal_objs(data);
+
 }
 
 static void	ft_resize(int32_t width, int32_t height, void *param)
@@ -115,3 +162,12 @@ void ft_render(t_data *data)
 	mlx_resize_hook(data->mlx, &ft_resize, (void *)data);
 	mlx_mouse_hook(data->mlx, ft_handle_mouse_click, data); // Mouse click event  
 }
+
+
+
+/**
+ * need ray calculation 
+ * go through objects, get necessary info depending on what objs we have, using already made ray
+ * go through pixels, using ray and hit data, give colour
+ * 
+ */
