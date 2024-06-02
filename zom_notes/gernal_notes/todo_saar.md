@@ -23,7 +23,12 @@
 
 - there's new stuff you want in the parser
 
-- haven't gone back to textures yet
 
 !! ** 0_0 - inside of objects!! (at least cylinder...) - NOPE
 
+
+**TEXTURE**
+
+- bool?
+- instead of colour for testing but need to know whether texture or rgb, oder?
+- haven't gone back to textures yet

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/26 23:10:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/02 16:40:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void ft_put_image(t_data *data)
 {
 	t_hit_data hit_data;
 	uint32_t colour;
+	mlx_texture_t	*text;
 	int y = 0;
 	int x = 0;
 
@@ -86,8 +87,11 @@ void ft_put_image(t_data *data)
 		while (x < data->mlx->width)
 		{ 
 			// data->mouse.mouse_map[y][x] = -1;
-			data->ray = ft_create_ray(data, x ,y);		
+			data->ray = ft_create_ray(data, x ,y);	
 			colour = ft_calculate_colour(data, &hit_data, data->ray);
+			// text = get_texture(data);
+			// data->image = mlx_texture_to_image(data->mlx, text);
+			// exit(EXIT_SUCCESS);
 			mlx_put_pixel(data->image, x, y, colour);
 			// data->mouse.mouse_x = x;
 			x++;

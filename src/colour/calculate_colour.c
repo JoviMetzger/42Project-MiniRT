@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 19:33:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/02 16:36:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,22 @@
 
 //----------------------------------------------------------//
 
+mlx_texture_t	*get_texture(t_data *data)
+{
+	int					i = 0;
+	mlx_texture_t		*text;
+
+	while (i < data->objs_i)
+	{
+		if (data->objs[i]->type == E_SPHERE)
+		{
+			text = data->objs[i]->texture;
+			return (text);
+		}
+		i++;
+	}
+	return (NULL);
+}
 
 // No intersection found, return black
 static uint32_t	get_ret(t_hit_data *hit, t_colour colour)
