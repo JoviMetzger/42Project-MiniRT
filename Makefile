@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/06/02 19:56:21 by smclacke      ########   odam.nl          #
+#    Updated: 2024/06/02 20:07:35 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CFLAGS 			= -Wall -Wextra
 CFLAGS			+= -Werror
 # CFLAGS			+= -g -fsanitize=address
 # CFLAGS			+= -Ofast -flto -O3
-CFLAGS			+= -O3
+CFLAGS			+= -O3 -flto
 MAKEFLAGS		= --no-print-directory
 
 # Libraries

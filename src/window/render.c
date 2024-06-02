@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 19:48:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/02 20:07:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,20 +103,20 @@ void ft_put_image(t_data *data)
 {
 	uint32_t	colour;
 	t_hit_data	hit;
+	int			x = 0;
+	int			y = 0;
 
-	data->x = 0;
-	data->y = 0;
-	while (data->y < data->mlx->height)
+	while (y < data->mlx->height)
 	{
-		while (data->x < data->mlx->width)
+		while (x < data->mlx->width)
 		{
-			data->ray = ft_create_ray(data, data->x, data->y);
+			data->ray = ft_create_ray(data, x, y);
 			colour = ft_calculate_colour(data, &hit, data->ray);
-			mlx_put_pixel(data->image, data->x, data->y, colour);
-			data->x++;
+			mlx_put_pixel(data->image, x, y, colour);
+			x++;
 		}
-		data->x = 0;
-		data->y++;
+		x = 0;
+		y++;
 	}
 	puts("DONE");
 }
