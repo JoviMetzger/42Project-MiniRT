@@ -6,53 +6,28 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 16:36:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/02 17:09:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-//----------------------------------------------------------//
-/**
- * 	was attempting this for textures with planes but ... ya know
- * 
-* 		// if (data->objs[i]->texture != NULL)
-		// {
-		// 	data->image = mlx_texture_to_image(data->mlx, data->objs[i]->texture);
-		// 	// convert into colour some how...
-		// 	if (!data->image)
-		// 		return (ft_convert_rgb(0, 0, 0));
-		// 	else
-		// 		exit(EXIT_SUCCESS);
-		// }
-		// else
- * 
- */
-// t_colour	texture_colour(t_data *data, t_objs *object)
+// static uint32_t get_text_colour(t_objs *obj, t_colour colour, int x, int y)
 // {
-	// data->objs[data->objs_i]->text_img = mlx_texture_to_image(data->mlx, texture);
-	// if (!data->objs[data->objs_i]->text_img)
-	// 	return (printf("ret 2\n"), 0);
+// 	mlx_texture_t	*text = obj->texture;
+// 	uint32_t		colour_ret;
+
+// 	colour.r = text->pixels[(y * text->width + x) * 4];
+// 	colour.g = text->pixels[(y * text->width + x) * 4 + 1];
+// 	colour.b = text->pixels[(y * text->width + x) * 4 + 2];
+
+// 	printf("pixel = %i\n", text->pixels[(y * text->width + x) * 4]);
+// 	printf("colours = %i %i %i\n", colour.r, colour.g, colour.b);
+
+// 	colour_ret = ft_convert_rgb(colour.r, colour.g, colour.b);
+
+// 	return (colour_ret);
 // }
-
-//----------------------------------------------------------//
-
-mlx_texture_t	*get_texture(t_data *data)
-{
-	int					i = 0;
-	mlx_texture_t		*text;
-
-	while (i < data->objs_i)
-	{
-		if (data->objs[i]->type == E_SPHERE)
-		{
-			text = data->objs[i]->texture;
-			return (text);
-		}
-		i++;
-	}
-	return (NULL);
-}
 
 // No intersection found, return black
 static uint32_t	get_ret(t_hit_data *hit, t_colour colour)
@@ -70,7 +45,7 @@ static uint32_t	get_ret(t_hit_data *hit, t_colour colour)
  *
  * 		@todo texture, colour, image... heh?
  */
-uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit, t_ray ray)
+uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit, t_ray ray, int x, int y)
 {
 	t_colour	colour;
 	int			i;
@@ -88,7 +63,12 @@ uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit, t_ray ray)
 		else if (data->objs[i]->type == E_SPHERE)
 		{
 			if (intersect_sphere(&ray, data->objs[i], hit))
-				colour = get_colour(data, hit, ray, data->objs[i]);
+			{
+				// if (data->objs[i]->texture)
+				// 	return (get_text_colour(data->objs[i], colour, x, y));
+				// else
+					colour = get_colour(data, hit, ray, data->objs[i]);
+			}
 		}
 		else if (data->objs[i]->type == E_CYLINDER)
 		{

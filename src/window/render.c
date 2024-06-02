@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 16:40:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/02 17:00:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void ft_put_image(t_data *data)
 {
 	t_hit_data hit_data;
 	uint32_t colour;
-	mlx_texture_t	*text;
 	int y = 0;
 	int x = 0;
 
@@ -81,6 +80,9 @@ void ft_put_image(t_data *data)
 	// printf("ADDEDlight: %f %f %f - R: %f - C: %d %d %d\n", data->lightS[2]->place.x, data->lightS[2]->place.y, data->lightS[2]->place.z, data->lightS[2]->ratio, data->lightS[2]->colour.r, data->lightS[2]->colour.g, data->lightS[2]->colour.b);
 
 	// --------------------------------------------
+	// mlx_texture_t	*text;
+
+	// (void) text;
 	
 	while (y < data->mlx->height)
 	{
@@ -88,10 +90,7 @@ void ft_put_image(t_data *data)
 		{ 
 			// data->mouse.mouse_map[y][x] = -1;
 			data->ray = ft_create_ray(data, x ,y);	
-			colour = ft_calculate_colour(data, &hit_data, data->ray);
-			// text = get_texture(data);
-			// data->image = mlx_texture_to_image(data->mlx, text);
-			// exit(EXIT_SUCCESS);
+			colour = ft_calculate_colour(data, &hit_data, data->ray, x, y);
 			mlx_put_pixel(data->image, x, y, colour);
 			// data->mouse.mouse_x = x;
 			x++;
