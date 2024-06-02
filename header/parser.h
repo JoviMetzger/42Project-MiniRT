@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 19:38:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/02 13:45:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int			rgb_valid(int c);
 
 // --- convert_utils_2 --- //
 char		*give_null(char *str);
+void		cyl_cals(t_data *data);
 
 // --- is_funcs --- //
 int			is_valid(int c);

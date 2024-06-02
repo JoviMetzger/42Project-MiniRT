@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 19:41:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/02 13:45:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,6 @@ int	sort_cy(char **elem_str, t_data *data)
 			return (par_err("Texture file invalid"));
 	}
 	normalize_vector(data->objs[data->objs_i]->vector);
+	cyl_cals(data);
 	return (1);
 }

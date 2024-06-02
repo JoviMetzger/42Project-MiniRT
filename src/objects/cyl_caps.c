@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/01 19:12:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 20:09:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/02 14:24:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ bool	tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	t_objs	tmppl;
 	double	distance;
 
-	cyl->top = minus(cyl->center, mult_vecdub(cyl->vector,
-				cyl->height_half / 2));
 	ft_bzero(&tmppl, sizeof(t_objs));
 	tmppl.center = cyl->top;
 	tmppl.vector = cyl->vector;
@@ -37,8 +35,6 @@ bool	boop_bottom(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	t_objs	tmppl;
 	double	distance;
 
-	cyl->base = minus(cyl->center, mult_vecdub(cyl->vector,
-				-(cyl->height_half / 2)));
 	ft_bzero(&tmppl, sizeof(t_objs));
 	tmppl.center = cyl->base;
 	tmppl.vector = cyl->vector;
