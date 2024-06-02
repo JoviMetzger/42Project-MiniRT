@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 17:01:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/02 18:34:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,7 +255,8 @@ void		store_ray_matrix(t_data *data);
 void		ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
-uint32_t		ft_calculate_colour(t_data *data, t_hit_data *hit, t_ray ray, int x, int y);
+// int32_t		get_texture(t_data *data, int x, int y);
+uint32_t		ft_calculate_colour(t_data *data, t_hit_data *hit, t_ray ray);
 t_colour		get_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj_i);
 t_vec3			ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t			ft_convert_rgb(int32_t r, int32_t g, int32_t b);

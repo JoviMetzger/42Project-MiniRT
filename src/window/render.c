@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 17:00:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/02 18:33:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,14 @@ void ft_put_image(t_data *data)
 	// printf("ADDEDlight: %f %f %f - R: %f - C: %d %d %d\n", data->lightS[2]->place.x, data->lightS[2]->place.y, data->lightS[2]->place.z, data->lightS[2]->ratio, data->lightS[2]->colour.r, data->lightS[2]->colour.g, data->lightS[2]->colour.b);
 
 	// --------------------------------------------
-	// mlx_texture_t	*text;
 
-	// (void) text;
-	
 	while (y < data->mlx->height)
 	{
 		while (x < data->mlx->width)
 		{ 
 			// data->mouse.mouse_map[y][x] = -1;
 			data->ray = ft_create_ray(data, x ,y);	
-			colour = ft_calculate_colour(data, &hit_data, data->ray, x, y);
+			colour = ft_calculate_colour(data, &hit_data, data->ray);
 			mlx_put_pixel(data->image, x, y, colour);
 			// data->mouse.mouse_x = x;
 			x++;
@@ -102,18 +99,19 @@ void ft_put_image(t_data *data)
 	puts("DONE BITCHES!!!!");
 }
 
-// static void	ft_resize(int32_t width, int32_t height, void *param)
-// {
-// 	t_data	*data;
+static void	ft_resize(int32_t width, int32_t height, void *param)
+{
+	t_data	*data;
 
-// 	data = (t_data *)param;
-// 	data->mlx->width = width;
-// 	data->mlx->height = height;
-// }
+	data = (t_data *)param;
+	data->mlx->width = width;
+	data->mlx->height = height;
+}
 
 void ft_render(t_data *data)
 {
 	ft_put_image(data); // Shazam(MATH)
 	mlx_key_hook(data->mlx, (mlx_keyfunc)ft_key_action, data); // movement aka ESC
+	mlx_resize_hook(data->mlx, &ft_resize, (void *)data);
 	mlx_mouse_hook(data->mlx, ft_handle_mouse_click, data); // Mouse click event  
 }
