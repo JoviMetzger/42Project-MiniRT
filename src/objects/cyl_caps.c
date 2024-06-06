@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/01 19:12:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 12:55:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 13:58:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ bool	tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	tmppl.vector = cyl->vector;  //
 	if (intersect_cyl_plane(ray, &tmppl, hit) == true)
 	{
-		cyl->cyl_denom = tmppl.cyl_denom; 
 		hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
 		distance = vec_length(cyl->top, hit->hit_pos);
 		if (distance <= cyl->radius / 1.41)

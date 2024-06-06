@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 13:01:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 14:16:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,30 @@ bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
+// The cylinder normal vector starts at the centerline of the cylinder at the 
+// same z-height of the point where the ray intersects the cylinder, 
+// ends at the radial point of intersection. 
+// Normalize it and you have your unit normal vector
+
 void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
-	hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
-	hit->to_center = minus(hit->hit_pos, cyl->center);
-	cyl->normal = minus(hit->to_center,
-			mult_vecdub(normalize_vector(cyl->vector),
-				dot_product(normalize_vector(cyl->vector), hit->to_center)));
+	if (cyl->vector.z == 0)
+	{
+		hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
+		hit->to_center = minus(hit->hit_pos, cyl->center);
+		cyl->normal = minus(hit->to_center,
+				mult_vecdub(cyl->vector,
+					dot_product(cyl->vector, hit->to_center)));
+	}
+	// else
+	
+	cyl->normal = normalize_vector(cyl->normal);
 }
 
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
 	hit->tmp_t = DBL_MAX;
-	cyl->cyl_flag = 0;
+	cyl->normal = normalize_vector(cyl->vector);
 	if (tap_top(hit, cyl, ray) == true)
 	{
 		if (hit->t < hit->tmp_t)
@@ -70,20 +81,10 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 		if (hit->t < hit->tmp_t)
 		{
 			hit->tmp_t = hit->t;
-			cyl->cyl_flag = 2;
+			cyl_normal(ray, cyl, hit);
 		}
 	}
 	if (hit->tmp_t != DBL_MAX)
-	{
-		if (cyl->cyl_flag == 2)
-			cyl_normal(ray, cyl, hit);
-		else
-		{
-			cyl->normal = normalize_vector(cyl->vector);
-			if (cyl->cyl_denom < 0)
-				cyl->normal = mult_vecdub(cyl->vector, -1);
-		}
 		return (check_closest(hit));
-	}
 	return (false);
 }

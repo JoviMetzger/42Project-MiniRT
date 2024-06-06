@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 13:00:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 13:58:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ bool	intersect_cyl_plane(t_ray *ray, t_objs *cyl_plane, t_hit_data *hit)
 		hit->t = dot_product(hit->o_c, cyl_plane->vector) / denom;
 		if (hit->t >= EPSILON)
 		{
-			cyl_plane->cyl_denom = denom;
+			if (denom < 0)
+				cyl_plane->normal = mult_vecdub(cyl_plane->vector, -1);
 			return (true);
 		}
 	}
