@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 14:16:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 16:15:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,10 @@ bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 
 void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
-	if (cyl->vector.z == 0)
-	{
-		hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
-		hit->to_center = minus(hit->hit_pos, cyl->center);
-		cyl->normal = minus(hit->to_center,
-				mult_vecdub(cyl->vector,
-					dot_product(cyl->vector, hit->to_center)));
-	}
-	// else
-	
+	hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
+	hit->to_center = minus(hit->hit_pos, cyl->center);
+	cyl->normal = minus(hit->to_center, mult_vecdub(cyl->vector,
+			dot_product(cyl->vector, hit->to_center)));
 	cyl->normal = normalize_vector(cyl->normal);
 }
 

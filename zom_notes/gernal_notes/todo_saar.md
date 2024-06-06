@@ -7,7 +7,7 @@
 
  - dont do textures, remove extra code
 
- - no inside objects
+ - no inside objects (but actually have to for cylinder...)
 
 
 
