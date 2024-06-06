@@ -6,22 +6,20 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/01 19:12:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 13:58:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 19:27:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
-
-// add cyl plane to obj struct, init with top and vector, send to plane func
 
 bool	tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 {
 	t_objs	tmppl;
 	double	distance;
 
-	ft_bzero(&tmppl, sizeof(t_objs));  //
-	tmppl.center = cyl->top;  //
-	tmppl.vector = cyl->vector;  //
+	ft_bzero(&tmppl, sizeof(t_objs));
+	tmppl.center = cyl->top;
+	tmppl.vector = cyl->vector;
 	if (intersect_cyl_plane(ray, &tmppl, hit) == true)
 	{
 		hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
@@ -37,9 +35,9 @@ bool	boop_bottom(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	t_objs	tmppl;
 	double	distance;
 
-	ft_bzero(&tmppl, sizeof(t_objs));  //
-	tmppl.center = cyl->base;  // 
-	tmppl.vector = cyl->vector;  //
+	ft_bzero(&tmppl, sizeof(t_objs));
+	tmppl.center = cyl->base;
+	tmppl.vector = cyl->vector;
 	if (intersect_cyl_plane(ray, &tmppl, hit) == true)
 	{
 		hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));

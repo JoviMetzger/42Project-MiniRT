@@ -6,11 +6,23 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 12:01:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 19:38:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/parser.h"
+
+static void	init_colour(t_data *data)
+{
+	ft_bzero(&data->vars, sizeof(t_colour_vars));
+	data->vars.ambient_intensity = data->ambient.ratio;
+	data->vars.diffuse_intensity = data->light.ratio;
+	data->vars.spec_intensity = 0.2;
+	data->vars.spec_power = 32;
+	data->vars.ambient_red = data->vars.ambient_intensity * data->ambient.colour.r;
+	data->vars.ambient_green = data->vars.ambient_intensity * data->ambient.colour.g;
+	data->vars.ambient_blue = data->vars.ambient_intensity * data->ambient.colour.b;
+}
 
 /**
  * @brief	takes array of strings from read_file()
@@ -34,6 +46,7 @@ static void	parse_array(t_data *data, char **arr)
 	obj_count = validate_elems(arr);
 	convert_cap_input(data, arr);
 	convert_obj_input(data, arr, obj_count);
+	init_colour(data);
 }
 
 /**

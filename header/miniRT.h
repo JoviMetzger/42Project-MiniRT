@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 19:13:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 19:39:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,21 +222,22 @@ typedef struct s_hit_data
 // Main struct
 typedef struct s_data
 {
-	mlx_image_t	*image;
-	mlx_t		*mlx;
-	t_objs		**objs;
-	t_hit_data	*hit_data; // bezeroed here but might move
-	int			objs_i;
-	t_camera	camera;
-	t_ambient	ambient;
-	t_light		light; // remove
-	int			lights_i;
-	t_lightS	**lightS;
-	t_ray		ray;
-	t_screen	screen;
-	t_type		type;	// parser util which gets overwritten for each element, objects do have a type
-	t_mouse		mouse;
-	int16_t		i_am; // what object is currently seleted
+	t_colour_vars	vars;
+	mlx_image_t		*image;
+	mlx_t			*mlx;
+	t_objs			**objs;
+	t_hit_data		*hit_data;
+	int				objs_i;
+	t_camera		camera;
+	t_ambient		ambient;
+	t_light			light; // remove
+	int				lights_i;
+	t_lightS		**lightS;
+	t_ray			ray;
+	t_screen		screen;
+	t_type			type;	// parser util which gets overwritten for each element, objects do have a type
+	t_mouse			mouse;
+	int16_t			i_am; // what object is currently seleted
 }	t_data;
 
 // --- Functions --- 

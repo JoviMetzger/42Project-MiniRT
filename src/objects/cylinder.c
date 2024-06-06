@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 19:17:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 19:42:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,6 @@ bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
-// void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
-// {
-// 	hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
-// 	hit->to_center = minus(hit->hit_pos, cyl->center);
-// 	cyl->tmp_normal = minus(hit->to_center, mult_vecdub(cyl->vector,
-// 			dot_product(cyl->vector, hit->to_center)));
-// 	cyl->normal = normalize_vector(cyl->tmp_normal);
-// }
-
 void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
 	hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
@@ -66,7 +57,6 @@ void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
 	hit->tmp_t = DBL_MAX;
-	cyl->normal = normalize_vector(cyl->vector);
 	if (tap_top(hit, cyl, ray) == true)
 	{
 		if (hit->t < hit->tmp_t)
