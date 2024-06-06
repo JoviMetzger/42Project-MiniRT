@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 20:07:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 12:54:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,8 @@ typedef struct s_objs
 	t_vec3				edge[2];
 	t_vec3				point[3];
 	int					point_flag;
+	int					cyl_flag;
+	double				cyl_denom;
 	mlx_texture_t		*texture;
 	int16_t				i_am;	// what obj num this is, basicly ID	
 	int					i;		// iterate through the different obj patterns (checkerboard, normal ...) -> resrets to 0 after 2 iterations.
