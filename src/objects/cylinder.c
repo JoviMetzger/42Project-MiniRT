@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 14:13:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 12:05:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
 	hit->tmp_t = DBL_MAX;
-	cyl->normal = normalize_vector(cyl->vector);
+	cyl->normal = normalize_vector(cyl->vector); // ?
 	if (tap_top(hit, cyl, ray) == true)
 	{
 		if (hit->t < hit->tmp_t)

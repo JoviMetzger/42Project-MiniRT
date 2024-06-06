@@ -6,23 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 18:25:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 12:01:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/parser.h"
-
-int	handle_texture(t_data *data, char *str)
-{
-	mlx_texture_t	*texture;
-
-	str = give_null(str);
-	texture = mlx_load_png(str);
-	if (!texture)
-		return (0);
-	data->objs[data->objs_i]->texture = texture;
-	return (1);
-}
 
 /**
  * @brief	takes array of strings from read_file()

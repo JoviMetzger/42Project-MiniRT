@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 13:45:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 11:57:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,6 @@ int	sort_tr(char **elem_str, t_data *data)
 	vec_obj(data, 0, 0, 1);
 	data->objs[data->objs_i]->normal
 		= normalize_vector(data->objs[data->objs_i]->vector);
-	if (elem_str[5] && !is_space(elem_str[5]))
-	{
-		if (!handle_texture(data, elem_str[5]))
-			return (par_err("Texture file invalid"));
-	}
 	return (1);
 }
 
@@ -72,11 +67,6 @@ int	sort_pl(char **elem_str, t_data *data)
 		return (par_err("invalid: Plane: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[3]))
 		return (par_err("invalid: Plane: RGB | [0-255]"));
-	if (elem_str[4] && !is_space(elem_str[4]))
-	{
-		if (!handle_texture(data, elem_str[4]))
-			return (par_err("Texture file invalid"));
-	}
 	return (1);
 }
 
@@ -96,12 +86,6 @@ int	sort_sp(char **elem_str, t_data *data)
 		return (par_err("invalid: Sphere: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[3]))
 		return (par_err("invalid: Sphere: RGB | [0-255]"));
-	if (elem_str[4] && !is_space(elem_str[4]))
-	{
-		if (!handle_texture(data, elem_str[4]))
-			return (par_err("Texture file invalid"));
-	}
-	normalize_vector(data->objs[data->objs_i]->vector);
 	return (1);
 }
 
@@ -127,12 +111,6 @@ int	sort_cy(char **elem_str, t_data *data)
 		return (par_err("invalid: Cylinder: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[5]))
 		return (par_err("invalid: Cylinder: RGB | [0-255]"));
-	if (elem_str[6] && !is_space(elem_str[6]))
-	{
-		if (!handle_texture(data, elem_str[6]))
-			return (par_err("Texture file invalid"));
-	}
-	normalize_vector(data->objs[data->objs_i]->vector);
 	cyl_cals(data);
 	return (1);
 }
