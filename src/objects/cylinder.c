@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/11 17:30:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 17:12:32 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-bool	check_roots(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+bool	check_roots(t_obj_hit *obj, t_objs *cyl, t_ray *ray)
 {
 	t_vec3	a;
 	t_vec3	b;
@@ -52,7 +52,7 @@ bool	check_roots(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 
 
 // infinity shittt
-// double	plane_cyl(t_obj_data *obj, t_ray *ray, t_vec3 center, t_vec3 vector)
+// double	plane_cyl(t_obj_hit *obj, t_ray *ray, t_vec3 center, t_vec3 vector)
 // {
 // 	t_vec3 oc;
 // 	double	denom;
@@ -83,7 +83,7 @@ double	plane_cyl(t_ray *ray, t_vec3 center, t_vec3 vector)
 }
 
 
-bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+bool	check_caps(t_obj_hit *obj, t_objs *cyl, t_ray *ray)
 {
 	double hit1;
 	double hit2;
@@ -125,7 +125,7 @@ bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
-bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
+bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_hit *obj)
 {
 
 	t_vec3	vector_cross;

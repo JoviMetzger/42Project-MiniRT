@@ -1,32 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   vector.c                                           :+:    :+:            */
+/*   operators.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/05 18:18:13 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/06 16:41:44 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-// assign pixels to the position of the ray-vector 
-t_vec3 init_ray_pos(double pos_x, double pos_y, double pos_z)
+// -------------- Operators (+-) --------------
+// + operator (vec + vec)
+t_vec3	plus(t_vec3 u, t_vec3 v)
 {
-    t_vec3 vec;
+	t_vec3	len;
 
-    vec.x = pos_x;
-    vec.y = pos_y;
-    vec.z = pos_z;
-    return (vec);
+	len.x = u.x + v.x;
+	len.y = u.y + v.y;
+	len.z = u.z + v.z;
+	return (len);
 }
 
-// it returns the normalizes_vectors
-// Altough we need the ray-vector, we assign x,y,z the pixel_x-y-z -> init_ray_pos() as the ray-vector;
-t_vec3 init_vector(t_screen screen)
+// + operator (vec + dub)
+t_vec3	plus_vecdub(t_vec3 u, double v)
 {
-    return (normalize_vector(init_ray_pos(screen.pixel_delta_x, screen.pixel_delta_y, -1)));
+	t_vec3	len;
+
+	len.x = u.x + v;
+	len.y = u.y + v;
+	len.z = u.z + v;
+	return (len);
 }
 
+// - operator (vec - vec)
+t_vec3	minus(t_vec3 u, t_vec3 v)
+{
+	t_vec3	len;
+
+	len.x = u.x - v.x;
+	len.y = u.y - v.y;
+	len.z = u.z - v.z;
+	return (len);
+}

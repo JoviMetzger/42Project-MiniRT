@@ -1,5 +1,5 @@
 <<<<<<< HEAD:zom_notes/dont_need_files/og_colour.md
-t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder)
+t_colour get_cyl_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *cylinder)
 =======
 /* ************************************************************************** */
 /*                                                                            */
@@ -18,7 +18,7 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
 /**
  * @todo norm 
  */
-// t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder)
+// t_colour get_cyl_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *cylinder)
 // {
 //     t_colour result;
 //     double AMBIENT_INTENSITY = data->ambient.ratio; // (0.2)
@@ -27,8 +27,8 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
 //     double SPECULAR_POWER = 32;
     
 //     // Using the 'Phong reflection model'
-// 	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_data->t));
-// 	t_vec3	normal = normalize_vector(minus(intersection_point, cylinder->center));
+// 	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_hit->t));
+// 	t_vec3	normal = normalize(minus(intersection_point, cylinder->center));
 
 // 	// Ambient light contribution
 // 	double ambient_red = AMBIENT_INTENSITY * data->ambient.colour.r;
@@ -36,7 +36,7 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
 // 	double ambient_blue = AMBIENT_INTENSITY * data->ambient.colour.b;
 
 // 	// Diffuse light contribution
-// 	t_vec3 light_direction = normalize_vector(minus(data->light.place, intersection_point));
+// 	t_vec3 light_direction = normalize(minus(data->light.place, intersection_point));
 // 	double diffuse_factor = dot_product(normal, light_direction);
 // 	if (diffuse_factor < 0.0)
 // 		diffuse_factor = 0.0;
@@ -45,8 +45,8 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
 // 	double diffuse_blue = DIFFUSE_INTENSITY * diffuse_factor * data->light.colour.b;
 	
 // 	// Specular light contribution
-// 	t_vec3 view_direction = normalize_vector(minus(ray.place, intersection_point));
-// 	t_vec3 reflection_direction = normalize_vector(ft_reflect(light_direction, normal));
+// 	t_vec3 view_direction = normalize(minus(ray.place, intersection_point));
+// 	t_vec3 reflection_direction = normalize(ft_reflect(light_direction, normal));
 // 	double specular_factor = pow(dot_product(reflection_direction, view_direction), SPECULAR_POWER);
 // 	if (specular_factor < 0.0)
 // 		specular_factor = 0.0;
@@ -72,7 +72,7 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
 	
 // }
 
-t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *cylinder) 
+t_colour get_cyl_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *cylinder) 
 >>>>>>> putPixel:src/colour/cylinder_colour.c
 {
     t_colour result;
@@ -87,8 +87,8 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
     double SPECULAR_POWER = 32;
 
     // Using the 'Phong reflection model'
-    intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_data->t));
-    normal = normalize_vector(minus(intersection_point, cylinder->center));
+    intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_hit->t));
+    normal = normalize(minus(intersection_point, cylinder->center));
 
     // Ambient light contribution
     double ambient_red = AMBIENT_INTENSITY * data->ambient.colour.r;
@@ -115,7 +115,7 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
 }
 =======
         // Shadow ray
-        t_vec3 light_direction = normalize_vector(minus(current_light->place, intersection_point));
+        t_vec3 light_direction = normalize(minus(current_light->place, intersection_point));
         shadow_ray.place = plus(intersection_point, mult_vecdub(normal, EPSILON)); // Add small offset to avoid self-intersection
         shadow_ray.vector = light_direction;
 
@@ -123,7 +123,7 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
 		int j = 0;
         while (j < data->objs_i) 
 		{
-            if (intersect_sphere(&shadow_ray, data->objs[j], obj_data) || intersect_plane(&shadow_ray, data->objs[j], obj_data) || intersect_cylinder(&shadow_ray, data->objs[j], obj_data)) 
+            if (intersect_sphere(&shadow_ray, data->objs[j], obj_hit) || intersect_plane(&shadow_ray, data->objs[j], obj_hit) || intersect_cylinder(&shadow_ray, data->objs[j], obj_hit)) 
 			{
                 in_shadow = true;
                 break;
@@ -142,8 +142,8 @@ t_colour get_cyl_colour(t_data *data, t_obj_data *obj_data, t_ray ray, t_objs *c
             double diffuse_blue = current_light->ratio * diffuse_factor * current_light->colour.b;
 
             // Specular light contribution
-            view_direction = normalize_vector(minus(ray.place, intersection_point));
-            reflection_direction = normalize_vector(ft_reflect(light_direction, normal));
+            view_direction = normalize(minus(ray.place, intersection_point));
+            reflection_direction = normalize(ft_reflect(light_direction, normal));
             double specular_factor = pow(dot_product(reflection_direction, view_direction), SPECULAR_POWER);
             if (specular_factor < 0.0) 
                 specular_factor = 0.0;

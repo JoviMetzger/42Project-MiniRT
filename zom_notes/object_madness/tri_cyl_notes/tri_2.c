@@ -22,7 +22,7 @@ double			triangle_intersection(t_p3 o, t_p3 d, t_figures *lst)
 
 
 // does not hit triangle
-bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
 {
 	t_vec3	edge1;
 	t_vec3	edge2;
@@ -35,34 +35,34 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 	edge2 = minus(tri->point3, tri->point1);
 
 	hit = cross_product(ray->vector, edge2);
-	obj_data->t = dot_product(edge1, hit);
+	obj_hit->t = dot_product(edge1, hit);
 
 	normal = mult_vecvec(edge1, edge2);
 
-	if (fabs(obj_data->t) < EPSILON)
+	if (fabs(obj_hit->t) < EPSILON)
 		return (false);
 
-	obj_data->c = 1 / obj_data->t;
+	obj_hit->c = 1 / obj_hit->t;
 	tvec = minus(ray->place, tri->point1);
 
 
-	obj_data->a = dot_product(edge1, hit) * obj_data->c;
-	if (obj_data->a < 0 || obj_data->a > 1)
+	obj_hit->a = dot_product(edge1, hit) * obj_hit->c;
+	if (obj_hit->a < 0 || obj_hit->a > 1)
 		return (false);
 
 	tvec = cross_product(tvec, edge1);
-	obj_data->b = dot_product(ray->vector, tvec) * obj_data->c;
+	obj_hit->b = dot_product(ray->vector, tvec) * obj_hit->c;
 
-	if (obj_data->b < 0 || obj_data->a + obj_data->b > 1)
+	if (obj_hit->b < 0 || obj_hit->a + obj_hit->b > 1)
 		return (false);
 
-	obj_data->t = dot_product(edge2, tvec) * obj_data->c;
+	obj_hit->t = dot_product(edge2, tvec) * obj_hit->c;
 	return (true);
 }
 
 
 // does hit
-bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
 {
 	t_vec3	edge1;
 	t_vec3	edge2;
@@ -95,11 +95,11 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 	v = f * v;
 	if (v < 0.0 || u + v > 1.0)
 		return (false);
-	obj_data->t = dot_product(q, edge2);
-	obj_data->t = f * obj_data->t;
+	obj_hit->t = dot_product(q, edge2);
+	obj_hit->t = f * obj_hit->t;
 	// tri->center = hit;
 	// tri->center = cross_product(edge1, edge2);
-	if (obj_data->t > EPSILON)
+	if (obj_hit->t > EPSILON)
 		return (true);
 	else
 		return (false);
@@ -108,7 +108,7 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 
 
 // does hit // mix of two above
-bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
 {
 	t_vec3	edge1;
 	t_vec3	edge2;
@@ -133,36 +133,36 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 		// q vec3 - c_c
 		// s vec3 - o_c (tvec)
 		
-	obj_data->a = 1.0 / dir;
+	obj_hit->a = 1.0 / dir;
 	t_vec3 o_c = minus(ray->place, tri->point1);
 	
 
-	obj_data->b = dot_product(edge1, hit);
-	obj_data->b = obj_data->a * obj_data->b;
+	obj_hit->b = dot_product(edge1, hit);
+	obj_hit->b = obj_hit->a * obj_hit->b;
 	
-	if (obj_data->b < 0.0 || obj_data->b > 1.0)
+	if (obj_hit->b < 0.0 || obj_hit->b > 1.0)
 		return (false);
 		
 	o_c = cross_product(o_c, edge1); 
 	
-	obj_data->c = dot_product(o_c, edge1);
-	obj_data->c = obj_data->a * obj_data->c;
-	if (obj_data->c < 0.0 || obj_data->b + obj_data->c > 1.0)
+	obj_hit->c = dot_product(o_c, edge1);
+	obj_hit->c = obj_hit->a * obj_hit->c;
+	if (obj_hit->c < 0.0 || obj_hit->b + obj_hit->c > 1.0)
 		return (false);
 
 		
-	// obj_data->d = dot_product(c_c, edge2); // edge2, q
-	// obj_data->t = obj_data->a * obj_data->t;
+	// obj_hit->d = dot_product(c_c, edge2); // edge2, q
+	// obj_hit->t = obj_hit->a * obj_hit->t;
 
-	// if (obj_data->t < 0 || u + obj_data->t > 1)
+	// if (obj_hit->t < 0 || u + obj_hit->t > 1)
 	// 	return (false);
 
-	obj_data->t = dot_product(edge2, o_c);
+	obj_hit->t = dot_product(edge2, o_c);
 	return (true);
 
 
 	
-	// if (obj_data->t > EPSILON)
+	// if (obj_hit->t > EPSILON)
 	// 	return (true);
 	// else
 	// 	return (false);
@@ -172,7 +172,7 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 //---------------- total mess ------------//
 
 
-// bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
+// bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
 // {
 // 	t_vec3	vec1 = tri->point1;
 // 	t_vec3	vec2 = tri->point2;
@@ -198,7 +198,7 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 // 	pvec = cross_product(ray->vector, thing2);
 
 // 	tri_normal = mult_vecvec(vec1, vec2);
-// 	ray_normal = normalize_vector(ray->vector); // necessary?
+// 	ray_normal = normalize(ray->vector); // necessary?
 	
 // 	// d = dot_product(pvec, thing1);
 
@@ -233,35 +233,35 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 // 	// 	return (false);
 
 // 	// // double distance = 40; //dot_product(thing2, qvec)
-// 	// tri->center = plus(ray->place, mult_vecdub(ray->vector, obj_data->t));
-// 	// obj_data->t = 40;
+// 	// tri->center = plus(ray->place, mult_vecdub(ray->vector, obj_hit->t));
+// 	// obj_hit->t = 40;
 // 	// return (true);
 
 // 	tri->center = tri_normal;
 // 	tri->center = tri->point1;
 
-// 	obj_data->t = dot_product(vec1, tri_normal);
+// 	obj_hit->t = dot_product(vec1, tri_normal);
 
-// 	if (fabs(obj_data->t) < EPSILON)
+// 	if (fabs(obj_hit->t) < EPSILON)
 // 		return (false);
 // 		// return (printf("this one\n"), false);
 		
-// 	obj_data->c = 1 / obj_data->t;
+// 	obj_hit->c = 1 / obj_hit->t;
 // 	tvec = minus(ray->place, tri->point1);
-// 	obj_data->a = dot_product(vec1, pvec) * obj_data->c;
-// 	if (obj_data->a < 0 || obj_data->a > 1)
+// 	obj_hit->a = dot_product(vec1, pvec) * obj_hit->c;
+// 	if (obj_hit->a < 0 || obj_hit->a > 1)
 // 		return (false);
 // 		// return (printf("this two\n"), false);
 // 	tvec = cross_product(tvec, vec1);
-// 	obj_data->b = dot_product(ray->vector, tvec) * obj_data->c;
-// 	if (obj_data->b < 0 || obj_data->a + obj_data->b > 1)
+// 	obj_hit->b = dot_product(ray->vector, tvec) * obj_hit->c;
+// 	if (obj_hit->b < 0 || obj_hit->a + obj_hit->b > 1)
 // 		return (false);
 // 		// return (printf("this three\n"), false);
-// 	obj_data->t = dot_product(vec2, tvec) * obj_data->c;
+// 	obj_hit->t = dot_product(vec2, tvec) * obj_hit->c;
 // 	return (true);
 // }
 
-// bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
+// bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
 // {
 // 	t_vec3	vec1;
 // 	t_vec3	vec2;
@@ -275,19 +275,19 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 // 	normal = mult_vecvec(vec1, vec2);
 
 // 	pvec = cross_product(ray->vector, vec2);
-// 	obj_data->t = dot_product(vec1, pvec);
+// 	obj_hit->t = dot_product(vec1, pvec);
 
-// 	if (fabs(obj_data->t) < EPSILON)
+// 	if (fabs(obj_hit->t) < EPSILON)
 // 		return (false);
-// 	obj_data->c = 1 / obj_data->t;
+// 	obj_hit->c = 1 / obj_hit->t;
 // 	tvec = minus(ray->place, tri->point1);
-// 	obj_data->a = dot_product(vec1, pvec) * obj_data->c;
-// 	if (obj_data->a < 0 || obj_data->a > 1)
+// 	obj_hit->a = dot_product(vec1, pvec) * obj_hit->c;
+// 	if (obj_hit->a < 0 || obj_hit->a > 1)
 // 		return (false);
 // 	tvec = cross_product(tvec, vec1);
-// 	obj_data->b = dot_product(ray->vector, tvec) * obj_data->c;
-// 	if (obj_data->b < 0 || obj_data->a + obj_data->b > 1)
+// 	obj_hit->b = dot_product(ray->vector, tvec) * obj_hit->c;
+// 	if (obj_hit->b < 0 || obj_hit->a + obj_hit->b > 1)
 // 		return (false);
-// 	obj_data->t = dot_product(vec2, tvec) * obj_data->c;
+// 	obj_hit->t = dot_product(vec2, tvec) * obj_hit->c;
 // 	return (true);
 // }

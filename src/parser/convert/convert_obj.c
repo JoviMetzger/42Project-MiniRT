@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 18:31:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 19:44:33 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ char	*give_null(char *str)
 	return (str);
 }
 
-
-// triangle
-// /**
-//  * #Identifier   #Coordinates point1  #Coordinates point2  #Coordinates point3    #R,G,B
-// */
+/* triangle
+ *
+ * #Identifier  #Coordinates point1  #Coordinates point2  #Coordinates point3  #R,G,B
+ */
 int	sort_tr(char **elem_str, t_data *data)
 {
 	data->objs[data->objs_i]->point_flag = 0;
@@ -57,7 +56,6 @@ int	sort_tr(char **elem_str, t_data *data)
 	}
 	return (1);
 }
-
 
 // /**
 //  * #Identifier     #Coordinates        #3D vector      #R,G,B

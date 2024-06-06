@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 18:00:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 20:29:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 17:12:59 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 // objects for raytracing, especially in complex scenes.
 
 // does hit
-bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
 {
 	t_vec3	edge1;
 	t_vec3	edge2;
@@ -68,7 +68,7 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 		return (false);
 
 	// f
-	obj_data->a = 1.0 / dir;
+	obj_hit->a = 1.0 / dir;
 
 	// s
 	t_vec3 o_c = minus(ray->place, tri->point1);
@@ -76,25 +76,25 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_data *obj_data)
 
 	// check the scalar values (u q || b c) are in range 0-1
 	// u
-	obj_data->b = dot_product(o_c, hit);
-	obj_data->b = obj_data->a * obj_data->b;
-	if (obj_data->b < 0.0 || obj_data->b > 1.0)
+	obj_hit->b = dot_product(o_c, hit);
+	obj_hit->b = obj_hit->a * obj_hit->b;
+	if (obj_hit->b < 0.0 || obj_hit->b > 1.0)
 		return (false);
 
 	//q	
 	t_vec3 c_c = cross_product(o_c, edge1); 
 
 	// v
-	obj_data->c = dot_product(ray->vector, c_c);
-	obj_data->c = obj_data->a * obj_data->c;
-	if (obj_data->c < 0.0 || obj_data->b + obj_data->c > 1.0)
+	obj_hit->c = dot_product(ray->vector, c_c);
+	obj_hit->c = obj_hit->a * obj_hit->c;
+	if (obj_hit->c < 0.0 || obj_hit->b + obj_hit->c > 1.0)
 		return (false);
 
 
-	obj_data->t = dot_product(edge2, c_c);
-	obj_data->t = obj_data->a * obj_data->t;
-	if (obj_data->t < EPSILON)
+	obj_hit->t = dot_product(edge2, c_c);
+	obj_hit->t = obj_hit->a * obj_hit->t;
+	if (obj_hit->t < EPSILON)
 		return (false);
-	return (check_closest(obj_data));
+	return (check_closest(obj_hit));
 
 }

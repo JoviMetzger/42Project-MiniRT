@@ -5,7 +5,7 @@
  * 				t_vec3 hit = plus(ray->place, mult_vecdub(ray->vector, obj->t));
 				t_vec3 ctp = minus(hit, cyl->center);
 				t_vec3 normal = minus(ctp, mult_vecdub(cyl->vector, dot_product(cyl->vector, ctp)));
-				normalize_vector(normal);
+				normalize(normal);
 				if (dot_product(normal, ray->vector) > EPSILON)
 					normal = mult_vecdub(normal, -1);
 				cyl->center = normal;
@@ -83,7 +83,7 @@ FIGURING OUT THE CAP PLANE BIT
 //------------------------------//
 //------------------------------//
 
-// bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
+// bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_hit *obj)
 // {
 // 	t_vec3	c_c;
 // 	t_vec3	r_c;
@@ -117,7 +117,7 @@ FIGURING OUT THE CAP PLANE BIT
 
 //------------------------------//
 
-static void	check_hit(double root, t_objs *cyl, t_ray *ray, t_obj_data *obj)
+static void	check_hit(double root, t_objs *cyl, t_ray *ray, t_obj_hit *obj)
 {
 	t_vec3	a;
 	t_vec3	b;
@@ -145,11 +145,11 @@ static t_vec3 cyl_norm(t_vec3 hit, t_ray *ray, t_objs *cyl)
 
 	ctp = minus(hit, cyl->center);
 	normal = minus(ctp, mult_vecdub(cyl->vector, dot_product(cyl->vector, ctp)));
-	normalize_vector(normal);
+	normalize(normal);
 	return (good_norm(normal, ray));
 }
 
-bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
+bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_hit *obj)
 {
 	t_vec3	aaa;
 	t_vec3	right;
@@ -199,7 +199,7 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 
 // without hit variables
 
-			// static bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+			// static bool	check_caps(t_obj_hit *obj, t_objs *cyl, t_ray *ray)
 			// {
 			// 	obj->tmp_t = obj->t;
 			// 	// double	hit1 = 0;
@@ -236,7 +236,7 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 
 // old plane bit
 
-			// if (obj_data->t > 0)
+			// if (obj_hit->t > 0)
 			// 			{
 			// 				// printf("here\n");
 			// 				// exit(EXIT_SUCCESS);
@@ -245,31 +245,31 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 			// 				if (fabs(denom) > EPSILON)
 			// 				{
 			// 					t_vec3	oc = minus(ray->place, cyl->center);
-			// 					obj_data->t = -dot_product(oc, cyl->vector) / denom;
-			// 					if (obj_data->t >= EPSILON)
-			// 						return (check_closest(obj_data));
+			// 					obj_hit->t = -dot_product(oc, cyl->vector) / denom;
+			// 					if (obj_hit->t >= EPSILON)
+			// 						return (check_closest(obj_hit));
 			// 				}
 			// 				return (false);
 			// 			}
 
 // old version before function split
 
-			// double	t1 = ray->place.y + obj_data->root1 * ray->vector.y;
-			// double	t2 = ray->place.y + obj_data->root2 * ray->vector.y;
+			// double	t1 = ray->place.y + obj_hit->root1 * ray->vector.y;
+			// double	t2 = ray->place.y + obj_hit->root2 * ray->vector.y;
 			// if (t1 < (cyl->vector.y - height_half) || t1 > cyl->vector.y + height_half)
-			// 	obj_data->t = obj_data->root1;
-			// 	// obj_data->root1 = INFINITY;
+			// 	obj_hit->t = obj_hit->root1;
+			// 	// obj_hit->root1 = INFINITY;
 			// else if (t2 < (cyl->vector.y - height_half) || t2 > cyl->vector.y + height_half)
-			// 	obj_data->t = obj_data->root2;
-			// 	// obj_data->root2 = INFINITY;
-			// // printf("root1 = %f | root2 = %f\n", obj_data->root1, obj_data->root2);
+			// 	obj_hit->t = obj_hit->root2;
+			// 	// obj_hit->root2 = INFINITY;
+			// // printf("root1 = %f | root2 = %f\n", obj_hit->root1, obj_hit->root2);
 			// // exit(EXIT_SUCCESS);
-			// // obj_data->t = fmin(obj_data->root1, obj_data->root2);
-			// // printf("t = %f\n", obj_data->t);
+			// // obj_hit->t = fmin(obj_hit->root1, obj_hit->root2);
+			// // printf("t = %f\n", obj_hit->t);
 			// // exit(EXIT_SUCCESS);
-			// // if (obj_data->t == INFINITY || obj_data->t == 0)
+			// // if (obj_hit->t == INFINITY || obj_hit->t == 0)
 			// // 	return (true);
-			// if (obj_data->t > 0)
+			// if (obj_hit->t > 0)
 			// {
 			// 	// printf("here\n");
 			// 	// exit(EXIT_SUCCESS);
@@ -278,21 +278,21 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 			// 	if (fabs(denom) > EPSILON)
 			// 	{
 			// 		t_vec3	oc = minus(ray->place, cyl->center);
-			// 		obj_data->t = -dot_product(oc, cyl->vector) / denom;
-			// 		if (obj_data->t >= EPSILON)
-			// 			return (check_closest(obj_data));
+			// 		obj_hit->t = -dot_product(oc, cyl->vector) / denom;
+			// 		if (obj_hit->t >= EPSILON)
+			// 			return (check_closest(obj_hit));
 			// 	}
 			// 	return (false);
 			// }
-			// else if (obj_data->t < 0) //- no intersection
+			// else if (obj_hit->t < 0) //- no intersection
 			// 	return (false);
 
 // possible solution ish not really
 
-		// 	if (obj_data->t > 0)
+		// 	if (obj_hit->t > 0)
 		// 	{
 		// 		// check caps (top) using height, for bottom we need base point
-		// 		// return (check_closest(obj_data));
+		// 		// return (check_closest(obj_hit));
 		// 		double	distance;
 		// 		double	denom = dot_product(ray->vector, cyl->vector);
 		// 		t_vec3	oc = minus(cyl->center, ray->place);
@@ -304,14 +304,14 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 		// 			// if vector length (hit , height (for top ? )) <= cyl->radius
 		// 			if (length_squared(hit) + sqrt(cyl->height) <= radius)
 		// 			{
-		// 				if (distance > 0 && distance < obj_data->t)
-		// 					return (check_closest(obj_data));
+		// 				if (distance > 0 && distance < obj_hit->t)
+		// 					return (check_closest(obj_hit));
 		// 			}
 		// 		}
 		// 	}
 		// }
 
-static bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+static bool	check_caps(t_obj_hit *obj, t_objs *cyl, t_ray *ray)
 {
 	obj->tmp_t = obj->t;
 	obj->hit1 = ray->place.y + obj->root1 * ray->vector.y;
@@ -343,7 +343,7 @@ static bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
 	return (false);
 }
 
-bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
+bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_hit *obj)
 {
 	t_vec3	c_c;
 	t_vec3	r_c;
@@ -378,7 +378,7 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 
 //--------------------//
 
-// static bool	check_caps(t_obj_data *obj, t_objs *cyl, t_ray *ray)
+// static bool	check_caps(t_obj_hit *obj, t_objs *cyl, t_ray *ray)
 // {
 // 	obj->tmp_t = obj->t;
 // 	// obj->hit1 = ray->place.y + obj->root1 * ray->vector.y;
@@ -410,7 +410,7 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
 // 	return (false);
 // }
 
-static void	check_hit(double root, t_objs *cyl, t_ray *ray, t_obj_data *obj)
+static void	check_hit(double root, t_objs *cyl, t_ray *ray, t_obj_hit *obj)
 {
 	t_vec3	a;
 	t_vec3	b;
@@ -424,7 +424,7 @@ static void	check_hit(double root, t_objs *cyl, t_ray *ray, t_obj_data *obj)
 		root = -1;
 }	
 
-bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_data *obj)
+bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_hit *obj)
 {
 	t_vec3	c_c;
 	t_vec3	r_c;

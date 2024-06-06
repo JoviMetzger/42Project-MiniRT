@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/05/18 18:38:05 by jmetzger      ########   odam.nl          #
+#    Updated: 2024/06/06 17:21:44 by jmetzger      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,21 +34,22 @@ MLX42			= $(MLX42_PATH)/build/libmlx42.a
 SRC_HEADER		= ./header
 
 SRCS			= main.c											\
-					utils/vec_operators.c 							\
-					utils/utils.c 									\
-					window/window_movement.c 						\
+					utils/operators.c 								\
+					utils/operators1.c 								\
+					utils/operators2.c 								\
+					utils/colour_utils.c							\
+					window/window_key.c 							\
+					window/window_mouse.c 							\
 					window/open_window.c							\
 					window/render.c									\
 					colour/calculate_colour.c						\
-					colour/sphere_colour.c 							\
-					colour/plane_colour.c							\
+					colour/checkerboard.c 							\
 					colour/get_colour.c 							\
 					objects/sphere.c 								\
 					objects/plane.c 								\
 					objects/cylinder.c 								\
 					objects/triangle.c 								\
 					objects/quad.c 									\
-					ray/vector.c									\
 					ray/ray.c										\
 					parser/check_elements/check_caps.c				\
 					parser/check_elements/check_elements.c			\
