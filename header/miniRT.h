@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 13:58:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/06 19:13:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ typedef struct s_objs
 	t_colour			colour;
 	t_vec3				center;
 	t_vec3				vector;
+	t_vec3				tmp_normal;
 	t_vec3				normal;
 	double				diameter;
 	double				height;
@@ -210,6 +211,7 @@ typedef struct s_hit_data
 	double	root2;
 	t_vec3	hit_pos;
 	t_vec3	to_center;
+	t_vec3	from_center;
 	t_vec3	vector_cross;
 	double	t;
 	double	tmp_t;
