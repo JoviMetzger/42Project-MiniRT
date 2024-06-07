@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 19:58:29 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/07 15:32:08 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,8 @@ t_colour	get_base_colour(t_objs *obj, t_colour_vars colour)
 {
 	t_colour	base;
 
-	if (obj->what_pattern == 1)
-	{
-		if (obj->type == E_SPHERE)
-			base = get_sphere_checkerboard(colour.normal);
-		if (obj->type == E_PLANE)
-			base = get_plane_checkerboard(obj, colour.normal);
-		if (obj->type == E_CYLINDER)
-			base = get_cylinder_checkerboard(colour.normal);
-	}
+	if (obj->what_pattern == 1 && obj->type == E_SPHERE)
+		base = get_sphere_checkerboard(colour.normal);
 	else
 		base = obj->colour;
 	return (base);
@@ -73,12 +66,14 @@ t_vec3	ft_reflect(t_vec3 incident, t_vec3 normal)
 				* dot_product(incident, normal))));
 }
 
-//	Bit shifts the ints rg,b, 
-//	so that the correct colour is displayed into mlx_put_pixel();
-int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b)
+void	add_light(t_colour_vars *colour, t_ray ray)
 {
-	int32_t	a;
-
-	a = 0xFF;
-	return (b << 8 | g << 16 | r << 24 | a);
+	diffuse_light(colour);
+	specular_light(colour, ray);
+	colour->result.r += colour->diffuse.r * colour->base.r / 255
+		+ colour->specular.r;
+	colour->result.g += colour->diffuse.g * colour->base.g / 255
+		+ colour->specular.g;
+	colour->result.b += colour->diffuse.b * colour->base.b / 255
+		+ colour->specular.b;
 }

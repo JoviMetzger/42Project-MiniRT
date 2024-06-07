@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 17:35:22 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/07 15:31:19 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,26 @@
 #include "../../header/parser.h"
 
 /*	This function is for if the object got selected to change the pattern.
+ *	Does only do spheres, but could do other objects aswell.
  *		- obj->what_pattern = 1;	->	is for Checkerboard.
  *		- obj->what_pattern = 0;	->	is for Normal.
  */
 static void	change_pattern(t_data *data, t_objs *obj)
 {
-	if (obj->i == 1)
-		obj->what_pattern = 1;
-	else
-		obj->what_pattern = 0;
-	ft_put_image(data);
-}
-
-//	This function checks what object got selected
-static void	what_obj_me(t_data *data, t_objs *obj)
-{
 	if (obj->type == E_SPHERE)
-		change_pattern(data, data->objs[data->i_am]);
-	else if (obj->type == E_PLANE)
-		change_pattern(data, data->objs[data->i_am]);
-	else if (obj->type == E_CYLINDER)
-		change_pattern(data, data->objs[data->i_am]);
+	{
+		if (obj->i == 1)
+			obj->what_pattern = 1;
+		else
+			obj->what_pattern = 0;
+		ft_put_image(data);
+	}
 }
 
 /*	Key commands
  *	- If the pressed key is 'ESC key', close and free window.
  *	- If an object got selected (data->mouse.selected == true)
  *	  And the key 'Arrow up' is pressed, we change the pattern of that object.
- *	  (We first check what object got selected and then we change the pattern)
  */
 void	ft_key_action(mlx_key_data_t keydata, t_data *data)
 {
@@ -57,6 +49,6 @@ void	ft_key_action(mlx_key_data_t keydata, t_data *data)
 		data->objs[data->i_am]->i++;
 		if (data->objs[data->i_am]->i > 1)
 			data->objs[data->i_am]->i = 0;
-		what_obj_me(data, data->objs[data->i_am]);
+		change_pattern(data, data->objs[data->i_am]);
 	}
 }

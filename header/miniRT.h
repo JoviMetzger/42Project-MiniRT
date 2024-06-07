@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 21:29:38 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/07 18:04:15 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef enum e_type
 	E_SPACE = 7,
 	E_HASH = 8,
 	E_TRIANGLE = 9
-}				t_type;
+}	t_type;
 
 // --- Structs ---
 // -------------------------------------------------------------
@@ -64,7 +64,7 @@ typedef struct s_vec3
 {
 	double	x;
 	double	y;
-	double	z;  
+	double	z;
 }	t_vec3;
 
 // -------------------------------------------------------------
@@ -104,7 +104,7 @@ typedef struct s_objs
 	double				diameter;
 	double				height;
 	int16_t				i_am;
-	int					what_pattern; 
+	int					what_pattern;
 	int					i;
 	mlx_texture_t		*texture; // ??? we still need this?
 	// mlx_image_t			*text_img; // we still need this ???
@@ -163,10 +163,10 @@ typedef struct s_mouse
 	int16_t			**mouse_map;
 	uint32_t		window_h;
 	uint32_t		window_w;
-	int 			mou_y;
+	int				mou_y;
 	int				mou_x;
 	bool			selected;
-}   t_mouse;
+}	t_mouse;
 
 // -------------------------------------------------------------
 // Ray struct
@@ -198,7 +198,7 @@ typedef struct s_data
 	t_mouse			mouse;
 	t_ray			ray;
 	int				objs_i;
-	int 			lights_i; 
+	int				lights_i;
 	int16_t			i_am;
 }	t_data;
 
@@ -220,19 +220,18 @@ typedef struct s_obj_hit
 	double	hit2;
 	double	radius;
 	double	closest_t;
-
 }	t_obj_hit;
 
 // -------------------------------------------------------------
 // Struct for all colour variables (standing alone)
-typedef	struct s_colour_vars
+typedef struct s_colour_vars
 {
 	t_colour	result;
 	t_lightS	*curr_light;
 	t_vec3		intersect_p;
 	t_vec3		normal;
-    t_vec3		ref_dir;
-    t_vec3		view_dir;
+	t_vec3		ref_dir;
+	t_vec3		view_dir;
 	t_vec3		light_dir;
 	double		ambient_ratio;
 	double		spec_intensity;
@@ -245,6 +244,18 @@ typedef	struct s_colour_vars
 	t_colour	base;	
 }	t_colour_vars;
 
+// -------------------------------------------------------------
+// Struct for the checkerboard variables (standing alone)
+typedef struct s_checkerboard
+{
+	double	theta;
+	double	phi;
+	double	u;
+	double	v;
+	double	square_u;
+	double	square_v;
+}	t_checkerboard;
+
 // --- Functions --- 
 // Window Functions
 void		ft_put_image(t_data *data);
@@ -253,7 +264,7 @@ void		ft_render(t_data *data);
 
 // Movement Functions
 void		ft_key_action(mlx_key_data_t keydata, t_data *data);
-void		ft_handle_mouse_click(mouse_key_t key, action_t act, 
+void		ft_handle_mouse_click(mouse_key_t key, action_t act,
 				modifier_key_t m, void *_data);
 void		init_mouse_map(t_data *data);
 
@@ -261,18 +272,22 @@ void		init_mouse_map(t_data *data);
 t_ray		ft_create_ray(t_data *data, int x, int y);
 
 // Colour Functions
-uint32_t	ft_calculate_colour(t_data *data, t_obj_hit *obj, t_ray ray);
-t_colour	get_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *obj);
+uint32_t	ft_calculate_colour(t_data *data, t_obj_hit *obj);
+t_colour	get_colour(t_data *data, t_obj_hit *obj_hit,
+				t_ray ray, t_objs *obj);
 t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars colour);
+void		add_light(t_colour_vars *colour, t_ray ray);
+void		specular_light(t_colour_vars *colour, t_ray ray);
+void		diffuse_light(t_colour_vars *colour);
+t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
+int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 // Colour Functions Bonus
 t_colour	get_sphere_checkerboard(t_vec3 normal);
-t_colour	get_plane_checkerboard(t_objs *plane, t_vec3 normal);
-t_colour	get_cylinder_checkerboard(t_vec3 normal);
 
 // Operators
-t_vec3 		plus_vecdub(t_vec3 u, double v);
+t_vec3		plus_vecdub(t_vec3 u, double v);
 t_vec3		plus(t_vec3 u, t_vec3 v);
 t_vec3		minus(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecvec(t_vec3 u, t_vec3 v);
@@ -292,13 +307,7 @@ bool		check_caps(t_obj_hit *obj, t_objs *cyl, t_ray *ray);
 bool		check_roots(t_obj_hit *obj, t_objs *cyl, t_ray *ray);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_obj_hit *obj_hit);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_obj_hit *obj_hit);
-bool		intersect_plane_for_colour(t_ray *ray, t_objs *plane, t_obj_hit *obj_hit);
 bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_obj_hit *obj_hit);
 bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit);
-
-
-// Utils
-t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
-int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 #endif

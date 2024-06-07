@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 20:59:24 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/07 17:24:13 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_colour_vars	init_colour_struct(t_data *data, t_obj_hit *obj_hit,
 }
 
 // Calculation of the diffuse light
-static void	diffuse_light(t_colour_vars *colour)
+void	diffuse_light(t_colour_vars *colour)
 {
 	colour->diff_fact = dot_product(colour->normal, colour->light_dir);
 	if (colour->diff_fact < 0.0)
@@ -52,7 +52,7 @@ static void	diffuse_light(t_colour_vars *colour)
 }
 
 // Calculation of the specular light
-static void	specular_light(t_colour_vars *colour, t_ray ray)
+void	specular_light(t_colour_vars *colour, t_ray ray)
 {
 	colour->view_dir = normalize(minus(ray.place, colour->intersect_p));
 	colour->ref_dir = normalize(ft_reflect(colour->light_dir, colour->normal));
@@ -106,18 +106,13 @@ static void	shadow_calculation(t_data *data, t_colour_vars *colour,
 	}
 	if (!in_shadow)
 	{
-		diffuse_light(colour);
-		specular_light(colour, ray);
-		colour->result.r += colour->diffuse.r * colour->base.r / 255
-			+ colour->specular.r;
-		colour->result.g += colour->diffuse.g * colour->base.g / 255
-			+ colour->specular.g;
-		colour->result.b += colour->diffuse.b * colour->base.b / 255
-			+ colour->specular.b;
+		add_light(colour, ray);
 	}
 }
 
-/*	This function uses the 'Phong reflection model' for each object.
+/*	STEP 3. Compute a color for the closest intersection point.
+ *
+ *	This function uses the 'Phong reflection model' for each object.
  *	Including multiple lights and creating shadows.
  *		- Initializing colour_vars.
  *		- Initializing the base colour of the object.
