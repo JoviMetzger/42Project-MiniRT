@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 18:35:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 13:10:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static uint32_t	get_ret(t_hit_data *hit, t_colour colour)
  *	(https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_reflection_model)
  *	(https://en.wikipedia.org/wiki/Phong_reflection_model)
  *
- * 		@todo texture, colour, image... heh?
+ * 		@todo NORM, too many lines
 //  */
 uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit, t_ray ray)
 {

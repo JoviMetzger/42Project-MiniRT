@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 19:37:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 13:11:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,21 @@ static void	light_funcs(t_data *data, t_colour_vars *vars, t_ray *ray)
 
 static void	combine_colour(t_data *data, t_objs *obj_i)
 {
-	data->vars.final_red = data->vars.ambient_red + data->vars.diffuse_red;
+	data->vars.final_red = data->vars.ambient_red
+		+ data->vars.diffuse_red;
 	data->vars.final_red += data->vars.spec_red;
-	data->vars.final_green = data->vars.ambient_green + data->vars.diffuse_green;
+	data->vars.final_green = data->vars.ambient_green
+		+ data->vars.diffuse_green;
 	data->vars.final_green += data->vars.spec_green;
-	data->vars.final_blue = data->vars.ambient_blue + data->vars.diffuse_blue;
+	data->vars.final_blue = data->vars.ambient_blue
+		+ data->vars.diffuse_blue;
 	data->vars.final_blue += data->vars.spec_blue;
-	data->vars.final_red = fmin(fmax(data->vars.final_red, obj_i->colour.r), 255);
-	data->vars.final_green = fmin(fmax(data->vars.final_green, obj_i->colour.g), 255);
-	data->vars.final_blue = fmin(fmax(data->vars.final_blue, obj_i->colour.b), 255);
+	data->vars.final_red
+		= fmin(fmax(data->vars.final_red, obj_i->colour.r), 255);
+	data->vars.final_green
+		= fmin(fmax(data->vars.final_green, obj_i->colour.g), 255);
+	data->vars.final_blue
+		= fmin(fmax(data->vars.final_blue, obj_i->colour.b), 255);
 }
 
 // Using the 'Phong reflection model'

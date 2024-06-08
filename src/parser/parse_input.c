@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 19:38:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 13:05:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ static void	init_colour(t_data *data)
 	data->vars.diffuse_intensity = data->light.ratio;
 	data->vars.spec_intensity = 0.2;
 	data->vars.spec_power = 32;
-	data->vars.ambient_red = data->vars.ambient_intensity * data->ambient.colour.r;
-	data->vars.ambient_green = data->vars.ambient_intensity * data->ambient.colour.g;
-	data->vars.ambient_blue = data->vars.ambient_intensity * data->ambient.colour.b;
+	data->vars.ambient_red = data->vars.ambient_intensity
+		* data->ambient.colour.r;
+	data->vars.ambient_green = data->vars.ambient_intensity
+		* data->ambient.colour.g;
+	data->vars.ambient_blue = data->vars.ambient_intensity
+		* data->ambient.colour.b;
 }
 
 /**
@@ -105,28 +108,6 @@ static void	check_file_type(char *arg)
 	error_msg("wrong file type");
 }
 
-void	init_mouse_map(t_data *data)
-{
-	int16_t		**map;
-	uint32_t	i;
-
-	i = 0;
-	data->mouse.window_h = HEIGHT;
-	data->mouse.window_w = WIDTH;
-	data->mouse.selected = false;
-	if (data->mouse.mouse_map != NULL)
-		error_msg("map failure");
-	map = map_malloc((data->mouse.window_h + 1) * sizeof(int16_t *));
-	data->mouse.mouse_map = map;
-	while (i < data->mouse.window_h)
-	{
-		map[i] = map_malloc(data->mouse.window_w * sizeof(int16_t));
-		i++;
-	}
-	map[i] = NULL;
-	data->mouse.mouse_map = map;
-}
-
 void	parse_input(int argc, char **argv, t_data *data)
 {
 	int		file;
@@ -135,7 +116,7 @@ void	parse_input(int argc, char **argv, t_data *data)
 	ft_bzero(data, sizeof(t_data));
 	if (argc != 2)
 		error_msg("wrong number of arguments");
-	// data->i_am = -1;
+	data->i_am = -1;
 	check_file_type(argv[1]);
 	file = open(argv[1], O_RDONLY, 0644);
 	if (file == -1)
