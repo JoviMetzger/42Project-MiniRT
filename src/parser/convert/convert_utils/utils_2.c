@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/01 19:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 13:54:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 15:58:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	free_lights(t_data *data)
 			i++;
 		}
 	}
+	free(data->lightS);
 }
 
 int	count_lights(char **arr)

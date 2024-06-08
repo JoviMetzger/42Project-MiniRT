@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 13:45:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 16:01:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,11 @@ static t_lightS	*light_malloc(t_data *data, char **arr)
 	data->lightS[data->lights_i] = (t_lightS *)malloc(sizeof(t_lightS));
 	if (!data->lightS[data->lights_i])
 	{
-		free_objects(data);
+		free_lights(data);
 		free_arr_error("parser error", arr);
 	}
 	ft_bzero(data->lightS[data->lights_i], sizeof(t_lightS));
 	return (data->lightS[data->lights_i]);
-}
-
-static	void	init_lights(t_data *data, char **arr)
-{
-	data->lightS[data->lights_i] = light_malloc(data, arr);
-	data->lights_i++;
 }
 
 void	convert_cap_input(t_data *data, char **arr, int count)
@@ -76,13 +70,21 @@ void	convert_cap_input(t_data *data, char **arr, int count)
 			|| data->type == E_HASH || data->type == E_TRIANGLE)
 			i++;
 		else if (data->type == 0 || data->type > 9)
+		{
+			// free_lights(data);
 			free_arr_error("parser error", arr);
+		}
 		if (data->type == E_AMBIENT || data->type == E_LIGHT
 			|| data->type == E_CAMERA)
 		{
 			if (data->type == E_LIGHT)
-				init_lights(data, arr);
-			convert_element(arr, data, i);
+			{	
+				data->lightS[data->lights_i] = light_malloc(data, arr);
+				convert_element(arr, data, i);
+				data->lights_i++;
+			}
+			else
+				convert_element(arr, data, i);
 			i++;
 		}
 	}

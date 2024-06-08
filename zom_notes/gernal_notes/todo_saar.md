@@ -27,5 +27,5 @@
 
  - sphere stretching
 
- - new stuff for parser?
+ - lights array in parser 
 

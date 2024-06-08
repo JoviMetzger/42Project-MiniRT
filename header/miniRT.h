@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:02:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 15:45:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ typedef struct s_data
 	int				objs_i;
 	t_camera		camera;
 	t_ambient		ambient;
-	t_light			light; // remove
+	// t_light			light; // remove
 	int				lights_i;
 	t_lightS		**lightS;
 	t_ray			ray;

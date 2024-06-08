@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 20:43:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 17:13:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 15:08:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	coord_light(t_data *data, double x, double y, double z)
 {
-	data->light.place.x = x;
-	data->light.place.y = y;
-	data->light.place.z = z;
+	data->lightS[data->lights_i]->place.x = x;
+	data->lightS[data->lights_i]->place.y = y;
+	data->lightS[data->lights_i]->place.z = z;
 }
 
 void	coord_camera(t_data *data, double x, double y, double z)

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/07 15:31:19 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/08 16:05:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	ft_key_action(mlx_key_data_t keydata, t_data *data)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(data->mlx);
-		mlx_terminate(data->mlx);
-		free_objects(data);
+		// mlx_terminate(data->mlx);
+		// free_objects(data);
 	}
 	if (data->mouse.selected == true && mlx_is_key_down(data->mlx, MLX_KEY_UP))
 	{
