@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/18 18:03:34 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/08 13:43:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int			check_capital(char *str, int type);
 // ----------- /convert/ ----------- //
 
 // --- convert --- //
-void		convert_cap_input(t_data *data, char **arr);
+void		convert_cap_input(t_data *data, char **arr, int count);
 void		convert_obj_input(t_data *data, char **arr, int count);
 
 // --- convert_caps --- //
@@ -85,7 +85,6 @@ int			sort_l(char **elem_str, t_data *data);
 int			sort_c(char **elem_str, t_data *data);
 
 // --- convert_other --- //
-char		*give_null(char *str);
 int			sort_tr(char **elem_str, t_data *data);
 int			sort_pl(char **elem_str, t_data *data);
 int			sort_sp(char **elem_str, t_data *data);
@@ -134,6 +133,13 @@ int			check_neg(char *str, int i);
 int			coord_valid(int c);
 int			ratio_valid(int c);
 int			rgb_valid(int c);
+
+// --- convert_utils_2 --- //
+t_lightS	**lt_malloc(t_data *data, char **arr, int count);
+void		free_lights(t_data *data);
+int			count_lights(char **arr);
+char		*give_null(char *str);
+void		cyl_cals(t_data *data);
 
 // --- is_funcs --- //
 int			is_valid(int c);

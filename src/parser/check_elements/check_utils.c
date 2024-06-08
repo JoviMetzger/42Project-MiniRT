@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 17:30:17 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/10 14:03:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/14 17:21:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	check_cy(char *str)
 	return (0);
 }
 
-int		check_tr(char *str)
+int	check_tr(char *str)
 {
 	int		i;
 

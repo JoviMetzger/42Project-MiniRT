@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/07 18:07:29 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/08 14:21:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,26 @@ int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b)
 	return (b << 8 | g << 16 | r << 24 | a);
 }
 
-// static void	ft_resize(int32_t width, int32_t height, void *param)
+// void ft_put_image(t_data *data)
 // {
-// 	t_data	*data;
+// 	uint32_t	colour;
+// 	t_hit_data	hit;
+// 	int			x = 0;
+// 	int			y = 0;
 
-// 	data = (t_data *)param;
-// 	data->mlx->width = width;
-// 	data->mlx->height = height;
+// 	while (y < data->mlx->height)
+// 	{
+// 		while (x < data->mlx->width)
+// 		{
+// 			data->ray = ft_create_ray(data, x, y);
+// 			colour = ft_calculate_colour(data, &hit, data->ray);
+// 			mlx_put_pixel(data->image, x, y, colour);
+// 			x++;
+// 		}
+// 		x = 0;
+// 		y++;
+// 	}
+// 	// puts("DONE");
 // }
 
 
@@ -102,7 +115,7 @@ void init_LIGHTS(t_lightS *two)
  */
 void	ft_put_image(t_data *data)
 {
-	t_obj_hit	obj_hit;
+	t_hit_data	obj_hit;
 	uint32_t	colour;
 	int			y;
 	int			x;

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:02:37 by smclacke      ########   odam.nl         */
+/*   Created: 2024/03/08 14:43:34 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/06/08 14:23:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <float.h> // apparently invalid by norm
 # include <math.h>
 # include <limits.h>
 
@@ -35,12 +36,11 @@
 # define WIDTH 1900
 # define HEIGHT 1700
 
-// --- Math stuff ---
+// Math stuff
+// This is a constant representing the value of pi.
 # define M_PI 3.14159265358979323846
 # define EPSILON 0.000001
-# define DBL_MAX 1.79769e+308
 
-// --- Enum ---
 // Element type enums, includes space for parser
 typedef enum e_type
 {
@@ -53,45 +53,69 @@ typedef enum e_type
 	E_SPACE = 7,
 	E_HASH = 8,
 	E_TRIANGLE = 9
-}	t_type;
+}				t_type;
 
 // --- Structs ---
 // -------------------------------------------------------------
 // Vector - position - coordinates
-//		x-axis (left-right)
-//		y-axis (up-down)
-//		z-axis (forward-back forwrd)
 typedef struct s_vec3
 {
-	double	x;
-	double	y;
-	double	z;
+	double	x; // x-axis (left-right)
+	double	y; // y-axis (up-down)
+	double	z; // z-axis (forward-back forwrd)  
 }	t_vec3;
 
+// -------------------------------------------------------------
+// For getting colour purposes..
+typedef	struct s_colour_vars
+{
+	double		ambient_intensity;
+	double		diffuse_intensity;
+	double		spec_intensity;
+	double		spec_power;
+	t_vec3		inter_point;
+	t_vec3		normal;
+	double		ambient_red;
+	double		ambient_green;
+	double		ambient_blue;
+	double		diffuse_red;
+	double		diffuse_green;
+	double		diffuse_blue;
+	t_vec3		light_dir;
+	double		diffuse_factor;
+	t_vec3		view_dir;
+	t_vec3		reflection_dir;
+	double		spec_factor;
+	double		spec_red;
+	double		spec_green;
+	double		spec_blue;
+	double		final_red;
+	double		final_green;
+	double		final_blue;
+	
+}			t_colour_vars;
 
+// ---------------------------------------------our = get_sphere_colour(data, hit_data, ray, data->objs[i]);
+				// dat----------------
 // Colour - RGB
-// 		r -> red
-// 		g -> green
-// 		b -> blue
 typedef struct s_colour
 {
-	int		r;
-	int		g;
-	int		b;
+	int		r; // redfov
+	int		g; // green
+	int		b; // blue
 }	t_colour;
 
 // -------------------------------------------------------------
 // Struct for camera
-//		fov - field of view
 typedef struct s_camera
 {
 	t_vec3		place;
 	t_vec3		vector;
-	int			fov;
+	int			fov; //field of view
 }	t_camera;
 
 // -------------------------------------------------------------
-// Struct for ambient - constant light source (No spotlight)
+// Struct for ambient - background
 typedef struct ambient
 {
 	t_colour	colour;
@@ -100,19 +124,12 @@ typedef struct ambient
 
 // -------------------------------------------------------------
 // Struct for light
-typedef struct s_light  // RM THIS ONE once it's fixed
-{                       // RM
-	t_colour	colour; // RM
-	t_vec3		place;  // RM
-	double		ratio;  // RM
-}	t_light;            // RM
-
-typedef struct s_lightS // WE need this one // without the s
+typedef struct s_light
 {
 	t_colour	colour;
 	t_vec3		place;
 	double		ratio;
-}	t_lightS;
+}	t_light;
 
 // -------------------------------------------------------------
 // Screen struct
@@ -129,14 +146,12 @@ typedef struct s_screen
 // Mouse movemnet struct
 typedef struct s_mouse
 {
-	mlx_image_t		*highlight_img;
-	int16_t			**mouse_map;
-	uint32_t		window_h;
-	uint32_t		window_w;
-	int				mou_y;
-	int				mou_x;
-	bool			selected;
-}	t_mouse;
+    int16_t		**mouse_map;
+	int 		mouse_y;
+	int			mouse_x;
+	uint32_t	window_h;
+	uint32_t	window_w;
+}   t_mouse;
 
 
 // -------------------------------------------------------------
@@ -156,7 +171,6 @@ typedef struct s_objs
 	t_colour			colour;
 	t_vec3				center;
 	t_vec3				vector;
-	t_vec3				tmp_normal;
 	t_vec3				normal;
 	double				diameter;
 	double				height;
@@ -164,13 +178,9 @@ typedef struct s_objs
 	double				radius;
 	t_vec3				top;
 	t_vec3				base;
-	t_vec3				edge[2];
 	t_vec3				point[3];
 	int					point_flag;
 	mlx_texture_t		*texture;
-	int16_t				i_am;	// what obj num this is, basicly ID	
-	int					i;		// iterate through the different obj patterns (checkerboard, normal ...) -> resrets to 0 after 2 iterations.
-	int					what_pattern; //what patten that object currently has.
 }	t_objs;
 
 // -------------------------------------------------------------
@@ -182,76 +192,29 @@ typedef struct s_hit_data
 	double	b;
 	double	c;
 	double	d;
-	t_vec3	o_c; // origin center
-	t_vec3	c_c; // cross center / perp to cent
-	t_vec3	norm_vec;
 	double	root1;
 	double	root2;
 	t_vec3	hit_pos;
-	t_vec3	to_center;
-	t_vec3	from_center;
-	t_vec3	vector_cross;
 	double	t;
 	double	tmp_t;
 	double	closest_t;
 }	t_hit_data;
 
 // -------------------------------------------------------------
-// Struct for all colour variables (standing alone)
-typedef struct s_colour_vars
-{
-	t_colour	result;
-	t_lightS	*curr_light;
-	t_vec3		intersect_p;
-	t_vec3		normal;
-	t_vec3		ref_dir;
-	t_vec3		view_dir;
-	t_vec3		light_dir;
-	double		ambient_ratio;
-	double		spec_intensity;
-	double		spec_power;
-	double		diff_fact;
-	double		spec_fact;
-	t_colour	ambient;
-	t_colour	diffuse;
-	t_colour	specular;
-	t_colour	base;	
-}	t_colour_vars;
-
-
-// -------------------------------------------------------------
 // Main struct
 typedef struct s_data
 {
-	t_colour_vars	vars;
-	mlx_image_t		*image;
-	mlx_t			*mlx;
-	t_objs			**objs;
-	t_hit_data		*hit_data;
-	int				objs_i;
-	t_camera		camera;
-	t_ambient		ambient;
-	t_light			light; // remove
-	int				lights_i;
-	t_lightS		**lightS;
-	t_ray			ray;
-	t_screen		screen;
-	t_type			type;	// parser util which gets overwritten for each element, objects do have a type
-	t_mouse			mouse;
-	int16_t			i_am; // what object is currently seleted
+	mlx_image_t	*image;
+	mlx_t		*mlx;
+	t_objs		**objs;
+	int			objs_i;
+	t_camera	camera;
+	t_ambient	ambient;
+	t_light		light;
+	t_screen	screen;
+	t_type		type;		// parser util which gets overwritten for each element, objects do have a type
+	t_mouse		mouse;
 }	t_data;
-
-// -------------------------------------------------------------
-// Struct for the checkerboard variables (standing alone)
-typedef struct s_checkerboard
-{
-	double	theta;
-	double	phi;
-	double	u;
-	double	v;
-	double	square_u;
-	double	square_v;
-}	t_checkerboard;
 
 // --- Functions --- 
 // Window Functions
@@ -261,58 +224,57 @@ void		ft_render(t_data *data);
 
 // Movement Functions
 void		ft_key_action(mlx_key_data_t keydata, t_data *data);
-void		ft_handle_mouse_click(mouse_key_t key, action_t act,
-				modifier_key_t m, void *_data);
+void		ft_handle_mouse_click(mouse_key_t btn, action_t act, modifier_key_t m, void *p);
 void		init_mouse_map(t_data *data);
 
 // Ray Functions
 t_ray		ft_create_ray(t_data *data, int x, int y);
+void		store_ray_matrix(t_data *data);
+void		ft_create_lightray(t_data *data, t_ray *lightray);
 
 // Colour Functions
-uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj);
-t_colour	get_colour(t_data *data, t_hit_data *obj_hit,
-				t_ray ray, t_objs *obj);
-t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
-t_colour	get_base_colour(t_objs *obj, t_colour_vars colour);
-void		add_light(t_colour_vars *colour, t_ray ray);
-void		specular_light(t_colour_vars *colour, t_ray ray);
-void		diffuse_light(t_colour_vars *colour);
+t_colour	get_pl_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
+t_colour	get_sp_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
+t_colour	get_cy_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
+t_colour	get_tr_colour(t_data *data, t_hit_data *hit, t_ray ray, t_objs *obj);
+uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj, t_ray ray);
+t_colour	get_old_colour(t_data *data, t_hit_data *obj, t_ray ray, t_objs *obj_i);
+void		get_colour(t_data *data, t_colour_vars *vars, t_ray ray);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 // Colour Functions Bonus
-t_colour	get_sphere_checkerboard(t_vec3 normal);
+t_colour	get_sphere_checkerboard(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *sphere);
+t_colour	get_sphere_bumpmap(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *sphere);
+
+// Vector Functions
+t_vec3		init_vector(t_screen screen);
 
 // Operators
-t_vec3		plus_vecdub(t_vec3 u, double v);
+t_vec3 		plus_vecdub(t_vec3 u, double v);
 t_vec3		plus(t_vec3 u, t_vec3 v);
 t_vec3		minus(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecvec(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecdub(t_vec3 v, double dub);
 t_vec3		division_vec_dub(t_vec3 v, double dub);
-t_vec3		division_vec_vec(t_vec3 u, t_vec3 v);
+t_vec3		division_vec_vec(t_vec3 u, t_vec3 v); // might remove this
 t_vec3		cross_product(t_vec3 u, t_vec3 v);
-t_vec3		normalize(t_vec3 v);
 double		dot_product(t_vec3 u, t_vec3 v);
 double		length_squared(t_vec3 vec);
+t_vec3		normalize(t_vec3 v);
 double		distance(t_vec3 pnt1, t_vec3 pnt2);
 double		vec_length(t_vec3 v1, t_vec3 v2);
 double		pythagoras(double a, double b);
 double		vec_length(t_vec3 v1, t_vec3 v2);
 
 // Objects Functions
-bool		tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray);
-bool		boop_bottom(t_hit_data *hit, t_objs *cyl, t_ray *ray);
-void		cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit);
-bool		cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray);
-void		set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl);
-bool		bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray);
-bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit);
-bool		intersect_cyl_plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
-bool		intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
-bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit);
-bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit);
-bool		check_closest(t_hit_data *hit);
-bool		quadratic(t_hit_data *hit);
+bool		check_closest(t_hit_data *hit_data);
+bool		quadratic(t_hit_data *hit_data);
+bool		check_caps(t_hit_data *obj, t_objs *cyl, t_ray *ray);
+bool		cut_ends(t_hit_data *obj, t_objs *cyl, t_ray *ray);
+bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit_data);
+bool		intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit_data);
+bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit_data);
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit_data);
 
 #endif

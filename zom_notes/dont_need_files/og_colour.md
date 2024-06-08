@@ -1,5 +1,12 @@
+<<<<<<< HEAD
+t_colour get_cyl_colour(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *cylinder)
+=======
 <<<<<<< HEAD:zom_notes/dont_need_files/og_colour.md
-t_colour get_cyl_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *cylinder)
+<<<<<<< HEAD
+t_colour get_cyl_colour(t_data *data, t_hit_data *obj_hit, t_ray ray, t_objs *cylinder)
+=======
+t_colour get_cyl_colour(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *cylinder)
+>>>>>>> parser
 =======
 /* ************************************************************************** */
 /*                                                                            */
@@ -18,7 +25,11 @@ t_colour get_cyl_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *cyl
 /**
  * @todo norm 
  */
-// t_colour get_cyl_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *cylinder)
+<<<<<<< HEAD
+// t_colour get_cyl_colour(t_data *data, t_hit_data *obj_hit, t_ray ray, t_objs *cylinder)
+=======
+// t_colour get_cyl_colour(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *cylinder)
+>>>>>>> parser
 // {
 //     t_colour result;
 //     double AMBIENT_INTENSITY = data->ambient.ratio; // (0.2)
@@ -27,8 +38,13 @@ t_colour get_cyl_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *cyl
 //     double SPECULAR_POWER = 32;
     
 //     // Using the 'Phong reflection model'
+<<<<<<< HEAD
 // 	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_hit->t));
 // 	t_vec3	normal = normalize(minus(intersection_point, cylinder->center));
+=======
+// 	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, hit_data->t));
+// 	t_vec3	normal = normalize(minus(intersection_point, cylinder->center));
+>>>>>>> parser
 
 // 	// Ambient light contribution
 // 	double ambient_red = AMBIENT_INTENSITY * data->ambient.colour.r;
@@ -72,8 +88,13 @@ t_colour get_cyl_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *cyl
 	
 // }
 
-t_colour get_cyl_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *cylinder) 
+<<<<<<< HEAD
+t_colour get_cyl_colour(t_data *data, t_hit_data *obj_hit, t_ray ray, t_objs *cylinder) 
+=======
+t_colour get_cyl_colour(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *cylinder) 
+>>>>>>> parser
 >>>>>>> putPixel:src/colour/cylinder_colour.c
+>>>>>>> main
 {
     t_colour result;
     t_vec3 intersection_point;
@@ -87,8 +108,18 @@ t_colour get_cyl_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *cyl
     double SPECULAR_POWER = 32;
 
     // Using the 'Phong reflection model'
+<<<<<<< HEAD
     intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_hit->t));
     normal = normalize(minus(intersection_point, cylinder->center));
+=======
+<<<<<<< HEAD
+	t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, hit_data->t));
+	t_vec3	normal = normalize(minus(intersection_point, cylinder->center));
+=======
+    intersection_point = plus(ray.place, mult_vecdub(ray.vector, hit_data->t));
+    normal = normalize(minus(intersection_point, cylinder->center));
+>>>>>>> main
+>>>>>>> parser
 
     // Ambient light contribution
     double ambient_red = AMBIENT_INTENSITY * data->ambient.colour.r;
@@ -123,7 +154,11 @@ t_colour get_cyl_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *cyl
 		int j = 0;
         while (j < data->objs_i) 
 		{
+<<<<<<< HEAD
             if (intersect_sphere(&shadow_ray, data->objs[j], obj_hit) || intersect_plane(&shadow_ray, data->objs[j], obj_hit) || intersect_cylinder(&shadow_ray, data->objs[j], obj_hit)) 
+=======
+            if (intersect_sphere(&shadow_ray, data->objs[j], hit_data) || intersect_plane(&shadow_ray, data->objs[j], hit_data) || intersect_cylinder(&shadow_ray, data->objs[j], hit_data)) 
+>>>>>>> parser
 			{
                 in_shadow = true;
                 break;

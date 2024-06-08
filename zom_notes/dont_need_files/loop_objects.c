@@ -19,7 +19,11 @@
 // DON'T NEED THIS!!!!!
 // // if sphere, intersect, then get sphere colour, then return colour...
 // //
-// void ft_create_intersection(t_data *data, t_obj_hit *obj_hit, t_ray ray)
+<<<<<<< HEAD
+// void ft_create_intersection(t_data *data, t_hit_data *obj_hit, t_ray ray)
+=======
+// void ft_create_intersection(t_data *data, t_hit_data *hit_data, t_ray ray)
+>>>>>>> parser
 // {
 //     int i = 0;
 
@@ -30,7 +34,11 @@
 
 // if sphere, intersect, then get sphere colour, then return colour...
 //
-// void ft_create_intersection(t_data *data, t_obj_hit *obj_hit, t_ray ray)
+<<<<<<< HEAD
+// void ft_create_intersection(t_data *data, t_hit_data *obj_hit, t_ray ray)
+=======
+// void ft_create_intersection(t_data *data, t_hit_data *hit_data, t_ray ray)
+>>>>>>> parser
 // {
 //     int i = 0;
 
@@ -40,18 +48,30 @@
 // 	{
 // 		if (data->objs[i]->type == E_SPHERE)
 // 		{
+<<<<<<< HEAD
 //             if (intersect_sphere(&ray, data->objs[i], obj_hit))
+=======
+//             if (intersect_sphere(&ray, data->objs[i], hit_data))
+>>>>>>> parser
 //                 return ;
 // 		}
 //         // // 'if' OR 'if/else if'????
 //         // if (data->objs->type == E_PLANE)
 // 		// {
+<<<<<<< HEAD
 //         //     if (intersect_plane(&ray, &data->objs[i], obj_hit))
+=======
+//         //     if (intersect_plane(&ray, &data->objs[i], hit_data))
+>>>>>>> parser
 //         //         return ;
 // 		// }
 //         // if (data->objs->type == E_CYLINDER)
 // 		// {
+<<<<<<< HEAD
 //         //     if (intersect_cylinder(&ray, &data->objs[i], obj_hit))
+=======
+//         //     if (intersect_cylinder(&ray, &data->objs[i], hit_data))
+>>>>>>> parser
 //         //         return ;
 // 		// }
 //         i++;

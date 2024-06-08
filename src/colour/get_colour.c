@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/07 17:24:13 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/08 14:30:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,25 @@
  *		- Calculate ambient light contribution. (am_ratio * am_colour)
  *		- Initialize result color with ambient light contribution.
  */
-static t_colour_vars	init_colour_struct(t_data *data, t_obj_hit *obj_hit,
-				t_ray ray, t_objs *obj)
-{
-	t_colour_vars	colour;
+// static t_colour_vars	init_colour_struct(t_data *data, t_hit_data *obj_hit,
+// 				t_ray ray, t_objs *obj)
+// {
+// 	t_colour_vars	colour;
 
-	colour.ambient_ratio = data->ambient.ratio;
-	colour.spec_intensity = 0.2;
-	colour.spec_power = 32;
-	colour.intersect_p = plus(ray.place, mult_vecdub(ray.vector, obj_hit->t));
-	colour.normal = get_surface_normal(colour.intersect_p, obj);
-	colour.ambient.r = colour.ambient_ratio * data->ambient.colour.r;
-	colour.ambient.g = colour.ambient_ratio * data->ambient.colour.g;
-	colour.ambient.b = colour.ambient_ratio * data->ambient.colour.b;
-	colour.result.r = colour.ambient.r;
-	colour.result.g = colour.ambient.g;
-	colour.result.b = colour.ambient.b;
-	return (colour);
-}
+// 	// colour.ambient_ratio = data->ambient.ratio;
+// 	// colour.spec_intensity = 0.2;
+// 	// colour.spec_power = 32;
+// 	init_colout(data);
+// 	colour.intersect_p = plus(ray.place, mult_vecdub(ray.vector, obj_hit->t));
+// 	colour.normal = get_surface_normal(colour.intersect_p, obj);
+// 	// colour.ambient.r = colour.ambient_ratio * data->ambient.colour.r;
+// 	// colour.ambient.g = colour.ambient_ratio * data->ambient.colour.g;
+// 	// colour.ambient.b = colour.ambient_ratio * data->ambient.colour.b;
+// 	// colour.result.r = colour.ambient.r;
+// 	// colour.result.g = colour.ambient.g;
+// 	// colour.result.b = colour.ambient.b;
+// 	return (colour);
+// }
 
 // Calculation of the diffuse light
 void	diffuse_light(t_colour_vars *colour)
@@ -81,7 +82,7 @@ void	specular_light(t_colour_vars *colour, t_ray ray)
  *			 (newColour += diffuse_colour * base_colour / 255 + specular_colour)
  */
 static void	shadow_calculation(t_data *data, t_colour_vars *colour,
-		t_ray ray, t_obj_hit *obj_hit)
+		t_ray ray, t_hit_data *obj_hit)
 {
 	t_ray	shadow_ray;
 	bool	in_shadow;
@@ -124,13 +125,18 @@ static void	shadow_calculation(t_data *data, t_colour_vars *colour,
  *		  This ensurs that the value is not less than 0 and not bigger than 255. 
  *		  So basiclly controls the overflow/underflow of RGB colour range.
  */
-t_colour	get_colour(t_data *data, t_obj_hit *obj_hit, t_ray ray, t_objs *obj)
+t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_ray ray, t_objs *obj)
 {
 	t_colour_vars	colour;
 	int				j;
 
 	j = -1;
-	colour = init_colour_struct(data, obj_hit, ray, obj);
+	colour = data->vars;
+	// init_colour(data);
+	colour.intersect_p = plus(ray.place, mult_vecdub(ray.vector, obj_hit->t));
+	// colour.normal = get_surface_normal(colour.intersect_p, obj);
+	colour.normal = obj->normal;
+	// colour = init_colour_struct(data, obj_hit, ray, obj);
 	colour.base = get_base_colour(obj, colour);
 	colour.result.r = colour.ambient.r * colour.base.r / 255;
 	colour.result.g = colour.ambient.g * colour.base.g / 255;

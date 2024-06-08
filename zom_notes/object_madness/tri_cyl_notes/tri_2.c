@@ -22,7 +22,7 @@ double			triangle_intersection(t_p3 o, t_p3 d, t_figures *lst)
 
 
 // does not hit triangle
-bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *obj_hit)
 {
 	t_vec3	edge1;
 	t_vec3	edge2;
@@ -62,7 +62,7 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
 
 
 // does hit
-bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *obj_hit)
 {
 	t_vec3	edge1;
 	t_vec3	edge2;
@@ -108,7 +108,7 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
 
 
 // does hit // mix of two above
-bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
+bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *obj_hit)
 {
 	t_vec3	edge1;
 	t_vec3	edge2;
@@ -172,7 +172,7 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
 //---------------- total mess ------------//
 
 
-// bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
+// bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *obj_hit)
 // {
 // 	t_vec3	vec1 = tri->point1;
 // 	t_vec3	vec2 = tri->point2;
@@ -261,7 +261,7 @@ bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
 // 	return (true);
 // }
 
-// bool		intersect_triangle(t_ray *ray, t_objs *tri, t_obj_hit *obj_hit)
+// bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *obj_hit)
 // {
 // 	t_vec3	vec1;
 // 	t_vec3	vec2;

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/19 14:57:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 17:17:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/30 15:18:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_num(int c)
 
 int	ft_isspace(int c)
 {
-	if (c == ' ' || c == '\t' || c == '\v' || c == '\n' || c == '\0')
+	if (c == ' ' || c == '\n' || c == '\0')
 		return (c);
 	return (0);
 }

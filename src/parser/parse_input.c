@@ -6,22 +6,24 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/18 18:08:54 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/08 14:26:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/parser.h"
 
-int	handle_texture(t_data *data, char *str)
+static void	init_colour(t_data *data)
 {
-	mlx_texture_t	*texture;
-
-	str = give_null(str);
-	texture = mlx_load_png(str);
-	if (!texture)
-		return (0);
-	data->objs[data->objs_i]->texture = texture;
-	return (1);
+	ft_bzero(&data->vars, sizeof(t_colour_vars));
+	data->vars.ambient_ratio = data->ambient.ratio;
+	data->vars.spec_intensity = 0.2;
+	data->vars.spec_power = 32;
+	data->vars.ambient.r = data->vars.ambient_ratio * data->ambient.colour.r;
+	data->vars.ambient.g = data->vars.ambient_ratio * data->ambient.colour.g;
+	data->vars.ambient.b = data->vars.ambient_ratio * data->ambient.colour.b;
+	data->vars.result.r = data->vars.ambient.r;
+	data->vars.result.g = data->vars.ambient.g;
+	data->vars.result.b = data->vars.ambient.b;
 }
 
 /**
@@ -41,11 +43,16 @@ int	handle_texture(t_data *data, char *str)
 static void	parse_array(t_data *data, char **arr)
 {
 	int			obj_count;
+	int			light_count;
 
 	check_elements(arr);
 	obj_count = validate_elems(arr);
-	convert_cap_input(data, arr);
+	light_count = count_lights(arr);
+	if (light_count == 0)
+		return ;
+	convert_cap_input(data, arr, light_count);
 	convert_obj_input(data, arr, obj_count);
+	init_colour(data);
 }
 
 /**
@@ -102,28 +109,6 @@ static void	check_file_type(char *arg)
 		i++;
 	}
 	error_msg("wrong file type");
-}
-
-void	init_mouse_map(t_data *data) 
-{
-	int16_t	**map;
-	uint32_t	i;
-
-	i = 0;
-	data->mouse.window_h = HEIGHT;
-	data->mouse.window_w = WIDTH;
-	data->mouse.selected = false;
-	if (data->mouse.mouse_map != NULL)
-		error_msg("map failure");
-	map = map_malloc((data->mouse.window_h + 1) * sizeof(int16_t *));
-	data->mouse.mouse_map = map;
-	while (i < data->mouse.window_h)
-	{
-		map[i] = map_malloc(data->mouse.window_w  * sizeof(int16_t));
-		i++;
-	}
-	map[i] = NULL;
-	data->mouse.mouse_map = map;
 }
 
 void	parse_input(int argc, char **argv, t_data *data)

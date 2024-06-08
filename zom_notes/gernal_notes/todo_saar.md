@@ -1,27 +1,31 @@
 
 
-**1**
-textures....
+
+--- not implementing ---
+
+ - dont do window resizing
+
+ - dont do textures, remove extra code
+
+ - no inside objects (but actually have to for cylinder...?)
 
 
-**2** // KLAAR
-fix resize window shizzle
 
+--- to do now ---
 
-**3**
-- cylinder
-		-try using old cylinder equations to see if i can get capping
+ - cyl normals!
 
-**4**
-- triangle
+ - find any calculation that can happen in parsing and not per pixel
 
+ - fix the cylinder:
+ 		 - cap normal ok?
+		 - when cylinder is turned etc, z vec isnt quite ok
+	++ if 0,1,0 0r 1,0,0 and a little to one side, it's lopsided without straight edges...
+		cutting ends is not quite right for a laying cylinder
 
-**5**
-- check lighting... - colours too intense?
+ - what is cyl vec 1,1,1 supposed to do?
 
-	- if flat 'back wall' facing plane in 0,0,0 black, why gray ?? (light??)
+ - sphere stretching
 
-
-**6**
-- final clean up, remove unused functions, norm and test
+ - new stuff for parser?
 

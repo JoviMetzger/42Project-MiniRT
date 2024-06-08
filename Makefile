@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/06/06 17:21:44 by jmetzger      ########   odam.nl          #
+#    Updated: 2024/06/08 14:26:53 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,9 @@ INPUT_FILE		= images_rt/parse_me.rt
 CC 				= cc
 CFLAGS 			= -Wall -Wextra
 CFLAGS			+= -Werror
-CFLAGS			+= -g -fsanitize=address
-CFLAGS			+= -Ofast -flto
+# CFLAGS			+= -g -fsanitize=address
+# CFLAGS			+= -Ofast -flto -O3
+CFLAGS			+= -O3 -flto
 MAKEFLAGS		= --no-print-directory
 
 # Libraries
@@ -47,6 +48,7 @@ SRCS			= main.c											\
 					colour/get_colour.c 							\
 					objects/sphere.c 								\
 					objects/plane.c 								\
+					objects/cyl_caps.c 								\
 					objects/cylinder.c 								\
 					objects/triangle.c 								\
 					objects/quad.c 									\
@@ -66,16 +68,18 @@ SRCS			= main.c											\
 					parser/convert/convert_utils/add_vec.c			\
 					parser/convert/convert_utils/add_info.c			\
 					parser/convert/convert_utils/convert_utils.c	\
+					parser/convert/convert_utils/utils_2.c			\
 					parser/convert/convert_utils/is_funcs.c			\
 					parser/convert/convert_utils/is_funcs_2.c		\
 					parser/convert/convert_utils/is_funcs_3.c		\
 					parser/validate/validate.c						\
 					parser/validate/valid_ratio.c					\
 					parser/parse_input.c							\
+					parser/parse_mouse.c							\
 					parser/parser_free.c							\
 					parser/parser_error.c							\
 					parser/parser_utils.c							\
-					
+
 
 SRC_DIR			= src
 SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))

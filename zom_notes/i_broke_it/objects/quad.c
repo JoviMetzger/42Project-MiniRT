@@ -6,47 +6,43 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/15 20:17:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:13:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/21 17:54:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-bool	check_closest(t_hit_data *hit)
+bool	check_closest(t_hit_data *hit_data)
 {
-	if (hit->t < hit->closest_t)
+	if (hit_data->t < hit_data->closest_t)
 	{
-		hit->closest_t = hit->t;
+		hit_data->closest_t = hit_data->t;
 		return (true);
 	}
 	return (false);
 }
 
-bool	quadratic(t_hit_data *hit)
+/**
+ * @return true - intersection found
+ * @return false - no intersection found
+ */
+bool	quadratic(t_hit_data *hit_data)
 {
-	double	tmp;
-
-	hit->d = hit->b * hit->b - 4 * hit->a * hit->c;
-	if (hit->d < 0)
+	hit_data->d = hit_data->b * hit_data->b - 4 * hit_data->a * hit_data->c;
+	if (hit_data->d < 0)
 		return (false);
 	else
 	{
-		hit->d = sqrt(hit->d);
-		hit->root1 = (-hit->b - hit->d) / (2.0 * hit->a);
-		hit->root2 = (-hit->b + hit->d) / (2.0 * hit->a);
-		if (hit->root1 > hit->root2)
-		{
-			tmp = hit->root1;
-			hit->root1 = hit->root2;
-			hit->root2 = tmp;
-		}
-		if (hit->root1 < 0)
-		{
-			hit->root1 = hit->root2;
-			if (hit->root1 < 0)
-				return (false);
-		}
-		hit->t = hit->root1;
+		hit_data->root1 = (-hit_data->b
+				+ sqrt(hit_data->d)) / (2.0 * hit_data->a);
+		hit_data->root2 = (-hit_data->b
+				- sqrt(hit_data->d)) / (2.0 * hit_data->a);
+		if (hit_data->root1 < hit_data->root2 && hit_data->root1 > 0)
+			hit_data->t = hit_data->root1;
+		else if (hit_data->root2 > 0)
+			hit_data->t = hit_data->root2;
+		else
+			return (false);
 		return (true);
 	}
 }

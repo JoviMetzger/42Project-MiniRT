@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/16 21:20:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/05/15 15:13:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,13 @@ int	convert_double(t_data *data, char *str, int flag)
 	if (flag == 1)
 	{
 		data->objs[data->objs_i]->diameter = ratio;
+		data->objs[data->objs_i]->radius = ratio / 2;
 		return (1);
 	}
 	else if (flag == 2)
 	{
 		data->objs[data->objs_i]->height = ratio;
+		data->objs[data->objs_i]->height_half = ratio / 2;
 		return (1);
 	}
 	return (0);

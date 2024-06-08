@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 15:37:47 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/08 14:18:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static void	ft_error_handler(int num, t_data *data)
 //		  And a error message will be displayed.
 void	ft_open_window(t_data *data)
 {
-	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
-	data->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", 1);
+	// mlx_set_setting(MLX_STRETCH_IMAGE, 1);
+	data->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", 0);
 	if (!data->mlx)
 	{
 		ft_error_handler(1, data);

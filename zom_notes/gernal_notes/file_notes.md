@@ -25,7 +25,11 @@ cy              50.0,0.0,20.6       0.0,0.0,1.0     14.2     21.42   10,0,255
 cy              50.0,0.0,20.6       0.0,0.0,1.0     14.2     21.42   10,0,255
 cy              50.0,0.0,20.6       0.0,0.0,1.0     14.2     21.42   10,0,255
 
-void ft_create_intersection(t_data *data, t_obj_hit *obj_hit, t_ray ray)
+<<<<<<< HEAD
+void ft_create_intersection(t_data *data, t_hit_data *obj_hit, t_ray ray)
+=======
+void ft_create_intersection(t_data *data, t_hit_data *hit_data, t_ray ray)
+>>>>>>> parser
 {
     int i = 0;
 
@@ -33,18 +37,30 @@ void ft_create_intersection(t_data *data, t_obj_hit *obj_hit, t_ray ray)
     {
 		if (data->objs->type == E_SPHERE)
 		{
+<<<<<<< HEAD
             if (intersect_sphere(&ray, &data->objs[i], obj_hit))
+=======
+            if (intersect_sphere(&ray, &data->objs[i], hit_data))
+>>>>>>> parser
                 return ;
 		}
         // // 'if' OR 'if/else if'????
         // if (data->objs->type == E_PLANE)
 		// {
+<<<<<<< HEAD
         //     if (intersect_plane(&ray, &data->objs[i], obj_hit))
+=======
+        //     if (intersect_plane(&ray, &data->objs[i], hit_data))
+>>>>>>> parser
         //         return ;
 		// }
         // if (data->objs->type == E_CYLINDER)
 		// {
+<<<<<<< HEAD
         //     if (intersect_cylinder(&ray, &data->objs[i], obj_hit))
+=======
+        //     if (intersect_cylinder(&ray, &data->objs[i], hit_data))
+>>>>>>> parser
         //         return ;
 		// }
         i++;
@@ -61,7 +77,11 @@ void ft_create_intersection(t_data *data, t_obj_hit *obj_hit, t_ray ray)
 void ft_put_image(t_data *data)
 {
 	t_ray ray;
-	t_obj_hit obj_hit; // maybe we don't need this. -> can add "a,b,c,d,root1,root2,t" in objs struct
+<<<<<<< HEAD
+	t_hit_data obj_hit; // maybe we don't need this. -> can add "a,b,c,d,root1,root2,t" in objs struct
+=======
+	t_hit_data hit_data; // maybe we don't need this. -> can add "a,b,c,d,root1,root2,t" in objs struct
+>>>>>>> parser
 	uint32_t colour;
 	int y = 0;
 	int x = 0;
@@ -71,8 +91,13 @@ void ft_put_image(t_data *data)
 		while (y < data->mlx->height)
 		{ 
 			ray = ft_create_ray(data, x ,y);
+<<<<<<< HEAD
 			ft_create_intersection(data, &obj_hit, ray);			
 			colour = ft_calculate_colour(data, &obj_hit, ray); // eVerYTinG iN heRE iS jUSt ME gOiNg "hhhUUUUUhhhhhh?????????????" -> aka. cat meme (https://www.youtube.com/watch?v=xVWeRnStdSA)
+=======
+			ft_create_intersection(data, &hit_data, ray);			
+			colour = ft_calculate_colour(data, &hit_data, ray); // eVerYTinG iN heRE iS jUSt ME gOiNg "hhhUUUUUhhhhhh?????????????" -> aka. cat meme (https://www.youtube.com/watch?v=xVWeRnStdSA)
+>>>>>>> parser
 			mlx_put_pixel(data->image, x, y, colour);
 			y++;
 		}
