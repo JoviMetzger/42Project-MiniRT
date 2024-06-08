@@ -6,38 +6,38 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/01 19:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 15:58:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 18:46:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../header/parser.h"
 
-t_lightS	**lt_malloc(t_data *data, char **arr, int count)
+t_light	**lt_malloc(t_data *data, char **arr, int count)
 {
-	data->lights_i = 0;
-	data->lightS = (t_lightS **)malloc(sizeof(t_lightS *) * (count + 1));
-	if (!data->lightS)
+	data->light_i = 0;
+	data->light = (t_light **)malloc(sizeof(t_light *) * (count + 1));
+	if (!data->light)
 		free_arr_error("parser error", arr);
-	return (data->lightS);
+	return (data->light);
 }
 
-void	free_lights(t_data *data)
+void	free_light(t_data *data)
 {
 	int		i;
 
 	i = 0;
-	if (data->lightS && data->lightS[i])
+	if (data->light && data->light[i])
 	{
-		while (data->lightS[i])
+		while (data->light[i])
 		{
-			free(data->lightS[i]);
+			free(data->light[i]);
 			i++;
 		}
 	}
-	free(data->lightS);
+	free(data->light);
 }
 
-int	count_lights(char **arr)
+int	count_light(char **arr)
 {
 	int	i;
 	int	type;
@@ -55,7 +55,7 @@ int	count_lights(char **arr)
 			count++;
 		i++;
 	}
-	if (count > 3)
+	if (count > 4)
 		return (0);
 	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 15:45:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 18:46:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,12 @@ typedef struct s_light  // RM THIS ONE once it's fixed
 	double		ratio;  // RM
 }	t_light;            // RM
 
-typedef struct s_lightS // WE need this one // without the s
+typedef struct s_light // WE need this one // without the s
 {
 	t_colour	colour;
 	t_vec3		place;
 	double		ratio;
-}	t_lightS;
+}	t_light;
 
 // -------------------------------------------------------------
 // Screen struct
@@ -201,7 +201,7 @@ typedef struct s_hit_data
 typedef struct s_colour_vars
 {
 	t_colour	result;
-	t_lightS	*curr_light;
+	t_light	*curr_light;
 	t_vec3		intersect_p;
 	t_vec3		normal;
 	t_vec3		ref_dir;
@@ -232,8 +232,8 @@ typedef struct s_data
 	t_camera		camera;
 	t_ambient		ambient;
 	// t_light			light; // remove
-	int				lights_i;
-	t_lightS		**lightS;
+	int				light_i;
+	t_light		**light;
 	t_ray			ray;
 	t_screen		screen;
 	t_type			type;	// parser util which gets overwritten for each element, objects do have a type

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 15:19:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 18:46:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	sort_l(char **elem_str, t_data *data)
 	ratio = ft_atof(elem_str[2]);
 	if (!is_valid_light(ratio))
 		return (par_err("invalid: Light: light ratio | [0.0,1.0]"));
-	data->lightS[data->lights_i]->ratio = ratio;
+	data->light[data->light_i]->ratio = ratio;
 	if (!is_rgb(elem_str[3], 0, 0))
 		return (par_err("invalid: Light: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[3]))

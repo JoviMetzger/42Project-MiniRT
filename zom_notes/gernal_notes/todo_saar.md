@@ -27,5 +27,5 @@
 
  - sphere stretching
 
- - lights array in parser 
+ - light array in parser 
 

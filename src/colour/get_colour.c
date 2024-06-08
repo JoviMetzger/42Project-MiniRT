@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 15:55:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 18:46:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,12 @@ static void	shadow_calculation(t_data *data, t_colour_vars *colour,
 /*	STEP 3. Compute a color for the closest intersection point.
  *
  *	This function uses the 'Phong reflection model' for each object.
- *	Including multiple lights and creating shadows.
+ *	Including multiple light and creating shadows.
  *		- Initializing colour_vars.
  *		- Initializing the base colour of the object.
  *		- Initializing the result of the colour with ambient light contribution.
  *		  (colour = ambient * base / 255)
- *		- Goes through all the different lights 
+ *		- Goes through all the different light 
  *		  and does the shadow_calculation on each object for each light.
  *		- Clamp final values to [0, 255]. 
  *		  This ensurs that the value is not less than 0 and not bigger than 255. 
@@ -133,18 +133,15 @@ t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_ray ray, t_objs *obj)
 
 	j = -1;
 	colour = data->vars;
-	// init_colour(data);
 	colour.intersect_p = plus(ray.place, mult_vecdub(ray.vector, obj_hit->t));
-	// colour.normal = get_surface_normal(colour.intersect_p, obj);
 	colour.normal = obj->normal;
-	// colour = init_colour_struct(data, obj_hit, ray, obj);
 	colour.base = get_base_colour(obj, colour);
 	colour.result.r = colour.ambient.r * colour.base.r / 255;
 	colour.result.g = colour.ambient.g * colour.base.g / 255;
 	colour.result.b = colour.ambient.b * colour.base.b / 255;
-	while (++j < data->lights_i)
+	while (++j < data->light_i)
 	{
-		colour.curr_light = data->lightS[j];
+		colour.curr_light = data->light[j];
 		shadow_calculation(data, &colour, ray, obj_hit);
 	}
 	colour.result.r = fmin(255, fmax(0, colour.result.r));
