@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 13:45:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 13:43:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int			check_capital(char *str, int type);
 // ----------- /convert/ ----------- //
 
 // --- convert --- //
-void		convert_cap_input(t_data *data, char **arr);
+void		convert_cap_input(t_data *data, char **arr, int count);
 void		convert_obj_input(t_data *data, char **arr, int count);
 
 // --- convert_caps --- //
@@ -135,6 +135,9 @@ int			ratio_valid(int c);
 int			rgb_valid(int c);
 
 // --- convert_utils_2 --- //
+t_lightS	**lt_malloc(t_data *data, char **arr, int count);
+void		free_lights(t_data *data);
+int			count_lights(char **arr);
 char		*give_null(char *str);
 void		cyl_cals(t_data *data);
 

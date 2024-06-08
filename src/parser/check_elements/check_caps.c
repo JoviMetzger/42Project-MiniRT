@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:25:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/04/15 19:46:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 13:15:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	check_cap_valid(char **arr, int type)
 
 	i = 0;
 	flag = 0;
+	if (type == 'L')
+		return (1);
 	while (arr[i])
 	{
 		if (check_capital(arr[i], type) == 1)

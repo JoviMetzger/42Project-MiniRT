@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:50:09 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/01 19:34:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 13:40:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	free_objects(t_data *data)
 			i++;
 		}
 	}
+	free_lights(data);
 	free_map(data->mouse.mouse_map);
 	free(data->objs);
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/02 20:28:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 13:19:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void init_LIGHTS(t_lightS *one, t_lightS *two, t_lightS *three)
 // 1. Calculate the ray from the “eye” through the pixel,	 -> ft_create_ray();
 // 2. Determine which objects the ray intersects,			 -> ft_create_intersecttions();
 // 3. Compute a color for the closest intersection point.	 -> ft_calculate_colour();
-// void ft_put_image(t_data *data)
-// {
-// 	t_hit_data hit_data;
-// 	uint32_t colour;
-// 	int y = 0;
-// 	int x = 0;
+void ft_put_image(t_data *data)
+{
+	t_hit_data hit_data;
+	uint32_t colour;
+	int y = 0;
+	int x = 0;
 
 	/* 
 	-> NOTE FOR SARAH <-
@@ -61,19 +61,19 @@ void init_LIGHTS(t_lightS *one, t_lightS *two, t_lightS *three)
 	*/
 	// ---------------- RM ------------------------
 
-	// data->lightS = malloc(sizeof(t_lightS)); // Assuming t_light is the type of lightS elements
-	// if (data->lightS == NULL) 
-	// 	return ;
+	data->lightS = malloc(sizeof(t_lightS)); // Assuming t_light is the type of lightS elements
+	if (data->lightS == NULL) 
+		return ;
 	
-	// t_lightS one;
-	// t_lightS two;
-	// t_lightS three;
-	// init_LIGHTS(&one, &two, &three);
+	t_lightS one;
+	t_lightS two;
+	t_lightS three;
+	init_LIGHTS(&one, &two, &three);
 	
-	// data->lightS[0] = &one;
-	// data->lightS[1] = &two;
-	// data->lightS[2] = &three;
-	// data->lights_i = 3;
+	data->lightS[0] = &one;
+	data->lightS[1] = &two;
+	data->lightS[2] = &three;
+	data->lights_i = 3;
 
 	// printf("ADDEDlight: %f %f %f - R: %f - C: %d %d %d\n", data->lightS[0]->place.x, data->lightS[0]->place.y, data->lightS[0]->place.z, data->lightS[0]->ratio, data->lightS[0]->colour.r, data->lightS[0]->colour.g, data->lightS[0]->colour.b);
 	// printf("ADDEDlight: %f %f %f - R: %f - C: %d %d %d\n", data->lightS[1]->place.x, data->lightS[1]->place.y, data->lightS[1]->place.z, data->lightS[1]->ratio, data->lightS[1]->colour.r, data->lightS[1]->colour.g, data->lightS[1]->colour.b);
@@ -81,45 +81,45 @@ void init_LIGHTS(t_lightS *one, t_lightS *two, t_lightS *three)
 
 	// --------------------------------------------
 
-// 	while (y < data->mlx->height)
-// 	{
-// 		while (x < data->mlx->width)
-// 		{ 
-// 			// data->mouse.mouse_map[y][x] = -1;
-// 			data->ray = ft_create_ray(data, x ,y);	
-// 			colour = ft_calculate_colour(data, &hit_data, data->ray);
-// 			mlx_put_pixel(data->image, x, y, colour);
-// 			// data->mouse.mouse_x = x;
-// 			x++;
-// 		}
-// 		data->mouse.mouse_y = y;
-// 		x = 0;
-// 		y++;
-// 	}
-// 	puts("DONE BITCHES!!!!");
-// }
-
-void ft_put_image(t_data *data)
-{
-	uint32_t	colour;
-	t_hit_data	hit;
-	int			x = 0;
-	int			y = 0;
-
 	while (y < data->mlx->height)
 	{
 		while (x < data->mlx->width)
-		{
-			data->ray = ft_create_ray(data, x, y);
-			colour = ft_calculate_colour(data, &hit, data->ray);
+		{ 
+			// data->mouse.mouse_map[y][x] = -1;
+			data->ray = ft_create_ray(data, x ,y);	
+			colour = ft_calculate_colour(data, &hit_data, data->ray);
 			mlx_put_pixel(data->image, x, y, colour);
+			// data->mouse.mouse_x = x;
 			x++;
 		}
+		data->mouse.mouse_y = y;
 		x = 0;
 		y++;
 	}
-	// puts("DONE");
+	puts("DONE BITCHES!!!!");
 }
+
+// void ft_put_image(t_data *data)
+// {
+// 	uint32_t	colour;
+// 	t_hit_data	hit;
+// 	int			x = 0;
+// 	int			y = 0;
+
+// 	while (y < data->mlx->height)
+// 	{
+// 		while (x < data->mlx->width)
+// 		{
+// 			data->ray = ft_create_ray(data, x, y);
+// 			colour = ft_calculate_colour(data, &hit, data->ray);
+// 			mlx_put_pixel(data->image, x, y, colour);
+// 			x++;
+// 		}
+// 		x = 0;
+// 		y++;
+// 	}
+// 	// puts("DONE");
+// }
 
 
 void ft_render(t_data *data)
