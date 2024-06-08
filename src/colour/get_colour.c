@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:30:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/08 14:43:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ static void	shadow_calculation(t_data *data, t_colour_vars *colour,
 	{
 		if (intersect_sphere(&shadow_ray, data->objs[i], obj_hit)
 			|| intersect_plane(&shadow_ray, data->objs[i], obj_hit)
-			|| intersect_cylinder(&shadow_ray, data->objs[i], obj_hit))
+			|| intersect_cylinder(&shadow_ray, data->objs[i], obj_hit)
+			|| intersect_triangle(&shadow_ray, data->objs[i], obj_hit))
 		{
 			in_shadow = true;
 			break ;
