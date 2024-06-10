@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:21:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 18:39:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ t_vec3	ft_reflect(t_vec3 incident, t_vec3 normal)
 				* dot_product(incident, normal))));
 }
 
-void	add_light(t_colour_vars *colour, t_ray ray)
-{
-	diffuse_light(colour);
-	specular_light(colour, ray);
-	colour->result.r += colour->diffuse.r * colour->base.r / 255
-		+ colour->specular.r;
-	colour->result.g += colour->diffuse.g * colour->base.g / 255
-		+ colour->specular.g;
-	colour->result.b += colour->diffuse.b * colour->base.b / 255
-		+ colour->specular.b;
-}
+// void	add_light(t_colour_vars *colour, t_ray ray)
+// {
+// 	diffuse_light(colour);
+// 	specular_light(colour, ray);
+// 	colour->result.r += colour->diffuse.r * colour->base.r / 255
+// 		+ colour->specular.r;
+// 	colour->result.g += colour->diffuse.g * colour->base.g / 255
+// 		+ colour->specular.g;
+// 	colour->result.b += colour->diffuse.b * colour->base.b / 255
+// 		+ colour->specular.b;
+// }

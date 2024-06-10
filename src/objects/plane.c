@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:52:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 16:21:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
 		if (hit->t >= EPSILON)
 		{
 			if (denom < 0)
-				plane->normal = mult_vecdub(plane->vector, -1);
+				plane->normal = mult_vecdub(plane->vector, -1); // check check checkidy check
 			return (check_closest(hit));
 		}
 	}

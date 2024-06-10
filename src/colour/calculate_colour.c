@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/10 15:52:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 18:48:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,17 @@
  *	other wise objects will overlap and won't be dispalyed realistic.
  *		- If no intersection is found, it will return black.
  */
-static uint32_t	get_ret(t_hit_data *hit, t_colour colour)
+static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj)
 {
+	t_colour colour;
+	t_ray ray;
+
+	ray = data->ray;
 	if (hit->closest_t != DBL_MAX)
+	{
+		colour = get_colour(data, hit, ray, obj);
 		return (ft_convert_rgb(colour.r, colour.g, colour.b));
+	}
 	else
 		return (ft_convert_rgb(0, 0, 0));
 }
@@ -30,31 +37,57 @@ static uint32_t	get_ret(t_hit_data *hit, t_colour colour)
  *		- data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = i; 
  *		  is for the mouse_map, so that we can select object.
  */
-static t_colour	do_stuff(t_type type, t_data *data, t_hit_data *hit, int i)
+static void	do_stuff(t_type type, t_data *data, t_hit_data *hit, int i)
 {
+	(void) hit;
+	data->is_shadow = 0;
+	t_ray	shadow_ray;
+	// t_vec3 intersect;
+	
 	if (type == E_SPHERE)
 	{
 		data->objs[i]->i_am = i;
 		data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = i;
-		return (get_colour(data, hit, data->ray, data->objs[i]));
+		// return (get_colour(data, hit, data->ray, data->objs[i]));
 	}
 	if (type == E_PLANE)
 	{
 		data->objs[i]->i_am = i;
 		data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = i;
-		return (get_colour(data, hit, data->ray, data->objs[i]));
+		// return (get_colour(data, hit, data->ray, data->objs[i]));
 	}
 	if (type == E_CYLINDER)
 	{
 		data->objs[i]->i_am = i;
 		data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = i;
-		return (get_colour(data, hit, data->ray, data->objs[i]));
+		// return (get_colour(data, hit, data->ray, data->objs[i]));
 	}
 	else
 	{
+		data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, hit->t));
+		shadow_ray.place = plus(data->vars.intersect_p, mult_vecdub(data->objs[i]->normal, EPSILON));
+		shadow_ray.vector =  normalize(minus(data->light[0]->place, data->vars.intersect_p)); // LATER; colour->curr_light->place
+		
+		// printf("intersect: %f %f %f\n", intersect.x, intersect.y, intersect.z);
+		// printf("shadowR PLACE: %f %f %f\n", shadow_ray.place.x, shadow_ray.place.y, shadow_ray.place.z);
+		// printf("shadowR vector: %f %f %f\n", shadow_ray.vector.x, shadow_ray.vector.y, shadow_ray.vector.z);
+		// exit(0);
+		
+		int j = -1;
+		while (++j < data->objs_i)
+		{
+			if (intersect_sphere(&shadow_ray, data->objs[j], hit)
+				|| intersect_plane(&shadow_ray, data->objs[j], hit)
+				|| intersect_cylinder(&shadow_ray, data->objs[j], hit)
+				|| intersect_triangle(&shadow_ray, data->objs[j], hit))
+			{
+				data->is_shadow = 1;
+				break ;
+			}
+		}
 		data->objs[i]->i_am = i;
 		data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = i;
-		return (get_colour(data, hit, data->ray, data->objs[i]));
+		// return (get_colour(data, hit, data->ray, data->objs[i]));
 	}
 }
 
@@ -68,26 +101,34 @@ static t_colour	do_stuff(t_type type, t_data *data, t_hit_data *hit, int i)
  */
 uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit)
 {
-	t_colour	colour;
+	// t_colour	colour;
 	int			i;
+	t_objs		*obj_tmp;
 
 	i = 0;
 	hit->closest_t = DBL_MAX;
 	while (i < data->objs_i)
 	{
-		if (data->objs[i]->type == E_SPHERE
-			&& intersect_sphere(&data->ray, data->objs[i], hit))
-			colour = do_stuff(E_SPHERE, data, hit, i);
-		if (data->objs[i]->type == E_PLANE
-			&& intersect_plane(&data->ray, data->objs[i], hit))
-			colour = do_stuff(E_PLANE, data, hit, i);
-		if (data->objs[i]->type == E_CYLINDER
-			&& intersect_cylinder(&data->ray, data->objs[i], hit))
-			colour = do_stuff(E_CYLINDER, data, hit, i);
-		if (data->objs[i]->type == E_TRIANGLE
+		// if (data->objs[i]->type == E_SPHERE
+		// 	&& intersect_sphere(&data->ray, data->objs[i], hit))
+		// 	{
+				
+		// 		type = E_SPHERE;
+		// 		do_stuff(E_SPHERE, data, hit, i);
+		// 	}
+		// if (data->objs[i]->type == E_PLANE
+		// 	&& intersect_plane(&data->ray, data->objs[i], hit))
+		// 	do_stuff(E_PLANE, data, hit, i);
+		// if (data->objs[i]->type == E_CYLINDER
+		// 	&& intersect_cylinder(&data->ray, data->objs[i], hit))
+		// 	do_stuff(E_CYLINDER, data, hit, i);
+		if (data->objs[i]->type == E_TRIANGLE	
 			&& intersect_triangle(&data->ray, data->objs[i], hit))
-			colour = do_stuff(E_TRIANGLE, data, hit, i);
+		{
+			obj_tmp = data->objs[i];
+			do_stuff(E_TRIANGLE, data, hit, i);
+		}
 		i++;
 	}
-	return (get_ret(hit, colour));
+	return (get_ret(data, hit, obj_tmp));
 }

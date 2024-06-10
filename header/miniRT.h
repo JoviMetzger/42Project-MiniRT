@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/10 15:20:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 18:39:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,7 @@ typedef struct s_data
 	t_type			type;	// parser util which gets overwritten for each element, objects do have a type
 	t_mouse			mouse;
 	int16_t			i_am; // what object is currently seleted
+	int			is_shadow; // FOR TESTING
 }	t_data;
 
 // -------------------------------------------------------------
@@ -274,9 +275,9 @@ t_colour	get_colour(t_data *data, t_hit_data *obj_hit,
 				t_ray ray, t_objs *obj);
 t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars colour);
-void		add_light(t_colour_vars *colour, t_ray ray);
-void		specular_light(t_colour_vars *colour, t_ray ray);
-void		diffuse_light(t_colour_vars *colour);
+// void		add_light(t_colour_vars *colour, t_ray ray);
+// void		specular_light(t_colour_vars *colour, t_ray ray);
+// void		diffuse_light(t_colour_vars *colour);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 

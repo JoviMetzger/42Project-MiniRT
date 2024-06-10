@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:23:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 16:33:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	sort_tr(char **elem_str, t_data *data)
 		return (par_err("invalid: Triangle: RGB | [0-255]"));
 	vec_obj(data, 0, 0, 1);
 	data->objs[data->objs_i]->normal
-		= normalize(data->objs[data->objs_i]->vector);
+		= normalize(data->objs[data->objs_i]->vector);   // chck chck checkidy check
 	data->objs[data->objs_i]->edge[0]
 		= minus(data->objs[data->objs_i]->point[1],
 			data->objs[data->objs_i]->point[0]);
@@ -68,7 +68,7 @@ int	sort_pl(char **elem_str, t_data *data)
 	if (!convert_vector(data, elem_str[2]))
 		return (par_err("invalid: Plane: 3D vector"));
 	data->objs[data->objs_i]->normal
-		= normalize(data->objs[data->objs_i]->vector);
+		= normalize(data->objs[data->objs_i]->vector); // chck chck checkidy check
 	if (!is_rgb(elem_str[3], 0, 0))
 		return (par_err("invalid: Plane: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[3]))
@@ -119,6 +119,6 @@ int	sort_cy(char **elem_str, t_data *data)
 		return (par_err("invalid: Cylinder: RGB | [0-255]"));
 	cyl_cals(data);
 	data->objs[data->objs_i]->normal
-		= normalize(data->objs[data->objs_i]->vector);
+		= normalize(data->objs[data->objs_i]->vector); // need?
 	return (1);
 }
