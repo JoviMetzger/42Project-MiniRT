@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/10 18:58:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 22:11:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	specular_light(t_colour_vars *colour, t_ray ray)
 		* colour->curr_light->colour.b;
 }
 
-static void	add_light(t_colour_vars *colour, t_ray ray)
+void	add_light(t_colour_vars *colour, t_ray ray)
 {
 	// puts("hi");
 	diffuse_light(colour);
@@ -148,40 +148,43 @@ static void	add_light(t_colour_vars *colour, t_ray ray)
  *		  This ensurs that the value is not less than 0 and not bigger than 255. 
  *		  So basiclly controls the overflow/underflow of RGB colour range.
  */
-t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_ray ray, t_objs *obj)
+t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj)
 {
+	(void)obj_hit;
 	t_colour_vars	colour;
 	int				j;
 
 	j = -1;
-
-	
-	// colour = malloc(sizeof(t_colour_vars));
 	colour = data->vars;
-	colour.intersect_p = plus(ray.place, mult_vecdub(ray.vector, obj_hit->t));
-	colour.normal = obj->normal;
-	colour.base = get_base_colour(obj, colour);
-	colour.result.r = colour.ambient.r * colour.base.r / 255;
-	colour.result.g = colour.ambient.g * colour.base.g / 255;
-	colour.result.b = colour.ambient.b * colour.base.b / 255;
-	colour.curr_light = data->light[0];
-	colour.light_dir = normalize(minus(colour.curr_light->place,
-				colour.intersect_p));
+	data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj_hit->t));
+	data->vars.normal = obj->normal;
+	data->vars.base = get_base_colour(obj, colour);
+	data->vars.result.r = data->vars.ambient.r * data->vars.base.r / 255;
+	data->vars.result.g = data->vars.ambient.g * data->vars.base.g / 255;
+	data->vars.result.b = data->vars.ambient.b * data->vars.base.b / 255;
+	data->vars.curr_light = data->light[0];
+	// data->vars.light_dir = normalize(minus(data->vars.curr_light->place, data->vars.intersect_p));
 	// while (++j < data->light_i)
 	// {
-	// 	colour.curr_light = data->light[j];
-	// 	shadow_calculation(data, &colour, ray, obj_hit);
+	// 	data->vars.curr_light = data->light[j];
+	// 	shadow_calculation(data, &colour, data->ray, obj_hit);
 	// }
-	if (data->is_shadow == 0)
-	{
-		// printf("bool = %i\n", data->is_shadow);
-		// puts("HEK\n");
-		add_light(&colour, ray);
-	}
-	// add_light(&colour, ray);
-
-	colour.result.r = fmin(255, fmax(0, colour.result.r));
-	colour.result.g = fmin(255, fmax(0, colour.result.g));
-	colour.result.b = fmin(255, fmax(0, colour.result.b));
-	return (colour.result);
+	// if (obj->has_shadow == true)
+	// {
+	// 	// puts("oh nooooo");
+	// 	// exit(0);
+	// 	data->vars.result.r = fmin(255, fmax(0, data->vars.result.r));
+	// 	data->vars.result.g = fmin(255, fmax(0, data->vars.result.g));
+	// 	data->vars.result.b = fmin(255, fmax(0, data->vars.result.b));
+	// 	return (data->vars.result);
+	// }
+	// else
+	// {
+		// add_light(&colour, data->ray);
+		data->vars.result.r = fmin(255, fmax(0, data->vars.result.r));
+		data->vars.result.g = fmin(255, fmax(0, data->vars.result.g));
+		data->vars.result.b = fmin(255, fmax(0, data->vars.result.b));
+		return (data->vars.result);
+		
+	// }
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/10 18:39:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 21:52:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ typedef struct s_ray
 typedef struct s_objs
 {
 	t_type				type;
+	double				obj_hit;
+	bool				has_shadow;
 	t_colour			colour;
 	t_vec3				center;
 	t_vec3				vector;
@@ -271,8 +273,8 @@ t_ray		ft_create_ray(t_data *data, int x, int y);
 
 // Colour Functions
 uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj);
-t_colour	get_colour(t_data *data, t_hit_data *obj_hit,
-				t_ray ray, t_objs *obj);
+void		add_light(t_colour_vars *colour, t_ray ray);
+t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj);
 t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars colour);
 // void		add_light(t_colour_vars *colour, t_ray ray);
