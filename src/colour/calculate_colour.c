@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:44:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 15:52:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static t_colour	do_stuff(t_type type, t_data *data, t_hit_data *hit, int i)
 		data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = i;
 		return (get_colour(data, hit, data->ray, data->objs[i]));
 	}
-	else if (type == E_PLANE)
+	if (type == E_PLANE)
 	{
 		data->objs[i]->i_am = i;
 		data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = i;
 		return (get_colour(data, hit, data->ray, data->objs[i]));
 	}
-	else if (type == E_CYLINDER)
+	if (type == E_CYLINDER)
 	{
 		data->objs[i]->i_am = i;
 		data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = i;
@@ -77,24 +77,16 @@ uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit)
 	{
 		if (data->objs[i]->type == E_SPHERE
 			&& intersect_sphere(&data->ray, data->objs[i], hit))
-		{
 			colour = do_stuff(E_SPHERE, data, hit, i);
-		}
 		if (data->objs[i]->type == E_PLANE
 			&& intersect_plane(&data->ray, data->objs[i], hit))
-		{
 			colour = do_stuff(E_PLANE, data, hit, i);
-		}
 		if (data->objs[i]->type == E_CYLINDER
 			&& intersect_cylinder(&data->ray, data->objs[i], hit))
-		{
 			colour = do_stuff(E_CYLINDER, data, hit, i);
-		}
 		if (data->objs[i]->type == E_TRIANGLE
 			&& intersect_triangle(&data->ray, data->objs[i], hit))
-		{
 			colour = do_stuff(E_TRIANGLE, data, hit, i);
-		}
 		i++;
 	}
 	return (get_ret(hit, colour));
