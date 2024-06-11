@@ -6,30 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/11 16:41:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/11 17:46:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-
-		// if (data->objs[j]->obj_hit < DBL_MAX)
-		// {
-		// 	// 
-		// }
-		// // hit->t per obj loop, checking if shadow ray hits
-		// // way of not doing this? + changing hit data? + saving the closest hit/going in order of file array
-// REMEMBER LIGHT ARRAY..
-
-
-// update_shadow_colour
-// change back/cover with ambient lighting
-
 /*	This function checks which object is closer to the camera, 
  *	other wise objects will overlap and won't be dispalyed realistic.
  *		- If no intersection is found, it will return black.
-
- colour = get_colour // colour for this obj, we know is closests
  */
 static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj)
 {
@@ -59,7 +44,6 @@ static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj)
  *		- data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = i; 
  *		  is for the mouse_map, so that we can select object.
  */
-// all the same regardless of obj type
 static t_objs	*update_obj(t_data *data, int obj_i)
 {
 	data->objs[obj_i]->i_am = obj_i;

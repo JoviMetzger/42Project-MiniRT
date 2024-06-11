@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/11 16:34:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/11 17:10:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,7 @@ typedef struct ambient
 	double		ratio;
 }	t_ambient;
 
-// -------------------------------------------------------------
-// Struct for light
-// typedef struct s_light  // RM THIS ONE once it's fixed
-// {                       // RM
-// 	t_colour	colour; // RM
-// 	t_vec3		place;  // RM
-// 	double		ratio;  // RM
-// }	t_light;            // RM
-
-typedef struct s_light // WE need this one // without the s
+typedef struct s_light
 {
 	t_colour	colour;
 	t_vec3		place;
@@ -153,8 +144,6 @@ typedef struct s_ray
 typedef struct s_objs
 {
 	t_type				type;
-	double				obj_hit;
-	bool				has_shadow;
 	t_colour			colour;
 	t_vec3				center;
 	t_vec3				vector;
@@ -184,8 +173,8 @@ typedef struct s_hit_data
 	double	b;
 	double	c;
 	double	d;
-	t_vec3	o_c; // origin center
-	t_vec3	c_c; // cross center / perp to cent
+	t_vec3	o_c;
+	t_vec3	c_c;
 	t_vec3	norm_vec;
 	double	root1;
 	double	root2;
@@ -233,7 +222,6 @@ typedef struct s_data
 	int				objs_i;
 	t_camera		camera;
 	t_ambient		ambient;
-	// t_light			light; // remove
 	int				light_i;
 	t_light			**light;
 	t_ray			ray;
@@ -241,7 +229,6 @@ typedef struct s_data
 	t_type			type;	// parser util which gets overwritten for each element, objects do have a type
 	t_mouse			mouse;
 	int16_t			i_am; // what object is currently seleted
-	int			is_shadow; // FOR TESTING
 }	t_data;
 
 // -------------------------------------------------------------

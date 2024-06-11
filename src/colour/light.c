@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/11 16:33:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/11 16:44:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/11 17:44:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,16 @@ bool check_light(t_data *data, t_objs *obj, t_hit_data *hit)
 {
 	(void) hit;
 	t_ray	shadow_ray;
-	data->is_shadow = 0;
-	obj->has_shadow = 0;
 
 	shadow_ray.place = plus(data->vars.intersect_p, mult_vecdub(obj->normal, EPSILON));
 	shadow_ray.vector = data->vars.light_dir; // LATER; colour->curr_light->place
 
+	/**
+	 * if does not hit object directly, false - leave ambient
+	 *  else true - give light
+	 * 
+	 */
+	
 	// int j = -1;
 	// while (++j < data->objs_i)
 	// {
@@ -46,4 +50,5 @@ bool check_light(t_data *data, t_objs *obj, t_hit_data *hit)
 	// 		}
 	// }
 	return (true);
+	// return (false);
 }
