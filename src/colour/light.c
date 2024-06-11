@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/11 16:33:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/11 21:00:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/11 21:14:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ t_colour give_light(t_data *data)
 		sphere - 15.115867
 		hit pos = 2.968122
 		sphere distance = 15.115867
+
+		hit_pos and t same, so just use t
+
+		wanted to compare obj_t to other objs but obvs dont have the obj_t yet...
 	 */
 bool check_light(t_data *data, t_objs *obj, t_hit_data *hit)
 {
@@ -45,43 +49,15 @@ bool check_light(t_data *data, t_objs *obj, t_hit_data *hit)
 	shadow_ray.place = plus(data->vars.intersect_p, mult_vecdub(obj->normal, EPSILON));
 	shadow_ray.vector = data->vars.light_dir; // LATER; colour->curr_light->place
 
-	/**
-	 * if in the vector of the ray, another object is closer/infront of from the 'ray view'...
-	 * each obj has there own intersect distance stored
-	 */
-	// int	j = -1;
-	// while (++j < data->objs_i)
+	// int	j = 0;
+	// while (j < data->objs_i)
 	// {
-	// 	printf("distance - %f\n", data->objs[j]->distance);
-	// 	printf("t - %f\n", data->objs[j]->obj_t);
-	// 	exit(0);
-	// 	if (data->objs[j]->distance < hit->t)
+	// 	// make a calc for the other objs (only the bit i need), then compare...
+	// 	// if obj is infront = z vector and center point compare to current hit obj
+	// 	// 
+	// 	if (data->objs[j]->obj_t < hit->t)
 	// 		return (false);
+	// 	j++;
 	// }
-	
-	// if ()
-		// return (true);
-	// return (false);
 	return (true);
 }
-
-
-
-
-
-// old stuff from above func	
-	// int j = -1;
-	// while (++j < data->objs_i)
-	// {
-	// 	// if ray does not hit directly - false
-	// 	if (intersect_sphere(&shadow_ray, data->objs[j], hit)
-	// 		|| intersect_plane(&shadow_ray, data->objs[j], hit)
-	// 		|| intersect_cylinder(&shadow_ray, data->objs[j], hit)
-	// 		|| intersect_triangle(&shadow_ray, data->objs[j], hit))
-	// 		{
-	// 			// printf("false\n");
-	// 			return (false);
-	// 		}
-	// }
-	// return (true);
-	// return (false);
