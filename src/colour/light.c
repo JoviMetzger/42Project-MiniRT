@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/11 16:33:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/11 16:40:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/11 16:44:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ bool check_light(t_data *data, t_objs *obj, t_hit_data *hit)
 	// 			return (false);
 	// 		}
 	// }
-	// printf("true\n");
 	return (true);
 }
