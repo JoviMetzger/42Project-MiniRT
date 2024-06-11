@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/10 22:20:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/11 13:18:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static bool check_light(t_data *data, t_objs *obj, t_hit_data *hit)
 	int j = -1;
 	while (++j < data->objs_i)
 	{
-		// does ray hit directly or not?
+		// if ray does not hit directly - false
 		if (intersect_sphere(&shadow_ray, data->objs[j], hit)
 			|| intersect_plane(&shadow_ray, data->objs[j], hit)
 			|| intersect_cylinder(&shadow_ray, data->objs[j], hit)
@@ -62,8 +62,8 @@ static bool check_light(t_data *data, t_objs *obj, t_hit_data *hit)
  */
 static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj)
 {
-	t_colour colour;
-	uint32_t ambient_light;
+	t_colour	colour;
+	uint32_t	ambient_light;
 	t_colour	light;
 
 	if (hit->closest_t != DBL_MAX)
@@ -80,7 +80,7 @@ static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj)
 		}
 		else
 		{
-			puts("here");
+			// puts("here");
 			return (ambient_light);
 		}
 		
@@ -95,29 +95,31 @@ static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj)
  *		- data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = i; 
  *		  is for the mouse_map, so that we can select object.
  */
+// all the same regardless of obj type
 static void	do_stuff(t_type type, t_data *data, t_hit_data *hit, int obj_i)
 {
+	(void) type;
 	(void) hit;
-	if (type == E_SPHERE)
-	{
+	// if (type == E_SPHERE)
+	// {
+	// 	data->objs[obj_i]->i_am = obj_i;
+	// 	data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = obj_i;
+	// }
+	// else if (type == E_PLANE)
+	// {
+	// 	data->objs[obj_i]->i_am = obj_i;
+	// 	data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = obj_i;
+	// }
+	// if (type == E_CYLINDER)
+	// {
+	// 	data->objs[obj_i]->i_am = obj_i;
+	// 	data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = obj_i;
+	// }
+	// else
+	// {
 		data->objs[obj_i]->i_am = obj_i;
 		data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = obj_i;
-	}
-	if (type == E_PLANE)
-	{
-		data->objs[obj_i]->i_am = obj_i;
-		data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = obj_i;
-	}
-	if (type == E_CYLINDER)
-	{
-		data->objs[obj_i]->i_am = obj_i;
-		data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = obj_i;
-	}
-	else
-	{
-		data->objs[obj_i]->i_am = obj_i;
-		data->mouse.mouse_map[data->mouse.mou_y][data->mouse.mou_x] = obj_i;
-	}
+	// }
 }
 
 /*	STEP 2. Determine which objects the ray intersects
@@ -141,25 +143,25 @@ uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit)
 			&& intersect_sphere(&data->ray, data->objs[i], hit))
 		{
 			tmp_obj = data->objs[i];	
-			do_stuff(E_SPHERE, data, hit, i);
+			do_stuff(E_SPHERE, data, hit, i); // remove hit and type + change function name
 		}
 		if (data->objs[i]->type == E_PLANE
 			&& intersect_plane(&data->ray, data->objs[i], hit))
 		{		
 			tmp_obj = data->objs[i];	
-			do_stuff(E_PLANE, data, hit, i);
+			do_stuff(E_PLANE, data, hit, i); // remove hit and type + change function name
 		}
 		if (data->objs[i]->type == E_CYLINDER
 			&& intersect_cylinder(&data->ray, data->objs[i], hit))
 		{		
 			tmp_obj = data->objs[i];	
-			do_stuff(E_CYLINDER, data, hit, i);
+			do_stuff(E_CYLINDER, data, hit, i); // remove hit and type + change function name
 		}
 		if (data->objs[i]->type == E_TRIANGLE	
 			&& intersect_triangle(&data->ray, data->objs[i], hit))
 		{
 			tmp_obj = data->objs[i];
-			do_stuff(E_TRIANGLE, data, hit, i);
+			do_stuff(E_TRIANGLE, data, hit, i); // remove hit and type + change function name
 		}
 		i++;
 	}
