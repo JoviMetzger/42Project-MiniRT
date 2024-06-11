@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/10 21:52:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/11 16:34:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,8 @@ void		add_light(t_colour_vars *colour, t_ray ray);
 t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj);
 t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars colour);
+t_colour 	give_light(t_data *data);
+bool		check_light(t_data *data, t_objs *obj, t_hit_data *hit);
 // void		add_light(t_colour_vars *colour, t_ray ray);
 // void		specular_light(t_colour_vars *colour, t_ray ray);
 // void		diffuse_light(t_colour_vars *colour);

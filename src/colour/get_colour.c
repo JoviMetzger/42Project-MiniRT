@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/11 13:21:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/11 16:39:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,12 @@ void	add_light(t_colour_vars *colour, t_ray ray)
 {
 	diffuse_light(colour);
 	specular_light(colour, ray);
-	// printf("Colour: %d %d %d\n", colour.result.r, colour.result.g, colour.result.b);
 	colour->result.r += colour->diffuse.r * colour->base.r / 255
 		+ colour->specular.r;
 	colour->result.g += colour->diffuse.g * colour->base.g / 255
 		+ colour->specular.g;
 	colour->result.b += colour->diffuse.b * colour->base.b / 255
 		+ colour->specular.b;
-
 }
 
 /*	STEP 3. Compute a color for the closest intersection point.
@@ -73,19 +71,18 @@ void	add_light(t_colour_vars *colour, t_ray ray)
  */
 t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj)
 {
-	(void)obj_hit;
-	t_colour_vars	colour;
 	int				j;
 
 	j = -1;
-	colour = data->vars;
 	data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj_hit->t));
 	data->vars.normal = obj->normal;
-	data->vars.base = get_base_colour(obj, colour);
+	data->vars.base = get_base_colour(obj, data->vars);
 	data->vars.result.r = data->vars.ambient.r * data->vars.base.r / 255;
 	data->vars.result.g = data->vars.ambient.g * data->vars.base.g / 255;
 	data->vars.result.b = data->vars.ambient.b * data->vars.base.b / 255;
 	data->vars.curr_light = data->light[0];
+	data->vars.light_dir = normalize(minus(data->vars.curr_light->place,
+		data->vars.intersect_p));
 	data->vars.result.r = fmin(255, fmax(0, data->vars.result.r));
 	data->vars.result.g = fmin(255, fmax(0, data->vars.result.g));
 	data->vars.result.b = fmin(255, fmax(0, data->vars.result.b));
