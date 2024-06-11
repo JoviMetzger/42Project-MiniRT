@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/11 16:33:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/11 17:44:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/11 19:56:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,15 @@ t_colour give_light(t_data *data)
 	return (data->vars.result);
 }
 
-// check_shadow
+// check_shadow !! light!
+	/**
+	 * if does not hit object directly, false - leave ambient
+	 *  else true - give light
+	 * 
+	 * just check the pixel (+ obj) we know we've hit
+	 * if closest then definitely right obj, just maybe shadow
+	 * 
+	 */
 bool check_light(t_data *data, t_objs *obj, t_hit_data *hit)
 {
 	(void) hit;
@@ -31,11 +39,30 @@ bool check_light(t_data *data, t_objs *obj, t_hit_data *hit)
 	shadow_ray.vector = data->vars.light_dir; // LATER; colour->curr_light->place
 
 	/**
-	 * if does not hit object directly, false - leave ambient
-	 *  else true - give light
-	 * 
+	 * if in the vector of the ray, another object is closer/infront of from the 'ray view'...
+	 * each obj has there own intersect distance stored
 	 */
+	int	j = -1;
+	while (++j < data->objs_i)
+	{
+		printf("distance - %f\n", data->objs[j]->distance);
+		printf("t - %f\n", data->objs[j]->obj_t);
+		exit(0);
+		// if (data->objs[j]->distance < hit->t)
+		// 	return (false);
+	}
 	
+	// if ()
+		// return (true);
+	// return (false);
+	return (true);
+}
+
+
+
+
+
+// old stuff from above func	
 	// int j = -1;
 	// while (++j < data->objs_i)
 	// {
@@ -49,6 +76,5 @@ bool check_light(t_data *data, t_objs *obj, t_hit_data *hit)
 	// 			return (false);
 	// 		}
 	// }
-	return (true);
+	// return (true);
 	// return (false);
-}

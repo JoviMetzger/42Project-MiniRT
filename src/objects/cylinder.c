@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/10 16:30:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/11 19:51:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,10 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 		}
 	}
 	if (hit->tmp_t != DBL_MAX)
+	{
+		cyl->obj_t = hit->tmp_t;
+		cyl->hit_pos = plus(ray->place, mult_vecdub(ray->vector, cyl->obj_t));
 		return (check_closest(hit));
+	}
 	return (false);
 }

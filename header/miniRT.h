@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/11 17:10:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/11 19:53:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,9 @@ typedef struct s_ray
 typedef struct s_objs
 {
 	t_type				type;
+	double				obj_t;
+	t_vec3				hit_pos;
+	double				distance;
 	t_colour			colour;
 	t_vec3				center;
 	t_vec3				vector;
