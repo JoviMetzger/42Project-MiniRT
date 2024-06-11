@@ -3,7 +3,7 @@
 --- to do now ---
 
 !!!
- - are in the light or no function
+ - are in the light or no function - maybe actually save pixels... then check objs closer to the ray for shadows, then draw... talk to jovi... 
  - add light array to new colour calculating shizzle
 
 !!
