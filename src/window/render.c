@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/12 15:33:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/12 17:16:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,20 +156,28 @@ int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b)
 void	ft_put_image(t_data *data)
 {
 	data->pix_i = 0;
-	while (data->pix[data->pix_i]->y < data->height)
+	while (data->pix_i < data->total_pix)
 	{
-		while (data->pix[data->pix_i]->x < data->mlx->width)
-		{
-			data->mouse.mouse_map[data->pix[data->pix_i]->y][data->pix[data->pix_i]->x] = -1;
-			mlx_put_pixel(data->image, data->pix[data->pix_i]->x, data->pix[data->pix_i]->y, data->pix[data->pix_i]->colour);
-			data->mouse.mou_x = data->pix[data->pix_i]->x;
-			data->pix[data->pix_i]->x++;
-		}
-		data->mouse.mou_y = data->pix[data->pix_i]->y;
-		data->pix[data->pix_i]->x = 0;
-		data->pix[data->pix_i]->y++;
+		data->mouse.mouse_map[data->pix[data->pix_i]->y][data->pix[data->pix_i]->x] = -1;
+		mlx_put_pixel(data->image, data->pix[data->pix_i]->x, data->pix[data->pix_i]->y, data->pix[data->pix_i]->colour);
+		data->mouse.mou_x = data->pix[data->pix_i]->x;
+		data->pix_i++;
 	}
+	// puts("DONEE");
 }
+
+// static void	check_pix(t_data *data)
+// {
+// 	int p = 0;
+
+// 	while (p < data->total_pix)
+// 	{
+// 	 	printf("pix[%i] = %i %i  ", p, data->pix[p]->x, data->pix[p]->y);
+// 		printf("pix colour = %d\n", data->pix[p]->colour);
+// 		p++;
+// 	}
+// }
+
 
 /*	In this function the Shazam is happening.
  *	- ft_put_image(); 	-> is the loop that goes pixel by pixel and shoots rays.
@@ -178,6 +186,8 @@ void	ft_put_image(t_data *data)
  */
 void	ft_render(t_data *data)
 {
+	// check_pix(data);
+	// exit(0);
 	ft_put_image(data);
 	mlx_key_hook(data->mlx, (mlx_keyfunc)ft_key_action, data);
 	mlx_mouse_hook(data->mlx, ft_handle_mouse_click, data);

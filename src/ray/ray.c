@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 19:58:29 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/12 17:04:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ t_ray	ft_create_ray(t_data *data, int pos_x, int pos_y)
 	double		img_height;
 
 	screen = data->screen;
-	img_width = data->mlx->width;
-	img_height = data->mlx->height;
+	img_width = data->width; // change from data->mlx-> since not init window yet
+	img_height = data->height;
 	screen.img_ratio = img_height / img_width;
 	screen.viewport_w = 2 * ((pos_x + 0.5) / img_width) - 1;
 	screen.viewport_h = (1 - 2 * ((pos_y + 0.5)

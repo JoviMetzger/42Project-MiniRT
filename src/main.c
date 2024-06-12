@@ -6,12 +6,28 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/12 15:31:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/12 17:19:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/parser.h"
 #include "../header/miniRT.h"
+
+void	free_pixels(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->pix && data->pix[i])
+	{
+		while (data->pix[i])
+		{
+			free(data->pix[i]);
+			i++;
+		}
+	}
+	free(data->pix);
+}
 
 // main function:
 //		- 1. parse_input(); takes the '.rt' file and checks and parses 
@@ -35,5 +51,6 @@ int	main(int argc, char **argv)
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	free_objects(&data);
+	free_pixels(&data);
 	return (EXIT_SUCCESS);
 }
