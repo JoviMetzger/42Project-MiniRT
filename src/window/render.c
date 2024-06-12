@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/10 21:36:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/12 13:04:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void	ft_put_image(t_data *data)
 		{
 			data->mouse.mouse_map[y][x] = -1;
 			data->ray = ft_create_ray(data, x ,y);
-			colour = ft_calculate_colour(data, &obj_hit);
+			colour = ft_calculate_colour(data, &obj_hit); // move to a loop where pixels are saved, give put func the pixels here
 			mlx_put_pixel(data->image, x, y, colour);
 			data->mouse.mou_x = x;
 			x++;
