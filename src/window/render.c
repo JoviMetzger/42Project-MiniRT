@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/12 15:02:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/12 15:33:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b)
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+// OG PUT IMAGE
 /*	This function is the main loop.
  *		- It loops through each pixel and takes these steps for each pixel.
  *		- STEPS:
@@ -150,6 +151,8 @@ int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b)
 // 	}
 // }
 
+// POSSIBLE PUT IMAGE
+// new put image if pixels already pre calculated
 void	ft_put_image(t_data *data)
 {
 	data->pix_i = 0;
@@ -168,39 +171,6 @@ void	ft_put_image(t_data *data)
 	}
 }
 
-static int	do_calcs(t_data *data)
-{
-	t_hit_data	obj_hit;
-	uint32_t	colour;
-	data->height = data->mlx->height;
-	data->width = data->mlx->width;
-	int			total_pix = data->height * data->width; // do this in init area with malloc
-	// printf("total = %i\n", total_pix);
-	
-	data->pix = (t_pixel **)malloc(sizeof(t_pixel *));
-	if (!data->pix)
-		return (1); // add malloc error msg, but return to free everything
-	
-	data->pix_i = 0;
-	data->pix[data->pix_i]->x = 0;
-	data->pix[data->pix_i]->y = 0;
-	while (data->pix[data->pix_i]->y < data->height)
-	{
-		while (data->pix[data->pix_i]->x < data->width)
-		{
-			data->ray = ft_create_ray(data, data->pix[data->pix_i]->x, data->pix[data->pix_i]->y);
-			colour = ft_calculate_colour(data, &obj_hit);
-			data->pix[data->pix_i]->colour = colour;
-			data->pix[data->pix_i]->x++;
-			data->pix_i++;
-		}
-		data->pix[data->pix_i]->y++;
-		data->pix_i++;
-	}
-	exit(0);
-	return (0);
-}
-
 /*	In this function the Shazam is happening.
  *	- ft_put_image(); 	-> is the loop that goes pixel by pixel and shoots rays.
  *	- mlx_key_hook(); 	-> is for key movement (ESC, Arrow up).
@@ -208,13 +178,7 @@ static int	do_calcs(t_data *data)
  */
 void	ft_render(t_data *data)
 {
-	if (do_calcs(data))
-		return ;
 	ft_put_image(data);
 	mlx_key_hook(data->mlx, (mlx_keyfunc)ft_key_action, data);
 	mlx_mouse_hook(data->mlx, ft_handle_mouse_click, data);
 }
-
-// init pixel struct, set total amount of pixels
-// do calcs
-// put image

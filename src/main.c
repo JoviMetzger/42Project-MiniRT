@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 18:37:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/12 15:31:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	parse_input(argc, argv, &data);
+	init_pix(&data);	// do this before opening window, stop waiting error notification
+	// also going to do intersect + colour calcs here, then open window
+	// then render with all pixel info already calculated
+	
 	ft_open_window(&data);
 	ft_render(&data);
 	mlx_loop(data.mlx);

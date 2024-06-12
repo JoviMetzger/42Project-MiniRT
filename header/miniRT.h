@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/12 15:00:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/12 15:39:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define RESET "\033[0m"
 
 // Window
-# define WIDTH 1900
-# define HEIGHT 1700
+# define WIDTH 10
+# define HEIGHT 25
 
 // --- Math stuff ---
 # define M_PI 3.14159265358979323846
@@ -264,6 +264,7 @@ typedef struct s_checkerboard
 
 // --- Functions --- 
 // Window Functions
+void		init_pix(t_data *data);
 void		ft_put_image(t_data *data);
 void		ft_open_window(t_data *data);
 void		ft_render(t_data *data);
