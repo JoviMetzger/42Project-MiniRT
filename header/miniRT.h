@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/11 19:53:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/12 15:00:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,18 @@ typedef struct s_colour_vars
 	t_colour	base;	
 }	t_colour_vars;
 
+typedef struct s_pixel
+{
+	// what do i need per pixel?
+	// double	hit_t;
+	// t_data	ray; // ?
+	// light?
+	
+	uint32_t	colour;
+	int			x;	
+	int			y;	
+}			t_pixel;
+
 
 // -------------------------------------------------------------
 // Main struct
@@ -220,6 +232,10 @@ typedef struct s_data
 	t_colour_vars	vars;
 	mlx_image_t		*image;
 	mlx_t			*mlx;
+	t_pixel			**pix;
+	int				pix_i;
+	int				height;
+	int				width;
 	t_objs			**objs;
 	t_hit_data		*hit_data;
 	int				objs_i;

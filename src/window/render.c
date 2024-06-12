@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/12 13:04:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/12 15:02:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,6 @@ int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b)
 	a = 0xFF;
 	return (b << 8 | g << 16 | r << 24 | a);
 }
-
-// void ft_put_image(t_data *data)
-// {
-// 	uint32_t	colour;
-// 	t_hit_data	hit;
-// 	int			x = 0;
-// 	int			y = 0;
-
-// 	while (y < data->mlx->height)
-// 	{
-// 		while (x < data->mlx->width)
-// 		{
-// 			data->ray = ft_create_ray(data, x, y);
-// 			colour = ft_calculate_colour(data, &hit, data->ray);
-// 			mlx_put_pixel(data->image, x, y, colour);
-// 			x++;
-// 		}
-// 		x = 0;
-// 		y++;
-// 	}
-// 	// puts("DONE");
-// }
-
 
 /////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -100,25 +77,7 @@ int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b)
 
 // }
 /////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
 
-/*	This function is the main loop.
- *		- It loops through each pixel and takes these steps for each pixel.
- *		- STEPS:
- *			- 1. Calculate the ray from the “eye” through the pixel, 
- *				 -> ft_create_ray();
- *			- 2. Determine which objects the ray intersects,		 
- *				 -> ft_calculate_colour();
- *			- 3. Compute a color for the closest intersection point. 
- *				 -> get_colour();
- *		- It aswell updates all necessary varabils.  
- */
-void	ft_put_image(t_data *data)
-{
-	t_hit_data	obj_hit;
-	uint32_t	colour;
-	int			y;
-	int			x;
 
 	// ---------------- RM ------------------------
 	/* 
@@ -150,23 +109,96 @@ void	ft_put_image(t_data *data)
 
 	// --------------------------------------------
 
-	y = 0;
-	x = 0;
-	while (y < data->mlx->height)
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/*	This function is the main loop.
+ *		- It loops through each pixel and takes these steps for each pixel.
+ *		- STEPS:
+ *			- 1. Calculate the ray from the “eye” through the pixel, 
+ *				 -> ft_create_ray();
+ *			- 2. Determine which objects the ray intersects,		 
+ *				 -> ft_calculate_colour();
+ *			- 3. Compute a color for the closest intersection point. 
+ *				 -> get_colour();
+ *		- It aswell updates all necessary varabils.  
+ */
+// void	ft_put_image(t_data *data)
+// {
+// 	t_hit_data	obj_hit;
+// 	uint32_t	colour;
+// 	int			y;
+// 	int			x;
+
+// 	y = 0;
+// 	x = 0;
+// 	while (y < data->mlx->height)
+// 	{
+// 		while (x < data->mlx->width)
+// 		{
+// 			data->mouse.mouse_map[y][x] = -1;
+// 			data->ray = ft_create_ray(data, x ,y);
+// 			colour = ft_calculate_colour(data, &obj_hit); // move to a loop where pixels are saved, give put func the pixels here
+// 			mlx_put_pixel(data->image, x, y, colour);
+// 			data->mouse.mou_x = x;
+// 			x++;
+// 		}
+// 		data->mouse.mou_y = y;
+// 		x = 0;
+// 		y++;
+// 	}
+// }
+
+void	ft_put_image(t_data *data)
+{
+	data->pix_i = 0;
+	while (data->pix[data->pix_i]->y < data->height)
 	{
-		while (x < data->mlx->width)
+		while (data->pix[data->pix_i]->x < data->mlx->width)
 		{
-			data->mouse.mouse_map[y][x] = -1;
-			data->ray = ft_create_ray(data, x ,y);
-			colour = ft_calculate_colour(data, &obj_hit); // move to a loop where pixels are saved, give put func the pixels here
-			mlx_put_pixel(data->image, x, y, colour);
-			data->mouse.mou_x = x;
-			x++;
+			data->mouse.mouse_map[data->pix[data->pix_i]->y][data->pix[data->pix_i]->x] = -1;
+			mlx_put_pixel(data->image, data->pix[data->pix_i]->x, data->pix[data->pix_i]->y, data->pix[data->pix_i]->colour);
+			data->mouse.mou_x = data->pix[data->pix_i]->x;
+			data->pix[data->pix_i]->x++;
 		}
-		data->mouse.mou_y = y;
-		x = 0;
-		y++;
+		data->mouse.mou_y = data->pix[data->pix_i]->y;
+		data->pix[data->pix_i]->x = 0;
+		data->pix[data->pix_i]->y++;
 	}
+}
+
+static int	do_calcs(t_data *data)
+{
+	t_hit_data	obj_hit;
+	uint32_t	colour;
+	data->height = data->mlx->height;
+	data->width = data->mlx->width;
+	int			total_pix = data->height * data->width; // do this in init area with malloc
+	// printf("total = %i\n", total_pix);
+	
+	data->pix = (t_pixel **)malloc(sizeof(t_pixel *));
+	if (!data->pix)
+		return (1); // add malloc error msg, but return to free everything
+	
+	data->pix_i = 0;
+	data->pix[data->pix_i]->x = 0;
+	data->pix[data->pix_i]->y = 0;
+	while (data->pix[data->pix_i]->y < data->height)
+	{
+		while (data->pix[data->pix_i]->x < data->width)
+		{
+			data->ray = ft_create_ray(data, data->pix[data->pix_i]->x, data->pix[data->pix_i]->y);
+			colour = ft_calculate_colour(data, &obj_hit);
+			data->pix[data->pix_i]->colour = colour;
+			data->pix[data->pix_i]->x++;
+			data->pix_i++;
+		}
+		data->pix[data->pix_i]->y++;
+		data->pix_i++;
+	}
+	exit(0);
+	return (0);
 }
 
 /*	In this function the Shazam is happening.
@@ -176,7 +208,13 @@ void	ft_put_image(t_data *data)
  */
 void	ft_render(t_data *data)
 {
+	if (do_calcs(data))
+		return ;
 	ft_put_image(data);
 	mlx_key_hook(data->mlx, (mlx_keyfunc)ft_key_action, data);
 	mlx_mouse_hook(data->mlx, ft_handle_mouse_click, data);
 }
+
+// init pixel struct, set total amount of pixels
+// do calcs
+// put image
