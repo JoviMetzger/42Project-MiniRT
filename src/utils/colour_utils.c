@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 13:42:03 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/13 16:55:35 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,19 @@ t_vec3	ft_reflect(t_vec3 incident, t_vec3 normal)
 				* dot_product(incident, normal))));
 }
 
+// 
+void	free_pixels(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->pix && data->pix[i])
+	{
+		while (data->pix[i])
+		{
+			free(data->pix[i]);
+			i++;
+		}
+	}
+	free(data->pix);
+}

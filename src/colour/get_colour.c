@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 14:00:38 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/13 16:47:10 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj)
 	int				j;
 
 	j = -1;
+	// printf("pat: %d\n", obj->what_pattern);
 	data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj_hit->t));
 	data->vars.normal = obj->normal;
 	data->vars.base = get_base_colour(obj, data->vars);

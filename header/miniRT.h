@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 14:00:59 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/13 16:45:27 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@
 # define RESET "\033[0m"
 
 // --- Window ---
-# define WIDTH 1900
-# define HEIGHT 1700
+// # define WIDTH 1900
+// # define HEIGHT 1700
+// ^ using that one ^
+# define WIDTH 1920
+# define HEIGHT 1080
 
 // --- Math stuff ---
 # define M_PI 3.14159265358979323846
@@ -308,6 +311,9 @@ int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
 // Colour Functions Bonus
 t_colour	get_sphere_checkerboard(t_vec3 normal);
+
+// Utils
+void		free_pixels(t_data *data);
 
 // Operators
 t_vec3		plus_vecdub(t_vec3 u, double v);

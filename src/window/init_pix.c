@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/12 15:29:22 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/12 17:04:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/13 15:28:52 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int	do_calcs(t_data *data)
 		data->ray = ft_create_ray(data, data->pix[i]->x, data->pix[i]->y);
 		colour = ft_calculate_colour(data, &obj_hit);
 		data->pix[i]->colour = colour;
+		// printf("X : %d\n", data->pix[i]->x);
+		// printf("Y : %d\n", data->pix[i]->y);
+		data->mouse.mou_y = data->pix[i]->y;
+		data->mouse.mou_x = data->pix[i]->x;
 		// hit_per_pix ... WE COULD DO ANYTHING HEHEHEH
 		i++;
 	}
@@ -51,6 +55,7 @@ static void	set_pixels(t_data *data)
 		{
 			while (x < data->width)
 			{
+				data->mouse.mouse_map[y][x] = -1;
 				data->pix[j]->y = y;
 				data->pix[j]->x = x;
 				x++;
