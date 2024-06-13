@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:17:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 15:45:36 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_vec3	minus(t_vec3 u, t_vec3 v)
 	return (len);
 }
 
+// -------------- Other math functions --------------
 double	pythagoras(double a, double b)
 {
 	return (sqrt(a * a + b * b));

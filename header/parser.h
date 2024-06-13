@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 13:43:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 16:14:57 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,9 @@ int			ratio_valid(int c);
 int			rgb_valid(int c);
 
 // --- convert_utils_2 --- //
-t_lightS	**lt_malloc(t_data *data, char **arr, int count);
-void		free_lights(t_data *data);
-int			count_lights(char **arr);
+t_light	**lt_malloc(t_data *data, char **arr, int count);
+void		free_light(t_data *data);
+int			count_light(char **arr);
 char		*give_null(char *str);
 void		cyl_cals(t_data *data);
 

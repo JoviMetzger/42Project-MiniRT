@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 13:45:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 16:26:11 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,25 @@ static void	convert_element(char **arr, t_data *data, int i)
 	free_array(elem_str);
 }
 
-static t_lightS	*light_malloc(t_data *data, char **arr)
+static t_light	*light_malloc(t_data *data, char **arr)
 {
-	data->lightS[data->lights_i] = (t_lightS *)malloc(sizeof(t_lightS));
-	if (!data->lightS[data->lights_i])
+	data->light[data->light_i] = (t_light *)malloc(sizeof(t_light));
+	if (!data->light[data->light_i])
 	{
-		free_objects(data);
+		free_light(data);
 		free_arr_error("parser error", arr);
 	}
-	ft_bzero(data->lightS[data->lights_i], sizeof(t_lightS));
-	return (data->lightS[data->lights_i]);
+	ft_bzero(data->light[data->light_i], sizeof(t_light));
+	return (data->light[data->light_i]);
 }
 
-static	void	init_lights(t_data *data, char **arr)
-{
-	data->lightS[data->lights_i] = light_malloc(data, arr);
-	data->lights_i++;
-}
-
+// norm
 void	convert_cap_input(t_data *data, char **arr, int count)
 {
 	int		i;
 
 	i = 0;
-	data->lightS = lt_malloc(data, arr, count);
+	data->light = lt_malloc(data, arr, count);
 	while (arr[i])
 	{
 		data->type = get_type(arr[i]);
@@ -76,15 +71,24 @@ void	convert_cap_input(t_data *data, char **arr, int count)
 			|| data->type == E_HASH || data->type == E_TRIANGLE)
 			i++;
 		else if (data->type == 0 || data->type > 9)
+		{
+			free_light(data);
 			free_arr_error("parser error", arr);
+		}
 		if (data->type == E_AMBIENT || data->type == E_LIGHT
 			|| data->type == E_CAMERA)
 		{
+			// light init and convert func
 			if (data->type == E_LIGHT)
-				init_lights(data, arr);
-			convert_element(arr, data, i);
+			{	
+				data->light[data->light_i] = light_malloc(data, arr);
+				convert_element(arr, data, i);
+				data->light_i++;
+			}
+			else
+				convert_element(arr, data, i);
 			i++;
 		}
 	}
-	data->lightS[data->lights_i] = NULL;
+	data->light[data->light_i] = NULL;
 }

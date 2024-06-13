@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/15 17:53:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/30 18:28:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 16:16:02 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	rgb_obj(t_data *data, int r, int g, int b)
 
 void	rgb_light(t_data *data, int r, int g, int b)
 {
-	data->light.colour.r = r;
-	data->light.colour.g = g;
-	data->light.colour.b = b;
+	data->light[data->light_i]->colour.r = r;
+	data->light[data->light_i]->colour.g = g;
+	data->light[data->light_i]->colour.b = b;
 }
 
 void	rgb_ambient(t_data *data, int r, int g, int b)

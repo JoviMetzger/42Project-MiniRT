@@ -6,38 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:21:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 15:41:49 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
-
-// Function to calculate the surface normal of a cylinder
-// static t_vec3	normal_for_cylinder(t_vec3 intersection_point, t_objs obj)
-// {
-// 	t_vec3	vector;
-// 	t_vec3	center_point;
-// 	t_vec3	projection;
-
-// 	vector = normalize(obj.vector);
-// 	center_point = minus(intersection_point, obj.center);
-// 	projection = mult_vecdub(vector, dot_product(center_point, vector));
-// 	return (minus(center_point, projection));
-// }
-
-// Get the surface normal for the correct object.
-// t_vec3	get_surface_normal(t_vec3 intersect_point, t_objs *obj)
-// {
-// 	t_vec3	normal;
-
-// 	if (obj->type == E_SPHERE)
-// 		normal = normalize(minus(intersect_point, obj->center));
-// 	if (obj->type == E_PLANE)
-// 		normal = normalize(obj->vector);
-// 	if (obj->type == E_CYLINDER)
-// 		normal = normalize(normal_for_cylinder(intersect_point, *obj));
-// 	return (normal);
-// }
 
 /*	This Function calculates the base colour of an object.
  *		- So if the object has a pattern (Checkerboard, texture),
@@ -64,16 +37,4 @@ t_vec3	ft_reflect(t_vec3 incident, t_vec3 normal)
 {
 	return (minus(incident, mult_vecdub(normal, 2
 				* dot_product(incident, normal))));
-}
-
-void	add_light(t_colour_vars *colour, t_ray ray)
-{
-	diffuse_light(colour);
-	specular_light(colour, ray);
-	colour->result.r += colour->diffuse.r * colour->base.r / 255
-		+ colour->specular.r;
-	colour->result.g += colour->diffuse.g * colour->base.g / 255
-		+ colour->specular.g;
-	colour->result.b += colour->diffuse.b * colour->base.b / 255
-		+ colour->specular.b;
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:18:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 15:37:56 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,11 @@ static void	ft_error_handler(int num, t_data *data)
 }
 
 //	Initializes the window and everything else from MLX.
-//		- mlx_set_setting(MLX_STRETCH_IMAGE, 1); Is for stretching img/window.
-//		- If something goes wrong with the initializing it will be freed, 
+//		- If something goes wrong with the initializition it will be freed, 
 //		  aswell at the structs that got already allocated. 
 //		  And a error message will be displayed.
 void	ft_open_window(t_data *data)
 {
-	// mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	data->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", 0);
 	if (!data->mlx)
 	{

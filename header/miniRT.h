@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:02:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/10 16:14:57 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define YELLOW "\033[33;1m"
 # define RESET "\033[0m"
 
-// Window
+// --- Window ---
 # define WIDTH 1900
 # define HEIGHT 1700
 
@@ -68,7 +68,7 @@ typedef struct s_vec3
 	double	z;
 }	t_vec3;
 
-
+// -------------------------------------------------------------
 // Colour - RGB
 // 		r -> red
 // 		g -> green
@@ -100,19 +100,12 @@ typedef struct ambient
 
 // -------------------------------------------------------------
 // Struct for light
-typedef struct s_light  // RM THIS ONE once it's fixed
-{                       // RM
-	t_colour	colour; // RM
-	t_vec3		place;  // RM
-	double		ratio;  // RM
-}	t_light;            // RM
-
-typedef struct s_lightS // WE need this one // without the s
+typedef struct s_light
 {
 	t_colour	colour;
 	t_vec3		place;
 	double		ratio;
-}	t_lightS;
+}	t_light;
 
 // -------------------------------------------------------------
 // Screen struct
@@ -138,7 +131,6 @@ typedef struct s_mouse
 	bool			selected;
 }	t_mouse;
 
-
 // -------------------------------------------------------------
 // Ray struct (standing alone)
 typedef struct s_ray
@@ -149,7 +141,15 @@ typedef struct s_ray
 
 // -------------------------------------------------------------
 // Struct for objects, each object has this struct
-// array of structs in data struct
+//		- center, vector, tmp_normal, normal, top, base, edge[2], 
+//		  point[3], point_flag, diameter, height, height_half,
+//		  radius 			-> (for intersection calculation); 
+//		- type 				-> (what type of obj);
+//		- colour 			-> (colour of obj);
+//		- what_pattern 		-> (what patten that obj currently has); 
+//		- i_am 				-> (what obj num this is, basicly ID);
+//		- i 				-> (iterate through the different obj patterns,
+//							   Resrets to 0 after 2 iterations);
 typedef struct s_objs
 {
 	t_type				type;
@@ -158,24 +158,23 @@ typedef struct s_objs
 	t_vec3				vector;
 	t_vec3				tmp_normal;
 	t_vec3				normal;
-	double				diameter;
-	double				height;
-	double				height_half;
-	double				radius;
 	t_vec3				top;
 	t_vec3				base;
 	t_vec3				edge[2];
 	t_vec3				point[3];
 	int					point_flag;
-	mlx_texture_t		*texture;
-	int16_t				i_am;	// what obj num this is, basicly ID	
-	int					i;		// iterate through the different obj patterns (checkerboard, normal ...) -> resrets to 0 after 2 iterations.
-	int					what_pattern; //what patten that object currently has.
+	double				diameter;
+	double				height;
+	double				height_half;
+	double				radius;
+	int16_t				i_am;
+	int					i;
+	int					what_pattern;
 }	t_objs;
 
 // -------------------------------------------------------------
-// Object data struct (standing alone)
-// -> saves the calculations of the intersections
+// Object data struct
+//		-> saves the calculations of the intersections
 typedef struct s_hit_data
 {
 	double	a;
@@ -197,11 +196,11 @@ typedef struct s_hit_data
 }	t_hit_data;
 
 // -------------------------------------------------------------
-// Struct for all colour variables (standing alone)
+// Struct for all colour variables
 typedef struct s_colour_vars
 {
 	t_colour	result;
-	t_lightS	*curr_light;
+	t_light		*curr_light;
 	t_vec3		intersect_p;
 	t_vec3		normal;
 	t_vec3		ref_dir;
@@ -218,27 +217,30 @@ typedef struct s_colour_vars
 	t_colour	base;	
 }	t_colour_vars;
 
-
 // -------------------------------------------------------------
 // Main struct
+//		- **objs, **light, vars, type, camera, ambient, screen, 
+//		  ray, mouse		-> (all kind of structs);
+//		- *image, *mlx		-> (MLX structs);
+//		- objs_i, light_i	-> (how many obj & light we have);
+//		- i_am				-> (what object is currently seleted);
 typedef struct s_data
 {
-	t_colour_vars	vars;
 	mlx_image_t		*image;
 	mlx_t			*mlx;
-	t_objs			**objs;
 	t_hit_data		*hit_data;
-	int				objs_i;
+	t_objs			**objs;
+	t_light			**light;
+	t_colour_vars	vars;
+	t_type			type;
 	t_camera		camera;
 	t_ambient		ambient;
-	t_light			light; // remove
-	int				lights_i;
-	t_lightS		**lightS;
-	t_ray			ray;
 	t_screen		screen;
-	t_type			type;	// parser util which gets overwritten for each element, objects do have a type
+	t_ray			ray;
 	t_mouse			mouse;
-	int16_t			i_am; // what object is currently seleted
+	int				objs_i;
+	int				light_i;
+	int16_t			i_am;
 }	t_data;
 
 // -------------------------------------------------------------
@@ -270,13 +272,8 @@ t_ray		ft_create_ray(t_data *data, int x, int y);
 
 // Colour Functions
 uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj);
-t_colour	get_colour(t_data *data, t_hit_data *obj_hit,
-				t_ray ray, t_objs *obj);
-t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
+t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars colour);
-void		add_light(t_colour_vars *colour, t_ray ray);
-void		specular_light(t_colour_vars *colour, t_ray ray);
-void		diffuse_light(t_colour_vars *colour);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 

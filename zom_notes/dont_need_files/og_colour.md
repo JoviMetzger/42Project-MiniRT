@@ -132,9 +132,9 @@ t_colour get_cyl_colour(t_data *data, t_hit_data *hit_data, t_ray ray, t_objs *c
     result.b = ambient_blue;
 
 	int i = 0;
-    while (i < data->lights_i) 
+    while (i < data->light_i) 
 	{
-        t_lightS *current_light = data->lightS[i];
+        t_light *current_light = data->light[i];
 
 <<<<<<< HEAD:zom_notes/dont_need_files/og_colour.md
 	result.r = final_red;

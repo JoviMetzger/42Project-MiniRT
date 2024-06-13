@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 18:27:40 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/10 16:14:57 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	draw_highlight(t_data *data, int16_t num)
 	}
 }
 
-/*	This function highlights or removes the highlight on the object.
+/*	This function highlight or removes the highlight on the object.
  *	(Highlight = white line around the object):
  *		- We are using mlx_image_to_window() to put a image (white line)
  *		  ontop of the original image. 
