@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 13:21:23 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/13 14:00:38 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	specular_light(t_colour_vars *colour, t_ray ray)
  *		- Accumulate light contributions. 
  *		  (newColour += diffuse_colour * base_colour / 255 + specular_colour)
  */
-static void	add_light(t_colour_vars *colour, t_ray ray)
+void	add_light(t_colour_vars *colour, t_ray ray)
 {
 	diffuse_light(colour);
 	specular_light(colour, ray);
@@ -61,79 +61,35 @@ static void	add_light(t_colour_vars *colour, t_ray ray)
 		+ colour->specular.b;
 }
 
-/* Calculation of the light_ray and if it hits a object, 
- * it should not go trough the object, so that it gives a shadow.
- *	  - Creating a light_direction.
- *	  - Initializing the place & vector of the shadow_ray.
- *	  - Check for shadows by testing intersection with all objects.
- *		 - If an intersection is hit, there will be a shadow.
- *		 - If no intersection hit (!is_shadow), add light.
- */
-static void	shadow_calculation(t_data *data, t_colour_vars *colour,
-		t_ray ray, t_hit_data *obj_hit)
-{
-	t_ray	shadow_ray;
-	bool	in_shadow;
-	int		i;
-
-	colour->light_dir = normalize(minus(colour->curr_light->place,
-				colour->intersect_p));
-	shadow_ray.place = plus(colour->intersect_p, mult_vecdub(colour->normal,
-				EPSILON));
-	shadow_ray.vector = colour->light_dir;
-	in_shadow = false;
-	i = -1;
-	while (++i < data->objs_i)
-	{
-		if (intersect_sphere(&shadow_ray, data->objs[i], obj_hit)
-			|| intersect_plane(&shadow_ray, data->objs[i], obj_hit)
-			|| intersect_cylinder(&shadow_ray, data->objs[i], obj_hit)
-			|| intersect_triangle(&shadow_ray, data->objs[i], obj_hit))
-		{
-			in_shadow = true;
-			break ;
-		}
-	}
-	if (!in_shadow)
-		add_light(colour, ray);
-}
-
 /*	STEP 3. Compute a color for the closest intersection point.
  *
  *	This function uses the 'Phong reflection model' for each object.
  *	Including multiple light and creating shadows.
- *		- Initializing colour_vars (colour = data->vars;).
+ *		- Initializing data->vars variables.
  *		- Initializing the base colour of the object.
  *		- Initializing the result of the colour with ambient light contribution.
  *		  (colour = ambient * base / 255)
- *		- Goes through all the different light 
- *		  and does the shadow_calculation on each object for each light.
+ *		- Creating a light_direction.
  *		- Clamp final values to [0, 255]. 
  *		  This ensurs that the value is not less than 0 and not bigger than 255. 
  *		  So basiclly controls the overflow/underflow of RGB colour range.
  */
 t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj)
 {
-	t_colour_vars	colour;
-	t_ray			ray;
 	int				j;
 
 	j = -1;
-	ray = data->ray;
-	colour = data->vars;
-	colour.intersect_p = plus(ray.place, mult_vecdub(ray.vector, obj_hit->t));
-	colour.normal = obj->normal;
-	colour.base = get_base_colour(obj, colour);
-	colour.result.r = colour.ambient.r * colour.base.r / 255;
-	colour.result.g = colour.ambient.g * colour.base.g / 255;
-	colour.result.b = colour.ambient.b * colour.base.b / 255;
-	while (++j < data->light_i)
-	{
-		colour.curr_light = data->light[j];
-		shadow_calculation(data, &colour, data->ray, obj_hit);
-	}
-	colour.result.r = fmin(255, fmax(0, colour.result.r));
-	colour.result.g = fmin(255, fmax(0, colour.result.g));
-	colour.result.b = fmin(255, fmax(0, colour.result.b));
-	return (colour.result);
+	data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj_hit->t));
+	data->vars.normal = obj->normal;
+	data->vars.base = get_base_colour(obj, data->vars);
+	data->vars.result.r = data->vars.ambient.r * data->vars.base.r / 255;
+	data->vars.result.g = data->vars.ambient.g * data->vars.base.g / 255;
+	data->vars.result.b = data->vars.ambient.b * data->vars.base.b / 255;
+	data->vars.curr_light = data->light[0];
+	data->vars.light_dir = normalize(minus(data->vars.curr_light->place,
+		data->vars.intersect_p));
+	data->vars.result.r = fmin(255, fmax(0, data->vars.result.r));
+	data->vars.result.g = fmin(255, fmax(0, data->vars.result.g));
+	data->vars.result.b = fmin(255, fmax(0, data->vars.result.b));
+	return (data->vars.result);
 }

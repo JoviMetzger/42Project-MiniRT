@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/10 16:14:57 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/13 14:00:59 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,9 @@ typedef struct s_ray
 typedef struct s_objs
 {
 	t_type				type;
+	double				obj_t;
+	t_vec3				hit_pos;
+	double				distance;
 	t_colour			colour;
 	t_vec3				center;
 	t_vec3				vector;
@@ -181,8 +184,8 @@ typedef struct s_hit_data
 	double	b;
 	double	c;
 	double	d;
-	t_vec3	o_c; // origin center
-	t_vec3	c_c; // cross center / perp to cent
+	t_vec3	o_c;
+	t_vec3	c_c;
 	t_vec3	norm_vec;
 	double	root1;
 	double	root2;
@@ -218,19 +221,36 @@ typedef struct s_colour_vars
 }	t_colour_vars;
 
 // -------------------------------------------------------------
+// Struct for each pixel. Each pixel will be saved in the struct.
+typedef struct s_pixel
+{
+	// what do i need per pixel?
+	// double	hit_t;
+	// t_data	ray; // ?
+	// light?
+	
+	uint32_t	colour;
+	int			x;	
+	int			y;	
+}			t_pixel;
+
+// -------------------------------------------------------------
 // Main struct
-//		- **objs, **light, vars, type, camera, ambient, screen, 
-//		  ray, mouse		-> (all kind of structs);
-//		- *image, *mlx		-> (MLX structs);
-//		- objs_i, light_i	-> (how many obj & light we have);
-//		- i_am				-> (what object is currently seleted);
+//		- **objs, **light, *hit_data, vars, type, camera, ambient,
+//		  screen, ray, mouse	-> (all kind of structs);
+//		- *image, *mlx, **pix	-> (MLX structs);
+//		- pix_i, total_pix, 
+//		  height, width			-> (Info about the pixel);
+//		- objs_i, light_i		-> (how many obj & light we have);
+//		- i_am					-> (what object is currently seleted);
 typedef struct s_data
 {
 	mlx_image_t		*image;
 	mlx_t			*mlx;
-	t_hit_data		*hit_data;
+	t_pixel			**pix;
 	t_objs			**objs;
 	t_light			**light;
+	t_hit_data		*hit_data;
 	t_colour_vars	vars;
 	t_type			type;
 	t_camera		camera;
@@ -238,6 +258,10 @@ typedef struct s_data
 	t_screen		screen;
 	t_ray			ray;
 	t_mouse			mouse;
+	int				total_pix;
+	int				height;
+	int				width;
+	int				pix_i;
 	int				objs_i;
 	int				light_i;
 	int16_t			i_am;
@@ -257,6 +281,8 @@ typedef struct s_checkerboard
 
 // --- Functions --- 
 // Window Functions
+int			do_calcs(t_data *data);
+void		init_pix(t_data *data);
 void		ft_put_image(t_data *data);
 void		ft_open_window(t_data *data);
 void		ft_render(t_data *data);
@@ -274,6 +300,9 @@ t_ray		ft_create_ray(t_data *data, int x, int y);
 uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj);
 t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars colour);
+t_colour 	give_light(t_data *data);
+void		add_light(t_colour_vars *colour, t_ray ray);
+bool		check_light(t_data *data, t_objs *obj, t_hit_data *hit);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 
@@ -300,8 +329,8 @@ double		vec_length(t_vec3 v1, t_vec3 v2);
 // Objects Functions
 bool		tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray);
 bool		boop_bottom(t_hit_data *hit, t_objs *cyl, t_ray *ray);
-void		cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit);
 bool		cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray);
+void		cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit);
 void		set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl);
 bool		bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit);

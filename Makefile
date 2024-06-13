@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/06/08 14:26:53 by smclacke      ########   odam.nl          #
+#    Updated: 2024/06/12 17:01:33 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INPUT_FILE		= images_rt/parse_me.rt
 CC 				= cc
 CFLAGS 			= -Wall -Wextra
 CFLAGS			+= -Werror
-# CFLAGS			+= -g -fsanitize=address
+CFLAGS			+= -g -fsanitize=address
 # CFLAGS			+= -Ofast -flto -O3
 CFLAGS			+= -O3 -flto
 MAKEFLAGS		= --no-print-directory
@@ -39,6 +39,7 @@ SRCS			= main.c											\
 					utils/operators1.c 								\
 					utils/operators2.c 								\
 					utils/colour_utils.c							\
+					window/init_pix.c 								\
 					window/window_key.c 							\
 					window/window_mouse.c 							\
 					window/open_window.c							\
@@ -46,6 +47,7 @@ SRCS			= main.c											\
 					colour/calculate_colour.c						\
 					colour/checkerboard.c 							\
 					colour/get_colour.c 							\
+					colour/light.c 									\
 					objects/sphere.c 								\
 					objects/plane.c 								\
 					objects/cyl_caps.c 								\

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/10 15:41:49 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/13 13:42:03 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,4 @@ t_vec3	ft_reflect(t_vec3 incident, t_vec3 normal)
 	return (minus(incident, mult_vecdub(normal, 2
 				* dot_product(incident, normal))));
 }
+
