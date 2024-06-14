@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 18:38:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/14 19:26:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,10 +219,14 @@ typedef struct s_pixel
 	// light?
 	
 	uint32_t	colour;
+	uint32_t	ambient_colour;
+	uint32_t	light;
+	
 	int			x;	
 	int			y;	
 	double		hit_t;
 	t_objs		*obj;
+	bool		hit_b;
 
 }			t_pixel;
 
@@ -289,8 +293,9 @@ t_ray		ft_create_ray(t_data *data, int x, int y);
 //--- light ---//
 // uint32_t	direct_light(t_data *data, int i);
 // bool		check_light(t_data *data, t_objs *obj, t_hit_data *hit);
-uint32_t	 give_light(t_data *data);
-bool		in_light(t_data *data, int i);
+t_colour	give_light(t_data *data);
+uint32_t	get_light(t_data *data);
+bool		in_light(t_data *data, t_hit_data *hit, int i);
 
 uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj, int index);
 void		add_light(t_colour_vars *colour, t_ray ray);

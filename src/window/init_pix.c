@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/12 15:29:22 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 18:38:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/14 19:35:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,26 @@ void	free_pixels(t_data *data)
 void	do_calcs(t_data *data)
 {
 	t_hit_data	hit;
-	uint32_t	colour;
+	uint32_t	ambient_colour;
+	uint32_t	light;
 	int 		i;
 
 	i = 0;
 	while (i < data->total_pix)
 	{
 		data->ray = ft_create_ray(data, data->pix[i]->x, data->pix[i]->y);
-		colour = ft_calculate_colour(data, &hit, i);
-		data->pix[i]->colour = colour;
+		ambient_colour = ft_calculate_colour(data, &hit, i);
+		data->pix[i]->colour = ambient_colour;
 		data->pix[i]->hit_t = hit.t;
 		i++;
 	}
 	i = 0;
 	while (i < data->total_pix)
 	{
-		if (in_light(data, i) == true)
+		if (in_light(data, &hit, i) == true)
 		{	
-			colour = give_light(data);
-			data->pix[i]->colour = colour;
+			light = get_light(data);
+			data->pix[i]->colour = light;
 		}
 		i++;
 	}

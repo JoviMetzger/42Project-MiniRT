@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 18:27:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/14 19:26:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
 
  now only ambient light is given, direct light is calculated after we have all hit->ts
  */
-static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj)
+static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj, int i)
 {
 	t_colour	colour;
 
 	if (hit->closest_t != DBL_MAX)
 	{
 		colour = get_colour(data, hit, obj);
+		data->pix[i]->hit_b = true;
 		return (ft_convert_rgb(colour.r, colour.g, colour.b));
 	}
 	else
@@ -59,6 +60,7 @@ uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit, int pix_index)
 
 	i = 0;
 	hit->closest_t = DBL_MAX;
+	data->pix[i]->hit_b = false;
 	while (i < data->objs_i)
 	{
 		if (data->objs[i]->type == E_SPHERE
@@ -76,6 +78,6 @@ uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit, int pix_index)
 		i++;
 	}
 	data->pix[pix_index]->obj = tmp_obj;
-	return (get_ret(data, hit, tmp_obj));
+	return (get_ret(data, hit, tmp_obj, pix_index));
 }
   
