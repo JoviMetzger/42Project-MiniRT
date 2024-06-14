@@ -6,27 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/12 17:19:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/14 13:48:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/parser.h"
 #include "../header/miniRT.h"
 
-void	free_pixels(t_data *data)
+void	free_all(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	if (data->pix && data->pix[i])
-	{
-		while (data->pix[i])
-		{
-			free(data->pix[i]);
-			i++;
-		}
-	}
-	free(data->pix);
+	free_objects(data);
+	free_pixels(data);
 }
 
 // main function:
@@ -42,15 +32,12 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	parse_input(argc, argv, &data);
-	init_pix(&data);	// do this before opening window, stop waiting error notification
-	// also going to do intersect + colour calcs here, then open window
-	// then render with all pixel info already calculated
-	
+	init_pix(&data);
+	do_calcs(&data);
 	ft_open_window(&data);
 	ft_render(&data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
-	free_objects(&data);
-	free_pixels(&data);
+	free_all(&data);
 	return (EXIT_SUCCESS);
 }

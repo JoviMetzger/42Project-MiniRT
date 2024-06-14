@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/12 17:16:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/14 13:55:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,13 +215,13 @@ typedef struct s_colour_vars
 typedef struct s_pixel
 {
 	// what do i need per pixel?
-	// double	hit_t;
 	// t_data	ray; // ?
 	// light?
 	
 	uint32_t	colour;
 	int			x;	
 	int			y;	
+	double		hit_t;
 }			t_pixel;
 
 
@@ -264,8 +264,11 @@ typedef struct s_checkerboard
 }	t_checkerboard;
 
 // --- Functions --- 
+void		free_all(t_data *data);
+
 // Window Functions
-int			do_calcs(t_data *data);
+void		free_pixels(t_data *data);
+void		do_calcs(t_data *data);
 void		init_pix(t_data *data);
 void		ft_put_image(t_data *data);
 void		ft_open_window(t_data *data);

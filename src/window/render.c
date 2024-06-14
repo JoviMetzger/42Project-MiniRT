@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/12 17:16:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/14 13:50:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,19 +166,6 @@ void	ft_put_image(t_data *data)
 	// puts("DONEE");
 }
 
-// static void	check_pix(t_data *data)
-// {
-// 	int p = 0;
-
-// 	while (p < data->total_pix)
-// 	{
-// 	 	printf("pix[%i] = %i %i  ", p, data->pix[p]->x, data->pix[p]->y);
-// 		printf("pix colour = %d\n", data->pix[p]->colour);
-// 		p++;
-// 	}
-// }
-
-
 /*	In this function the Shazam is happening.
  *	- ft_put_image(); 	-> is the loop that goes pixel by pixel and shoots rays.
  *	- mlx_key_hook(); 	-> is for key movement (ESC, Arrow up).
@@ -186,8 +173,6 @@ void	ft_put_image(t_data *data)
  */
 void	ft_render(t_data *data)
 {
-	// check_pix(data);
-	// exit(0);
 	ft_put_image(data);
 	mlx_key_hook(data->mlx, (mlx_keyfunc)ft_key_action, data);
 	mlx_mouse_hook(data->mlx, ft_handle_mouse_click, data);
