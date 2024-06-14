@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 19:33:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/14 21:18:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static void	diffuse_light(t_colour_vars *colour)
 }
 
 // Calculation of the specular light
-static void	specular_light(t_colour_vars *colour, t_ray ray)
+static void	specular_light(t_colour_vars *colour, t_ray *ray)
 {
-	colour->view_dir = normalize(minus(ray.place, colour->intersect_p));
+	colour->view_dir = normalize(minus(ray->place, colour->intersect_p));
 	colour->ref_dir = normalize(ft_reflect(colour->light_dir, colour->normal));
 	colour->spec_fact = pow(dot_product(colour->ref_dir, colour->view_dir),
 			colour->spec_power);
@@ -43,7 +43,7 @@ static void	specular_light(t_colour_vars *colour, t_ray ray)
 		* colour->curr_light->colour.b;
 }
 
-void	add_light(t_colour_vars *colour, t_ray ray)
+void	add_light(t_colour_vars *colour, t_ray *ray)
 {
 	diffuse_light(colour);
 	specular_light(colour, ray);
@@ -74,17 +74,17 @@ t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj)
 	int				j;
 
 	j = -1;
-	data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj_hit->t));
-	data->vars.normal = obj->normal;
-	data->vars.base = get_base_colour(obj, data->vars);
-	data->vars.result.r = data->vars.ambient.r * data->vars.base.r / 255;
-	data->vars.result.g = data->vars.ambient.g * data->vars.base.g / 255;
-	data->vars.result.b = data->vars.ambient.b * data->vars.base.b / 255;
-	data->vars.curr_light = data->light[0];
-	data->vars.light_dir = normalize(minus(data->vars.curr_light->place,
-		data->vars.intersect_p));
-	data->vars.result.r = fmin(255, fmax(0, data->vars.result.r));
-	data->vars.result.g = fmin(255, fmax(0, data->vars.result.g));
-	data->vars.result.b = fmin(255, fmax(0, data->vars.result.b));
-	return (data->vars.result);
+	data->vars->intersect_p = plus(data->ray->place, mult_vecdub(data->ray->vector, obj_hit->t));
+	data->vars->normal = obj->normal;
+	data->vars->base = get_base_colour(obj, data->vars);
+	data->vars->result.r = data->vars->ambient.r * data->vars->base.r / 255;
+	data->vars->result.g = data->vars->ambient.g * data->vars->base.g / 255;
+	data->vars->result.b = data->vars->ambient.b * data->vars->base.b / 255;
+	data->vars->curr_light = data->light[0];
+	data->vars->light_dir = normalize(minus(data->vars->curr_light->place,
+		data->vars->intersect_p));
+	data->vars->result.r = fmin(255, fmax(0, data->vars->result.r));
+	data->vars->result.g = fmin(255, fmax(0, data->vars->result.g));
+	data->vars->result.b = fmin(255, fmax(0, data->vars->result.b));
+	return (data->vars->result);
 }

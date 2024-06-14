@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/12 15:29:22 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 20:18:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/14 21:18:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,32 @@ void	do_calcs(t_data *data)
 	t_hit_data	hit;
 	uint32_t	ambient_colour;
 	uint32_t	light;
+	// t_colour	light;
 	int 		i;
 
 	i = 0;
 	while (i < data->total_pix)
 	{
 		data->ray = ft_create_ray(data, data->pix[i]->x, data->pix[i]->y);
-		data->pix[i]->ray = data->ray;
 		ambient_colour = ft_calculate_colour(data, &hit, i);
-		data->pix[i]->colour = ambient_colour;
-		data->pix[i]->hit_t = hit.t;
+		data->pix[i]->ambient_colour = ambient_colour;
+		// light = get_light(data);
+		
+		light = get_light(data);
+		data->pix[i]->colour = light;
+		// data->pix[i]->hit_t = hit.t;
 		i++;
 	}
-	i = 0;
-	while (i < data->total_pix)
-	{
-		data->ray = data->pix[i]->ray;
-		if (in_light(data, &hit, i) == true)
-		{	
-			light = get_light(data);
-			data->pix[i]->colour = light;
-		}
-		i++;
-	}
+	// i = 0;
+	// while (i < data->total_pix)
+	// {
+	// 	// if (in_light(data, &hit, i) == true)
+	// 	// {
+	// 		light = get_light(data);
+	// 		data->pix[i]->colour = light;
+	// 	// }
+	// 	i++;
+	// }
 }
 
 static void	set_pixels(t_data *data)
