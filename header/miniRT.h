@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 13:55:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/14 18:38:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,8 @@ typedef struct s_pixel
 	int			x;	
 	int			y;	
 	double		hit_t;
+	t_objs		*obj;
+
 }			t_pixel;
 
 
@@ -284,13 +286,17 @@ void		init_mouse_map(t_data *data);
 t_ray		ft_create_ray(t_data *data, int x, int y);
 
 // Colour Functions
-uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj);
+//--- light ---//
+// uint32_t	direct_light(t_data *data, int i);
+// bool		check_light(t_data *data, t_objs *obj, t_hit_data *hit);
+uint32_t	 give_light(t_data *data);
+bool		in_light(t_data *data, int i);
+
+uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj, int index);
 void		add_light(t_colour_vars *colour, t_ray ray);
 t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj);
 t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars colour);
-t_colour 	give_light(t_data *data);
-bool		check_light(t_data *data, t_objs *obj, t_hit_data *hit);
 // void		add_light(t_colour_vars *colour, t_ray ray);
 // void		specular_light(t_colour_vars *colour, t_ray ray);
 // void		diffuse_light(t_colour_vars *colour);

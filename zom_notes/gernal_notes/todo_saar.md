@@ -3,8 +3,8 @@
 --- to do now ---
 
 !!!
- - are in the light or no function - maybe actually save pixels... then check objs closer to the ray for shadows, then draw... talk to jovi... 
- - add light array to new colour calculating shizzle
+ - direct light functions
+ - add light array to new colour calculating shizzle - jovi, how?
 
 !!
  - cylinder normal when turned on z vector not guuci (0,1,1) / (1,0,1)

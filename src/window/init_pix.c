@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/12 15:29:22 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 13:55:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/14 18:38:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	free_pixels(t_data *data)
 
 void	do_calcs(t_data *data)
 {
-	t_hit_data	*hit;
+	t_hit_data	hit;
 	uint32_t	colour;
 	int 		i;
 
@@ -39,15 +39,21 @@ void	do_calcs(t_data *data)
 	while (i < data->total_pix)
 	{
 		data->ray = ft_create_ray(data, data->pix[i]->x, data->pix[i]->y);
-		// calculate ambient lighting
-		// save hit points
-		// in separate while, check which have direct light
-		colour = ft_calculate_colour(data, &hit);
+		colour = ft_calculate_colour(data, &hit, i);
 		data->pix[i]->colour = colour;
-		data->pix[i]->hit_t = hit->t;
+		data->pix[i]->hit_t = hit.t;
 		i++;
 	}
-	// check_light + give light + reassign colour...
+	i = 0;
+	while (i < data->total_pix)
+	{
+		if (in_light(data, i) == true)
+		{	
+			colour = give_light(data);
+			data->pix[i]->colour = colour;
+		}
+		i++;
+	}
 }
 
 static void	set_pixels(t_data *data)
