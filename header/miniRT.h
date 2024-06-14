@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 19:26:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/14 20:16:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define RESET "\033[0m"
 
 // Window
-# define WIDTH 1200
-# define HEIGHT 1500
+# define WIDTH 1800
+# define HEIGHT 1900
 
 // --- Math stuff ---
 # define M_PI 3.14159265358979323846
@@ -227,6 +227,7 @@ typedef struct s_pixel
 	double		hit_t;
 	t_objs		*obj;
 	bool		hit_b;
+	t_ray		ray;
 
 }			t_pixel;
 
