@@ -6,11 +6,34 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 19:26:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/14 20:23:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
+
+// old one
+// static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj)
+// {
+// 	t_colour	colour;
+// 	uint32_t	ambient_light;
+// 	t_colour	light;
+
+// 	if (hit->closest_t != DBL_MAX)
+// 	{
+// 		colour = get_colour(data, hit, obj);
+// 		ambient_light = ft_convert_rgb(colour.r, colour.g, colour.b);
+// 		if (check_light(data, obj, hit) == true)
+// 		{
+// 			light = give_light(data);
+// 			return (ft_convert_rgb(light.r, light.g, light.b));
+// 		}
+// 		else
+// 			return (ambient_light);
+// 	}
+// 	else
+// 		return (ft_convert_rgb(0, 0, 0));
+// }
 
 /*	This function checks which object is closer to the camera, 
  *	other wise objects will overlap and won't be dispalyed realistic.
