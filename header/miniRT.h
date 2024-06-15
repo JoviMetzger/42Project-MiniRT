@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 16:45:27 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/15 13:50:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,9 @@
 # define YELLOW "\033[33;1m"
 # define RESET "\033[0m"
 
-// --- Window ---
-// # define WIDTH 1900
-// # define HEIGHT 1700
-// ^ using that one ^
-# define WIDTH 1920
-# define HEIGHT 1080
+// Window
+# define WIDTH 1800
+# define HEIGHT 1900
 
 // --- Math stuff ---
 # define M_PI 3.14159265358979323846
@@ -227,14 +224,16 @@ typedef struct s_colour_vars
 // Struct for each pixel. Each pixel will be saved in the struct.
 typedef struct s_pixel
 {
-	// what do i need per pixel?
-	// double	hit_t;
-	// t_data	ray; // ?
-	// light?
-	
+	// check what we actually use here and clean up later
 	uint32_t	colour;
+	uint32_t	ambient_colour;
+	uint32_t	light;
 	int			x;	
 	int			y;	
+	double		hit_t;
+	t_objs		*obj;
+	bool		hit_b;
+
 }			t_pixel;
 
 // -------------------------------------------------------------
@@ -248,6 +247,7 @@ typedef struct s_pixel
 //		- i_am					-> (what object is currently seleted);
 typedef struct s_data
 {
+	t_colour_vars	*vars;
 	mlx_image_t		*image;
 	mlx_t			*mlx;
 	t_pixel			**pix;
@@ -283,8 +283,11 @@ typedef struct s_checkerboard
 }	t_checkerboard;
 
 // --- Functions --- 
+void		free_all(t_data *data);
+
 // Window Functions
-int			do_calcs(t_data *data);
+void		free_pixels(t_data *data);
+void		do_calcs(t_data *data);
 void		init_pix(t_data *data);
 void		ft_put_image(t_data *data);
 void		ft_open_window(t_data *data);
@@ -300,12 +303,21 @@ void		init_mouse_map(t_data *data);
 t_ray		ft_create_ray(t_data *data, int x, int y);
 
 // Colour Functions
-uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj);
-t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj);
-t_colour	get_base_colour(t_objs *obj, t_colour_vars colour);
-t_colour 	give_light(t_data *data);
+//--- light ---//
+// uint32_t	direct_light(t_data *data, int i);
+// bool		check_light(t_data *data, t_objs *obj, t_hit_data *hit);
+t_colour	give_light(t_data *data);
+uint32_t	get_light(t_data *data);
+bool		in_light(t_data *data, t_hit_data *hit, int i);
+
+uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj, int index);
 void		add_light(t_colour_vars *colour, t_ray ray);
-bool		check_light(t_data *data, t_objs *obj, t_hit_data *hit);
+t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj);
+t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
+t_colour	get_base_colour(t_objs *obj, t_colour_vars *colour);
+// void		add_light(t_colour_vars *colour, t_ray ray);
+// void		specular_light(t_colour_vars *colour, t_ray ray);
+// void		diffuse_light(t_colour_vars *colour);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 16:59:28 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/15 13:52:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ t_ray	ft_create_ray(t_data *data, int pos_x, int pos_y)
 	double		img_width;
 	double		img_height;
 
+	// ray = (t_ray *)malloc(sizeof(t_ray));
+	// if (!ray)
+	// 	exit(42); // handle correctly... TODO
 	screen = data->screen;
 	img_width = data->width;
 	img_height = data->height;

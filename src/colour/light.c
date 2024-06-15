@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/11 16:33:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/12 13:03:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 13:43:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,58 +14,41 @@
 
 t_colour give_light(t_data *data)
 {
-	add_light(&data->vars, data->ray);
-	data->vars.result.r = fmin(255, fmax(0, data->vars.result.r));
-	data->vars.result.g = fmin(255, fmax(0, data->vars.result.g));
-	data->vars.result.b = fmin(255, fmax(0, data->vars.result.b));
-	return (data->vars.result);
+	add_light(data->vars, data->ray);
+	data->vars->result.r = fmin(255, fmax(0, data->vars->result.r));
+	data->vars->result.g = fmin(255, fmax(0, data->vars->result.g));
+	data->vars->result.b = fmin(255, fmax(0, data->vars->result.b));
+	return (data->vars->result);
 }
 
-// check_shadow !! light!
-/**
- * if does not hit object directly, false - leave ambient
- *  else true - give light
- *
- * just check the pixel (+ obj) we know we've hit
- * if closest then definitely right obj, just maybe shadow
- *
- * 	obj_t = 20.325558
- *	hit pos = 2.968122
-	sphere distance = 15.115867
-
-	sphere - 15.115867
-	hit pos = 2.968122
-	sphere distance = 15.115867
-
-	hit_pos and t same, so just use t
-
-	wanted to compare obj_t to other objs but obvs dont have the obj_t yet...
- */
-bool check_light(t_data *data, t_objs *obj, t_hit_data *hit)
+uint32_t	get_light(t_data *data)
 {
-	(void)hit;
-	t_ray shadow_ray;
+	t_colour	light;
 
-	shadow_ray.place = plus(data->vars.intersect_p, mult_vecdub(obj->normal, EPSILON));
-	shadow_ray.vector = data->vars.light_dir; // LATER; colour->curr_light->place
-
-	// int	j = 0;
-	// while (j < data->objs_i)
-	// {
-	// 	// make a calc for the other objs (only the bit i need), then compare...
-	// 	// if obj is infront = z vector and center point compare to current hit obj
-	// 	//
-	// 	if (data->objs[j]->obj_t < hit->t)
-	// 		return (false);
-	// 	j++;
-	// }
-	return (true);
+	light = give_light(data);
+	return (ft_convert_rgb(light.r, light.g, light.b));
 }
 
-///////////////////////
-/**
-// options:
-
- *			per pixel, save pixel, then check what shadow and what light (+ maybe other things? could be useful..)
- *			OR .... ? 
- */
+bool	in_light(t_data *data, t_hit_data *hit, int i)
+{
+	(void)	hit;
+	int		tmp_i;
+	double	max_hit;
+	double	closest_hit;
+	
+	tmp_i = 0;
+	max_hit = DBL_MAX;
+	closest_hit = 0;
+	if (data->pix[i]->hit_b == true && data->pix[i]->hit_t != DBL_MAX)
+	{
+		while (tmp_i < data->total_pix)
+		{
+			if (data->pix[tmp_i]->hit_t < max_hit)
+				closest_hit = data->pix[tmp_i]->hit_t;
+			tmp_i++;
+		}
+		if (data->pix[i]->hit_t <= closest_hit)
+			return (true);
+	}
+	return (false);
+}

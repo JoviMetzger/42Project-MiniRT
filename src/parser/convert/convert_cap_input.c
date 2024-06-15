@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 13:41:25 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/15 13:52:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	convert_cap_input(t_data *data, char **arr, int count)
 		if (data->type == E_AMBIENT || data->type == E_LIGHT
 			|| data->type == E_CAMERA)
 		{
-			// light init and convert func
 			if (data->type == E_LIGHT)
 			{	
 				data->light[data->light_i] = light_malloc(data, arr);

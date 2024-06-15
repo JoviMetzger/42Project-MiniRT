@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 16:55:35 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/15 13:53:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
  *		- If the object is plain (has no pattern),
  *		  it will return the colour of the object as the base colour.	
  */
-t_colour	get_base_colour(t_objs *obj, t_colour_vars colour)
+t_colour	get_base_colour(t_objs *obj, t_colour_vars *colour)
 {
 	t_colour	base;
 
 	if (obj->what_pattern == 1 && obj->type == E_SPHERE)
-		base = get_sphere_checkerboard(colour.normal);
+		base = get_sphere_checkerboard(colour->normal);
 	else
 		base = obj->colour;
 	return (base);
