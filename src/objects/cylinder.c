@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/11 19:51:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 20:24:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl)
 	hit->b = 2.0 * dot_product(hit->vector_cross, hit->o_c);
 	hit->c = dot_product(hit->o_c, hit->o_c) - (cyl->radius * cyl->radius);
 }
+
 
 bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 {
@@ -90,6 +91,7 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 	if (hit->tmp_t != DBL_MAX)
 	{
 		cyl->obj_t = hit->tmp_t;
+		hit->t = hit->tmp_t;
 		cyl->hit_pos = plus(ray->place, mult_vecdub(ray->vector, cyl->obj_t));
 		return (check_closest(hit));
 	}

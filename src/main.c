@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 13:49:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 18:07:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	free_all(t_data *data)
 {
 	free_objects(data);
 	free_pixels(data);
-	free(data->vars);
 	// free lights
+	// did sarah malloc anything else and forget to free it?
 }
 
 /* main function:
@@ -54,13 +54,3 @@ int	main(int argc, char **argv)
 	free_all(&data);
 	return (EXIT_SUCCESS);
 }
-
-
-
-
-
-// WE NEED TO DOUBLE CHECK: 
-// window/window_key: 	change_pattern()
-// We are doing init_pix(), ft_put_image() twice.
-// is unnecessary. And we leak.
-// ----------------------------------------------------

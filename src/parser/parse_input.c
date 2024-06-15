@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 13:52:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 18:03:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 
 static void	init_colour(t_data *data)
 {
-	data->vars = (t_colour_vars *)malloc(sizeof(t_colour_vars));
-	if (!data->vars)
-		exit(42); // handle correly TODO
-	ft_bzero(data->vars, sizeof(t_colour_vars));
-	data->vars->ambient_ratio = data->ambient.ratio;
-	data->vars->spec_intensity = 0.2;
-	data->vars->spec_power = 32;
-	data->vars->ambient.r = data->vars->ambient_ratio * data->ambient.colour.r;
-	data->vars->ambient.g = data->vars->ambient_ratio * data->ambient.colour.g;
-	data->vars->ambient.b = data->vars->ambient_ratio * data->ambient.colour.b;
-	data->vars->result.r = data->vars->ambient.r;
-	data->vars->result.g = data->vars->ambient.g;
-	data->vars->result.b = data->vars->ambient.b;
+	ft_bzero(&data->vars, sizeof(t_colour_vars));
+	data->vars.ambient_ratio = data->ambient.ratio;
+	data->vars.spec_intensity = 0.2;
+	data->vars.spec_power = 32;
+	data->vars.ambient.r = data->vars.ambient_ratio * data->ambient.colour.r;
+	data->vars.ambient.g = data->vars.ambient_ratio * data->ambient.colour.g;
+	data->vars.ambient.b = data->vars.ambient_ratio * data->ambient.colour.b;
+	data->vars.result.r = data->vars.ambient.r;
+	data->vars.result.g = data->vars.ambient.g;
+	data->vars.result.b = data->vars.ambient.b;
 }
 
 /**

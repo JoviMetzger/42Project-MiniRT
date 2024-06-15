@@ -6,55 +6,31 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 14:44:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 20:44:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-// old one
-// static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj)
-// {
-// 	t_colour	colour;
-// 	uint32_t	ambient_light;
-// 	t_colour	light;
-
-// 	if (hit->closest_t != DBL_MAX)
-// 	{
-// 		colour = get_colour(data, hit, obj);
-// 		ambient_light = ft_convert_rgb(colour.r, colour.g, colour.b);
-// 		if (check_light(data, obj, hit) == true)
-// 		{
-// 			light = give_light(data);
-// 			return (ft_convert_rgb(light.r, light.g, light.b));
-// 		}
-// 		else
-// 			return (ambient_light);
-// 	}
-// 	else
-// 		return (ft_convert_rgb(0, 0, 0));
-// }
-
 /*	This function checks which object is closer to the camera, 
  *	other wise objects will overlap and won't be dispalyed realistic.
  *		- Calculates the colour of the nearest object.
  *		- If no intersection is found, it will return black.
-
- now only ambient light is given, direct light is calculated after we have all hit->ts
  */
-static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj, int i)
+static void	get_ret(t_data *data, t_hit_data *hit, t_objs *obj, int i)
 {
 	t_colour	colour;
 
 	if (hit->closest_t != DBL_MAX)
 	{
-		// debugging
-		colour = get_colour(data, hit, obj);
+		colour = get_colour(data, data->ray, hit, obj);
+		// data->pix[i]->ambient = ft_convert_rgb(colour.r, colour.g, colour.b);
+		data->pix[i]->colour = ft_convert_rgb(colour.r, colour.g, colour.b);
 		data->pix[i]->hit_b = true;
-		return (ft_convert_rgb(colour.r, colour.g, colour.b));
+		// data->pix[i]->light = get_light(data);
 	}
 	else
-		return (ft_convert_rgb(0, 0, 0));
+		data->pix[i]->colour = ft_convert_rgb(0, 0, 0);
 }
 
 /*	This function applies necessary information to the object.
@@ -76,7 +52,7 @@ static t_objs	*update_obj(t_data *data, int i)
  *			- If it does have a hit point it executs update_obj();
  *			  (Becuse the function was too long)
  */
-uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit, int pix_index)
+void	ft_calculate_colour(t_data *data, t_hit_data *hit, int pix_index)
 {
 	int		i;
 	t_objs	*tmp_obj;
@@ -101,6 +77,5 @@ uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit, int pix_index)
 		i++;
 	}
 	data->pix[pix_index]->obj = tmp_obj;
-	return (get_ret(data, hit, tmp_obj, pix_index));
+	get_ret(data, hit, tmp_obj, pix_index);
 }
-  
