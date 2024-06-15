@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 16:53:32 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/15 13:59:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	change_pattern(t_data *data, t_objs *obj)
 			obj->what_pattern = 1;
 		else
 			obj->what_pattern = 0;
-		init_pix(data);
+		do_calcs(data);
 		ft_put_image(data);
 	}
 }

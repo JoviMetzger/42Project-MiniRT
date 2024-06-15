@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 13:50:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 16:14:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,14 @@ typedef struct s_colour
 }	t_colour;
 
 // -------------------------------------------------------------
+// Ray struct (standing alone)
+typedef struct s_ray
+{
+	t_vec3	place;
+	t_vec3	vector;
+}	t_ray;
+
+// -------------------------------------------------------------
 // Struct for camera
 //		fov - field of view
 typedef struct s_camera
@@ -105,6 +113,8 @@ typedef struct s_light
 	t_colour	colour;
 	t_vec3		place;
 	double		ratio;
+	// t_ray		ray;
+	
 }	t_light;
 
 // -------------------------------------------------------------
@@ -131,13 +141,7 @@ typedef struct s_mouse
 	bool			selected;
 }	t_mouse;
 
-// -------------------------------------------------------------
-// Ray struct (standing alone)
-typedef struct s_ray
-{
-	t_vec3	place;
-	t_vec3	vector;
-}	t_ray;
+
 
 // -------------------------------------------------------------
 // Struct for objects, each object has this struct
@@ -227,12 +231,19 @@ typedef struct s_pixel
 	// check what we actually use here and clean up later
 	uint32_t	colour;
 	uint32_t	ambient_colour;
-	uint32_t	light;
+	// uint32_t	light;
 	int			x;	
 	int			y;	
 	double		hit_t;
 	t_objs		*obj;
 	bool		hit_b;
+	t_ray		ray;
+	// t_light		*light_light;
+	t_ray		light_ray;
+	t_vec3		inter_p;
+	// t_vec3		light_dir;
+	// t_data		*light;
+	// t_vec3		inter;
 
 }			t_pixel;
 
@@ -254,7 +265,6 @@ typedef struct s_data
 	t_objs			**objs;
 	t_light			**light;
 	t_hit_data		*hit_data;
-	t_colour_vars	vars;
 	t_type			type;
 	t_camera		camera;
 	t_ambient		ambient;
@@ -306,12 +316,12 @@ t_ray		ft_create_ray(t_data *data, int x, int y);
 //--- light ---//
 // uint32_t	direct_light(t_data *data, int i);
 // bool		check_light(t_data *data, t_objs *obj, t_hit_data *hit);
-t_colour	give_light(t_data *data);
-uint32_t	get_light(t_data *data);
+t_colour	give_light(t_data *data, int i);
+uint32_t	get_light(t_data *data, int i);
 bool		in_light(t_data *data, t_hit_data *hit, int i);
 
 uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj, int index);
-void		add_light(t_colour_vars *colour, t_ray ray);
+void		add_light(t_data *data, t_colour_vars *colour, t_ray ray, int i);
 t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj);
 t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars *colour);
