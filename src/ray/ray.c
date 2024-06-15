@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 21:04:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 13:21:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ static t_vec3	init_vector(t_screen screen)
  *			 pixel_y = viewport_h * (tan((fov / 2) * (M_PI / 180)));
  *		- 4. Initialize the ray vector and the ray place.
  */
-t_ray	*ft_create_ray(t_data *data, int pos_x, int pos_y)
+t_ray	ft_create_ray(t_data *data, int pos_x, int pos_y)
 {
-	t_ray		*ray;
+	t_ray		ray;
 	t_screen	screen;
 	double		img_width;
 	double		img_height;
 
-	ray = (t_ray *)malloc(sizeof(t_ray));
-	if (!ray)
-		exit(42); // handle correctly... TODO
+	// ray = (t_ray *)malloc(sizeof(t_ray));
+	// if (!ray)
+	// 	exit(42); // handle correctly... TODO
 	screen = data->screen;
 	img_width = data->width; // change from data->mlx-> since not init window yet
 	img_height = data->height;
@@ -67,7 +67,7 @@ t_ray	*ft_create_ray(t_data *data, int pos_x, int pos_y)
 				* (M_PI / 180)));
 	screen.pixel_delta_y = screen.viewport_h * (tan((data->camera.fov / 2)
 				* (M_PI / 180)));
-	ray->vector = init_vector(screen);
-	ray->place = data->camera.place;
+	ray.vector = init_vector(screen);
+	ray.place = data->camera.place;
 	return (ray);
 }

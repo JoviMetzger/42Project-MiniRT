@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 21:06:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 13:21:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,16 @@ uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit, int pix_index)
 	while (i < data->objs_i)
 	{
 		if (data->objs[i]->type == E_SPHERE
-			&& intersect_sphere(data->ray, data->objs[i], hit))
+			&& intersect_sphere(&data->ray, data->objs[i], hit))
 			tmp_obj = update_obj(data, i);
 		else if (data->objs[i]->type == E_PLANE
-			&& intersect_plane(data->ray, data->objs[i], hit))
+			&& intersect_plane(&data->ray, data->objs[i], hit))
 			tmp_obj = update_obj(data, i);
 		else if (data->objs[i]->type == E_CYLINDER
-			&& intersect_cylinder(data->ray, data->objs[i], hit))
+			&& intersect_cylinder(&data->ray, data->objs[i], hit))
 			tmp_obj = update_obj(data, i);
 		else if (data->objs[i]->type == E_TRIANGLE	
-			&& intersect_triangle(data->ray, data->objs[i], hit))
+			&& intersect_triangle(&data->ray, data->objs[i], hit))
 			tmp_obj = update_obj(data, i);
 		i++;
 	}

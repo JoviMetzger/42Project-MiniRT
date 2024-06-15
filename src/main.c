@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 13:07:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 13:37:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ void	free_all(t_data *data)
 {
 	free_objects(data);
 	free_pixels(data);
+	free(data->vars);
 	// free lights
-	// ray?
-	// colour_vars?
 }
 
 // main function:

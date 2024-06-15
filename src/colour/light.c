@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/11 16:33:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 21:12:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 13:43:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ t_colour give_light(t_data *data)
 	return (data->vars->result);
 }
 
-// 			light = give_light(data);
-// 			return (ft_convert_rgb(light.r, light.g, light.b));
-
 uint32_t	get_light(t_data *data)
 {
 	t_colour	light;
@@ -32,16 +29,26 @@ uint32_t	get_light(t_data *data)
 	return (ft_convert_rgb(light.r, light.g, light.b));
 }
 
-
-// shadow_ray.place = plus(data->vars.intersect_p, mult_vecdub(obj->normal, EPSILON));
-// shadow_ray.vector = data->vars.light_dir; // LATER; colour->curr_light->place
-
 bool	in_light(t_data *data, t_hit_data *hit, int i)
 {
-	(void) hit;
-
-	if (data->pix[i]->hit_b == true && data->pix[i]->hit_t != DBL_MAX) // && is in direct light
-		return (true);
-	else
-		return (false);
+	(void)	hit;
+	int		tmp_i;
+	double	max_hit;
+	double	closest_hit;
+	
+	tmp_i = 0;
+	max_hit = DBL_MAX;
+	closest_hit = 0;
+	if (data->pix[i]->hit_b == true && data->pix[i]->hit_t != DBL_MAX)
+	{
+		while (tmp_i < data->total_pix)
+		{
+			if (data->pix[tmp_i]->hit_t < max_hit)
+				closest_hit = data->pix[tmp_i]->hit_t;
+			tmp_i++;
+		}
+		if (data->pix[i]->hit_t <= closest_hit)
+			return (true);
+	}
+	return (false);
 }

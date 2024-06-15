@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/14 21:20:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 13:37:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,20 +214,15 @@ typedef struct s_colour_vars
 
 typedef struct s_pixel
 {
-	// what do i need per pixel?
-	// t_data	ray; // ?
-	// light?
-	
+	// check what we actually use here and clean up later
 	uint32_t	colour;
 	uint32_t	ambient_colour;
 	uint32_t	light;
-	
 	int			x;	
 	int			y;	
 	double		hit_t;
 	t_objs		*obj;
 	bool		hit_b;
-	t_ray		*ray;
 
 }			t_pixel;
 
@@ -251,7 +246,7 @@ typedef struct s_data
 	t_ambient		ambient;
 	int				light_i;
 	t_light			**light;
-	t_ray			*ray;
+	t_ray			ray;
 	t_screen		screen;
 	t_type			type;	// parser util which gets overwritten for each element, objects do have a type
 	t_mouse			mouse;
@@ -288,7 +283,7 @@ void		ft_handle_mouse_click(mouse_key_t key, action_t act,
 void		init_mouse_map(t_data *data);
 
 // Ray Functions
-t_ray		*ft_create_ray(t_data *data, int x, int y);
+t_ray		ft_create_ray(t_data *data, int x, int y);
 
 // Colour Functions
 //--- light ---//
@@ -299,7 +294,7 @@ uint32_t	get_light(t_data *data);
 bool		in_light(t_data *data, t_hit_data *hit, int i);
 
 uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj, int index);
-void		add_light(t_colour_vars *colour, t_ray *ray);
+void		add_light(t_colour_vars *colour, t_ray ray);
 t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj);
 t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars *colour);
