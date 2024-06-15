@@ -1,4 +1,12 @@
 
+
+- colours (end of test colour function) like the best version, darker more coloury colours
+- plane / obj overlapping
+- cylinder normals -> inside..
+
+
+
+
 --------------------------------------------------------------------------
 --- to do now ---
 

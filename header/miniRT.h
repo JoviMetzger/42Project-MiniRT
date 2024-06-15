@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 18:25:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 21:24:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,6 +289,8 @@ typedef struct s_checkerboard
 	double	square_u;
 	double	square_v;
 }	t_checkerboard;
+
+t_colour get_colour_test(t_data *data, t_hit_data *obj_data, t_ray ray, t_objs *cylinder);
 
 // --- Functions --- 
 void		free_all(t_data *data);
