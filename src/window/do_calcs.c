@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 20:42:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 20:54:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	do_calcs(t_data *data)
 	int			i = 0;
 
 	// t_ray		light_ray;
+	// light_ray = init_lights(data, light_ray, data->pix[i]->obj, index);
+
 	// int			index = 0;
 
 	while (i < data->total_pix)
@@ -60,8 +62,7 @@ void	do_calcs(t_data *data)
 			data->pix[i]->colour = data->pix[i]->ambient;
 			// while (index < data->light_i)
 			// {
-				// light_ray = init_lights(data, light_ray, data->pix[i]->obj, index);
-				// if light[index] intersects object, overwrite colour with light
+				// if light[index] [DIRECTLY] intersects object, overwrite colour with light
 					data->pix[i]->colour = data->pix[i]->light;
 			// 	index++;
 			// }
