@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 22:06:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 17:30:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,10 @@ bool	intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
 	{
 		hit->o_c = minus(plane->center, ray->place);
 		hit->t = dot_product(hit->o_c, plane->vector) / denom;
-		t_vec3 inter = plus(ray->place, mult_vecdub(ray->vector, hit->t));
-		plane->normal = normalize(minus(inter, plane->center));
 		if (hit->t >= EPSILON)
 		{
-			// printf("vec = %f %f %f\n", plane->vector.x, plane->vector.y, plane->vector.z);
-			// plane->normal = normalize(plane->vector);
-			// printf("norm = %f %f %f\n", plane->normal.x, plane->normal.y, plane->normal.z);
 			if (denom < 0)
-				plane->normal = mult_vecdub(plane->normal, -1);
+				plane->normal = mult_vecdub(plane->vector, -1);
 			plane->obj_t = hit->t;
 			plane->hit_pos = plus(ray->place, mult_vecdub(ray->vector, plane->obj_t));
 			return (check_closest(hit));

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 15:11:36 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 16:13:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 17:44:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,17 @@ static void	specular_light(t_colour_vars *colour, t_ray ray)
 
 uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj)
 {
-	// light init stuff
+	// light init stuff 
+
+//
+// this stuff for light array looping... (data->light[], will have correct light)
+
 	data->vars.curr_light = data->light[0];
 	data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj->obj_t));
 	data->vars.light_dir = normalize(minus(data->vars.curr_light->place,
 		data->vars.intersect_p));
+//
 	data->vars.normal = obj->normal;
-
 
 	// combine ambient, diffuse and specular
 
@@ -78,6 +82,7 @@ uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj)
 	data->vars.result.r = fmin(255, fmax(0, data->vars.result.r));
 	data->vars.result.g = fmin(255, fmax(0, data->vars.result.g));
 	data->vars.result.b = fmin(255, fmax(0, data->vars.result.b));
+
 	return ft_convert_rgb(data->vars.result.r, data->vars.result.g, data->vars.result.b);
 }
 
