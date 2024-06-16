@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 15:49:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 16:16:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,18 @@
  */
 static void	get_ret(t_data *data, t_hit_data *hit, t_objs *obj, int i)
 {
-	t_colour	ambient;
+	// t_colour	ambient;
+	// use ambient, light and black vars here, then give correct one to colour
 
 	if (hit->closest_t != DBL_MAX)
 	{
 		data->pix[i]->hit_b = true;
-	
-		ambient = get_colour(data, obj);
-		data->pix[i]->colour = ft_convert_rgb(ambient.r, ambient.g, ambient.b);
-	
-		data->pix[i]->colour = get_light(data, obj);
+		data->pix[i]->colour = get_ambient(data, obj);
+		data->pix[i]->colour = get_light(data, data->ray, obj);
 	}
 	else
 		data->pix[i]->colour = ft_convert_rgb(0, 0, 0);
+		// wont need this, black can be initialized in parser, given later if no hit
 }
 
 /*	This function applies necessary information to the object.

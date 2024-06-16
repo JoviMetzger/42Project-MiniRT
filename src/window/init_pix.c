@@ -6,27 +6,38 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/12 15:29:22 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 15:16:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 16:14:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 #include "../../header/parser.h"
 
-void	do_calcs(t_data *data)
+void	free_pixels(t_data *data)
 {
-	int			i = 0;
-	t_hit_data	hit;
+	int	i;
 
-	while (i < data->total_pix)
+	i = 0;
+	if (data->pix && data->pix[i])
 	{
-		data->ray = ft_create_ray(data, data->pix[i]->x, data->pix[i]->y);
-		ft_calculate_colour(data, &hit, i);
-		data->mouse.mou_y = data->pix[i]->y;
-		data->mouse.mou_x = data->pix[i]->x;
-		data->pix[i]->hit_t = hit.t;
-		i++;
+		while (data->pix[i])
+		{
+			free(data->pix[i]);
+			i++;
+		}
 	}
+	free(data->pix);
+}
+
+// INIT PER PIXEL :)
+// can add anything else in here that we know from start
+static void	init_pix_vars(t_data *data, int j, int x, int y)
+{
+	data->pix[j]->black = ft_convert_rgb(0, 0, 0);
+	data->mouse.mouse_map[y][x] = -1;
+	data->pix[j]->y = y;
+	data->pix[j]->x = x;
+	
 }
 
 static void	set_pixels(t_data *data)
@@ -46,9 +57,7 @@ static void	set_pixels(t_data *data)
 		{
 			while (x < data->width)
 			{
-				data->mouse.mouse_map[y][x] = -1;
-				data->pix[j]->y = y;
-				data->pix[j]->x = x;
+				init_pix_vars(data, j, x, y);
 				x++;
 				j++;
 			}

@@ -6,11 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 15:11:36 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 15:49:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 16:13:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
+
+// TODO norm, add utils to colour_utils file
 
 // Calculation of the diffuse light
 static void	diffuse_light(t_colour_vars *colour)
@@ -44,40 +46,39 @@ static void	specular_light(t_colour_vars *colour, t_ray ray)
 		* colour->curr_light->colour.b;
 }
 
-void	add_light(t_data *data, t_colour_vars *colour, t_ray ray, t_objs *obj)
+uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj)
 {
 	// light init stuff
-	colour->curr_light = data->light[0];
-	colour->intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj->obj_t));
-	colour->light_dir = normalize(minus(colour->curr_light->place,
-		colour->intersect_p));
-	colour->normal = obj->normal;
+	data->vars.curr_light = data->light[0];
+	data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj->obj_t));
+	data->vars.light_dir = normalize(minus(data->vars.curr_light->place,
+		data->vars.intersect_p));
+	data->vars.normal = obj->normal;
 
 
 	// combine ambient, diffuse and specular
 
-
 	// add diffuse + clamp
-	diffuse_light(colour);
-	colour->result.r = colour->base.r + colour->diffuse.r;
-	colour->result.g = colour->base.g + colour->diffuse.g;
-	colour->result.b = colour->base.b + colour->diffuse.b;
+	diffuse_light(&data->vars);
+	data->vars.result.r = data->vars.base.r + data->vars.diffuse.r;
+	data->vars.result.g = data->vars.base.g + data->vars.diffuse.g;
+	data->vars.result.b = data->vars.base.b + data->vars.diffuse.b;
 
-	colour->result.r = fmin(fmax(colour->result.r, obj->colour.r), 255);
-	colour->result.g = fmin(fmax(colour->result.g, obj->colour.g), 255);
-	colour->result.b = fmin(fmax(colour->result.b, obj->colour.b), 255);
+	data->vars.result.r = fmin(fmax(data->vars.result.r, obj->colour.r), 255);
+	data->vars.result.g = fmin(fmax(data->vars.result.g, obj->colour.g), 255);
+	data->vars.result.b = fmin(fmax(data->vars.result.b, obj->colour.b), 255);
 
 
 	// add specular + clamp
-	specular_light(colour, ray);
-	colour->result.r += colour->result.r / 255 + colour->specular.r;
-	colour->result.g += colour->result.g / 255 + colour->specular.g;
-	colour->result.b += colour->result.b / 255 + colour->specular.b;
+	specular_light(&data->vars, ray);
+	data->vars.result.r += data->vars.result.r / 255 + data->vars.specular.r;
+	data->vars.result.g += data->vars.result.g / 255 + data->vars.specular.g;
+	data->vars.result.b += data->vars.result.b / 255 + data->vars.specular.b;
 
-	colour->result.r = fmin(255, fmax(0, colour->result.r));
-	colour->result.g = fmin(255, fmax(0, colour->result.g));
-	colour->result.b = fmin(255, fmax(0, colour->result.b));
-
+	data->vars.result.r = fmin(255, fmax(0, data->vars.result.r));
+	data->vars.result.g = fmin(255, fmax(0, data->vars.result.g));
+	data->vars.result.b = fmin(255, fmax(0, data->vars.result.b));
+	return ft_convert_rgb(data->vars.result.r, data->vars.result.g, data->vars.result.b);
 }
 
 /*	STEP 3. Compute a color for the closest intersection point.
@@ -94,7 +95,7 @@ void	add_light(t_data *data, t_colour_vars *colour, t_ray ray, t_objs *obj)
  *		  This ensurs that the value is not less than 0 and not bigger than 255. 
  *		  So basiclly controls the overflow/underflow of RGB colour range.
  */
-t_colour	get_colour(t_data *data, t_objs *obj)
+uint32_t	get_ambient(t_data *data, t_objs *obj)
 {
 	// ambient
 	data->vars.base = get_base_colour(obj, &data->vars);
@@ -108,18 +109,9 @@ t_colour	get_colour(t_data *data, t_objs *obj)
 		data->vars.result.b = data->vars.ambient.b * data->vars.base.b / 255;
 	}
 
-
-	// // light stuff
-	// data->vars.curr_light = data->light[0];
-	// data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj_hit->t));
-	// data->vars.light_dir = normalize(minus(data->vars.curr_light->place,
-	// 	data->vars.intersect_p));
-	// data->vars.normal = obj->normal;
-
-
 	// final ambient
 	data->vars.result.r = fmin(255, fmax(0, data->vars.result.r));
 	data->vars.result.g = fmin(255, fmax(0, data->vars.result.g));
 	data->vars.result.b = fmin(255, fmax(0, data->vars.result.b));
-	return (data->vars.result);
+	return ft_convert_rgb(data->vars.result.r, data->vars.result.g, data->vars.result.b);
 }

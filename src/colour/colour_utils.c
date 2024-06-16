@@ -6,11 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 17:43:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 16:13:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
+
+// TODO add funcs here when norming get_colour file
 
 /*	This Function calculates the base colour of an object.
  *		- So if the object has a pattern (Checkerboard, texture),
@@ -37,20 +39,4 @@ t_vec3	ft_reflect(t_vec3 incident, t_vec3 normal)
 {
 	return (minus(incident, mult_vecdub(normal, 2
 				* dot_product(incident, normal))));
-}
-
-void	free_pixels(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	if (data->pix && data->pix[i])
-	{
-		while (data->pix[i])
-		{
-			free(data->pix[i]);
-			i++;
-		}
-	}
-	free(data->pix);
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 15:49:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 16:09:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,10 +239,6 @@ typedef struct s_pixel
 	double		hit_t;
 	t_objs		*obj;
 	bool		hit_b;
-	// t_ray		ray;
-	// t_ray		light_ray;
-	// t_vec3		inter_p;
-
 
 }			t_pixel;
 
@@ -291,7 +287,6 @@ typedef struct s_checkerboard
 	double	square_v;
 }	t_checkerboard;
 
-t_colour get_colour_test(t_data *data, t_hit_data *obj_data, t_ray ray, t_objs *cylinder);
 
 // --- Functions --- 
 void		free_all(t_data *data);
@@ -314,25 +309,13 @@ void		init_mouse_map(t_data *data);
 t_ray		ft_create_ray(t_data *data, int x, int y);
 
 // Colour Functions
-//--- light ---//
-// uint32_t	direct_light(t_data *data, int i);
-// bool		check_light(t_data *data, t_objs *obj, t_hit_data *hit);
-t_colour	give_light(t_data *data, t_objs *obj);
-uint32_t	get_light(t_data *data, t_objs *obj);
-// bool		in_light(t_data *data, t_hit_data *hit, int i);
-
 void		ft_calculate_colour(t_data *data, t_hit_data *obj, int index);
-void		add_light(t_data *data, t_colour_vars *colour, t_ray ray, t_objs *obj);
-t_colour	get_colour(t_data *data, t_objs *obj);
-t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
+uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj);
+uint32_t	get_ambient(t_data *data, t_objs *obj);
+// t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars *colour);
-// void		add_light(t_colour_vars *colour, t_ray ray);
-// void		specular_light(t_colour_vars *colour, t_ray ray);
-// void		diffuse_light(t_colour_vars *colour);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
-
-// Colour Functions Bonus
 t_colour	get_sphere_checkerboard(t_vec3 normal);
 
 // Utils
