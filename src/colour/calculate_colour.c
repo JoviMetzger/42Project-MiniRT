@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 21:25:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 15:49:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@
  */
 static void	get_ret(t_data *data, t_hit_data *hit, t_objs *obj, int i)
 {
-	t_colour	colour;
+	t_colour	ambient;
 
 	if (hit->closest_t != DBL_MAX)
 	{
-		colour = get_colour_test(data, hit, data->ray, obj);
-		// data->pix[i]->ambient = ft_convert_rgb(colour.r, colour.g, colour.b);
-		data->pix[i]->colour = ft_convert_rgb(colour.r, colour.g, colour.b);
 		data->pix[i]->hit_b = true;
-		// data->pix[i]->light = get_light(data);
+	
+		ambient = get_colour(data, obj);
+		data->pix[i]->colour = ft_convert_rgb(ambient.r, ambient.g, ambient.b);
+	
+		data->pix[i]->colour = get_light(data, obj);
 	}
 	else
 		data->pix[i]->colour = ft_convert_rgb(0, 0, 0);

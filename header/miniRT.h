@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 21:24:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 15:49:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ typedef struct s_colour_vars
 	double		spec_power;
 	double		diff_fact;
 	double		spec_fact;
+	double		diffuse_intense;
 	t_colour	ambient;
 	t_colour	diffuse;
 	t_colour	specular;
@@ -316,13 +317,13 @@ t_ray		ft_create_ray(t_data *data, int x, int y);
 //--- light ---//
 // uint32_t	direct_light(t_data *data, int i);
 // bool		check_light(t_data *data, t_objs *obj, t_hit_data *hit);
-t_colour	give_light(t_data *data);
-uint32_t	get_light(t_data *data);
+t_colour	give_light(t_data *data, t_objs *obj);
+uint32_t	get_light(t_data *data, t_objs *obj);
 // bool		in_light(t_data *data, t_hit_data *hit, int i);
 
 void		ft_calculate_colour(t_data *data, t_hit_data *obj, int index);
-void		add_light(t_colour_vars *colour, t_ray ray);
-t_colour	get_colour(t_data *data, t_ray ray, t_hit_data *obj_hit, t_objs *obj);
+void		add_light(t_data *data, t_colour_vars *colour, t_ray ray, t_objs *obj);
+t_colour	get_colour(t_data *data, t_objs *obj);
 t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars *colour);
 // void		add_light(t_colour_vars *colour, t_ray ray);
