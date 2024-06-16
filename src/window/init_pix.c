@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/12 15:29:22 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 16:14:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 16:20:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	init_pix_vars(t_data *data, int j, int x, int y)
 	data->mouse.mouse_map[y][x] = -1;
 	data->pix[j]->y = y;
 	data->pix[j]->x = x;
-	
 }
 
 static void	set_pixels(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 16:09:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 16:21:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,14 +312,10 @@ t_ray		ft_create_ray(t_data *data, int x, int y);
 void		ft_calculate_colour(t_data *data, t_hit_data *obj, int index);
 uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj);
 uint32_t	get_ambient(t_data *data, t_objs *obj);
-// t_vec3		get_surface_normal(t_vec3 intersection_point, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars *colour);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 t_colour	get_sphere_checkerboard(t_vec3 normal);
-
-// Utils
-void		free_pixels(t_data *data);
 
 // Operators
 t_vec3		plus_vecdub(t_vec3 u, double v);
