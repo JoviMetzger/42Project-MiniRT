@@ -5,12 +5,12 @@
 --- to do now ---
 
 !!!
- - which light per pixel while loop in do_calcs
+ - which light per pixel while loop in do_calcs - BEFORE DOING LIGHT ARRAY, CAUSE IM CONFUSED
  - surface normals
  - light array
 
 !!
- - cylinder shape in all positions
+ - cylinder shape - still wronnnngggggggg
  - inside cylinder + sphere
 
 !
@@ -26,3 +26,17 @@
 
 
 --------------------------------------------------------------------------
+
+
+normals:
+
+TRIANGLE
+obj norm = 0.000000 0.000000 1.000000
+
+SPHERE
+obj norm = -0.099434 0.988974 0.109744
+
+CYLINDER - 0,1,1
+obj norm = 0.000000 0.707107 0.707107
+
+literally no idea if good or no, triangle should be since it's flat on 0,0,1

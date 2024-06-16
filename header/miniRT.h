@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 17:36:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 19:40:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,9 @@ typedef struct s_light
 {
 	t_colour	colour;
 	t_vec3		place;
+	t_vec3		direction;
 	double		ratio;
-	// t_ray		ray;
+	t_ray		ray;
 	
 }	t_light;
 

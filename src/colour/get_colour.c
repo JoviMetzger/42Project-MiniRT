@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 15:11:36 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 18:36:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 20:41:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,12 @@ static void	specular_light(t_colour_vars *colour, t_ray ray)
 
 uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj)
 {
-	// light init stuff 
-//
-// this stuff for light array looping... (data->light[], will have correct light)
-// will be moved to create lights based on hit points, need to check if we've actually intersected 
-// if light hits pixel (on obj), then give pixel light 
-	// data->vars.curr_light = data->light[i_light];
-	// data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj->obj_t));
-	// data->vars.light_dir = normalize(minus(data->vars.curr_light->place,
-	// 	data->vars.intersect_p));
-	// data->vars.normal = obj->normal;
-//
+
+	data->vars.curr_light = data->light[0]; // !!!!!!
+	data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj->obj_t));
+	data->vars.light_dir = normalize(minus(data->vars.curr_light->place,
+		data->vars.intersect_p));
+	data->vars.normal = obj->normal;
 
 
 	// combine ambient, diffuse and specular
