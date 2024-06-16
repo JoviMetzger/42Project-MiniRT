@@ -6,12 +6,18 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 17:46:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 18:37:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
+static bool	intersect_light(t_data *data)
+{
+	(void) data;
+	return (true);
+	// return (false);
+}
 
 /**
  * light array: are we creating multiple light rays, then checking the intersection?
@@ -36,27 +42,20 @@ void	do_calcs(t_data *data)
 	i = 0;
 	while (i < data->total_pix)
 	{
+		int j = 0;
 		if (data->pix[i]->hit_b == true)
 		{
-			// if not in shadow... colour = light;
-			// else just give ambient
-			// data->pix[i]->colour = data->pix[i]->ambient;
-			data->pix[i]->colour = data->pix[i]->light;
+			data->pix[i]->colour = data->pix[i]->ambient;
+			while (j < data->light_i)
+			{
+// light is already save in pixel, but need to check if (a) light is hitting obj pixel directly 
+				if (intersect_light(data))
+					data->pix[i]->colour = data->pix[i]->light;
+				j++;
+			}
 		}
 		else
 			data->pix[i]->colour = data->pix[i]->black;
 		i++;
 	}
-	// if pixel->light != 0, yes, a light hits it so change pixel->colour to the one with light
-	// if pixel is in ANY light, then give the light... 
-	// we have black, ambient and light saved, now while loop to give light to correct pixel
-	// i = 0;
-	// while (i < data->total_pix)
-	// {
-	// 	if (data->pix[i]->hit_b == true)
-	// 		data->pix[i]->colour = data->pix[i]->light;
-	// 	else
-	// 		data->pix[i]->colour = data->pix[i]->black;
-	// 	i++;
-	// }
 }

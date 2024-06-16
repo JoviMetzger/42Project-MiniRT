@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 17:45:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/16 18:42:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,26 @@
  */
 static void	get_ret(t_data *data, t_hit_data *hit, t_objs *obj, int i)
 {
-	// int	i_light = 0;
+	int	i_light = 0;
 
 	if (hit->closest_t != DBL_MAX)
 	{
 		data->pix[i]->hit_b = true;
 		data->pix[i]->ambient = get_ambient(data, obj);
-		data->pix[i]->light = get_light(data, data->ray, obj);
-		// while (i_light < data->light_i)
-		// {
-		// 	data->vars.curr_light = data->light[i_light];
-		// 	data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj->obj_t));
-		// 	data->vars.light_dir = normalize(minus(data->vars.curr_light->place,
-		// 		data->vars.intersect_p));
-	
-		// 	double	tmp_hit;
-		// 	t_vec3	tmp_oc;
-			
-		// 	tmp_oc = minus(obj->center, data->vars.light_dir);
-		// 	tmp_hit = dot_product(tmp_oc, obj->vector);
-		// 	if (tmp_hit >= EPSILON)
-		// 	{
-		// 		puts("give light");
-		// 		exit(0);
-		// 		data->pix[i]->colour = get_light(data, data->ray, obj);
-		// 	}
-		// 	i_light++;
-		// }
+		// pixel->light will be overwritten everytime... last declared light will be the final show
+		while (i_light < data->light_i)
+		{
+			data->vars.curr_light = data->light[i_light];
+			data->vars.intersect_p = plus(data->ray.place, mult_vecdub(data->ray.vector, obj->obj_t));
+			data->vars.light_dir = normalize(minus(data->vars.curr_light->place,
+				data->vars.intersect_p));
+			data->vars.normal = obj->normal;
+			data->pix[i]->light = get_light(data, data->ray, obj);
+			i_light++;
+		}
 	}
-	else
-	{
+	// didnt hit anything
 		return ;
-		
-		// wont need this, black is initialized in parser, given later if no hit
-		// data->pix[i]->colour = ft_convert_rgb(0, 0, 0);
-	}
 }
 
 /*	This function applies necessary information to the object.
