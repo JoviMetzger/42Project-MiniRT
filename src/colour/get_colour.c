@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 16:47:10 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/13 22:23:24 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,24 @@ static void	specular_light(t_colour_vars *colour, t_ray ray)
  *		- Accumulate light contributions. 
  *		  (newColour += diffuse_colour * base_colour / 255 + specular_colour)
  */
-void	add_light(t_colour_vars *colour, t_ray ray)
+void add_light(t_colour_vars *colour, t_ray ray, t_data *data, t_objs *obj, t_hit_data *hit) 
 {
-	diffuse_light(colour);
-	specular_light(colour, ray);
-	colour->result.r += colour->diffuse.r * colour->base.r / 255
-		+ colour->specular.r;
-	colour->result.g += colour->diffuse.g * colour->base.g / 255
-		+ colour->specular.g;
-	colour->result.b += colour->diffuse.b * colour->base.b / 255
-		+ colour->specular.b;
+    if (check_light(data, obj, hit)) 
+	{
+        diffuse_light(colour);
+        specular_light(colour, ray);
+        colour->result.r += colour->diffuse.r * colour->base.r / 255 + colour->specular.r;
+        colour->result.g += colour->diffuse.g * colour->base.g / 255 + colour->specular.g;
+        colour->result.b += colour->diffuse.b * colour->base.b / 255 + colour->specular.b;
+    }
+	// diffuse_light(colour);
+	// specular_light(colour, ray);
+	// colour->result.r += colour->diffuse.r * colour->base.r / 255
+	// 	+ colour->specular.r;
+	// colour->result.g += colour->diffuse.g * colour->base.g / 255
+	// 	+ colour->specular.g;
+	// colour->result.b += colour->diffuse.b * colour->base.b / 255
+	// 	+ colour->specular.b;
 }
 
 /*	STEP 3. Compute a color for the closest intersection point.
@@ -76,7 +84,7 @@ void	add_light(t_colour_vars *colour, t_ray ray)
  */
 t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj)
 {
-	int				j;
+	int		j;
 
 	j = -1;
 	// printf("pat: %d\n", obj->what_pattern);
@@ -87,8 +95,9 @@ t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj)
 	data->vars.result.g = data->vars.ambient.g * data->vars.base.g / 255;
 	data->vars.result.b = data->vars.ambient.b * data->vars.base.b / 255;
 	data->vars.curr_light = data->light[0];
-	data->vars.light_dir = normalize(minus(data->vars.curr_light->place,
-		data->vars.intersect_p));
+	data->vars.light_dir = normalize(minus(data->vars.curr_light->place, data->vars.intersect_p));
+	add_light(&data->vars, data->ray, data, obj, data->hit_data);
+	// add_light(&data->vars, data->ray); // Don't know if this is important.
 	data->vars.result.r = fmin(255, fmax(0, data->vars.result.r));
 	data->vars.result.g = fmin(255, fmax(0, data->vars.result.g));
 	data->vars.result.b = fmin(255, fmax(0, data->vars.result.b));

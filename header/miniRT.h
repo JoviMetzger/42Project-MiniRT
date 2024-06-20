@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 16:45:27 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/13 22:22:06 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,7 @@ typedef struct s_pixel
 	uint32_t	colour;
 	int			x;	
 	int			y;	
-}			t_pixel;
+}	t_pixel;
 
 // -------------------------------------------------------------
 // Main struct
@@ -303,8 +303,9 @@ t_ray		ft_create_ray(t_data *data, int x, int y);
 uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj);
 t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars colour);
-t_colour 	give_light(t_data *data);
-void		add_light(t_colour_vars *colour, t_ray ray);
+t_colour	give_light(t_data *data, t_objs *obj, t_hit_data *hit);
+void add_light(t_colour_vars *colour, t_ray ray, t_data *data, t_objs *obj, t_hit_data *hit);
+// void		add_light(t_colour_vars *colour, t_ray ray);
 bool		check_light(t_data *data, t_objs *obj, t_hit_data *hit);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);

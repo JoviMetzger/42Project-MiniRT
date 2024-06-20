@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 17:10:39 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/13 21:55:28 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,23 @@
 static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj)
 {
 	t_colour	colour;
-	// uint32_t	ambient_light;
-	// t_colour	light;
+	uint32_t	ambient_light;
+	t_colour	light;
 
 	if (hit->closest_t != DBL_MAX)
 	{
 		// debugging
 		colour = get_colour(data, hit, obj);
-		return (ft_convert_rgb(colour.r, colour.g, colour.b)); //RM
-		// ambient_light = ft_convert_rgb(colour.r, colour.g, colour.b);
-		// if (check_light(data, obj, hit) == true)
-		// {
-		// 	light = give_light(data);
-		// 	return (ft_convert_rgb(light.r, light.g, light.b));
-		// }
-		// else
-		// 	return (ambient_light);
+		ambient_light = ft_convert_rgb(colour.r, colour.g, colour.b);
+		// return (ft_convert_rgb(colour.r, colour.g, colour.b)); //RM
+		if (check_light(data, obj, hit) == true)
+		{
+			light = give_light(data, obj, hit);
+			return (ft_convert_rgb(light.r, light.g, light.b));
+		}
+		else
+			return (ambient_light);
+			// return (ft_convert_rgb(colour.r, colour.g, colour.b)); //RM
 	}
 	else
 		return (ft_convert_rgb(0, 0, 0));
