@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 19:40:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/20 16:37:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,6 +274,7 @@ typedef struct s_data
 	int				light_i;
 	t_type			type;
 	int16_t			i_am;
+	int				tmp_i; // norm...
 }	t_data;
 
 // -------------------------------------------------------------
@@ -317,6 +318,7 @@ t_colour	get_base_colour(t_objs *obj, t_colour_vars *colour);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 t_colour	get_sphere_checkerboard(t_vec3 normal);
+t_colour	add_tmp(t_colour tmp, t_colour result);
 
 // Operators
 t_vec3		plus_vecdub(t_vec3 u, double v);
