@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 15:11:36 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/20 20:22:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/20 20:30:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,8 @@ static void	loop_lights(t_data *data, t_colour_vars *vars, t_objs *obj)
 	}
 }
 
-	// vars.final_red = fmin(fmax(vars.final_red, obj_i->colour.r), 255);
-	// vars.final_green = fmin(fmax(vars.final_green, obj_i->colour.g), 255);
-	// vars.final_blue = fmin(fmax(vars.final_blue, obj_i->colour.b), 255);
-
 uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj)
 {
-	// ft_bzero(&data->vars, sizeof(t_colour_vars));
 	data->vars.intersect_p = plus(data->ray.place,
 			mult_vecdub(data->ray.vector, obj->obj_t));
 	data->vars.normal = obj->normal;
