@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/20 16:46:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/20 19:49:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	do_calcs(t_data *data)
 	{
 		if (data->pix[data->i]->hit_b == true)
 		{
-			data->pix[data->i]->colour = data->pix[data->i]->light;
+			data->pix[data->i]->colour = data->pix[data->i]->ambient;
+			data->pix[data->i]->colour += data->pix[data->i]->light;
 			// if in shadow
 				// data->pix[i]->colour = data->pix[i]->ambient;
 		}

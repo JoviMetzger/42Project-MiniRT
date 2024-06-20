@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 15:11:36 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/20 16:42:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/20 19:52:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	specular_light(t_colour_vars *colour, t_ray ray)
 static void	loop_lights(t_data *data, t_colour_vars *vars, t_objs *obj)
 {
 	t_colour	tmp_save;
+	(void) obj;
 
 	data->tmp_i = 0;
 	while (data->tmp_i < data->light_i)
@@ -54,9 +55,9 @@ static void	loop_lights(t_data *data, t_colour_vars *vars, t_objs *obj)
 		vars->light_dir = normalize(minus(vars->curr_light->place,
 					vars->intersect_p));
 		diffuse_light(vars);
-		vars->result.r = vars->base.r + vars->diffuse.r;
-		vars->result.g = vars->base.g + vars->diffuse.g;
-		vars->result.b = vars->base.b + vars->diffuse.b;
+		vars->result.r += vars->diffuse.r;
+		vars->result.g += vars->diffuse.g;
+		vars->result.b += vars->diffuse.b;
 		vars->result.r = fmin(fmax(vars->result.r, obj->colour.r), 255);
 		vars->result.g = fmin(fmax(vars->result.g, obj->colour.g), 255);
 		vars->result.b = fmin(fmax(vars->result.b, obj->colour.b), 255);
@@ -88,20 +89,6 @@ uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj)
 			data->vars.result.g, data->vars.result.b));
 }
 
-/*	STEP 3. Compute a color for the closest intersection point.
- *
- *	This function uses the 'Phong reflection model' for each object.
- *	Including multiple light and creating shadows.
- *		- Initializing colour_vars.
- *		- Initializing the base colour of the object.
- *		- Initializing the result of the colour with ambient light contribution.
- *		  (colour = ambient * base / 255)
- *		- Goes through all the different light 
- *		  and does the shadow_calculation on each object for each light.
- *		- Clamp final values to [0, 255]. 
- *		  This ensurs that the value is not less than 0 and not bigger than 255. 
- *		  So basiclly controls the overflow/underflow of RGB colour range.
- */
 uint32_t	get_ambient(t_data *data, t_objs *obj)
 {
 	data->vars.base = get_base_colour(obj, &data->vars);
