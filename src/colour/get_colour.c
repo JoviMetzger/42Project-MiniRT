@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 15:11:36 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/20 20:30:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/20 21:07:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ static void	specular_light(t_colour_vars *colour, t_ray ray)
 		* colour->curr_light->colour.b;
 }
 
-static void	loop_lights(t_data *data, t_colour_vars *vars, t_objs *obj)
+static void	loop_light_array(t_data *data, t_colour_vars *vars, t_objs *obj, t_ray ray)
 {
 	t_colour	tmp_save;
-	(void) obj;
 
 	data->tmp_i = 0;
 	while (data->tmp_i < data->light_i)
 	{
+		data->vars.intersect_p = plus(data->ray.place,
+				mult_vecdub(data->ray.vector, obj->obj_t));
+		data->vars.normal = obj->normal;
 		vars->curr_light = data->light[data->tmp_i];
 		vars->light_dir = normalize(minus(vars->curr_light->place,
 					vars->intersect_p));
@@ -58,9 +60,10 @@ static void	loop_lights(t_data *data, t_colour_vars *vars, t_objs *obj)
 		vars->result.r += vars->diffuse.r;
 		vars->result.g += vars->diffuse.g;
 		vars->result.b += vars->diffuse.b;
-		// vars->result.r = fmin(fmax(vars->result.r, obj->colour.r), 255);
-		// vars->result.g = fmin(fmax(vars->result.g, obj->colour.g), 255);
-		// vars->result.b = fmin(fmax(vars->result.b, obj->colour.b), 255);
+		specular_light(&data->vars, ray);
+		vars->result.r += vars->specular.r;
+		vars->result.g += vars->specular.g;
+		vars->result.b += vars->specular.b;
 		if (data->tmp_i == 0)
 			tmp_save = vars->result;
 		else
@@ -74,14 +77,10 @@ static void	loop_lights(t_data *data, t_colour_vars *vars, t_objs *obj)
 
 uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj)
 {
-	data->vars.intersect_p = plus(data->ray.place,
-			mult_vecdub(data->ray.vector, obj->obj_t));
-	data->vars.normal = obj->normal;
-	loop_lights(data, &data->vars, obj);
-	specular_light(&data->vars, ray);
-	data->vars.result.r += data->vars.result.r / 255 + data->vars.specular.r;
-	data->vars.result.g += data->vars.result.g / 255 + data->vars.specular.g;
-	data->vars.result.b += data->vars.result.b / 255 + data->vars.specular.b;
+	loop_light_array(data, &data->vars, obj, ray);
+	data->vars.result.r += data->vars.result.r / 255;
+	data->vars.result.g += data->vars.result.g / 255;
+	data->vars.result.b += data->vars.result.b / 255;
 	data->vars.result.r = fmin(255, fmax(0, data->vars.result.r));
 	data->vars.result.g = fmin(255, fmax(0, data->vars.result.g));
 	data->vars.result.b = fmin(255, fmax(0, data->vars.result.b));
