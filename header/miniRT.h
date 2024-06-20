@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/20 16:37:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/20 16:45:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,6 +275,7 @@ typedef struct s_data
 	t_type			type;
 	int16_t			i_am;
 	int				tmp_i; // norm...
+	int				i;
 }	t_data;
 
 // -------------------------------------------------------------

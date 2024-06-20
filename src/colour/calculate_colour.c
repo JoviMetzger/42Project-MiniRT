@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/20 14:33:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/20 16:44:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*	This function checks which object is closer to the camera, 
  *	other wise objects will overlap and won't be dispalyed realistic.
  *		- Calculates the colour of the nearest object.
- *		- If no intersection is found, it will return black.
+ *		- If no intersection is found, colour is set to black.
  */
 static void	get_ret(t_data *data, t_hit_data *hit, t_objs *obj, int i)
 {
@@ -23,12 +23,10 @@ static void	get_ret(t_data *data, t_hit_data *hit, t_objs *obj, int i)
 	{
 		data->pix[i]->hit_b = true;
 		data->pix[i]->ambient = get_ambient(data, obj);
-		// idea but fuck knows...
-		// need somehow to get light after checking all lights and add most light to pixel->light
-		data->pix[i]->colour = get_light(data, data->ray, obj);
+		data->pix[i]->light = get_light(data, data->ray, obj);
 	}
 	else
-		data->pix[i]->colour = data->pix[i]->black; // didnt hit anything
+		data->pix[i]->colour = data->pix[i]->black;
 }
 
 /*	This function applies necessary information to the object.
