@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/21 12:48:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/21 13:37:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 bool   shadow_calc(t_data *data, int i)
 {
-    bool		 in_shadow = false;
+    bool		 in_shadow = true;
     int			 obj_i = 0;
     t_hit_data 	 hit_2;
     t_ray  		 shadow_ray;
@@ -42,24 +42,35 @@ bool   shadow_calc(t_data *data, int i)
 
     while (obj_i < data->objs_i)
     {
-        if (intersect_sphere(&shadow_ray, data->objs[obj_i], &hit_2)
-            || intersect_cylinder(&shadow_ray, data->objs[obj_i], &hit_2)
-            || intersect_triangle(&shadow_ray, data->objs[obj_i], &hit_2)
-            || intersect_plane(&shadow_ray, data->objs[obj_i], &hit_2))
-            {
-				if (hit_2.closest_t != data->objs[obj_i]->obj_t)
-				{
-					in_shadow = true;
-					break ;
-				}
-            }
+        if (intersect_sphere(&shadow_ray, data->objs[obj_i], &hit_2))
+		{
+			if (hit_2.closest_t != DBL_MAX)
+			{
+				in_shadow = false;
+				break ;
+			}
+		}
+        // else if (intersect_cylinder(&shadow_ray, data->objs[obj_i], &hit_2))
+		// {
+		// 	if (hit_2.closest_t == data->pix[i]->hit_t)
+		// 		in_shadow = false;
+		// }
+        // else if (intersect_triangle(&shadow_ray, data->objs[obj_i], &hit_2))
+		// {
+		// 	if (hit_2.closest_t == data->pix[i]->hit_t)
+		// 		in_shadow = false;
+		// }
+        // else if (intersect_plane(&shadow_ray, data->objs[obj_i], &hit_2))
+		// {
+		// 	if (hit_2.closest_t == data->pix[i]->hit_t)
+		// 		in_shadow = false;
+		// }
         obj_i++;
     }
-	
     // exit(0);
-    if (!in_shadow)
-		return (true);
-	return (false);
+    if (in_shadow)
+		return (false);
+	return (true);
 }
 
 void	do_calcs(t_data *data)
