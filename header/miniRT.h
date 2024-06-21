@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/21 15:29:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/21 16:30:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ typedef struct s_pixel
 	t_objs		*obj;
 	bool		hit_b;
 	t_ray		ray;
-	t_ray			shadow_ray;
+	t_ray		light_ray;
 
 }			t_pixel;
 
@@ -292,7 +292,7 @@ typedef struct s_checkerboard
 	double	square_v;
 }	t_checkerboard;
 
-bool   shadow_calc(t_data *data, t_ray ray, int i);
+bool   in_light(t_data *data, int i);
 
 
 // --- Functions --- 
