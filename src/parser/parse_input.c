@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 13:41:32 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/16 15:23:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	parse_input(int argc, char **argv, t_data *data)
 	ft_bzero(data, sizeof(t_data));
 	if (argc != 2)
 		error_msg("wrong number of arguments");
-	data->i_am = -1;
+	// data->i_am = -1;
 	check_file_type(argv[1]);
 	file = open(argv[1], O_RDONLY, 0644);
 	if (file == -1)

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 22:22:06 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/20 16:26:15 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@
 # define RESET "\033[0m"
 
 // --- Window ---
-// # define WIDTH 1900
-// # define HEIGHT 1700
-// ^ using that one ^
+// # define WIDTH 1800
+// # define HEIGHT 1900
 # define WIDTH 1920
 # define HEIGHT 1080
 
@@ -84,6 +83,14 @@ typedef struct s_colour
 }	t_colour;
 
 // -------------------------------------------------------------
+// Ray struct (standing alone)
+typedef struct s_ray
+{
+	t_vec3	place;
+	t_vec3	vector;
+}	t_ray;
+
+// -------------------------------------------------------------
 // Struct for camera
 //		fov - field of view
 typedef struct s_camera
@@ -108,6 +115,8 @@ typedef struct s_light
 	t_colour	colour;
 	t_vec3		place;
 	double		ratio;
+	// t_ray		ray;
+	
 }	t_light;
 
 // -------------------------------------------------------------
@@ -134,13 +143,7 @@ typedef struct s_mouse
 	bool			selected;
 }	t_mouse;
 
-// -------------------------------------------------------------
-// Ray struct (standing alone)
-typedef struct s_ray
-{
-	t_vec3	place;
-	t_vec3	vector;
-}	t_ray;
+
 
 // -------------------------------------------------------------
 // Struct for objects, each object has this struct
@@ -217,6 +220,7 @@ typedef struct s_colour_vars
 	double		spec_power;
 	double		diff_fact;
 	double		spec_fact;
+	double		diffuse_intense;
 	t_colour	ambient;
 	t_colour	diffuse;
 	t_colour	specular;
@@ -227,15 +231,18 @@ typedef struct s_colour_vars
 // Struct for each pixel. Each pixel will be saved in the struct.
 typedef struct s_pixel
 {
-	// what do i need per pixel?
-	// double	hit_t;
-	// t_data	ray; // ?
-	// light?
-	
 	uint32_t	colour;
+	uint32_t	ambient;
+	uint32_t	light;
+	uint32_t	black;
+
 	int			x;	
 	int			y;	
-}	t_pixel;
+	double		hit_t;
+	t_objs		*obj;
+	bool		hit_b;
+
+}			t_pixel;
 
 // -------------------------------------------------------------
 // Main struct
@@ -255,7 +262,6 @@ typedef struct s_data
 	t_light			**light;
 	t_hit_data		*hit_data;
 	t_colour_vars	vars;
-	t_type			type;
 	t_camera		camera;
 	t_ambient		ambient;
 	t_screen		screen;
@@ -267,6 +273,7 @@ typedef struct s_data
 	int				pix_i;
 	int				objs_i;
 	int				light_i;
+	t_type			type;
 	int16_t			i_am;
 }	t_data;
 
@@ -282,9 +289,13 @@ typedef struct s_checkerboard
 	double	square_v;
 }	t_checkerboard;
 
+
 // --- Functions --- 
+void		free_all(t_data *data);
+
 // Window Functions
-int			do_calcs(t_data *data);
+void		free_pixels(t_data *data);
+void		do_calcs(t_data *data);
 void		init_pix(t_data *data);
 void		ft_put_image(t_data *data);
 void		ft_open_window(t_data *data);
@@ -300,21 +311,13 @@ void		init_mouse_map(t_data *data);
 t_ray		ft_create_ray(t_data *data, int x, int y);
 
 // Colour Functions
-uint32_t	ft_calculate_colour(t_data *data, t_hit_data *obj);
-t_colour	get_colour(t_data *data, t_hit_data *obj_hit, t_objs *obj);
+void		ft_calculate_colour(t_data *data, t_hit_data *obj, int index);
+uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj);
+uint32_t	get_ambient(t_data *data, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars colour);
-t_colour	give_light(t_data *data, t_objs *obj, t_hit_data *hit);
-void add_light(t_colour_vars *colour, t_ray ray, t_data *data, t_objs *obj, t_hit_data *hit);
-// void		add_light(t_colour_vars *colour, t_ray ray);
-bool		check_light(t_data *data, t_objs *obj, t_hit_data *hit);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
-
-// Colour Functions Bonus
 t_colour	get_sphere_checkerboard(t_vec3 normal);
-
-// Utils
-void		free_pixels(t_data *data);
 
 // Operators
 t_vec3		plus_vecdub(t_vec3 u, double v);

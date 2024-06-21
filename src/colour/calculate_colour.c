@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 21:55:28 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/06/20 18:56:55 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,20 @@
  *		- Calculates the colour of the nearest object.
  *		- If no intersection is found, it will return black.
  */
-static uint32_t	get_ret(t_data *data, t_hit_data *hit, t_objs *obj)
+static void	get_ret(t_data *data, t_hit_data *hit, t_objs *obj, int i)
 {
-	t_colour	colour;
-	uint32_t	ambient_light;
-	t_colour	light;
+	// t_colour	ambient;
+	// use ambient, light and black vars here, then give correct one to colour
 
 	if (hit->closest_t != DBL_MAX)
 	{
-		// debugging
-		colour = get_colour(data, hit, obj);
-		ambient_light = ft_convert_rgb(colour.r, colour.g, colour.b);
-		// return (ft_convert_rgb(colour.r, colour.g, colour.b)); //RM
-		if (check_light(data, obj, hit) == true)
-		{
-			light = give_light(data, obj, hit);
-			return (ft_convert_rgb(light.r, light.g, light.b));
-		}
-		else
-			return (ambient_light);
-			// return (ft_convert_rgb(colour.r, colour.g, colour.b)); //RM
+		// data->pix[i]->hit_b = true;
+		// data->pix[i]->colour = get_ambient(data, obj);
+		data->pix[i]->colour = get_light(data, data->ray, obj);
 	}
 	else
-		return (ft_convert_rgb(0, 0, 0));
+		data->pix[i]->colour = ft_convert_rgb(0, 0, 0);
+		// wont need this, black can be initialized in parser, given later if no hit
 }
 
 /*	This function applies necessary information to the object.
@@ -61,13 +52,14 @@ static t_objs	*update_obj(t_data *data, int i)
  *			- If it does have a hit point it executs update_obj();
  *			  (Becuse the function was too long)
  */
-uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit)
+void	ft_calculate_colour(t_data *data, t_hit_data *hit, int pix_index)
 {
 	int		i;
 	t_objs	*tmp_obj;
 
 	i = 0;
 	hit->closest_t = DBL_MAX;
+	data->pix[i]->hit_b = false;
 	while (i < data->objs_i)
 	{
 		if (data->objs[i]->type == E_SPHERE
@@ -84,6 +76,6 @@ uint32_t	ft_calculate_colour(t_data *data, t_hit_data *hit)
 			tmp_obj = update_obj(data, i);
 		i++;
 	}
-	return (get_ret(data, hit, tmp_obj));
+	data->pix[pix_index]->obj = tmp_obj;
+	get_ret(data, hit, tmp_obj, pix_index);
 }
-  

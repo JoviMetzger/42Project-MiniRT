@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/11 19:51:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/15 21:27:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl)
 	hit->c = dot_product(hit->o_c, hit->o_c) - (cyl->radius * cyl->radius);
 }
 
+
 bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 {
 	set_points(hit, ray, cyl);
@@ -47,6 +48,7 @@ bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 
 void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 {
+	// t_vec3	to_bottom;
 	// jovi version
 	// t_vec3 intersect = plus(ray->place, mult_vecdub(ray->vector, hit->t));
 
@@ -59,6 +61,12 @@ void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 	
 	// check the things dont go wrong using/updating the hit values
 	
+	// hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
+	// // hit->to_center = minus(hit->hit_pos, cyl->center);
+	// to_bottom = minus(cyl->top, hit->hit_pos);
+	// cyl->tmp_normal = minus(to_bottom, mult_vecdub(cyl->vector,
+	// 			dot_product(cyl->vector, to_bottom)));
+	// cyl->normal = normalize(cyl->tmp_normal);
 	hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
 	hit->to_center = minus(hit->hit_pos, cyl->center);
 	cyl->tmp_normal = minus(hit->to_center, mult_vecdub(cyl->vector,
@@ -90,6 +98,7 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 	if (hit->tmp_t != DBL_MAX)
 	{
 		cyl->obj_t = hit->tmp_t;
+		hit->t = hit->tmp_t;
 		cyl->hit_pos = plus(ray->place, mult_vecdub(ray->vector, cyl->obj_t));
 		return (check_closest(hit));
 	}
