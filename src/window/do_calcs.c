@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/21 15:30:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/21 15:39:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,22 @@ bool   shadow_calc(t_data *data, t_ray ray, int i)
     {
         if (intersect_sphere(&ray, data->objs[obj_i], &hit_2))
 		{
-			if (hit_2.closest_t == data->pix[i]->hit_t)
+			if (hit_2.closest_t != data->pix[i]->hit_t)
 				in_shadow = true;
 		}
         else if (intersect_cylinder(&ray, data->objs[obj_i], &hit_2))
 		{
-			if (hit_2.closest_t == data->pix[i]->hit_t)
+			if (hit_2.closest_t != data->pix[i]->hit_t)
 				in_shadow = true;
 		}
         else if (intersect_triangle(&ray, data->objs[obj_i], &hit_2))
 		{
-			if (hit_2.closest_t == data->pix[i]->hit_t)
+			if (hit_2.closest_t != data->pix[i]->hit_t)
 				in_shadow = true;
 		}
         else if (intersect_plane(&ray, data->objs[obj_i], &hit_2))
 		{
-			if (hit_2.closest_t == data->pix[i]->hit_t)
+			if (hit_2.closest_t != data->pix[i]->hit_t)
 				in_shadow = true;
 		}
         obj_i++;
