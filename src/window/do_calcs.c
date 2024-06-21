@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/21 14:01:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/21 15:30:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,59 +28,48 @@ static t_ray	init_light_ray(t_data *data, int i)
 
 	t_vec3  light_dir = normalize(minus(data->light[0]->place, inter_p));
 
-	data->shadow_ray.place = data->light[0]->place;
-	data->shadow_ray.vector = light_dir;
+	data->pix[i]->shadow_ray.place = data->light[0]->place;
+	data->pix[i]->shadow_ray.vector = light_dir;
 
-	return (data->shadow_ray);
+	return (data->pix[i]->shadow_ray);
 }
 
-bool   shadow_calc(t_data *data, int i)
+bool   shadow_calc(t_data *data, t_ray ray, int i)
 {
     bool		 in_shadow = false;
     int			 obj_i = 0;
     t_hit_data 	 hit_2;
-    t_ray  		 shadow_ray;
-	
-	
-    t_vec3  inter_p = plus(data->pix[i]->ray.place,
-        mult_vecdub(data->pix[i]->ray.vector, data->pix[i]->hit_t));
-		
-
-    t_vec3  light_dir = normalize(minus(data->light[0]->place, inter_p));
-    // shadow_ray.place = plus(inter_p, mult_vecdub(data->pix[i]->obj->normal, EPSILON));
-    shadow_ray.place = data->light[0]->place;
-    shadow_ray.vector = light_dir;
 
 	hit_2.closest_t = DBL_MAX;
 
     while (obj_i < data->objs_i)
     {
-        if (intersect_sphere(&shadow_ray, data->objs[obj_i], &hit_2))
+        if (intersect_sphere(&ray, data->objs[obj_i], &hit_2))
 		{
 			if (hit_2.closest_t == data->pix[i]->hit_t)
-				in_shadow =true;
+				in_shadow = true;
 		}
-        else if (intersect_cylinder(&shadow_ray, data->objs[obj_i], &hit_2))
+        else if (intersect_cylinder(&ray, data->objs[obj_i], &hit_2))
 		{
 			if (hit_2.closest_t == data->pix[i]->hit_t)
-				in_shadow =true;
+				in_shadow = true;
 		}
-        else if (intersect_triangle(&shadow_ray, data->objs[obj_i], &hit_2))
+        else if (intersect_triangle(&ray, data->objs[obj_i], &hit_2))
 		{
 			if (hit_2.closest_t == data->pix[i]->hit_t)
-				in_shadow =true;
+				in_shadow = true;
 		}
-        else if (intersect_plane(&shadow_ray, data->objs[obj_i], &hit_2))
+        else if (intersect_plane(&ray, data->objs[obj_i], &hit_2))
 		{
 			if (hit_2.closest_t == data->pix[i]->hit_t)
-				in_shadow =true;
+				in_shadow = true;
 		}
         obj_i++;
     }
     // exit(0);
     if (in_shadow)
-		return (false);
-	return (true);
+		return (true);
+	return (false);
 }
 
 void	do_calcs(t_data *data)
@@ -92,7 +81,7 @@ void	do_calcs(t_data *data)
 	{
 		data->ray = ft_create_ray(data, data->pix[data->i]->x,
 				data->pix[data->i]->y);
-		data->shadow_ray = init_light_ray(data, data->i);
+		data->pix[data->i]->shadow_ray = init_light_ray(data, data->i);
 		ft_calculate_colour(data, &hit, data->i);
 		data->mouse.mou_y = data->pix[data->i]->y;
 		data->mouse.mou_x = data->pix[data->i]->x;
