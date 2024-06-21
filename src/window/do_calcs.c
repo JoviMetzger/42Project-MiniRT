@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/21 16:32:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/21 17:53:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	do_calcs(t_data *data)
 	{
 		if (data->pix[data->i]->hit_b == true)
 		{
-			if (data->pix[data->i]->obj->diameter != 3)
+			if (data->pix[data->i]->obj->diameter != 3) // try something based on the pixel... if pixel % 2, give light, mix on obj?
 				data->pix[data->i]->colour = data->pix[data->i]->light;
 			else
 				data->pix[data->i]->colour = data->pix[data->i]->ambient;
