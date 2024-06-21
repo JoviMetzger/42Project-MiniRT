@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/21 13:36:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/21 14:01:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ static void	get_ret(t_data *data, t_hit_data *hit, t_objs *obj, int i)
 	if (hit->closest_t != DBL_MAX)
 	{
 		data->pix[i]->hit_b = true;
-		data->pix[i]->colour = get_ambient(data, obj); // just make colour ambient, then add light? andersom?
 		data->pix[i]->hit_t = obj->obj_t;
+		data->pix[i]->ambient = get_ambient(data, obj); // just make colour ambient, then add light? andersom?
 		// data->pix[i]->ambient = get_ambient(data, obj); // just make colour ambient, then add light? andersom?
-		if (shadow_calc(data, i) && obj->diameter != 3)
-			data->pix[i]->colour = get_light(data, data->ray, obj);
+
+
+		data->pix[i]->colour = get_light(data, data->shadow_ray, obj);
+		// if (shadow_calc(data, shadow_ray, i))
+		// 	data->pix[i]->colour = data->pix[i]->ambient;
+		// }
 	}
 	else
 		data->pix[i]->colour = data->pix[i]->black;

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/21 12:43:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/06/21 14:02:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,6 +266,7 @@ typedef struct s_data
 	t_ambient		ambient;
 	t_screen		screen;
 	t_ray			ray;
+	t_ray			shadow_ray;
 	t_mouse			mouse;
 	int				total_pix;
 	int				height;
