@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 19:33:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/03 17:06:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 bool	intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit)
 {
 	t_vec3	inter_point;
+
 
 	hit->o_c = minus(ray->place, sphere->center);
 	hit->a = dot_product(ray->vector, ray->vector);
