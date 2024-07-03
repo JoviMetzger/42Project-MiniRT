@@ -6,13 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/03 17:21:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/03 17:55:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
-
-
 
 static t_ray	init_light_ray(t_data *data, int i)
 {
