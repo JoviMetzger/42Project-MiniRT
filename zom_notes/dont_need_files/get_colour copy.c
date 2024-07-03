@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_colour.c                                       :+:    :+:            */
+/*   get_colour copy.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 15:11:36 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/20 19:52:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/03 20:07:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	specular_light(t_colour_vars *colour, t_ray ray)
 static void	loop_lights(t_data *data, t_colour_vars *vars, t_objs *obj)
 {
 	t_colour	tmp_save;
-	(void) obj;
 
 	data->tmp_i = 0;
 	while (data->tmp_i < data->light_i)

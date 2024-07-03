@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/03 17:55:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/03 20:46:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,29 @@ static t_ray	init_light_ray(t_data *data, int i)
 
 // trace another ray from the intersection of the prime ray and the object back to the light. 
 // If there is another object between the intersection and the light, the point is in shadow.
-bool	in_light(t_data *data, int i)
+bool	in_light(t_data *data, t_ray *ray, int i)
 {
-	t_ray 			ray = init_light_ray(data, i);
+	// t_ray 			ray = init_light_ray(data, i);
     int				obj_i = 0;
     t_hit_data		hit_2;
+	double			tmp_t;
+	(void) i;
 
 
+	tmp_t = data->pix[i]->hit_t;
 	hit_2.closest_t = DBL_MAX;
-
-    while (obj_i < data->objs_i && data->objs[obj_i] != data->pix[i]->obj)
+	// hit_2.t = data->pix[i]->hit_t;
+//  && data->objs[obj_i] != data->pix[i]->obj ??
+    while (obj_i < data->objs_i)
     {
-        if (intersect_sphere(&ray, data->objs[obj_i], &hit_2)
-			|| intersect_cylinder(&ray, data->objs[obj_i], &hit_2)
-			|| intersect_triangle(&ray, data->objs[obj_i], &hit_2)
-			|| intersect_plane(&ray, data->objs[obj_i], &hit_2))
+        if (intersect_sphere(ray, data->objs[obj_i], &hit_2)
+			|| intersect_cylinder(ray, data->objs[obj_i], &hit_2)
+			|| intersect_triangle(ray, data->objs[obj_i], &hit_2)
+			|| intersect_plane(ray, data->objs[obj_i], &hit_2))
 		{
+			if (hit_2.closest_t > tmp_t)
+			// if (hit_2.closest_t < data->pix[i]->hit_t)
+				// puts("intersects");
 			// if (hit_2.closest_t > data->pix[i]->hit_t)
 				return (false);
 		}
@@ -70,9 +77,10 @@ void	do_calcs(t_data *data)
 	data->i = 0;
 	while (data->i < data->total_pix)
 	{
+		t_ray 			ray = init_light_ray(data, data->i);
 		if (data->pix[data->i]->hit_b == true)
 		{
-			if (in_light(data, data->i) == true)
+			if (in_light(data, &ray, data->i))
 				data->pix[data->i]->colour = data->pix[data->i]->light;
 			else
 				data->pix[data->i]->colour = data->pix[data->i]->ambient;

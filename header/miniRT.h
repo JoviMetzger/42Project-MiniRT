@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/03 17:00:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/03 19:58:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,27 +258,31 @@ typedef struct s_data
 {
 	mlx_image_t		*image;
 	mlx_t			*mlx;
+	
 	t_pixel			**pix;
+	int				pix_i;
+	int				total_pix;
 	t_objs			**objs;
+	int				objs_i;
 	t_light			**light;
-	t_hit_data		*hit_data;
-	t_colour_vars	vars;
+	int				light_i;
+
 	t_camera		camera;
 	t_ambient		ambient;
 	t_screen		screen;
 	t_ray			ray;
 	// t_ray			light_ray;
+
+	t_hit_data		*hit_data;
+	t_colour_vars	vars;
 	t_mouse			mouse;
-	int				total_pix;
 	int				height;
 	int				width;
-	int				pix_i;
-	int				objs_i;
-	int				light_i;
 	t_type			type;
+
 	int16_t			i_am;
 	int				tmp_i; // norm...
-	int				i;
+	int				i;		// somehting sarah is using hehe
 }	t_data;
 
 // -------------------------------------------------------------
@@ -293,7 +297,7 @@ typedef struct s_checkerboard
 	double	square_v;
 }	t_checkerboard;
 
-bool   in_light(t_data *data, int i);
+bool   in_light(t_data *data, t_ray *ray, int i);
 
 
 // --- Functions --- 
