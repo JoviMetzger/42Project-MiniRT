@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/01 19:12:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/06 19:27:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/09 15:16:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	ft_bzero(&tmppl, sizeof(t_objs));
 	tmppl.center = cyl->top;
 	tmppl.vector = cyl->vector;
-	if (intersect_cyl_plane(ray, &tmppl, hit) == true)
+	if (intersect_plane(ray, &tmppl, hit) == true)
 	{
 		hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
 		distance = vec_length(cyl->top, hit->hit_pos);
@@ -38,7 +38,7 @@ bool	boop_bottom(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	ft_bzero(&tmppl, sizeof(t_objs));
 	tmppl.center = cyl->base;
 	tmppl.vector = cyl->vector;
-	if (intersect_cyl_plane(ray, &tmppl, hit) == true)
+	if (intersect_plane(ray, &tmppl, hit) == true)
 	{
 		hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
 		distance = vec_length(cyl->base, hit->hit_pos);

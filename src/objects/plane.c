@@ -6,31 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/16 17:30:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/09 15:20:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
-
-bool	intersect_cyl_plane(t_ray *ray, t_objs *cyl_plane, t_hit_data *hit)
-{
-	double	denom;
-
-	denom = dot_product(ray->vector, cyl_plane->vector);
-	if (fabs(denom) > EPSILON)
-	{
-		hit->o_c = minus(cyl_plane->center, ray->place);
-		hit->t = dot_product(hit->o_c, cyl_plane->vector) / denom;
-		if (hit->t >= EPSILON)
-		{
-			if (denom < 0)
-				cyl_plane->normal = mult_vecdub(cyl_plane->vector, -1);
-			cyl_plane->obj_t = hit->t;
-			return (true);
-		}
-	}
-	return (false);
-}
 
 /**
  * if t is negative, no intersection found
@@ -56,8 +36,16 @@ bool	intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
 				plane->normal = mult_vecdub(plane->vector, -1);
 			plane->obj_t = hit->t;
 			plane->hit_pos = plus(ray->place, mult_vecdub(ray->vector, plane->obj_t));
-			return (check_closest(hit));
+			return (true);
 		}
 	}
 	return (false);
 }
+
+bool	plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
+{
+	if (intersect_plane(ray, plane, hit))
+		return (check_closest(hit));
+	return (false);
+}
+

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/03 19:58:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/09 15:18:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,10 +354,13 @@ bool		cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray);
 void		cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit);
 void		set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl);
 bool		bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray);
+bool		cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit);
-bool		intersect_cyl_plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
+bool		plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
+bool		sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit);
 bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit);
+bool		triangle(t_ray *ray, t_objs *tri, t_hit_data *hit);
 bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit);
 bool		check_closest(t_hit_data *hit);
 bool		quadratic(t_hit_data *hit);

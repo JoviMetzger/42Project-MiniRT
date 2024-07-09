@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 18:00:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/11 19:51:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/09 15:23:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,13 @@ bool	intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit)
 		return (false);
 	tri->obj_t = hit->t;
 	tri->hit_pos = plus(ray->place, mult_vecdub(ray->vector, tri->obj_t));
-	return (check_closest(hit));
+	return (true);
 }
+
+bool	triangle(t_ray *ray, t_objs *triangle, t_hit_data *hit)
+{
+	if (intersect_triangle(ray, triangle, hit))
+		return (check_closest(hit));
+	return (false);
+}
+

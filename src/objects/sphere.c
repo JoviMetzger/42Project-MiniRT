@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/03 17:06:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/09 15:19:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,14 @@ bool	intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit)
 		inter_point = plus(ray->place, mult_vecdub(ray->vector, hit->t));
 		sphere->normal = normalize(minus(inter_point, sphere->center));
 		sphere->obj_t = hit->t;
-		return (check_closest(hit));
+		return (true);
 	}
+	return (false);
+}
+
+bool	sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit)
+{
+	if (intersect_sphere(ray, sphere, hit))
+		return (check_closest(hit));
 	return (false);
 }

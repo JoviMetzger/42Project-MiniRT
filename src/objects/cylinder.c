@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 21:27:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/09 15:20:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,14 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 		cyl->obj_t = hit->tmp_t;
 		hit->t = hit->tmp_t;
 		cyl->hit_pos = plus(ray->place, mult_vecdub(ray->vector, cyl->obj_t));
-		return (check_closest(hit));
+		return (true);
 	}
+	return (false);
+}
+
+bool	cylinder(t_ray *ray, t_objs *cylinder, t_hit_data *hit)
+{
+	if (intersect_cylinder(ray, cylinder, hit))
+		return (check_closest(hit));
 	return (false);
 }
