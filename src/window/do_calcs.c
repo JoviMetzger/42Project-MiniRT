@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/03 20:54:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/09 14:55:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 static t_ray	init_light_ray(t_data *data, int i)
 {
-	t_vec3  inter_p = plus(data->pix[i]->og_ray.place,
+	// t_vec3  inter_p = plus(data->pix[i]->og_ray.place,
+	// 	mult_vecdub(data->pix[i]->og_ray.vector, data->pix[i]->hit_t));
+	
+	t_vec3  inter_p = plus(data->light[0]->place,
 		mult_vecdub(data->pix[i]->og_ray.vector, data->pix[i]->hit_t));
 
-	t_vec3  light_dir = normalize(minus(data->light[0]->place, inter_p));
+	// t_vec3  light_dir = normalize(minus(data->light[0]->place, inter_p));
+	t_vec3  light_dir = minus(data->light[0]->place, inter_p);
 
-	data->pix[i]->light_ray.place = data->light[0]->place;
+	// data->pix[i]->light_ray.place = data->light[0]->place;
+	data->pix[i]->light_ray.place = inter_p;
 	data->pix[i]->light_ray.vector = light_dir;
 
 	return (data->pix[i]->light_ray);
