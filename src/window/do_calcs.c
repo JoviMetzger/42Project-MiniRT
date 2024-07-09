@@ -6,24 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/09 15:34:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/09 17:50:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
-
-// old calculations
-
-	// t_vec3  inter_p = plus(data->pix[i]->og_ray.place,
-	// 	mult_vecdub(data->pix[i]->og_ray.vector, data->pix[i]->hit_t));
-	
-	// t_vec3  inter_p = plus(data->light[0]->place,
-	// 	mult_vecdub(data->pix[i]->og_ray.vector, data->pix[i]->hit_t));
-
-
-	// t_vec3  light_dir = normalize(minus(data->light[0]->place, inter_p));
-
-	// data->pix[i]->light_ray.place = data->light[0]->place;
 
 static t_ray	init_light_ray(t_data *data, int i)
 {
@@ -35,30 +22,28 @@ static t_ray	init_light_ray(t_data *data, int i)
 	return (data->pix[i]->light_ray);
 }
 
-// trace another ray from the intersection of the prime ray and the object back to the light. 
-// If there is another object between the intersection and the light, the point is in shadow.
 bool	in_light(t_data *data, t_ray *ray, int i)
 {
     int				obj_i = 0;
     t_hit_data		hit_2;
 	double			tmp_t;
-	(void) i;
-
 
 	tmp_t = data->pix[i]->hit_t;
 	hit_2.closest_t = DBL_MAX;
-    while (obj_i < data->objs_i && data->objs[obj_i] != data->pix[i]->obj)
+    while (obj_i < data->objs_i)
     {
         if (intersect_sphere(ray, data->objs[obj_i], &hit_2)
 			|| intersect_triangle(ray, data->objs[obj_i], &hit_2)
 			|| intersect_cylinder(ray, data->objs[obj_i], &hit_2)
 			|| intersect_plane(ray, data->objs[obj_i], &hit_2))
 		{
-			// if (hit_2.closest_t > tmp_t)
+			if (data->objs[obj_i] != data->pix[i]->obj)
 				return (false);
 		}
         obj_i++;
     }
+	if (hit_2.closest_t < tmp_t)
+		return (false);
 	return (true);
 }
 
