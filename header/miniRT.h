@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/09 15:18:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/11 15:10:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,8 +296,6 @@ typedef struct s_checkerboard
 	double	square_u;
 	double	square_v;
 }	t_checkerboard;
-
-bool   in_light(t_data *data, t_ray *ray, int i);
 
 
 // --- Functions --- 

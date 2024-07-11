@@ -6,7 +6,6 @@
 
 !!!
  - surface normals
- - light array when creating shadow rays...
 
  - cylinder shape - still wronnnngggggggg
  - inside cylinder + sphere
