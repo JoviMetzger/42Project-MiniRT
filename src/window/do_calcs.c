@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/11 15:21:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/11 16:24:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ static t_ray	init_light_ray(t_data *data, int i, int light_i)
 	return (data->pix[i]->light_ray);
 }
 
+// if one light cases shadow, another might give light...
 static bool	in_light(t_data *data, int i)
 {
     int				obj_i = 0;
 	int				light_i = 0;
     t_hit_data		hit_2;
 	t_ray			ray;
+	bool			in_light = true;
 
 	while (light_i < data->light_i)
 	{
@@ -41,15 +43,22 @@ static bool	in_light(t_data *data, int i)
 				|| intersect_triangle(&ray, data->objs[obj_i], &hit_2)
 				|| intersect_cylinder(&ray, data->objs[obj_i], &hit_2)
 				|| intersect_plane(&ray, data->objs[obj_i], &hit_2))
-			{
+				{
 				if (data->objs[obj_i] != data->pix[i]->obj)
-					return (false);
-			}
+					in_light = false;
+				else
+					in_light = true;
+				}
 			obj_i++;
 		}
+		// WHERE SHADOW GO??
+		// if (hit_2.closest_t < tmp_t)
+		// return (false);
 		light_i++;
 	}
-	return (true);
+	if (in_light == true)
+		return (true);
+	return (false);
 }
 
 void	do_calcs(t_data *data)
