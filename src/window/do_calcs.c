@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/11 16:24:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/11 18:56:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,8 @@ static bool	in_light(t_data *data, int i)
 				}
 			obj_i++;
 		}
-		// WHERE SHADOW GO??
-		// if (hit_2.closest_t < tmp_t)
-		// return (false);
+		if (hit_2.closest_t < data->pix[i]->hit_t)
+			return (false);
 		light_i++;
 	}
 	if (in_light == true)
