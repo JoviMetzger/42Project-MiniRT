@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/11 18:56:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/11 19:55:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
 /**
- * @todo norming 
+ * @todo norming... everywhere
  */
 static t_ray	init_light_ray(t_data *data, int i, int light_i)
 {
@@ -25,7 +25,12 @@ static t_ray	init_light_ray(t_data *data, int i, int light_i)
 	return (data->pix[i]->light_ray);
 }
 
-// if one light cases shadow, another might give light...
+// with more objects + mixed objs, might actually need a closest check, can see triangle shadow inside
+// sphere that is in front, so the order is getting messed up somehow.. (see screenshots)
+
+// FIND CLOSEST OBJ TO LIGHT? WHEN WHILE OBJS, IF PIX->OBJ TRI + SPHERE INFRONT, 
+// "TRI PIX" IS IN SHADOW BUT = SPHERE IS IN SHADOW AT THAT SECTION
+
 static bool	in_light(t_data *data, int i)
 {
     int				obj_i = 0;
@@ -51,8 +56,6 @@ static bool	in_light(t_data *data, int i)
 				}
 			obj_i++;
 		}
-		if (hit_2.closest_t < data->pix[i]->hit_t)
-			return (false);
 		light_i++;
 	}
 	if (in_light == true)
