@@ -5,17 +5,15 @@
 --- to do now ---
 
 !!!
- - which light per pixel while loop in do_calcs - BEFORE DOING LIGHT ARRAY, CAUSE IM CONFUSED
  - surface normals
- - light array
+ - light array when creating shadow rays...
 
-!!
  - cylinder shape - still wronnnngggggggg
  - inside cylinder + sphere
 
-!
+
+
  - prep eval files, some basic/simple, some more complicated
- - triple check parser + new light array -> no leaks, no segfaults etc
  - norm everything
  - check all TODO comments
 

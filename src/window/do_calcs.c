@@ -6,12 +6,16 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/09 17:50:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/11 14:13:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
+/**
+ * @todo loop all lights, check all possible shadows..
+ * @todo norming 
+ */
 static t_ray	init_light_ray(t_data *data, int i)
 {
 	t_vec3  inter_p = mult_vecdub(data->pix[i]->og_ray.vector, data->pix[i]->hit_t);
@@ -28,6 +32,7 @@ bool	in_light(t_data *data, t_ray *ray, int i)
     t_hit_data		hit_2;
 	double			tmp_t;
 
+	// for each pixel, loop light array, check if something creates shadow..
 	tmp_t = data->pix[i]->hit_t;
 	hit_2.closest_t = DBL_MAX;
     while (obj_i < data->objs_i)
@@ -66,9 +71,9 @@ void	do_calcs(t_data *data)
 	data->i = 0;
 	while (data->i < data->total_pix)
 	{
-		t_ray 			ray = init_light_ray(data, data->i);
 		if (data->pix[data->i]->hit_b == true)
 		{
+			t_ray 			ray = init_light_ray(data, data->i); // move and loop light aray
 			if (in_light(data, &ray, data->i))
 				data->pix[data->i]->colour = data->pix[data->i]->light;
 			else

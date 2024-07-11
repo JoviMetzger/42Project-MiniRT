@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 15:11:36 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/20 21:07:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/11 14:10:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ static void	specular_light(t_colour_vars *colour, t_ray ray)
 		* colour->curr_light->colour.b;
 }
 
+/**
+ * @todo norm
+ */
 static void	loop_light_array(t_data *data, t_colour_vars *vars, t_objs *obj, t_ray ray)
 {
 	t_colour	tmp_save;
