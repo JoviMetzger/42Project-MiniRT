@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/16 16:59:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/16 19:32:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static t_ray	init_light_ray(t_data *data, int i, int light_i)
 
 static bool	in_light(t_data *data, int i)
 {
-    int				obj_i = 0;
 	int				light_i = 0;
     t_hit_data		hit_2;
 	t_ray			ray;
-	bool in_light = true;
+	data->pix[i]->in_light = true;
 
 	while (light_i < data->light_i)
 	{
+		int obj_i = 0;
 		ray = init_light_ray(data, i, light_i);
 		while (obj_i < data->objs_i)
 		{
@@ -45,19 +45,14 @@ static bool	in_light(t_data *data, int i)
 				|| intersect_plane(&ray, data->objs[obj_i], &hit_2))
 				&& data->objs[obj_i] != data->pix[i]->obj)
 				{
-					if (hit_2.t < DBL_MAX && hit_2.t < data->pix[i]->hit_t)
-					{
-						in_light = false;
-						break ;
-					}
-					else
-						in_light = true;
+					data->pix[i]->in_light = false;
+					break ;
 				}
 			obj_i++;
 		}
 		light_i++;
 	}
-	if (in_light == true)
+	if (data->pix[i]->in_light == true)
 		return (true);
 	return (false);
 }
