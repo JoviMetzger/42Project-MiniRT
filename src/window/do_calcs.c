@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/11 19:55:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/16 15:24:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@ static t_ray	init_light_ray(t_data *data, int i, int light_i)
 	return (data->pix[i]->light_ray);
 }
 
-// with more objects + mixed objs, might actually need a closest check, can see triangle shadow inside
-// sphere that is in front, so the order is getting messed up somehow.. (see screenshots)
-
-// FIND CLOSEST OBJ TO LIGHT? WHEN WHILE OBJS, IF PIX->OBJ TRI + SPHERE INFRONT, 
-// "TRI PIX" IS IN SHADOW BUT = SPHERE IS IN SHADOW AT THAT SECTION
+static bool	check_obj(t_data *data, t_hit_data *hit_2)
+{
+	// light ray intersects obj that is not our 'camera' seen obj
+	// if that obj distance to light ray (or ambient ray??) is closer to light than
+	// og obj, og obj at that point is in shadow
+	
+	 
+}
 
 static bool	in_light(t_data *data, int i)
 {
@@ -38,21 +41,21 @@ static bool	in_light(t_data *data, int i)
     t_hit_data		hit_2;
 	t_ray			ray;
 	bool			in_light = true;
+	hit_2.closest_t = DBL_MAX;
 
 	while (light_i < data->light_i)
 	{
 		ray = init_light_ray(data, i, light_i);
 		while (obj_i < data->objs_i)
 		{
-			if (intersect_sphere(&ray, data->objs[obj_i], &hit_2)
+			if ((intersect_sphere(&ray, data->objs[obj_i], &hit_2)
 				|| intersect_triangle(&ray, data->objs[obj_i], &hit_2)
 				|| intersect_cylinder(&ray, data->objs[obj_i], &hit_2)
 				|| intersect_plane(&ray, data->objs[obj_i], &hit_2))
+				&& data->objs[obj_i] != data->pix[i]->obj)
 				{
-				if (data->objs[obj_i] != data->pix[i]->obj)
-					in_light = false;
-				else
-					in_light = true;
+					if (check_obj(data, &hit_2))
+						in_light = false;
 				}
 			obj_i++;
 		}
