@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/16 16:50:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/16 16:59:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static bool	in_light(t_data *data, int i)
     t_hit_data		hit_2;
 	t_ray			ray;
 	bool in_light = true;
-	hit_2.closest_t = DBL_MAX;
 
 	while (light_i < data->light_i)
 	{
@@ -46,11 +45,13 @@ static bool	in_light(t_data *data, int i)
 				|| intersect_plane(&ray, data->objs[obj_i], &hit_2))
 				&& data->objs[obj_i] != data->pix[i]->obj)
 				{
-					// save distance between obj and light ray, if 
-					// closest + not in shadow, then send bool back..
-					// obj order is a thing and it shouldnt be
-					in_light = false;
-					break ;
+					if (hit_2.t < DBL_MAX && hit_2.t < data->pix[i]->hit_t)
+					{
+						in_light = false;
+						break ;
+					}
+					else
+						in_light = true;
 				}
 			obj_i++;
 		}
