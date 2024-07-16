@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/11 15:10:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/16 16:45:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,7 @@ typedef struct s_pixel
 	t_objs		*obj;
 	double		hit_t;
 	bool		hit_b;
+	bool		in_light; // not using 
 
 }			t_pixel;
 

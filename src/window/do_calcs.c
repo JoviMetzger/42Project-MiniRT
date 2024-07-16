@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/16 15:24:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/16 16:50:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,6 @@ static t_ray	init_light_ray(t_data *data, int i, int light_i)
 	return (data->pix[i]->light_ray);
 }
 
-static bool	check_obj(t_data *data, t_hit_data *hit_2)
-{
-	// light ray intersects obj that is not our 'camera' seen obj
-	// if that obj distance to light ray (or ambient ray??) is closer to light than
-	// og obj, og obj at that point is in shadow
-	
-	 
-}
 
 static bool	in_light(t_data *data, int i)
 {
@@ -40,7 +32,7 @@ static bool	in_light(t_data *data, int i)
 	int				light_i = 0;
     t_hit_data		hit_2;
 	t_ray			ray;
-	bool			in_light = true;
+	bool in_light = true;
 	hit_2.closest_t = DBL_MAX;
 
 	while (light_i < data->light_i)
@@ -54,8 +46,11 @@ static bool	in_light(t_data *data, int i)
 				|| intersect_plane(&ray, data->objs[obj_i], &hit_2))
 				&& data->objs[obj_i] != data->pix[i]->obj)
 				{
-					if (check_obj(data, &hit_2))
-						in_light = false;
+					// save distance between obj and light ray, if 
+					// closest + not in shadow, then send bool back..
+					// obj order is a thing and it shouldnt be
+					in_light = false;
+					break ;
 				}
 			obj_i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 13:34:26 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/07/16 16:32:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		*map_malloc(size_t size);
 void		init_mouse_map(t_data *data);
 
 // --- parse_input --- //
-int			handle_texture(t_data *data, char *str);
+// int			handle_texture(t_data *data, char *str);
 void		parse_input(int argc, char **argv, t_data *data);
 
 // --- parser_error --- //
@@ -135,7 +135,7 @@ int			ratio_valid(int c);
 int			rgb_valid(int c);
 
 // --- convert_utils_2 --- //
-t_light	**lt_malloc(t_data *data, char **arr, int count);
+t_light		**lt_malloc(t_data *data, char **arr, int count);
 void		free_light(t_data *data);
 int			count_light(char **arr);
 char		*give_null(char *str);
