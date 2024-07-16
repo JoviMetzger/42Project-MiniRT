@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/11 15:10:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/16 19:34:00 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,11 +346,8 @@ double		pythagoras(double a, double b);
 double		vec_length(t_vec3 v1, t_vec3 v2);
 
 // Objects Functions
-bool		tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray);
-bool		boop_bottom(t_hit_data *hit, t_objs *cyl, t_ray *ray);
-bool		cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray);
+bool		intersect_caps(t_ray *ray, t_objs *cyl, t_hit_data *hit);
 void		cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit);
-void		set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl);
 bool		bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray);
 bool		cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit);
