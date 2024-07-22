@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/22 20:53:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/22 21:12:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static bool	in_light(t_data *data, int i)
 	light_i = 0;
 	obj_i = 0;
 	data->pix[i]->in_light = true;
-	data->pix[i]->obj->in_light = true;
 	while (light_i < data->light_i)
 	{
 		data->light[light_i]->in_light = true;
@@ -52,9 +51,9 @@ static bool	in_light(t_data *data, int i)
 				|| intersect_triangle(&ray, data->objs[obj_i], &hit_2)
 				|| intersect_cylinder(&ray, data->objs[obj_i], &hit_2)
 				|| intersect_plane(&ray, data->objs[obj_i], &hit_2))
-				&& data->objs[obj_i] != data->pix[i]->obj) //
+				&& data->objs[obj_i] != data->pix[i]->obj) 
+				//
 				{
-					data->pix[i]->obj->in_light = false;
 					data->objs[obj_i]->in_light = false;
 					data->light[light_i]->in_light = false;
 					data->pix[i]->in_light = false;
@@ -65,24 +64,25 @@ static bool	in_light(t_data *data, int i)
 		light_i++;
 	}
 	//
+	// will use util but only once it actually works...
+	// if (do_loops(data) == true)
+	// 	return (true);
 	light_i = 0;
 	while (light_i < data->light_i)
 	{
-		obj_i = 0;
-		while (obj_i < data->objs_i)
-		{
-			if (data->objs[obj_i]->in_light == true)
-				return (true);
-			obj_i++;
-		}
 		if (data->light[light_i]->in_light == true)
 			return (true);
 		light_i++;
 	}
+		// obj_i = 0;
+		// while (obj_i < data->objs_i)
+		// {
+		// 	if (data->objs[obj_i]->in_light == true && data->objs[obj_i] != data->pix[i]->obj)
+		// 		return (true);
+		// 	// if (data->objs[obj_i]->in_light == true)
+		// 	// 	return (true);
+		// 	obj_i++;
 	//
-	// will use util but only once it actually works...
-	// if (do_loops(data) == true)
-	// 	return (true);
 	if (data->pix[i]->in_light == true)
 		return (true);
 	return (false);
