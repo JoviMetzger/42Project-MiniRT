@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/22 12:48:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/22 13:56:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ typedef struct s_objs
 	int16_t				i_am;
 	int					i;
 	int					what_pattern;
+	bool				in_light;
 }	t_objs;
 
 // -------------------------------------------------------------
