@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/09 15:14:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/22 12:23:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	get_ret(t_data *data, t_hit_data *hit, t_objs *obj, int i)
 		data->pix[i]->obj->obj_t = obj->obj_t;
 		data->pix[i]->ambient = get_ambient(data, obj);
 		data->pix[i]->light = get_light(data, data->ray, obj);
+		data->pix[i]->colour = data->pix[i]->light;
 	}
 	else
 		data->pix[i]->colour = data->pix[i]->black;

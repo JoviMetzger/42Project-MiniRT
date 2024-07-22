@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/16 19:32:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/22 12:48:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct ambient
 // Struct for light
 typedef struct s_light
 {
+	bool		in_light;
 	t_colour	colour;
 	t_vec3		place;
 	t_vec3		direction;

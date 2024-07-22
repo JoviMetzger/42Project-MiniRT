@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/16 20:11:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/22 13:23:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static bool	in_light(t_data *data, int i)
 	data->pix[i]->in_light = true;
 	while (light_i < data->light_i)
 	{
+		data->light[light_i]->in_light = true;
 		int obj_i = 0;
 		ray = init_light_ray(data, i, light_i);
 		while (obj_i < data->objs_i)
@@ -43,7 +44,7 @@ static bool	in_light(t_data *data, int i)
 				|| intersect_plane(&ray, data->objs[obj_i], &hit_2))
 				&& data->objs[obj_i] != data->pix[i]->obj)
 				{
-					// plus check if closer to light.. or order of obj... or something
+					data->light[light_i]->in_light = false;
 					data->pix[i]->in_light = false;
 					break ;
 				}
@@ -51,10 +52,20 @@ static bool	in_light(t_data *data, int i)
 		}
 		light_i++;
 	}
+	light_i = 0;
+	while (light_i < data->light_i)
+	{
+		if (data->light[light_i]->in_light == true)
+			data->pix[i]->in_light = true;
+		else
+			return (false);
+		light_i++;
+	}
 	if (data->pix[i]->in_light == true)
 		return (true);
 	return (false);
 }
+
 
 void	do_calcs(t_data *data)
 {
