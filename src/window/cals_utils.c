@@ -6,22 +6,31 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/07/22 17:46:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/22 17:54:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/22 18:50:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-t_ray	init_light_ray(t_data *data, int i, int light_i)
+bool	do_loops(t_data *data)
 {
-	t_vec3	inter_p;
-	t_vec3	light_dir;
+	int	light_i = 0;
+	int	obj_i = 0;
 
-	inter_p = mult_vecdub(data->pix[i]->og_ray.vector, data->pix[i]->hit_t);
-	light_dir = plus(data->light[light_i]->place, inter_p);
-	data->pix[i]->light_ray.place = inter_p;
-	data->pix[i]->light_ray.vector = light_dir;
-	return (data->pix[i]->light_ray);
+	while (light_i < data->light_i)
+	{
+		obj_i = 0;
+		while (obj_i < data->objs_i)
+		{
+			if (data->objs[obj_i]->in_light == true)
+				return (true);
+			obj_i++;
+		}
+		if (data->light[light_i]->in_light == true)
+			return (true);
+		light_i++;
+	}
+	return (false);
 }
 
 bool	does_intersect(t_ray *ray, t_objs *obj, t_hit_data *hit_2)

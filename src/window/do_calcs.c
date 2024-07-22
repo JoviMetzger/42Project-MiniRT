@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/22 17:56:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/22 18:51:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,16 @@
 // inter_p = division_vec_dub(data->pix[i]->og_ray.vector, data->pix[i]->hit_t);
 // sometimes mult/div, sometimes minus/plus (i think no more minus tho)
 
-static bool	check_all_after(t_data *data, int i)
+static t_ray	init_light_ray(t_data *data, int i, int light_i)
 {
-	int	light_i;
-	int	obj_i;
+	t_vec3	inter_p;
+	t_vec3	light_dir;
 
-	light_i = 0;
-	obj_i = 0;
-	while (light_i < data->light_i)
-	{
-		obj_i = 0;
-		while (obj_i < data->objs_i)
-		{
-			if (data->objs[obj_i]->in_light == true)
-				return (true);
-			obj_i++;
-		}
-		if (data->light[light_i]->in_light == true)
-			return (true);
-		light_i++;
-	}
-	if (data->pix[i]->in_light == true)
-		return (true);
-	return (false);
+	inter_p = mult_vecdub(data->pix[i]->og_ray.vector, data->pix[i]->hit_t);
+	light_dir = minus(data->light[light_i]->place, inter_p);
+	data->pix[i]->light_ray.place = inter_p;
+	data->pix[i]->light_ray.vector = light_dir;
+	return (data->pix[i]->light_ray);
 }
 
 static bool	in_light(t_data *data, int i)
@@ -78,24 +65,19 @@ static bool	in_light(t_data *data, int i)
 	int				light_i = 0;
     t_hit_data		hit_2;
 	t_ray			ray;
-	int				obj_i = 0;
 
 	data->pix[i]->in_light = true;
-	data->objs[obj_i]->in_light = true;
 	while (light_i < data->light_i)
 	{
 		data->light[light_i]->in_light = true;
-		obj_i = 0;
-		ft_bzero(&ray, sizeof(t_ray));
+		int obj_i = 0;
 		ray = init_light_ray(data, i, light_i);
 		while (obj_i < data->objs_i)
 		{
-			ft_bzero(&hit_2, sizeof(t_hit_data));
 			if (does_intersect(&ray, data->objs[obj_i], &hit_2)
 				&& data->objs[obj_i] != data->pix[i]->obj)
 				{
 					data->light[light_i]->in_light = false;
-					data->objs[obj_i]->in_light = false;
 					data->pix[i]->in_light = false;
 					break ;
 				}
@@ -103,7 +85,9 @@ static bool	in_light(t_data *data, int i)
 		}
 		light_i++;
 	}
-	if (check_all_after(data, i) == true)
+	if (do_loops(data))
+		return (true);
+	if (data->pix[i]->in_light == true)
 		return (true);
 	return (false);
 }

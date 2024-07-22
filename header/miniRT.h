@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/22 17:51:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/22 18:51:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,7 +306,7 @@ typedef struct s_checkerboard
 void		free_all(t_data *data);
 
 // Window Functions
-t_ray		init_light_ray(t_data *data, int i, int light_i);
+bool		do_loops(t_data *data);
 bool		does_intersect(t_ray *ray, t_objs *obj, t_hit_data *hit_2);
 void		do_calcs(t_data *data);
 void		free_pixels(t_data *data);
