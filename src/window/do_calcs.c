@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/22 21:12:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/22 21:13:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static bool	in_light(t_data *data, int i)
 				&& data->objs[obj_i] != data->pix[i]->obj) 
 				//
 				{
-					data->objs[obj_i]->in_light = false;
+					data->objs[obj_i]->in_light = false; /////////////////
 					data->light[light_i]->in_light = false;
 					data->pix[i]->in_light = false;
 					break ;
@@ -63,10 +63,12 @@ static bool	in_light(t_data *data, int i)
 		}
 		light_i++;
 	}
-	//
+	
 	// will use util but only once it actually works...
 	// if (do_loops(data) == true)
 	// 	return (true);
+	
+	//
 	light_i = 0;
 	while (light_i < data->light_i)
 	{
@@ -74,6 +76,8 @@ static bool	in_light(t_data *data, int i)
 			return (true);
 		light_i++;
 	}
+	
+	////////////////////////////////////////////////////////
 		// obj_i = 0;
 		// while (obj_i < data->objs_i)
 		// {
@@ -83,6 +87,7 @@ static bool	in_light(t_data *data, int i)
 		// 	// 	return (true);
 		// 	obj_i++;
 	//
+	
 	if (data->pix[i]->in_light == true)
 		return (true);
 	return (false);
