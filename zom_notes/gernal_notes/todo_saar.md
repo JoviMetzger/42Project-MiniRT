@@ -22,6 +22,8 @@
  - do we want loading messages/rending while window open (without pop up)
 
 
+!!!!! ft_handle_mouse_click heap butter overflowed when i threw the window and droped it quickly
+
 --------------------------------------------------------------------------
 
 

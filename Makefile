@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/06/16 16:16:13 by smclacke      ########   odam.nl          #
+#    Updated: 2024/07/22 17:53:59 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS			= main.c											\
 					utils/operators.c 								\
 					utils/operators1.c 								\
 					utils/operators2.c 								\
+					window/cals_utils.c 							\
 					window/do_calcs.c 								\
 					window/init_pix.c 								\
 					window/window_key.c 							\
