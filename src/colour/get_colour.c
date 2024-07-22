@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 15:11:36 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/16 19:46:16 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/07/16 19:47:55 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj)
 
 uint32_t	get_ambient(t_data *data, t_objs *obj)
 {
-	data->vars.base = get_base_colour(obj, &data->vars);
+	data->vars.base = get_base_colour(obj, data->vars);
 	data->vars.result.r = data->vars.ambient.r * data->vars.base.r / 255;
 	data->vars.result.g = data->vars.ambient.g * data->vars.base.g / 255;
 	data->vars.result.b = data->vars.ambient.b * data->vars.base.b / 255;

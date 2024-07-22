@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/16 19:41:19 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/07/22 13:26:36 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static bool	cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	double	distance_along_axis;
 	hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
 	distance_along_axis = dot_product(minus(hit->hit_pos, cyl->center), cyl->vector);	
-	if (distance_along_axis >= 0 && distance_along_axis <= cyl->height)
+	// if (distance_along_axis >= 0 && distance_along_axis <= cyl->height)
+	if (distance_along_axis >= -cyl->height / 2.0 && distance_along_axis <= cyl->height / 2.0)
 		return (true);
 	else
 		return (false);
@@ -63,11 +64,13 @@ void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 	distance_along_axis = dot_product(hit->to_center, cyl->vector);
 	point_on_axis = plus(cyl->center, mult_vecdub(cyl->vector, distance_along_axis));
 	cyl->normal = normalize(minus(hit->hit_pos, point_on_axis));
+	// cyl->normal = normalize(mult_vecdub(minus(hit->hit_pos, point_on_axis), -1));
+	// printf("NORMAL : %lf %lf %lf\n", cyl->normal.x, cyl->normal.y, cyl->normal.z);
 }
 
 
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
-{
+{	
 	hit->tmp_t = DBL_MAX;
 	if (intersect_caps(ray, cyl, hit) == true)
 	{
@@ -92,9 +95,9 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 	return (false);
 }
 
-bool	cylinder(t_ray *ray, t_objs *cylinder, t_hit_data *hit)
-{
-	if (intersect_cylinder(ray, cylinder, hit))
+bool	cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
+{	
+	if (intersect_cylinder(ray, cyl, hit))
 		return (check_closest(hit));
 	return (false);
 }
