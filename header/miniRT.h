@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/16 19:44:35 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/07/23 18:13:01 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,8 @@ typedef struct s_hit_data
 	double	d;
 	t_vec3	o_c;
 	t_vec3	c_c;
+	t_vec3	a_a;
+	t_vec3	b_b;
 	t_vec3	norm_vec;
 	double	root1;
 	double	root2;
