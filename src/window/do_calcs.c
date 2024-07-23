@@ -6,14 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/23 19:36:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/23 19:59:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
-
-// this should be minus (according to sarah research), dont know why plus was a fix but
-// gunna fix the stuff around it using minus...
 
 // adding intersection point offset to avoid self-intersection
 static t_ray	init_light_ray(t_data *data, int i, int light_i)
@@ -46,7 +43,7 @@ static bool	in_light(t_data *data, int i, int light_i)
 		if (data->objs[obj_i] != data->pix[i]->obj)
 		{
 			if (does_intersect(&ray, data->objs[obj_i], &hit_2) == true)
-				return false;
+				return (false);
 		}
 		obj_i++;
 	}
@@ -81,11 +78,14 @@ void	do_calcs(t_data *data)
 	{
 		if (data->pix[data->i]->hit_b == true)
 		{
-			// data->pix[data->i]->in_light = true;
-			if (in_light(data, data->i, light_i) == true)
-				data->pix[data->i]->colour = data->pix[data->i]->light;
-			else
-				data->pix[data->i]->colour = data->pix[data->i]->ambient;
+			// while (light_i < data->light_i)
+			// {
+				if (in_light(data, data->i, light_i) == false)
+					data->pix[data->i]->colour = data->pix[data->i]->light;
+				else
+					data->pix[data->i]->colour = data->pix[data->i]->ambient;
+			// 	light_i++;
+			// }
 		}
 		data->i++;
 	}
