@@ -9,7 +9,7 @@
 
  - cylinder shape - still wronnnngggggggg
  - inside cylinder + sphere
-
+ - window resizing "when..." subject pdf
 
 
  - prep eval files, some basic/simple, some more complicated
