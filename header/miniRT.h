@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/22 19:08:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/23 18:34:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_ray
 {
 	t_vec3	place;
 	t_vec3	vector;
+	double	distance;
 }	t_ray;
 
 // -------------------------------------------------------------

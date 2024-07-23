@@ -6,22 +6,29 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/23 17:07:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/23 19:36:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
+// this should be minus (according to sarah research), dont know why plus was a fix but
+// gunna fix the stuff around it using minus...
+
+// adding intersection point offset to avoid self-intersection
 static t_ray	init_light_ray(t_data *data, int i, int light_i)
 {
 	t_vec3	inter_p;
+	t_vec3	inter_p_offset;
 	t_vec3	light_dir;
 
 	inter_p = mult_vecdub(data->pix[i]->og_ray.vector, data->pix[i]->hit_t);
-	// light_dir = plus(data->light[light_i]->place, inter_p);
-	light_dir = minus(data->light[light_i]->place, inter_p);
-	data->pix[i]->light_ray.place = inter_p;
+	inter_p_offset = plus(inter_p, mult_vecdub(data->pix[i]->obj->normal, EPSILON));
+	light_dir = minus(data->light[light_i]->place, inter_p_offset);
+	data->pix[i]->light_ray.place = inter_p_offset;
 	data->pix[i]->light_ray.vector = light_dir;
+	data->pix[i]->light_ray.distance = length_squared(light_dir);
+	normalize(data->pix[i]->light_ray.vector);
 	return (data->pix[i]->light_ray);
 }
 
@@ -35,29 +42,15 @@ static bool	in_light(t_data *data, int i, int light_i)
 	ray = init_light_ray(data, i, light_i);
 	while (obj_i < data->objs_i)
 	{
-		data->objs[obj_i]->in_light = true;
 		ft_bzero(&hit_2, sizeof(t_hit_data));
-		if ((does_intersect(&ray, data->objs[obj_i], &hit_2) == true)
-			&& data->objs[obj_i] != data->pix[i]->obj)
-			{
-				data->pix[i]->in_light = false;
-				// break ;
-			}
+		if (data->objs[obj_i] != data->pix[i]->obj)
+		{
+			if (does_intersect(&ray, data->objs[obj_i], &hit_2) == true)
+				return false;
+		}
 		obj_i++;
 	}
-	// obj_i = 0;
-	// while (obj_i < data->objs_i)
-	// {
-	// 	if (data->objs[obj_i]->in_light == true)
-	// 	{
-	// 		data->pix[i]->in_light = true;
-	// 		break ;
-	// 	}
-	// 	obj_i++;
-	// }
-	if (data->pix[i]->in_light == true)
-		return (true);
-	return (false);
+	return (true);
 }
 
 static void	initial_cals(t_data *data)
@@ -88,7 +81,7 @@ void	do_calcs(t_data *data)
 	{
 		if (data->pix[data->i]->hit_b == true)
 		{
-			data->pix[data->i]->in_light = true;
+			// data->pix[data->i]->in_light = true;
 			if (in_light(data, data->i, light_i) == true)
 				data->pix[data->i]->colour = data->pix[data->i]->light;
 			else

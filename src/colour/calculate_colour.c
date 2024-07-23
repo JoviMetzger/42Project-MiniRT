@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/22 15:11:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/23 18:33:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_calculate_colour(t_data *data, t_hit_data *hit, int pix_index)
 	{
 		if (data->objs[i]->type == E_SPHERE
 			&& sphere(&data->ray, data->objs[i], hit))
-				tmp_obj = update_obj(data, i);
+			tmp_obj = update_obj(data, i);
 		else if (data->objs[i]->type == E_PLANE
 			&& plane(&data->ray, data->objs[i], hit))
 			tmp_obj = update_obj(data, i);
@@ -76,6 +76,5 @@ void	ft_calculate_colour(t_data *data, t_hit_data *hit, int pix_index)
 		i++;
 	}
 	data->pix[pix_index]->obj = tmp_obj;
-	// data->pix[pix_index]->obj->yes_hit == true;
 	get_ret(data, hit, tmp_obj, pix_index);
 }
