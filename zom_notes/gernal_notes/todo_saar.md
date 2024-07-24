@@ -10,7 +10,7 @@
 
 - cylinder still being a bitch?
 
-
+- texture.. ?
 
 
 *------- eval prep -------*

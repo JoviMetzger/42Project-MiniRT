@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 20:45:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:58:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ char		*give_null(char *str);
 void		cyl_cals(t_data *data);
 
 // --- convert_utils_3 --- //
-void		check_invalid(t_type type, t_data *data,char **arr);
+void		invalid_check(t_type type, t_data *data, char **arr);
 bool		dont_skip(t_type type);
 bool		skip_this(t_type type);
 

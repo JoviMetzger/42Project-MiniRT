@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/07/24 20:40:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 20:46:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:58:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../header/parser.h"
 
-void	check_invalid(t_type type, t_data *data, char **arr)
+void	invalid_check(t_type type, t_data *data, char **arr)
 {
 	if (type == 0 || type > 9)
 	{

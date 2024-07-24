@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 13:55:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:56:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_put_image(t_data *data)
 			data->pix[data->pix_i]->y, data->pix[data->pix_i]->colour);
 		data->pix_i++;
 	}
-	puts("DONEE");
+	puts("DONEE"); // dont forget to remove...
 }
 
 /*	In this function renders and executes keys/mouse movement.

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 20:45:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:58:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	convert_cap_input(t_data *data, char **arr, int count)
 		data->type = get_type(arr[i]);
 		if (skip_this(data->type) == true)
 			i++;
-		check_invalid(data->type, data, arr);
+		invalid_check(data->type, data, arr);
 		if (dont_skip(data->type) == true)
 		{
 			if (data->type == E_LIGHT)

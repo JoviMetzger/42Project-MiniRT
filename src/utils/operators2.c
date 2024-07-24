@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/15 20:16:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:56:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_vec3	cross_product(t_vec3 u, t_vec3 v)
 	len.z = u.x * v.y - u.y * v.x;
 	return (len);
 }
- 
 
 /*	Calculates the length (magnitude) of a vector 
  *	using the Euclidean distance formula.

@@ -6,19 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/02 15:45:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 20:28:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:55:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
-
-t_colour	add_colours(t_colour result, t_colour type)
-{
-	result.r += type.r;
-	result.g += type.g;
-	result.b += type.b;
-	return (result);
-}
 
 /*	This Function calculates the base colour of an object.
  *		- So if the object has a pattern (Checkerboard, texture),
@@ -52,5 +44,13 @@ t_colour	add_tmp(t_colour tmp, t_colour result)
 	result.r += tmp.r;
 	result.g += tmp.g;
 	result.b += tmp.b;
+	return (result);
+}
+
+t_colour	add_colours(t_colour result, t_colour type)
+{
+	result.r += type.r;
+	result.g += type.g;
+	result.b += type.b;
 	return (result);
 }
