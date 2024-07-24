@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/23 19:59:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 16:35:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ void	do_calcs(t_data *data)
 			// while (light_i < data->light_i)
 			// {
 				if (in_light(data, data->i, light_i) == false)
-					data->pix[data->i]->colour = data->pix[data->i]->light;
-				else
 					data->pix[data->i]->colour = data->pix[data->i]->ambient;
+				else
+					data->pix[data->i]->colour = data->pix[data->i]->light;
 			// 	light_i++;
 			// }
 		}
