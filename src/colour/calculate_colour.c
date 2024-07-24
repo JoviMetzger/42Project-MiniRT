@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/23 19:56:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:15:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_calculate_colour(t_data *data, t_hit_data *hit, int pix_index)
 		else if (data->objs[i]->type == E_CYLINDER
 			&& cylinder(&data->ray, data->objs[i], hit))
 			tmp_obj = update_obj(data, i);
-		else if (data->objs[i]->type == E_TRIANGLE	
+		else if (data->objs[i]->type == E_TRIANGLE
 			&& triangle(&data->ray, data->objs[i], hit))
 			tmp_obj = update_obj(data, i);
 		i++;

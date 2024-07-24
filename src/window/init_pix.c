@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/12 15:29:22 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/23 18:18:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:08:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static void	init_pix_vars(t_data *data, int j, int x, int y)
 
 static void	set_pixels(t_data *data)
 {
-	int i;
-	int j;
-	int x;
-	int y;
+	int	i;
+	int	j;
+	int	x;
+	int	y;
 
 	i = 0;
 	j = 0;

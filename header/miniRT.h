@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/23 18:34:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:14:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct ambient
 // Struct for light
 typedef struct s_light
 {
-	bool		in_light;
+	// bool		in_light;
 	t_colour	colour;
 	t_vec3		place;
 	t_vec3		direction;
@@ -180,7 +180,6 @@ typedef struct s_objs
 	int16_t				i_am;
 	int					i;
 	int					what_pattern;
-	bool				in_light;
 }	t_objs;
 
 // -------------------------------------------------------------
@@ -237,7 +236,6 @@ typedef struct s_pixel
 	uint32_t	ambient;
 	uint32_t	light;
 	uint32_t	black;
-
 	int			x;	
 	int			y;	
 	t_ray		og_ray;
@@ -245,7 +243,6 @@ typedef struct s_pixel
 	t_objs		*obj;
 	double		hit_t;
 	bool		hit_b;
-	bool		in_light;
 
 }			t_pixel;
 
@@ -275,7 +272,6 @@ typedef struct s_data
 	t_ambient		ambient;
 	t_screen		screen;
 	t_ray			ray;
-	// t_ray			light_ray;
 
 	t_hit_data		*hit_data;
 	t_colour_vars	vars;
@@ -285,8 +281,8 @@ typedef struct s_data
 	t_type			type;
 
 	int16_t			i_am;
-	int				tmp_i; // norm...
-	int				i;		// somehting sarah is using hehe
+	int				tmp_i; // sarah needs this
+	int				i;	// sarah needs this
 }	t_data;
 
 // -------------------------------------------------------------

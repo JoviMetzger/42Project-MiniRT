@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/25 12:43:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/23 18:34:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:11:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	init_objs(t_data *data, char **arr)
 {
 	data->objs[data->objs_i] = object_malloc(data, arr);
 	data->objs[data->objs_i]->type = data->type;
-	data->objs[data->objs_i]->in_light = true; // testing this still
 }
 
 /**

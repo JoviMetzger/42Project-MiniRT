@@ -1,28 +1,40 @@
 
+THE TO-DO LIST LET'S GOOOO
+
+
+- surface normals
+
+- test shadows
+
+- inside objects
+
+- cylinder still being a bitch?
+
+------- eval prep
+
+- speed improvement?
+
+- loading...
+
+- eval files with nice scenes + basic object files
+
+- everything norm
+
+- try to make it crash...
+
+- any more to dos left in files?
+
+
 
 
 --------------------------------------------------------------------------
---- to do now ---
 
-!!!
- - surface normals
+sarah now:
 
- - cylinder shape - still wronnnngggggggg
- - inside cylinder + sphere
- - window resizing "when..." subject pdf
+norm convert_cap_input + get_colour
 
+plane shadows + mixture objects etc.. + check all objects give good shade
 
- - prep eval files, some basic/simple, some more complicated
- - norm everything
- - check all TODO comments
-
-+
- - cylinder vector 1,1,1 ... check
- - anything else we can do to improve speed?
- - do we want loading messages/rending while window open (without pop up)
-
-
-!!!!! ft_handle_mouse_click heap butter overflowed when i threw the window and droped it quickly
 
 --------------------------------------------------------------------------
 

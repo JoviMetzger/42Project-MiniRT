@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/23 18:28:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:09:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_all(t_data *data)
 {
 	free_objects(data);
 	free_pixels(data);
-	// free lights
+	// free lights // in free_objects
 	// did sarah malloc anything else and forget to free it?
 }
 

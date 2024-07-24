@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 19:41:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:08:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static t_ray	init_light_ray(t_data *data, int i, int light_i)
 	t_vec3	light_dir;
 
 	inter_p = mult_vecdub(data->pix[i]->og_ray.vector, data->pix[i]->hit_t);
-	inter_p_offset = plus(inter_p, mult_vecdub(data->pix[i]->obj->normal, EPSILON));
+	inter_p_offset = plus(inter_p,
+			mult_vecdub(data->pix[i]->obj->normal, EPSILON));
 	light_dir = minus(data->light[light_i]->place, inter_p_offset);
 	data->pix[i]->light_ray.place = inter_p_offset;
 	data->pix[i]->light_ray.vector = light_dir;
@@ -31,10 +32,11 @@ static t_ray	init_light_ray(t_data *data, int i, int light_i)
 
 static bool	in_light(t_data *data, int i, int light_i)
 {
-    t_hit_data		hit_2;
+	t_hit_data		hit_2;
 	t_ray			ray;
-	int				obj_i = 0;
+	int				obj_i;
 
+	obj_i = 0;
 	ft_bzero(&ray, sizeof(t_ray));
 	ray = init_light_ray(data, i, light_i);
 	while (obj_i < data->objs_i)
