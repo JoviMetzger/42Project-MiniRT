@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 16:35:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 17:40:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,25 @@ static void	initial_cals(t_data *data)
 void	do_calcs(t_data *data)
 {
 	int	light_i = 0; // use later for loopin multi lights
-	
+	bool	light_light = true;
+
 	initial_cals(data);
 	data->i = 0;
 	while (data->i < data->total_pix)
 	{
 		if (data->pix[data->i]->hit_b == true)
 		{
-			// while (light_i < data->light_i)
-			// {
+			while (light_i < data->light_i)
+			{
 				if (in_light(data, data->i, light_i) == false)
 					data->pix[data->i]->colour = data->pix[data->i]->ambient;
 				else
 					data->pix[data->i]->colour = data->pix[data->i]->light;
-			// 	light_i++;
-			// }
+				light_i++;
+			}
+			// how handle bool?
+			// if (light_light == false)
+			// 	data->pix[data->i]->colour = data->pix[data->i]->ambient;
 		}
 		data->i++;
 	}
