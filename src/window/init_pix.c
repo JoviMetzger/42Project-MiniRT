@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/12 15:29:22 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 20:08:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:21:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	free_pixels(t_data *data)
 	free(data->pix);
 }
 
-// INIT PER PIXEL :)
-// can add anything else in here that we know from start
 static void	init_pix_vars(t_data *data, int j, int x, int y)
 {
 	data->pix[j]->black = ft_convert_rgb(0, 0, 0);

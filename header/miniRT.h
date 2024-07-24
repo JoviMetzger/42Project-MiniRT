@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 20:14:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:29:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ typedef struct ambient
 // Struct for light
 typedef struct s_light
 {
-	// bool		in_light;
 	t_colour	colour;
 	t_vec3		place;
 	t_vec3		direction;
@@ -302,8 +301,6 @@ typedef struct s_checkerboard
 void		free_all(t_data *data);
 
 // Window Functions
-bool		do_loops(t_data *data);
-bool		does_intersect(t_ray *ray, t_objs *obj, t_hit_data *hit_2);
 void		do_calcs(t_data *data);
 void		free_pixels(t_data *data);
 void		init_pix(t_data *data);
@@ -328,6 +325,7 @@ t_colour	get_base_colour(t_objs *obj, t_colour_vars *colour);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 t_colour	get_sphere_checkerboard(t_vec3 normal);
+t_colour	add_colours(t_colour result, t_colour type);
 t_colour	add_tmp(t_colour tmp, t_colour result);
 
 // Operators

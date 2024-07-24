@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:41:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/21 15:53:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:45:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static t_light	*light_malloc(t_data *data, char **arr)
 	return (data->light[data->light_i]);
 }
 
-// norm
 void	convert_cap_input(t_data *data, char **arr, int count)
 {
 	int		i;
@@ -66,17 +65,10 @@ void	convert_cap_input(t_data *data, char **arr, int count)
 	while (arr[i])
 	{
 		data->type = get_type(arr[i]);
-		if (data->type == E_SPACE || data->type == E_PLANE
-			|| data->type == E_SPHERE || data->type == E_CYLINDER
-			|| data->type == E_HASH || data->type == E_TRIANGLE)
+		if (skip_this(data->type) == true)
 			i++;
-		else if (data->type == 0 || data->type > 9)
-		{
-			free_light(data);
-			free_arr_error("parser error", arr);
-		}
-		if (data->type == E_AMBIENT || data->type == E_LIGHT
-			|| data->type == E_CAMERA)
+		check_invalid(data->type, data, arr);
+		if (dont_skip(data->type) == true)
 		{
 			if (data->type == E_LIGHT)
 			{

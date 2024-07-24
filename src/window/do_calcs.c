@@ -6,13 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 20:08:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 20:23:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-// adding intersection point offset to avoid self-intersection
 static t_ray	init_light_ray(t_data *data, int i, int light_i)
 {
 	t_vec3	inter_p;
@@ -28,6 +27,19 @@ static t_ray	init_light_ray(t_data *data, int i, int light_i)
 	data->pix[i]->light_ray.distance = length_squared(light_dir);
 	normalize(data->pix[i]->light_ray.vector);
 	return (data->pix[i]->light_ray);
+}
+
+static bool	does_intersect(t_ray *ray, t_objs *obj, t_hit_data *hit_2)
+{
+	if (intersect_sphere(ray, obj, hit_2)
+		|| intersect_triangle(ray, obj, hit_2)
+		|| intersect_cylinder(ray, obj, hit_2)
+		|| intersect_plane(ray, obj, hit_2))
+	{
+		if (hit_2->t < ray->distance)
+			return (true);
+	}
+	return (false);
 }
 
 static bool	in_light(t_data *data, int i, int light_i)
