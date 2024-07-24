@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 20:29:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 21:02:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef struct s_light
 	t_vec3		direction;
 	double		ratio;
 	t_ray		ray;
-	
+
 }	t_light;
 
 // -------------------------------------------------------------
@@ -142,8 +142,6 @@ typedef struct s_mouse
 	int				mou_x;
 	bool			selected;
 }	t_mouse;
-
-
 
 // -------------------------------------------------------------
 // Struct for objects, each object has this struct
@@ -258,7 +256,7 @@ typedef struct s_data
 {
 	mlx_image_t		*image;
 	mlx_t			*mlx;
-	
+
 	t_pixel			**pix;
 	int				pix_i;
 	int				total_pix;
@@ -295,7 +293,6 @@ typedef struct s_checkerboard
 	double	square_u;
 	double	square_v;
 }	t_checkerboard;
-
 
 // --- Functions --- 
 void		free_all(t_data *data);
