@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 17:40:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/24 19:41:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,98 +70,28 @@ static void	initial_cals(t_data *data)
 
 void	do_calcs(t_data *data)
 {
-	int	light_i = 0; // use later for loopin multi lights
-	bool	light_light = true;
+	int	light_i;
 
 	initial_cals(data);
 	data->i = 0;
+	light_i = 0;
 	while (data->i < data->total_pix)
 	{
 		if (data->pix[data->i]->hit_b == true)
 		{
+			light_i = 0;
 			while (light_i < data->light_i)
 			{
-				if (in_light(data, data->i, light_i) == false)
-					data->pix[data->i]->colour = data->pix[data->i]->ambient;
-				else
+				if (in_light(data, data->i, light_i) == true)
+				{
 					data->pix[data->i]->colour = data->pix[data->i]->light;
+					break ;
+				}
+				else
+					data->pix[data->i]->colour = data->pix[data->i]->ambient;
 				light_i++;
 			}
-			// how handle bool?
-			// if (light_light == false)
-			// 	data->pix[data->i]->colour = data->pix[data->i]->ambient;
 		}
 		data->i++;
 	}
 }
-
-
-// could use later for when handling many lights
-
-// void	do_calcs(t_data *data)
-// {
-// 	bool	light_bool = false;
-// 	initial_cals(data);
-// 	data->i = 0;
-// 	while (data->i < data->total_pix)
-// 	{
-// 		if (data->pix[data->i]->hit_b == true)
-// 		{
-// 			data->pix[data->i]->in_light = true;
-// 			int	light_i = 0;
-// 			while (light_i < data->light_i)
-// 			{
-// 				if (in_light(data, data->i, light_i))
-// 					data->light[light_i]->in_light = true;
-// 				else
-// 					data->light[light_i]->in_light = false;
-// 				light_i++;
-// 			}
-// 			light_i = 0;
-// 			while (light_i < data->light_i)
-// 			{
-// 				if (data->light[light_i]->in_light == true)
-// 				{
-// 					light_bool = true;
-// 					break ;
-// 				}
-// 				light_i++;
-// 			}
-// 			if (light_bool == true)
-// 			if (data->light[0]->in_light == true)
-// 				data->pix[data->i]->colour = data->pix[data->i]->light;
-// 			else
-// 			{
-// 				puts("ambient");
-// 				data->pix[data->i]->colour = data->pix[data->i]->ambient;
-// 			}
-// 		}
-// 		data->i++;
-// 	}
-// }
-
-// possibly want this too but older and shiter than above
-
-// bool	do_loops(t_data *data)
-// {
-// 	int	light_i;
-// 	int	obj_i;
-
-// 	light_i = 0;
-// 	obj_i = 0;
-// 	while (light_i < data->light_i)
-// 	{
-// 		obj_i = 0;
-// 		while (obj_i < data->objs_i)
-// 		{
-// 			if (data->objs[obj_i]->in_light == true)
-// 				obj_i++;
-// 		}
-
-// 		if (data->light[light_i]->in_light == true)
-// 			return (true);
-// 		light_i++;
-// 	}
-// 	return (false);
-// }
-
