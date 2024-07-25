@@ -1,6 +1,9 @@
 
 **THE TO-DO LIST LET'S GOOOO**
 
+- plane light is ... interesting.
+
+- triangle overlap... wtfffff
 
 - surface normals
 
@@ -29,16 +32,4 @@
 
 - any more to dos left in files?
 
-
-
-
---------------------------------------------------------------------------
-
-sarah now:
-
-
-plane shadows + mixture objects etc.. + check all objects give good shade
-
-
---------------------------------------------------------------------------
 
