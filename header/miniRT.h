@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 21:02:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/25 17:43:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@
 # define YELLOW "\033[33;1m"
 # define RESET "\033[0m"
 
-// Window
-# define WIDTH 1800
-# define HEIGHT 1900
+// --- Window ---
+// # define WIDTH 1800
+// # define HEIGHT 1900
+# define WIDTH 1920
+# define HEIGHT 1080
 
 // --- Math stuff ---
 # define M_PI 3.14159265358979323846
@@ -190,6 +192,8 @@ typedef struct s_hit_data
 	double	d;
 	t_vec3	o_c;
 	t_vec3	c_c;
+	t_vec3	a_a;
+	t_vec3	b_b;
 	t_vec3	norm_vec;
 	double	root1;
 	double	root2;
@@ -318,7 +322,7 @@ t_ray		ft_create_ray(t_data *data, int x, int y);
 void		ft_calculate_colour(t_data *data, t_hit_data *obj, int index);
 uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj);
 uint32_t	get_ambient(t_data *data, t_objs *obj);
-t_colour	get_base_colour(t_objs *obj, t_colour_vars *colour);
+t_colour	get_base_colour(t_objs *obj, t_colour_vars colour);
 t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 t_colour	get_sphere_checkerboard(t_vec3 normal);
@@ -343,11 +347,8 @@ double		pythagoras(double a, double b);
 double		vec_length(t_vec3 v1, t_vec3 v2);
 
 // Objects Functions
-bool		tap_top(t_hit_data *hit, t_objs *cyl, t_ray *ray);
-bool		boop_bottom(t_hit_data *hit, t_objs *cyl, t_ray *ray);
-bool		cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray);
+bool		intersect_caps(t_ray *ray, t_objs *cyl, t_hit_data *hit);
 void		cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit);
-void		set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl);
 bool		bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray);
 bool		cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit);
