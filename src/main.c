@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 20:21:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/25 16:23:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_all(t_data *data)
 {
 	free_objects(data);
 	free_pixels(data);
-	// did sarah malloc anything else and forget to free it? - CHECK THIS, CAN WE LEAK?
+	// did sarah malloc anything else and forget to free it?
 }
 
 /* main function:
@@ -38,7 +38,6 @@ void	free_all(t_data *data)
  *		- 6. mlx_terminate(); Terminate the window/MLX once done using.
  *		- 7. free_objects(); Cleans up the structs that got allcoated.
  */
-
 int	main(int argc, char **argv)
 {
 	t_data	data;
