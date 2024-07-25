@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/25 20:24:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/25 20:55:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,41 +29,35 @@ static t_ray	init_light_ray(t_data *data, int i, int light_i)
 	return (data->pix[i]->light_ray);
 }
 
-// static bool	does_intersect(t_ray *ray, t_objs *obj, t_hit_data *hit_2)
-// {
-// 	if (intersect_sphere(ray, obj, hit_2))
-// 	{
-// 		if (hit_2->t < ray->distance)
-// 			return (true);
-// 	}
-// 	else if (intersect_cylinder(ray, obj, hit_2))
-// 	{
-// 		puts("here");
-// 		exit(0);
-// 		if (hit_2->t < ray->distance)
-// 			return (true);
-// 	}
-// 	// else if (intersect_sphere(ray, obj, hit_2))
-// 	// {
-// 	// 	if (hit_2->t < ray->distance)
-// 	// 		return (true);
-// 	// }
-// 	// else if (intersect_sphere(ray, obj, hit_2))
-// 	// {
-// 	// 	if (hit_2->t < ray->distance)
-// 	// 		return (true);
-// 	// }
-// 		// || intersect_triangle(ray, obj, hit_2)
-// 		// || intersect_cylinder(ray, obj, hit_2)
-// 		// || intersect_plane(ray, obj, hit_2))
-// 		// {	
-// 		// 	if (hit_2->t < ray->distance)
-// 		// 		return (true);
-// 		// }
-// 	return (false);
-// }
+static bool	does_intersect(t_ray *ray, t_objs *obj, t_hit_data *hit_2)
+{
+	if (obj->type == E_SPHERE
+		&& intersect_sphere(ray, obj, hit_2))
+	{
+		if (hit_2->t < ray->distance)
+			return (true);
+	}
+	else if (obj->type == E_CYLINDER
+		&& intersect_cylinder(ray, obj, hit_2))
+	{
+		if (hit_2->t < ray->distance)
+			return (true);
+	}
+	else if (obj->type == E_PLANE
+		&& intersect_plane(ray, obj, hit_2))
+	{
+		if (hit_2->t < ray->distance)
+			return (true);
+	}
+	else if (obj->type == E_TRIANGLE
+		&& intersect_triangle(ray, obj, hit_2))
+	{
+		if (hit_2->t < ray->distance)
+			return (true);
+	}
+	return (false);
+}
 
-// fix this function so that the type is check, correct intersect function called... then test plane + triangle again
 static bool	in_light(t_data *data, int i, int light_i)
 {
 	t_hit_data		hit_2;
@@ -78,20 +72,8 @@ static bool	in_light(t_data *data, int i, int light_i)
 		ft_bzero(&hit_2, sizeof(t_hit_data));
 		if (data->objs[obj_i] != data->pix[i]->obj)
 		{
-			if (data->objs[obj_i]->type == E_SPHERE
-				&& intersect_sphere(&ray, data->objs[obj_i], &hit_2))
-			{
-				if (hit_2.t < ray.distance)
-					return (false);
-			}
-			if (data->objs[obj_i]->type == E_CYLINDER
-				&& intersect_cylinder(&ray, data->objs[obj_i], &hit_2))
-			{
-				if (hit_2.t < ray.distance)
-					return (false);
-			}
-			// if (does_intersect(&ray, data->objs[obj_i], &hit_2) == true)
-			// 	return (false);
+			if (does_intersect(&ray, data->objs[obj_i], &hit_2) == true)
+				return (false);
 		}
 		obj_i++;
 	}

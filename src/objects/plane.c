@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/09 15:20:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/25 21:22:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ bool	intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
 			if (denom < 0)
 				plane->normal = mult_vecdub(plane->vector, -1);
 			plane->obj_t = hit->t;
-			plane->hit_pos = plus(ray->place, mult_vecdub(ray->vector, plane->obj_t));
+			// plane->hit_pos = plus(ray->place, mult_vecdub(ray->vector, plane->obj_t));
+			plane->hit_pos = mult_vecdub(ray->vector, plane->obj_t);
 			return (true);
 		}
 	}
