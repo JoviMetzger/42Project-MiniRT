@@ -6,94 +6,71 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/09 15:20:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/23 20:20:10 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-bool	cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray)
+// Cut of the ends, else there will be a infinite cylinder
+static bool	cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray, t_vec3 ca)
 {
-	double	projection;
-
-	hit->to_center = plus(ray->place, mult_vecdub(ray->vector, hit->t));
-	hit->from_center = minus(hit->to_center, cyl->center);
-	projection = dot_product(hit->from_center, cyl->vector);
-	if (fabs(projection) <= cyl->height_half)
-		return (true);
-	return (false);
+	t_vec3	hit_to_c;
+	t_vec3	hit_to_ca;	
+	double	distance_along_axis;
+		
+	hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->root1));
+	hit_to_c = minus(hit->hit_pos, cyl->center);
+	distance_along_axis = dot_product(hit_to_c, ca);	
+	if (distance_along_axis <= -cyl->height / 2.0 || distance_along_axis >= cyl->height / 2.0)
+		return (false);
+	hit_to_ca = mult_vecdub(ca, distance_along_axis);
+	cyl->normal = normalize(minus(hit_to_c, hit_to_ca));
+	return (true);
 }
 
-void	set_points(t_hit_data *hit, t_ray *ray, t_objs *cyl)
-{
-	hit->vector_cross = cross_product(cyl->vector, ray->vector);
-	hit->o_c = minus(cyl->center, ray->place);
-	hit->o_c = cross_product(hit->o_c, cyl->vector);
-	hit->a = dot_product(hit->vector_cross, hit->vector_cross);
-	hit->b = 2.0 * dot_product(hit->vector_cross, hit->o_c);
-	hit->c = dot_product(hit->o_c, hit->o_c) - (cyl->radius * cyl->radius);
-}
-
-
+// calculating the body
 bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
-{
-	set_points(hit, ray, cyl);
-	if (quadratic(hit) == true)
+{	
+	double temp;
+
+	hit->o_c = minus(ray->place, cyl->center);;
+	hit->a_a = minus(ray->vector, mult_vecdub(normalize(cyl->vector), dot_product(normalize(cyl->vector), ray->vector)));
+	hit->b_b = minus(hit->o_c, mult_vecdub(normalize(cyl->vector), dot_product(normalize(cyl->vector), hit->o_c)));
+	hit->a = dot_product(hit->a_a, hit->a_a);
+	hit->b = dot_product(hit->a_a, hit->b_b);
+	hit->c = dot_product(hit->b_b, hit->b_b);
+	hit->d = hit->b * hit->b - hit->a * (hit->c - (cyl->radius * cyl->radius));
+	if (hit->d < 0.0)
+		return (false); 
+	hit->root1 = (-hit->b - sqrt(hit->d)) / hit->a;
+	hit->root2 = (-hit->b + sqrt(hit->d)) / hit->a;
+	if (hit->root1 > hit->root2)
 	{
-		if (cut_ends_hit_bod(hit, cyl, ray) == true)
-			return (true);
+		temp = hit->root1;
+		hit->root1 = hit->root2;
+		hit->root2 = temp;
 	}
-	return (false);
-}
-
-void	cyl_normal(t_ray *ray, t_objs *cyl, t_hit_data *hit)
-{
-	// t_vec3	to_bottom;
-	// jovi version
-	// t_vec3 intersect = plus(ray->place, mult_vecdub(ray->vector, hit->t));
-
-	// t_vec3 vector = normalize(cyl->vector);
-	// t_vec3 center = minus(intersect, cyl->center);
-	// t_vec3 projection = mult_vecdub(vector, dot_product(center, vector));
-	// cyl->normal = minus(center, projection);
-	
-	// jovi version
-	
-	// check the things dont go wrong using/updating the hit values
-	
-	// hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
-	// // hit->to_center = minus(hit->hit_pos, cyl->center);
-	// to_bottom = minus(cyl->top, hit->hit_pos);
-	// cyl->tmp_normal = minus(to_bottom, mult_vecdub(cyl->vector,
-	// 			dot_product(cyl->vector, to_bottom)));
-	// cyl->normal = normalize(cyl->tmp_normal);
-	hit->hit_pos = plus(ray->place, mult_vecdub(ray->vector, hit->t));
-	hit->to_center = minus(hit->hit_pos, cyl->center);
-	cyl->tmp_normal = minus(hit->to_center, mult_vecdub(cyl->vector,
-				dot_product(cyl->vector, hit->to_center)));
-	cyl->normal = normalize(cyl->tmp_normal);
+	if (hit->root1 < 0)
+		hit->root1 = hit->root2;
+	if (hit->root1 < 0)
+		return (false);
+	hit->t = hit->root1;
+	return (cut_ends_hit_bod(hit, cyl, ray, normalize(cyl->vector)));
 }
 
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
-{
+{	
 	hit->tmp_t = DBL_MAX;
-	if (tap_top(hit, cyl, ray) == true)
-	{
-		if (hit->t < hit->tmp_t)
-			hit->tmp_t = hit->t;
-	}
-	if (boop_bottom(hit, cyl, ray) == true)
-	{
-		if (hit->t < hit->tmp_t)
-			hit->tmp_t = hit->t;
-	}
 	if (bodyody(hit, cyl, ray) == true)
 	{
 		if (hit->t < hit->tmp_t)
-		{
 			hit->tmp_t = hit->t;
-			cyl_normal(ray, cyl, hit);
-		}
+	}
+	if (intersect_caps(ray, cyl, hit) == true)
+	{
+		if (hit->t < hit->tmp_t)
+			hit->tmp_t = hit->t;
 	}
 	if (hit->tmp_t != DBL_MAX)
 	{
@@ -105,9 +82,9 @@ bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
 	return (false);
 }
 
-bool	cylinder(t_ray *ray, t_objs *cylinder, t_hit_data *hit)
-{
-	if (intersect_cylinder(ray, cylinder, hit))
+bool	cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
+{	
+	if (intersect_cylinder(ray, cyl, hit))
 		return (check_closest(hit));
 	return (false);
 }

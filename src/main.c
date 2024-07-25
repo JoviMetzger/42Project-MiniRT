@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/25 16:23:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/07/25 17:45:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void	free_all(t_data *data)
  *		- 4. ft_render(); Prints the pixels.
  *		- 5. mlx_loop(); Runs the loop, so that the window stays open.	
  *		- 6. mlx_terminate(); Terminate the window/MLX once done using.
- *		- 7. free_objects(); Cleans up the structs that got allcoated.
+ *		- 7. free_all(); Cleans up the structs that got allcoated.
  */
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
+	printf("Loading...\n");
 	parse_input(argc, argv, &data);
 	init_pix(&data);
 	do_calcs(&data);
