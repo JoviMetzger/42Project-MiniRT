@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/15 20:17:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/08 14:13:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/05 14:35:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	check_closest(t_hit_data *hit)
 
 bool	quadratic(t_hit_data *hit)
 {
-	double	tmp;
+	double	tmp;hit->root1 = (-hit->b - hit->d) / (2.0 * hit->a);
 
 	hit->d = hit->b * hit->b - 4 * hit->a * hit->c;
 	if (hit->d < 0)
@@ -32,7 +32,7 @@ bool	quadratic(t_hit_data *hit)
 	else
 	{
 		hit->d = sqrt(hit->d);
-		hit->root1 = (-hit->b - hit->d) / (2.0 * hit->a);
+		
 		hit->root2 = (-hit->b + hit->d) / (2.0 * hit->a);
 		if (hit->root1 > hit->root2)
 		{
