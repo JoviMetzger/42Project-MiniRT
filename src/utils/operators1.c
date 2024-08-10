@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/23 18:12:44 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/10 15:21:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,12 @@ t_vec3	division_vec_vec(t_vec3 u, t_vec3 v)
 	len.y = u.y / v.y;
 	len.z = u.z / v.z;
 	return (len);
+}
+
+t_vec3	*ray_mult(t_vec3 *dst, t_ray *ray, double t)
+{
+	dst->x = ray->place.x + t * ray->vector.x;
+	dst->y = ray->place.y + t * ray->vector.y;
+	dst->z = ray->place.z + t * ray->vector.z;
+	return (dst);
 }

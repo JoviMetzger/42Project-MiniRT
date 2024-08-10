@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/25 20:27:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/10 15:23:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,6 +335,7 @@ t_vec3		mult_vecvec(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecdub(t_vec3 v, double dub);
 t_vec3		division_vec_dub(t_vec3 v, double dub);
 t_vec3		division_vec_vec(t_vec3 u, t_vec3 v);
+t_vec3		*ray_mult(t_vec3 *dst, t_ray *ray, double t);
 t_vec3		cross_product(t_vec3 u, t_vec3 v);
 t_vec3		normalize(t_vec3 v);
 double		dot_product(t_vec3 u, t_vec3 v);

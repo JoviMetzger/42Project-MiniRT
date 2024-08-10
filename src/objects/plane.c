@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/25 21:22:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/10 15:24:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,21 @@ bool	intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
 {
 	double	denom;
 
-	denom = dot_product(ray->vector, plane->vector);
-	if (fabs(denom) > EPSILON)
-	{
-		hit->o_c = minus(plane->center, ray->place);
-		hit->t = dot_product(hit->o_c, plane->vector) / denom;
-		if (hit->t >= EPSILON)
-		{
-			if (denom < 0)
-				plane->normal = mult_vecdub(plane->vector, -1);
-			plane->obj_t = hit->t;
-			// plane->hit_pos = plus(ray->place, mult_vecdub(ray->vector, plane->obj_t));
-			plane->hit_pos = mult_vecdub(ray->vector, plane->obj_t);
-			return (true);
-		}
-	}
-	return (false);
+	denom = dot_product(plane->vector, ray->vector);
+	if (denom == 0)
+		return (false);
+	hit->o_c = minus(ray->place, plane->center);
+	hit->t = dot_product(hit->o_c, plane->vector) / denom;
+	if (hit->t < EPSILON)
+		return (false);
+	plane->normal = plane->vector;
+	if (dot_product(plane->normal, ray->vector) > 0)
+		plane->normal = mult_vecdub(plane->vector, -1);
+	plane->obj_t = hit->t;
+	plane->hit_pos = mult_vecdub(ray->vector, plane->obj_t);
+	ray_mult(&plane->hit_pos, ray, hit->t);
+
+	return (true);
 }
 
 bool	plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
@@ -49,4 +48,3 @@ bool	plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
 		return (check_closest(hit));
 	return (false);
 }
-
