@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/25 20:55:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/10 18:30:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,13 @@ void	do_calcs(t_data *data)
 	{
 		if (data->pix[data->i]->hit_b == true)
 		{
+			// now see light, but need to use shadow shit..
+			if (data->pix[data->i]->obj->type == E_PLANE)
+			{
+				data->pix[data->i]->colour = data->pix[data->i]->light;
+				break ;
+			}
+			//
 			light_i = 0;
 			while (light_i < data->light_i)
 			{

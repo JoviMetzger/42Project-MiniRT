@@ -33,3 +33,8 @@
 - any more to dos left in files?
 
 
+
+
+
+
+ - loads of mouse clicking (+/- moving window fast) - buffer overflow ft_handle_mousE_click
