@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/25 20:26:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/11 19:23:52 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ static bool	cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray, t_vec3 ca
 		return (false);
 	hit_to_ca = mult_vecdub(ca, distance_along_axis);
 	cyl->normal = normalize(minus(hit_to_c, hit_to_ca));
+	
 	return (true);
 }
 
 // calculating the body
-bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
+static bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 {	
 	double temp;
 
@@ -55,12 +56,12 @@ bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 		hit->root1 = hit->root2;
 	if (hit->root1 < 0)
 		return (false);
-	hit->t = hit->root1;
+	hit->t = hit->root1;	
 	return (cut_ends_hit_bod(hit, cyl, ray, normalize(cyl->vector)));
 }
 
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)
-{	
+{
 	hit->tmp_t = DBL_MAX;
 	if (bodyody(hit, cyl, ray) == true)
 	{

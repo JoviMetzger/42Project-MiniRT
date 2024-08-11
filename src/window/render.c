@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 20:56:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/11 19:34:13 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-/*	Bit shifts the ints rg,b, 
+/*	Bit shifts the ints r,g,b, 
  *	so that the correct colour is displayed into mlx_put_pixel();
  */
 int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b)

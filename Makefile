@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/07/24 20:41:50 by smclacke      ########   odam.nl          #
+#    Updated: 2024/08/11 20:14:46 by jmetzger      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ SRC_HEADER		= ./header
 SRCS			= main.c											\
 					utils/operators.c 								\
 					utils/operators1.c 								\
-					utils/operators2.c 								\
 					window/do_calcs.c 								\
 					window/init_pix.c 								\
 					window/window_key.c 							\
@@ -53,7 +52,6 @@ SRCS			= main.c											\
 					objects/cyl_caps.c 								\
 					objects/cylinder.c 								\
 					objects/triangle.c 								\
-					objects/quad.c 									\
 					ray/ray.c										\
 					parser/check_elements/check_caps.c				\
 					parser/check_elements/check_elements.c			\

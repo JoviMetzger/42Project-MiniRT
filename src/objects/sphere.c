@@ -6,11 +6,40 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/09 15:19:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/11 20:02:55 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
+
+static bool	quadratic(t_hit_data *hit)
+{
+	double	tmp;hit->root1 = (-hit->b - hit->d) / (2.0 * hit->a);
+
+	hit->d = hit->b * hit->b - 4 * hit->a * hit->c;
+	if (hit->d < 0)
+		return (false);
+	else
+	{
+		hit->d = sqrt(hit->d);
+		
+		hit->root2 = (-hit->b + hit->d) / (2.0 * hit->a);
+		if (hit->root1 > hit->root2)
+		{
+			tmp = hit->root1;
+			hit->root1 = hit->root2;
+			hit->root2 = tmp;
+		}
+		if (hit->root1 < 0)
+		{
+			hit->root1 = hit->root2;
+			if (hit->root1 < 0)
+				return (false);
+		}
+		hit->t = hit->root1;
+		return (true);
+	}
+}
 
 /**
  * 	d = ray direction

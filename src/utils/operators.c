@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/16 19:03:35 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/11 20:09:42 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,6 @@ t_vec3	plus(t_vec3 u, t_vec3 v)
 	return (len);
 }
 
-// + operator (vec + dub)
-t_vec3	plus_vecdub(t_vec3 u, double v)
-{
-	t_vec3	len;
-
-	len.x = u.x + v;
-	len.y = u.y + v;
-	len.z = u.z + v;
-	return (len);
-}
-
 // - operator (vec - vec)
 t_vec3	minus(t_vec3 u, t_vec3 v)
 {
@@ -46,16 +35,36 @@ t_vec3	minus(t_vec3 u, t_vec3 v)
 	return (len);
 }
 
-// -------------- Other math functions --------------
-double	pythagoras(double a, double b)
+// -------------- Operators (*/) --------------
+// * operator (vec * double)
+t_vec3	mult_vecdub(t_vec3 v, double dub)
 {
-	return (sqrt(a * a + b * b));
+	t_vec3	len;
+
+	len.x = v.x * dub;
+	len.y = v.y * dub;
+	len.z = v.z * dub;
+	return (len);
 }
 
-double	vec_length(t_vec3 v1, t_vec3 v2)
+// / operator (vec / double)
+t_vec3	division_vecdub(t_vec3 v, double dub)
 {
-	double	result;
+	t_vec3	len;
 
-	result = pythagoras(v1.x - v2.x, v1.y - v2.y);
-	return (pythagoras(result, v1.z - v2.z));
+	len.x = v.x / dub;
+	len.y = v.y / dub;
+	len.z = v.z / dub;
+	return (len);
+}
+
+// -------------- Other math functions --------------
+bool	check_closest(t_hit_data *hit)
+{
+	if (hit->t < hit->closest_t)
+	{
+		hit->closest_t = hit->t;
+		return (true);
+	}
+	return (false);
 }

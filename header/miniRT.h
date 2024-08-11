@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/25 20:27:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/11 20:18:12 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,34 +145,28 @@ typedef struct s_mouse
 
 // -------------------------------------------------------------
 // Struct for objects, each object has this struct
-//		- center, vector, tmp_normal, normal, top, base, edge[2], 
-//		  point[3], point_flag, diameter, height, height_half,
-//		  radius 			-> (for intersection calculation); 
 //		- type 				-> (what type of obj);
-//		- colour 			-> (colour of obj);
 //		- what_pattern 		-> (what patten that obj currently has); 
 //		- i_am 				-> (what obj num this is, basicly ID);
 //		- i 				-> (iterate through the different obj patterns,
-//							   Resrets to 0 after 2 iterations);
+//							   Resets to 0 after 2 iterations);
 typedef struct s_objs
 {
 	t_type				type;
 	double				obj_t;
 	t_vec3				hit_pos;
-	double				distance;
 	t_colour			colour;
 	t_vec3				center;
 	t_vec3				vector;
-	t_vec3				tmp_normal;
 	t_vec3				normal;
-	t_vec3				top;
-	t_vec3				base;
+	t_vec3				top;	// Not using
+	t_vec3				base;	// Not using
 	t_vec3				edge[2];
 	t_vec3				point[3];
-	int					point_flag;
+	int					point_flag;	// Not using
 	double				diameter;
 	double				height;
-	double				height_half;
+	double				height_half;// Not using
 	double				radius;
 	int16_t				i_am;
 	int					i;
@@ -192,13 +186,9 @@ typedef struct s_hit_data
 	t_vec3	c_c;
 	t_vec3	a_a;
 	t_vec3	b_b;
-	t_vec3	norm_vec;
 	double	root1;
 	double	root2;
 	t_vec3	hit_pos;
-	t_vec3	to_center;
-	t_vec3	from_center;
-	t_vec3	vector_cross;
 	double	t;
 	double	tmp_t;
 	double	closest_t;
@@ -220,7 +210,6 @@ typedef struct s_colour_vars
 	double		spec_power;
 	double		diff_fact;
 	double		spec_fact;
-	double		diffuse_intense;
 	t_colour	ambient;
 	t_colour	diffuse;
 	t_colour	specular;
@@ -247,13 +236,6 @@ typedef struct s_pixel
 
 // -------------------------------------------------------------
 // Main struct
-//		- **objs, **light, *hit_data, vars, type, camera, ambient,
-//		  screen, ray, mouse	-> (all kind of structs);
-//		- *image, *mlx, **pix	-> (MLX structs);
-//		- pix_i, total_pix, 
-//		  height, width			-> (Info about the pixel);
-//		- objs_i, light_i		-> (how many obj & light we have);
-//		- i_am					-> (what object is currently seleted);
 typedef struct s_data
 {
 	mlx_image_t		*image;
@@ -262,6 +244,7 @@ typedef struct s_data
 	t_pixel			**pix;
 	int				pix_i;
 	int				total_pix;
+
 	t_objs			**objs;
 	int				objs_i;
 	t_light			**light;
@@ -270,15 +253,14 @@ typedef struct s_data
 	t_camera		camera;
 	t_ambient		ambient;
 	t_screen		screen;
-	t_ray			ray;
-
-	t_hit_data		*hit_data;
-	t_colour_vars	vars;
 	t_mouse			mouse;
+	t_ray			ray;
+	t_colour_vars	vars;
+
 	int				height;
 	int				width;
-	t_type			type;
 
+	t_type			type;
 	int16_t			i_am;
 	int				tmp_i;
 	int				i;
@@ -296,22 +278,23 @@ typedef struct s_checkerboard
 	double	square_v;
 }	t_checkerboard;
 
+// -------------------------------------------------------------
+// -------------------------------------------------------------
 // --- Functions --- 
 void		free_all(t_data *data);
 
 // Window Functions
 void		do_calcs(t_data *data);
-void		free_pixels(t_data *data);
 void		init_pix(t_data *data);
 void		ft_put_image(t_data *data);
 void		ft_open_window(t_data *data);
 void		ft_render(t_data *data);
+void		free_pixels(t_data *data);
 
 // Movement Functions
 void		ft_key_action(mlx_key_data_t keydata, t_data *data);
 void		ft_handle_mouse_click(mouse_key_t key, action_t act,
 				modifier_key_t m, void *_data);
-void		init_mouse_map(t_data *data);
 
 // Ray Functions
 t_ray		ft_create_ray(t_data *data, int x, int y);
@@ -321,41 +304,39 @@ void		ft_calculate_colour(t_data *data, t_hit_data *obj, int index);
 uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj);
 uint32_t	get_ambient(t_data *data, t_objs *obj);
 t_colour	get_base_colour(t_objs *obj, t_colour_vars *colour);
-t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
-int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
 t_colour	get_sphere_checkerboard(t_vec3 normal);
 t_colour	add_colours(t_colour result, t_colour type);
 t_colour	add_tmp(t_colour tmp, t_colour result);
+int32_t		ft_convert_rgb(int32_t r, int32_t g, int32_t b);
+t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 
 // Operators
-t_vec3		plus_vecdub(t_vec3 u, double v);
 t_vec3		plus(t_vec3 u, t_vec3 v);
 t_vec3		minus(t_vec3 u, t_vec3 v);
-t_vec3		mult_vecvec(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecdub(t_vec3 v, double dub);
-t_vec3		division_vec_dub(t_vec3 v, double dub);
-t_vec3		division_vec_vec(t_vec3 u, t_vec3 v);
+t_vec3		division_vecdub(t_vec3 v, double dub);
 t_vec3		cross_product(t_vec3 u, t_vec3 v);
 t_vec3		normalize(t_vec3 v);
 double		dot_product(t_vec3 u, t_vec3 v);
 double		length_squared(t_vec3 vec);
-double		distance(t_vec3 pnt1, t_vec3 pnt2);
-double		vec_length(t_vec3 v1, t_vec3 v2);
-double		pythagoras(double a, double b);
-double		vec_length(t_vec3 v1, t_vec3 v2);
+
+// t_vec3		plus_vecdub(t_vec3 u, double v);
+// t_vec3		mult_vecvec(t_vec3 u, t_vec3 v);
+// double		distance(t_vec3 pnt1, t_vec3 pnt2);
+// double		vec_length(t_vec3 v1, t_vec3 v2);
+// double		pythagoras(double a, double b);
 
 // Objects Functions
 bool		intersect_caps(t_ray *ray, t_objs *cyl, t_hit_data *hit);
-bool		bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray);
 bool		cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit);
 bool		intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit);
-bool		plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
-bool		intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
 bool		sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit);
 bool		intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit);
+bool		plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
+bool		intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
 bool		triangle(t_ray *ray, t_objs *tri, t_hit_data *hit);
 bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit);
+// bool		quadratic(t_hit_data *hit);
 bool		check_closest(t_hit_data *hit);
-bool		quadratic(t_hit_data *hit);
 
 #endif
