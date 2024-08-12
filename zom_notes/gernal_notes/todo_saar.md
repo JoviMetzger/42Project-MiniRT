@@ -11,10 +11,11 @@
 
 - inside objects
 
-- cylinder still being a bitch?
+- cylinder?
 
 - texture.. ?
 
+ - loads of mouse clicking (+/- moving window fast) - buffer overflow ft_handle_mousE_click
 
 *------- eval prep -------*
 
@@ -37,4 +38,3 @@
 
 
 
- - loads of mouse clicking (+/- moving window fast) - buffer overflow ft_handle_mousE_click
