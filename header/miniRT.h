@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/12 18:05:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/12 18:10:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,14 +159,14 @@ typedef struct s_objs
 	t_vec3				center;
 	t_vec3				vector;
 	t_vec3				normal;
-	t_vec3				top;	// Not using
-	t_vec3				base;	// Not using
+	t_vec3				top;
+	t_vec3				base;
 	t_vec3				edge[2];
 	t_vec3				point[3];
-	int					point_flag;	// Not using
+	int					point_flag;
 	double				diameter;
 	double				height;
-	double				height_half;// Not using
+	double				height_half;
 	double				radius;
 	int16_t				i_am;
 	int					i;
@@ -314,8 +314,7 @@ t_vec3		ft_reflect(t_vec3 incident, t_vec3 normal);
 t_vec3		plus(t_vec3 u, t_vec3 v);
 t_vec3		minus(t_vec3 u, t_vec3 v);
 t_vec3		mult_vecdub(t_vec3 v, double dub);
-// t_vec3		division_vec_dub(t_vec3 v, double dub);
-// t_vec3		division_vec_vec(t_vec3 u, t_vec3 v);
+t_vec3		division_vecdub(t_vec3 v, double dub);
 t_vec3		cross_product(t_vec3 u, t_vec3 v);
 t_vec3		normalize(t_vec3 v);
 double		dot_product(t_vec3 u, t_vec3 v);
