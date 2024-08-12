@@ -3,7 +3,6 @@
 
 - plane light is ... interesting.
 
-- triangle overlap... wtfffff
 
 - surface normals
 
@@ -16,6 +15,7 @@
 - texture.. ?
 
  - loads of mouse clicking (+/- moving window fast) - buffer overflow ft_handle_mousE_click
+
 
 *------- eval prep -------*
 
