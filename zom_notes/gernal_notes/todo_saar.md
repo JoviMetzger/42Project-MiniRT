@@ -3,7 +3,6 @@
 
 - plane light is ... interesting.
 
-- triangle overlap... wtfffff
 
 - surface normals
 
@@ -11,9 +10,11 @@
 
 - inside objects
 
-- cylinder still being a bitch?
+- cylinder?
 
 - texture.. ?
+
+ - loads of mouse clicking (+/- moving window fast) - buffer overflow ft_handle_mousE_click
 
 
 *------- eval prep -------*
@@ -31,5 +32,9 @@
 - try to make it crash...
 
 - any more to dos left in files?
+
+
+
+
 
 
