@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/13 19:55:44 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/13 20:27:49 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,14 +159,14 @@ typedef struct s_objs
 	t_vec3				center;
 	t_vec3				vector;
 	t_vec3				normal;
-	t_vec3				top;	// Not using
-	t_vec3				base;	// Not using
+	t_vec3				top;
+	t_vec3				base;
 	t_vec3				edge[2];
 	t_vec3				point[3];
-	int					point_flag;	// Not using
+	int					point_flag;
 	double				diameter;
 	double				height;
-	double				height_half;// Not using
+	double				height_half;
 	double				radius;
 	int16_t				i_am;
 	int					i;
@@ -336,7 +336,6 @@ bool		plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
 bool		triangle(t_ray *ray, t_objs *tri, t_hit_data *hit);
 bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit);
-// bool		quadratic(t_hit_data *hit);
 bool		check_closest(t_hit_data *hit);
 
 #endif

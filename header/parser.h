@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/24 20:58:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/10 18:02:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 
 # ifndef BUFF_SIZE
-#  define BUFF_SIZE 100
+#  define BUFF_SIZE 300
 # endif
 
 # define A 1

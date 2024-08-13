@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:02:19 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/21 15:53:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/10 16:28:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	parse_array(t_data *data, char **arr)
 	obj_count = validate_elems(arr);
 	light_count = count_light(arr);
 	if (light_count == 0)
-		free_arr_error("Can have between 1 and 4 light!", arr);
+		free_arr_error("min 1 | max 4 lights", arr);
 	convert_cap_input(data, arr, light_count);
 	convert_obj_input(data, arr, obj_count);
 	init_colour(data);
