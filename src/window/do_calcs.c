@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/12 12:35:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/13 22:11:23 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ static bool	does_intersect(t_ray *ray, t_objs *obj, t_hit_data *hit_2)
 	}
 	else if (obj->type == E_CYLINDER
 		&& intersect_cylinder(ray, obj, hit_2))
-	{
-		if (hit_2->t < ray->distance)
-			return (true);
-	}
-	else if (obj->type == E_PLANE
-		&& intersect_plane(ray, obj, hit_2))
 	{
 		if (hit_2->t < ray->distance)
 			return (true);

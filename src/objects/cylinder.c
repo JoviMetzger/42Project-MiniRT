@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/11 19:23:52 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/13 20:40:55 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	double temp;
 
 	hit->o_c = minus(ray->place, cyl->center);;
-	hit->a_a = minus(ray->vector, mult_vecdub(normalize(cyl->vector), dot_product(normalize(cyl->vector), ray->vector)));
-	hit->b_b = minus(hit->o_c, mult_vecdub(normalize(cyl->vector), dot_product(normalize(cyl->vector), hit->o_c)));
+	hit->a_a = minus(ray->vector, mult_vecdub(cyl->vector, dot_product(cyl->vector, ray->vector)));
+	hit->b_b = minus(hit->o_c, mult_vecdub(cyl->vector, dot_product(cyl->vector, hit->o_c)));
 	hit->a = dot_product(hit->a_a, hit->a_a);
 	hit->b = dot_product(hit->a_a, hit->b_b);
 	hit->c = dot_product(hit->b_b, hit->b_b);
