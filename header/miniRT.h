@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/11 20:18:12 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/13 19:55:44 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 // --- Math stuff ---
 # define M_PI 3.14159265358979323846
-# define EPSILON 0.000001
+# define EPSILON 0.0001
 # define DBL_MAX 1.79769e+308
 
 // --- Enum ---

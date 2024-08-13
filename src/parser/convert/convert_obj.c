@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/25 20:58:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/13 20:19:21 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int	sort_pl(char **elem_str, t_data *data)
 		return (par_err("invalid: Plane: 3D vector"));
 	if (!convert_vector(data, elem_str[2]))
 		return (par_err("invalid: Plane: 3D vector"));
-	data->objs[data->objs_i]->normal
-		= normalize(data->objs[data->objs_i]->vector);
+	data->objs[data->objs_i]->vector = normalize(data->objs[data->objs_i]->vector);
+	data->objs[data->objs_i]->normal = mult_vecdub(data->objs[data->objs_i]->normal, -1);
 	if (!is_rgb(elem_str[3], 0, 0))
 		return (par_err("invalid: Plane: RGB | [0-255]"));
 	if (!convert_rgb(data, elem_str[3]))
@@ -122,6 +122,7 @@ int	sort_cy(char **elem_str, t_data *data)
 	if (!convert_rgb(data, elem_str[5]))
 		return (par_err("invalid: Cylinder: RGB | [0-255]"));
 	cyl_cals(data);
+	data->objs[data->objs_i]->vector = normalize(data->objs[data->objs_i]->vector);
 	data->objs[data->objs_i]->normal
 		= normalize(data->objs[data->objs_i]->vector);
 	return (1);
