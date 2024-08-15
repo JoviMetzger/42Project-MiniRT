@@ -1,6 +1,7 @@
 
 **THE TO-DO LIST LET'S GOOOO**
 
+ - sarah: all texture stuff gone or commented
 
 - inside objects
 
