@@ -31,19 +31,13 @@ sp               0,0,-15      2      0,0,255
 
 *------- eval prep -------*
 
-- subject pdf example file, want to make that work? or leave as example
+- subject pdf example file, want to make that work? or leave as example (?)
 
-- really good parser check, fuck with the file lots..
-
-- speed improvement?
-
-- loading...
+- loading... (?)
 
 - eval files with nice scenes + basic object files
 
-- everything norm
-
-- try to make it crash...
+- everything norm (cylinder + sphere + last comments (dont forget to check headers))
 
 - any more to dos left in files?
 

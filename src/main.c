@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/15 14:03:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/15 14:04:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	printf("Loading...\n");
 	parse_input(argc, argv, &data);
+	printf("Loading...\n");
 	init_pix(&data);
 	do_calcs(&data);
 	ft_open_window(&data);
