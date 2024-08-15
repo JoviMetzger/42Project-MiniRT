@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/08 18:00:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/07/25 16:49:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/15 14:02:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,3 @@ bool	triangle(t_ray *ray, t_objs *triangle, t_hit_data *hit)
 		return (check_closest(hit));
 	return (false);
 }
-
