@@ -1,25 +1,20 @@
 
 
-
+# fix sphere here to be circle in middle instead of box
 L                   0,0,-12         0.9             55,55,255
 
 C                    0,0,-1           0,0,1            90
 
 A                    0.3              255,255,255
 
-# back
 pl                   0,0,-15          0,0,1          0,0,0                 
+sp                   0,0,-13            2            0,0,0
 
-# # # left
 pl                    -1,0,-20          1,0,0       0,0,0   
 
-# # # right
 pl                     1,0,-20          1,0,0      0,0,0
 
-# # # top
 pl                     0,1,-20          0,1,0           0,0,0
 
-# # # bottom
 pl                     -3,-1,-20         0,1,0           0,0,0
-
 
