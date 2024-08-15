@@ -6,15 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 23:42:49 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/13 20:58:31 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/15 20:29:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
-
-/**
- * @todo normals here or no? 
- */
 
 static int	tri_coords(char **elem_str, t_data *data)
 {

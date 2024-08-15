@@ -1,11 +1,9 @@
 
 **THE TO-DO LIST LET'S GOOOO**
 
- - sarah: all texture stuff gone or commented
-
 - inside objects
 
-- cylinder?
+- cylinder
 
  - loads of mouse clicking (+/- moving window fast) - buffer overflow ft_handle_mousE_click
 
@@ -39,11 +37,4 @@ sp               0,0,-15      2      0,0,255
 - eval files with nice scenes + basic object files
 
 - everything norm (cylinder + sphere + last comments (dont forget to check headers))
-
-- any more to dos left in files?
-
-
-
-
-
 
