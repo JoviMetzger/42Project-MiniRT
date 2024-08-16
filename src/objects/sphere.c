@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 15:58:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/16 16:56:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static bool	quadratic(t_hit_data *hit)
 	else
 	{
 		hit->d = sqrt(hit->d);
-		
 		hit->root1 = (-hit->b - hit->d) / (2.0 * hit->a);
 		hit->root2 = (-hit->b + hit->d) / (2.0 * hit->a);
 		if (hit->root1 > hit->root2)
@@ -69,7 +68,6 @@ static bool	quadratic(t_hit_data *hit)
 bool	intersect_sphere(t_ray *ray, t_objs *sphere, t_hit_data *hit)
 {
 	t_vec3	inter_point;
-
 
 	hit->o_c = minus(ray->place, sphere->center);
 	hit->a = dot_product(ray->vector, ray->vector);

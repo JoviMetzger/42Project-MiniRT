@@ -6,13 +6,24 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/13 22:16:17 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 17:35:50 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/miniRT.h"
 
-//	Assign pixels to the position of the ray-vector .
+// Helper function to scale a vector by a scalar
+static	t_vec3	scale_vector(t_vec3 v, double scalar)
+{
+	t_vec3	result;
+
+	result.x = v.x * scalar;
+	result.y = v.y * scalar;
+	result.z = v.z * scalar;
+	return (result);
+}
+
+// Converts a 'double' into a 'vector'.
 static t_vec3	init_ray_pos(double pos_x, double pos_y, double pos_z)
 {
 	t_vec3	vec;
@@ -23,12 +34,20 @@ static t_vec3	init_ray_pos(double pos_x, double pos_y, double pos_z)
 	return (vec);
 }
 
-//	Altough we need the ray-vector, 
-//	we assign x,y,z the pixel_x-y-z as the ray-vector;
-static t_vec3	init_vector(t_screen screen)
+// Function to initialize the ray direction with camera orientation.
+static t_vec3	init_vector(t_screen screen, t_camera camera)
 {
-	return (normalize(init_ray_pos(screen.pixel_delta_x,
-				screen.pixel_delta_y, -1)));
+	t_vec3	forward;
+	t_vec3	right;
+	t_vec3	up;
+	t_vec3	pixel_direction;
+
+	forward = normalize(camera.vector);
+	right = normalize(cross_product(init_ray_pos(0, 1, 0), forward));
+	up = cross_product(forward, right);
+	pixel_direction = plus(plus(scale_vector(right, screen.pixel_delta_x),
+				scale_vector(up, screen.pixel_delta_y)), forward);
+	return (normalize(pixel_direction));
 }
 
 /*	STEP 1: Calculate the ray from the “eye” through the pixel
@@ -64,7 +83,7 @@ t_ray	ft_create_ray(t_data *data, int pos_x, int pos_y)
 				* (M_PI / 180)));
 	screen.pixel_delta_y = screen.viewport_h * (tan((data->camera.fov / 2)
 				* (M_PI / 180)));
-	ray.vector = init_vector(screen);
+	ray.vector = init_vector(screen, data->camera);
 	ray.place = data->camera.place;
 	return (ray);
 }

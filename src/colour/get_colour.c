@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 15:11:36 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 15:14:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/16 16:49:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ static void	specular_light(t_colour_vars *colour, t_ray ray)
 {
 	colour->view_dir = normalize(minus(ray.place, colour->intersect_p));
 	colour->ref_dir = normalize(ft_reflect(colour->light_dir, colour->normal));
-	// colour->view_dir = minus(ray.place, colour->intersect_p);
-	// colour->ref_dir = ft_reflect(colour->light_dir, colour->normal);
 	colour->spec_fact = pow(dot_product(colour->ref_dir, colour->view_dir),
 			colour->spec_power);
 	if (colour->spec_fact < 0.0)

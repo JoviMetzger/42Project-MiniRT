@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:06:08 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/13 21:39:06 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 17:43:47 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_put_image(t_data *data)
 			data->pix[data->pix_i]->y, data->pix[data->pix_i]->colour);
 		data->pix_i++;
 	}
-	puts("DONEE"); // dont forget to remove...
+	printf("Window is ready!\n");
 }
 
 /*	In this function renders and executes keys/mouse movement.
