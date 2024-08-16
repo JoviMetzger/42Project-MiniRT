@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/11 19:41:05 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/15 14:04:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	free_all(t_data *data)
 {
 	free_objects(data);
 	free_pixels(data);
-	// did sarah malloc anything else and forget to free it?
 }
 
 /* main function:
@@ -42,8 +41,8 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	printf("Loading...\n");
 	parse_input(argc, argv, &data);
+	printf("Loading...\n");
 	init_pix(&data);
 	do_calcs(&data);
 	ft_open_window(&data);

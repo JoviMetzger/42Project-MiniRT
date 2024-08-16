@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 14:59:27 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 16:57:18 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@
  * 
  * 
  */
-
-bool intersect_plane(t_ray *ray, t_objs *plane,  t_hit_data *hit)
+bool	intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit)
 {
 	double	denom;
-	
+
 	denom = dot_product(ray->vector, plane->vector);
 	if (fabs(denom) > EPSILON)
 	{

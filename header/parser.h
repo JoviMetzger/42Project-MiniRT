@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/10 18:02:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/15 20:25:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void		*map_malloc(size_t size);
 void		init_mouse_map(t_data *data);
 
 // --- parse_input --- //
-// int			handle_texture(t_data *data, char *str);
 void		parse_input(int argc, char **argv, t_data *data);
 
 // --- parser_error --- //

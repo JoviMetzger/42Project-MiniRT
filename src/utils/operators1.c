@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/12 18:05:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/15 14:00:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ t_vec3	normalize(t_vec3 v)
 	len = division_vecdub(v, normalize);
 	return (len);
 }
-

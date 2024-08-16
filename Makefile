@@ -6,13 +6,13 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/08/16 12:26:24 by jmetzger      ########   odam.nl          #
+#    Updated: 2024/08/16 16:59:14 by jmetzger      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 # Executable
 NAME 			= miniRT
-INPUT_FILE		= images_rt/parse_me.rt 
+INPUT_FILE		= scenes/scene_1.rt 
 
 # Compiler and flags
 CC 				= cc

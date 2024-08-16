@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/01 19:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 13:41:20 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/15 20:28:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,6 @@ int	count_light(char **arr)
 	if (count > 4)
 		return (0);
 	return (count);
-}
-
-// util for textures
-char	*give_null(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i] && ft_isspace(str[i]))
-		i++;
-	while (str[i] && !ft_isspace(str[i]))
-		i++;
-	str[i] = '\0';
-	return (str);
 }
 
 void	cyl_cals(t_data *data)
