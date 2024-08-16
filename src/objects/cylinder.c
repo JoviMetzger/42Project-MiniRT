@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 16:49:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/16 17:12:18 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static bool	bodyody(t_hit_data *hit, t_objs *cyl, t_ray *ray)
 	if (hit->root1 < 0)
 		return (false);
 	hit->t = hit->root1;	
-	return (cut_ends_hit_bod(hit, cyl, ray, normalize(cyl->vector)));
+	return (cut_ends_hit_bod(hit, cyl, ray, cyl->vector));
 }
 
 bool	intersect_cylinder(t_ray *ray, t_objs *cyl, t_hit_data *hit)

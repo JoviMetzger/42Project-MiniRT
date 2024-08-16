@@ -21,6 +21,8 @@ cy            -2,-3,-8        0,1,1        2        5       0,0,255
 cy            3,2,-9           0,0,1        1.5        2       153,100,255
 
 
-# black triangle taking the colour of the light
-tr           -7,6,-11         -7,-6,-11      10,0,-11     0,0,0
+tr           -7,6,-11         -7,-6,-11      10,0,-11     255,102,102
+
+# # black triangle taking the colour of the light
+# tr           -7,6,-11         -7,-6,-11      10,0,-11     0,0,0
 
