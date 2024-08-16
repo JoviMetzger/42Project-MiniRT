@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/13 22:16:17 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 15:29:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static t_vec3	init_ray_pos(double pos_x, double pos_y, double pos_z)
 //	we assign x,y,z the pixel_x-y-z as the ray-vector;
 static t_vec3	init_vector(t_screen screen)
 {
+	// return (init_ray_pos(screen.pixel_delta_x,
+	// 			screen.pixel_delta_y, -1));
 	return (normalize(init_ray_pos(screen.pixel_delta_x,
 				screen.pixel_delta_y, -1)));
 }

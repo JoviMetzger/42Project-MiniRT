@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 15:11:36 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/13 21:30:23 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 15:29:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ static void	loop_light_array(t_data *data, t_colour_vars *vars, t_objs *obj,
 	data->tmp_i = 0;
 	while (data->tmp_i < data->light_i)
 	{
-		data->vars.intersect_p = plus(data->ray.place,
-				mult_vecdub(data->ray.vector, obj->obj_t));
+		// ?? maybe norm
+		data->vars.intersect_p = normalize(plus(data->ray.place,
+				mult_vecdub(data->ray.vector, obj->obj_t)));
 		data->vars.normal = obj->normal;
 		vars->curr_light = data->light[data->tmp_i];
 		vars->light_dir = normalize(minus(vars->curr_light->place,
