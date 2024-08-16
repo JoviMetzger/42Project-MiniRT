@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/11 20:02:55 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 15:58:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	quadratic(t_hit_data *hit)
 {
-	double	tmp;hit->root1 = (-hit->b - hit->d) / (2.0 * hit->a);
+	double	tmp;
 
 	hit->d = hit->b * hit->b - 4 * hit->a * hit->c;
 	if (hit->d < 0)
@@ -23,6 +23,7 @@ static bool	quadratic(t_hit_data *hit)
 	{
 		hit->d = sqrt(hit->d);
 		
+		hit->root1 = (-hit->b - hit->d) / (2.0 * hit->a);
 		hit->root2 = (-hit->b + hit->d) / (2.0 * hit->a);
 		if (hit->root1 > hit->root2)
 		{

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/13 21:38:17 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 14:52:13 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,34 +47,35 @@ static void	remove_highlight(t_data *data)
 
 /*	This function draws the highlight around the object.
  *		- It loops through the window, and if it incounters an object
- *		  on the mouse_map, 2 pixls before it draws a white pixel. 
+ *		  on the mouse_map, 1 pixls after it draws a white pixel. 
  *		  So the white line is offset by 2 pixels.
+ *		  Offset inner pixels of the object instead of the outer pixel.
  */
 static void	draw_highlight(t_data *data, int16_t num)
 {
 	uint32_t	x;
 	uint32_t	y;
 
-	y = 0;
+	y = -1;
 	data->mouse.selected = true;
-	while (y < data->mouse.window_h)
+	while (++y < data->mouse.window_h)
 	{
-		x = 0;
-		while (x < data->mouse.window_w)
+		x = -1;
+		while (++x < data->mouse.window_w)
 		{
-			if (data->mouse.mouse_map[y][x] != num)
+			if (data->mouse.mouse_map[y][x] == num)
 			{
 				if ((x < data->mouse.window_w - 2
-						&& data->mouse.mouse_map[y][x + 2] == num)
-					|| (x > 1 && data->mouse.mouse_map[y][x - 2] == num)
+						&& data->mouse.mouse_map[y][x + 1] != num)
+					|| (x > 0 && data->mouse.mouse_map[y][x - 1] != num)
 					|| (y < data->mouse.window_h - 2
-						&& data->mouse.mouse_map[y + 2][x] == num)
-					|| (y > 1 && data->mouse.mouse_map[y - 2][x] == num))
+						&& data->mouse.mouse_map[y + 1][x] != num)
+					|| (y > 0 && data->mouse.mouse_map[y - 1][x] != num)
+					|| (x == 0 || x == data->mouse.window_w - 2)
+					|| (y == 0 || y == data->mouse.window_h - 2))
 					set_pixel(data, x, y, ft_convert_rgb(255, 255, 255));
 			}
-			x++;
 		}
-		y++;
 	}
 }
 
@@ -131,9 +132,13 @@ void	ft_handle_mouse_click(mouse_key_t key, action_t act,
 	if (key == MLX_MOUSE_BUTTON_LEFT && act == MLX_RELEASE)
 	{
 		mlx_get_mouse_pos(data->mlx, &x, &y);
-		if (data->mouse.mouse_map[y][x] == -1)
-			printf("VinnyMove\n");
-		else
-			highlight_object(data, data->mouse.mouse_map[y][x]);
+		if ((uint32_t)x >= 0 && (uint32_t)x < data->mouse.window_w
+			&& (uint32_t)y >= 0 && (uint32_t)y < data->mouse.window_h)
+		{
+			if (data->mouse.mouse_map[y][x] == -1)
+				printf("VinnyMove\n");
+			else
+				highlight_object(data, data->mouse.mouse_map[y][x]);
+		}
 	}
 }
