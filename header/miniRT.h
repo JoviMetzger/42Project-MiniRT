@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/13 20:27:49 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 12:56:55 by jmetzger      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,12 +319,6 @@ t_vec3		cross_product(t_vec3 u, t_vec3 v);
 t_vec3		normalize(t_vec3 v);
 double		dot_product(t_vec3 u, t_vec3 v);
 double		length_squared(t_vec3 vec);
-
-// t_vec3		plus_vecdub(t_vec3 u, double v);
-// t_vec3		mult_vecvec(t_vec3 u, t_vec3 v);
-// double		distance(t_vec3 pnt1, t_vec3 pnt2);
-// double		vec_length(t_vec3 v1, t_vec3 v2);
-// double		pythagoras(double a, double b);
 
 // Objects Functions
 bool		intersect_caps(t_ray *ray, t_objs *cyl, t_hit_data *hit);
