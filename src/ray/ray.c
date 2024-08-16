@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 17:35:50 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 20:15:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static t_vec3	init_vector(t_screen screen, t_camera camera)
 	forward = normalize(camera.vector);
 	right = normalize(cross_product(init_ray_pos(0, 1, 0), forward));
 	up = cross_product(forward, right);
-	pixel_direction = plus(plus(scale_vector(right, screen.pixel_delta_x),
+	pixel_direction = plus(plus(scale_vector(right, -screen.pixel_delta_x),
 				scale_vector(up, screen.pixel_delta_y)), forward);
 	return (normalize(pixel_direction));
 }

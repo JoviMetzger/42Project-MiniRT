@@ -6,11 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-<<<<<<< HEAD
-#    Updated: 2024/08/16 17:53:49 by smclacke      ########   odam.nl          #
-=======
-#    Updated: 2024/08/16 17:23:19 by jmetzger      ########   odam.nl          #
->>>>>>> putPixel
+#    Updated: 2024/08/16 20:15:47 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 

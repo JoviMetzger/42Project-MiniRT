@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/15 20:25:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/16 20:49:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define PL 4
 # define SP 5
 # define CY 6
+# define TR 7
+# define SQ 8
 
 // --- map_functions --- //
 void		*map_malloc(size_t size);
@@ -70,6 +72,7 @@ int			check_pl(char *str);
 int			check_sp(char *str);
 int			check_cy(char *str);
 int			check_tr(char *str);
+int			check_sq(char *str);
 int			check_capital(char *str, int type);
 
 // ----------- /convert/ ----------- //

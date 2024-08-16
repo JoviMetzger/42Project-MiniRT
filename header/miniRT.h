@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 12:56:55 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 20:41:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ typedef enum e_type
 	E_CYLINDER = 6,
 	E_SPACE = 7,
 	E_HASH = 8,
-	E_TRIANGLE = 9
+	E_TRIANGLE = 9,
+	E_SQUARE = 10
 }	t_type;
 
 // --- Structs ---

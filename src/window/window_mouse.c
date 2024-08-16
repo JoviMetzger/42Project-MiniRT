@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 17:19:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/16 20:34:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,7 @@ void	ft_handle_mouse_click(mouse_key_t key, action_t act,
 		if ((uint32_t)x >= 0 && (uint32_t)x < data->mouse.window_w
 			&& (uint32_t)y >= 0 && (uint32_t)y < data->mouse.window_h)
 		{
-			if (data->mouse.mouse_map[y][x] == -1)
-				printf("VinnyMove\n");
-			else
+			if (data->mouse.mouse_map[y][x] != -1)
 				highlight_object(data, data->mouse.mouse_map[y][x]);
 		}
 	}
