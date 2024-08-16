@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 19:02:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/05/15 15:13:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/16 21:05:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ int	convert_double(t_data *data, char *str, int flag)
 	{
 		data->objs[data->objs_i]->height = ratio;
 		data->objs[data->objs_i]->height_half = ratio / 2;
+		return (1);
+	}
+	else if (flag == 3)
+	{
+		data->objs[data->objs_i]->edge_length = ratio;
 		return (1);
 	}
 	return (0);

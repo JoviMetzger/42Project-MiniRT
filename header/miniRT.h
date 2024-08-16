@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 20:41:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/16 21:55:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ typedef struct s_objs
 	int16_t				i_am;
 	int					i;
 	int					what_pattern;
+	double				edge_length;
 }	t_objs;
 
 // -------------------------------------------------------------
@@ -331,6 +332,8 @@ bool		plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
 bool		intersect_plane(t_ray *ray, t_objs *plane, t_hit_data *hit);
 bool		triangle(t_ray *ray, t_objs *tri, t_hit_data *hit);
 bool		intersect_triangle(t_ray *ray, t_objs *tri, t_hit_data *hit);
+bool		square(t_ray *ray, t_objs *square, t_hit_data *hit);
+bool		intersect_square(t_ray *ray, t_objs *squ, t_hit_data *hit);
 bool		check_closest(t_hit_data *hit);
 
 #endif

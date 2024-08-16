@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 12:56:26 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 21:47:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
  */
 static void	get_ret(t_data *data, t_hit_data *hit, t_objs *obj, int i)
 {
+	data->pix[i]->obj = obj;
 	if (hit->closest_t != DBL_MAX)
 	{
 		data->pix[i]->hit_b = true;
@@ -58,7 +59,6 @@ void	ft_calculate_colour(t_data *data, t_hit_data *hit, int pix_index)
 
 	i = 0;
 	hit->closest_t = DBL_MAX;
-	data->pix[i]->hit_b = false;
 	while (i < data->objs_i)
 	{
 		if (data->objs[i]->type == E_SPHERE
@@ -73,8 +73,10 @@ void	ft_calculate_colour(t_data *data, t_hit_data *hit, int pix_index)
 		else if (data->objs[i]->type == E_TRIANGLE
 			&& triangle(&data->ray, data->objs[i], hit))
 			tmp_obj = update_obj(data, i);
+		else if (data->objs[i]->type == E_SQUARE
+			&& square(&data->ray, data->objs[i], hit))
+			tmp_obj = update_obj(data, i);
 		i++;
 	}
-	data->pix[pix_index]->obj = tmp_obj;
 	get_ret(data, hit, tmp_obj, pix_index);
 }

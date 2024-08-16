@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 20:49:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/16 21:18:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int			sort_tr(char **elem_str, t_data *data);
 int			sort_pl(char **elem_str, t_data *data);
 int			sort_sp(char **elem_str, t_data *data);
 int			sort_cy(char **elem_str, t_data *data);
+int			sort_sq(char **elem_str, t_data *data);
 
 // --- convert_nums --- //
 int			is_coord(char *str, int i, int num_flag);
@@ -110,6 +111,7 @@ int			convert_double(t_data *data, char *str, int flag);
 double		ft_atof(char *str);
 
 // --- add_info --- //
+void		coord_sq(t_data *data, double x, double y, double z);
 void		coord_tri(t_data *data, double x, double y, double z);
 void		add_vec(t_data *data, double x, double y, double z);
 void		add_coord(t_data *data, double x, double y, double z);

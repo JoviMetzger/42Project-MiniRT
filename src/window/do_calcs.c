@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/16 16:14:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 16:50:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/16 21:21:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ static bool	does_intersect(t_ray *ray, t_objs *obj, t_hit_data *hit_2)
 	}
 	else if (obj->type == E_TRIANGLE
 		&& intersect_triangle(ray, obj, hit_2))
+	{
+		if (hit_2->t < ray->distance)
+			return (true);
+	}
+	else if (obj->type == E_SQUARE
+		&& intersect_square(ray, obj, hit_2))
 	{
 		if (hit_2->t < ray->distance)
 			return (true);
