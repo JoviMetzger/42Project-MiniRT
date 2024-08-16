@@ -5,8 +5,6 @@
 
 - cylinder
 
- - loads of mouse clicking (+/- moving window fast) - buffer overflow ft_handle_mousE_click
-
 
  ----- next -----
 
