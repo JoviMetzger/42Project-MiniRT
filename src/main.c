@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/15 14:04:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/16 17:58:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void	free_all(t_data *data)
 {
 	free_objects(data);
+	free_light(data);
 	free_pixels(data);
 }
 

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/01 19:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/15 20:28:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/16 18:28:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void	free_light(t_data *data)
 	int		i;
 
 	i = 0;
-	if (data->light && data->light[i])
+	if (data->light)
 	{
 		while (data->light[i])
 		{
 			free(data->light[i]);
 			i++;
 		}
+		free(data->light);
 	}
-	free(data->light);
 }
 
 int	count_light(char **arr)

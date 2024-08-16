@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:50:09 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/13 13:41:36 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 18:28:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void	free_array(char **arr)
 	int	i;
 
 	i = 0;
-	if (arr && arr[i])
+	if (arr)
 	{
 		while (arr[i])
 		{
 			free(arr[i]);
 			i++;
 		}
+		free(arr);
 	}
-	free(arr);
 }
 
 void	free_close_util(char *line, int file)
@@ -63,15 +63,15 @@ void	free_objects(t_data *data)
 	int		i;
 
 	i = 0;
-	if (data->objs && data->objs[i])
+	if (data->objs)
 	{
 		while (data->objs[i])
 		{
 			free(data->objs[i]);
 			i++;
 		}
+		free(data->objs);
 	}
-	free_light(data);
-	free_map(data->mouse.mouse_map);
-	free(data->objs);
+	if (data->mouse.mouse_map)
+		free_map(data->mouse.mouse_map);
 }

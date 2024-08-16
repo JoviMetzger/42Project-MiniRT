@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 16:05:43 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 14:52:13 by jmetzger      ########   odam.nl         */
+/*   Updated: 2024/08/16 17:19:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	draw_highlight(t_data *data, int16_t num)
 					|| (y > 0 && data->mouse.mouse_map[y - 1][x] != num)
 					|| (x == 0 || x == data->mouse.window_w - 2)
 					|| (y == 0 || y == data->mouse.window_h - 2))
-					set_pixel(data, x, y, ft_convert_rgb(255, 255, 255));
+					set_pixel(data, x + 1, y, ft_convert_rgb(255, 255, 255));
 			}
 		}
 	}

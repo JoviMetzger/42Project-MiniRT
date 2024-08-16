@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 18:26:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/06/21 15:52:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/16 18:15:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	convert_rgb(t_data *data, char *str)
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
 	if (!is_valid_rgb(r, g, b))
-		return (0);
+		return (free_array(rgb), 0);
 	add_rgb(data, r, g, b);
 	return (free_array(rgb), 1);
 }
