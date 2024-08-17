@@ -4,7 +4,7 @@
 - cylinder is the most god awful shape ever to exist
 
 - inside objects - files to show what happens, get explanation clear
-- square?? ... meh
+
 
  ----- next -----
 

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 15:20:47 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 20:47:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/17 18:15:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ t_type	get_type(char *str)
 		return (E_CYLINDER);
 	if (check_tr(str) == 1)
 		return (E_TRIANGLE);
-	if (check_sq(str) == 1)
-		return (E_SQUARE);
 	if (ft_strcmp(str, " ") == 0 || is_space(str))
 		return (E_SPACE);
 	if (hash_str(str))

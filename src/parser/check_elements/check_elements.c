@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:36:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 20:47:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/17 18:19:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static	int	check_invalid(char *str)
 	{
 		if (str[i] != 'A' && str[i] != 'L' && str[i] != 'C'
 			&& !check_sp(&str[i]) && !check_pl(&str[i])
-			&& !check_cy(&str[i]) && !check_tr(&str[i])
-			&& !check_sq(&str[i]))
+			&& !check_cy(&str[i]) && !check_tr(&str[i]))
 			return (1);
 	}
 	return (0);

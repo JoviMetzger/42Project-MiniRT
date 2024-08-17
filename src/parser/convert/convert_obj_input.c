@@ -6,43 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/25 12:43:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 21:43:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/17 18:17:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../header/parser.h"
-
-// /**
-//  * #Identifier   #Coordinates: center normal edge1  edge2  #Edge_length    #R,G,B
-// */
-int	sort_sq(char **elem_str, t_data *data)
-{
-	if (!is_coord(elem_str[1], 0, 0))
-		return (par_err("invalid: Square: coordinate"));
-	if (!convert_coord(data, elem_str[1]))
-		return (par_err("invalid: Square: coordinate"));
-	if (!is_coord(elem_str[2], 0, 0))
-		return (par_err("invalid: Square: 3D vector"));
-	if (!convert_vector(data, elem_str[2]))
-		return (par_err("invalid: Square: 3D vector"));
-	if (!is_coord(elem_str[3], 0, 0))
-		return (par_err("invalid: Square: 3D edge coordinate"));
-	data->objs[data->objs_i]->point_flag = 0;
-	if (!convert_coord(data, elem_str[3]))
-		return (par_err("invalid: Square: 3D edge coordinate"));
-	if (!is_coord(elem_str[4], 0, 0))
-		return (par_err("invalid: Square: 3D edge coordinate"));
-	data->objs[data->objs_i]->point_flag = 1;
-	if (!convert_coord(data, elem_str[4]))
-		return (par_err("invalid: Square: 3D edge coordinate"));
-	if (!convert_double(data, elem_str[5], 3))
-		return (par_err("invalid: Square: edge length"));
-	if (!is_rgb(elem_str[6], 0, 0))
-		return (par_err("invalid: Square: RGB | [0-255]"));
-	if (!convert_rgb(data, elem_str[6]))
-		return (par_err("invalid: Square: RGB | [0-255]"));
-	return (1);
-}
 
 static int	sort_into_struct(char **elem_str, t_data *data)
 {
@@ -53,8 +21,6 @@ static int	sort_into_struct(char **elem_str, t_data *data)
 	if (data->type == E_PLANE && !sort_pl(elem_str, data))
 		return (0);
 	if (data->type == E_TRIANGLE && !sort_tr(elem_str, data))
-		return (0);
-	if (data->type == E_SQUARE && !sort_sq(elem_str, data))
 		return (0);
 	return (1);
 }
@@ -95,13 +61,13 @@ void	convert_obj_input(t_data *data, char **arr, int count)
 		if (data->type == 7 || data->type == 1
 			|| data->type == 2 || data->type == 3 || data->type == 8)
 			i++;
-		else if (data->type == 0 || data->type > 10)
+		else if (data->type == 0 || data->type > 9)
 		{
 			free_objects(data);
 			free_arr_error("parser error", arr);
 		}
 		else if (data->type == 4 || data->type == 5
-			|| data->type == 6 || data->type == 9 || data->type == 10)
+			|| data->type == 6 || data->type == 9)
 		{
 			init_objs(data, arr);
 			convert_element(arr, data, i);

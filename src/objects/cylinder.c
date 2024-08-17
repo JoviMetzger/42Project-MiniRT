@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/07 19:29:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/17 18:05:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/17 18:07:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@
 // 		return (check_closest(hit));
 // 	return (false);
 // }
+
+
 
 // Cut of the ends, else there will be a infinite cylinder
 static bool	cut_ends_hit_bod(t_hit_data *hit, t_objs *cyl, t_ray *ray, t_vec3 ca)

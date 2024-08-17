@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2024/03/07 19:30:43 by smclacke      #+#    #+#                  #
-#    Updated: 2024/08/16 21:38:12 by smclacke      ########   odam.nl          #
+#    Updated: 2024/08/17 18:15:38 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,6 @@ SRCS			= main.c											\
 					objects/cyl_caps.c 								\
 					objects/cylinder.c 								\
 					objects/triangle.c 								\
-					objects/square.c 								\
 					ray/ray.c										\
 					parser/check_elements/check_caps.c				\
 					parser/check_elements/check_elements.c			\

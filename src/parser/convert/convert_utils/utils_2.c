@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/01 19:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/17 17:59:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/17 18:20:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	count_light(char **arr)
 	while (arr[i])
 	{
 		type = get_type(arr[i]);
-		if (type == 0 || type < 0 || type > 10)
+		if (type == 0 || type < 0 || type > 9)
 			free_arr_error("unknown parser error", arr);
 		if (type == 2)
 			count++;

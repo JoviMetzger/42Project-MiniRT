@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/06/01 19:12:21 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/17 18:06:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/17 18:07:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@
 // 	}
 // 	return (hit->tmp_t != DBL_MAX);
 // }
+
 
 /* Intersect with bottom cap -> Test bottom cap first
  * cyl->normal = mult_vecdub(cyl->vector, -1); // Normal points downwards

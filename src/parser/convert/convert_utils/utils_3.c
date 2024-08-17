@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/07/24 20:40:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 21:16:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/17 18:20:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	invalid_check(t_type type, t_data *data, char **arr)
 {
-	if (type == 0 || type > 10)
+	if (type == 0 || type > 9)
 	{
 		free_light(data);
 		free_arr_error("parser error", arr);
@@ -31,8 +31,7 @@ bool	dont_skip(t_type type)
 bool	skip_this(t_type type)
 {
 	if (type == E_SPACE || type == E_PLANE || type == E_SPHERE
-		|| type == E_CYLINDER || type == E_HASH || type == E_TRIANGLE
-		|| type == E_SQUARE)
+		|| type == E_CYLINDER || type == E_HASH || type == E_TRIANGLE)
 		return (true);
 	return (false);
 }
