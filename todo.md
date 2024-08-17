@@ -1,7 +1,8 @@
 
 **THE TO-DO LIST LET'S GOOOO**
 
-- inside objects - files..
+- inside objects - files to show what happens, get explanation clear
+- square?? ... meh
 
  ----- next -----
 
@@ -12,3 +13,15 @@
 
 - everything norm (cylinder + sphere + last comments (dont forget to check headers))
 
+
+
+
+A = 3
+L = 4
+C = 4
+
+sp = 4
+cy = 6
+tr = 5
+sq = 7
+pl = 4

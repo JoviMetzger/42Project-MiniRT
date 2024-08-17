@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/08 15:29:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 21:18:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/17 15:07:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@
 # ifndef BUFF_SIZE
 #  define BUFF_SIZE 300
 # endif
-
-# define A 1
-# define L 2
-# define C 3
-# define PL 4
-# define SP 5
-# define CY 6
-# define TR 7
-# define SQ 8
 
 // --- map_functions --- //
 void		*map_malloc(size_t size);

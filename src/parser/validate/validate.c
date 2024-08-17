@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/03/12 16:35:20 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/16 21:44:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/17 14:58:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static int	num_elems(char *str)
 int	is_caps(char *str)
 {
 	if (check_capital(str, 'A') == 1)
-		return (A);
+		return (E_AMBIENT);
 	else if (check_capital(str, 'L') == 1)
-		return (L);
+		return (E_LIGHT);
 	else if (check_capital(str, 'C') == 1)
-		return (C);
+		return (E_CAMERA);
 	return (0);
 }
 
@@ -52,11 +52,11 @@ static int	check_no_elems(char *str, int type)
 		return (par_err("invalid: Camera: number of arguments"));
 	else if (type == 2 && (num_elems(str) != 4))
 		return (par_err("invalid: Light: number of arguments"));
-	else if (type == 5 && (num_elems(str)))
+	else if (type == 5 && (num_elems(str) != 4))
 		return (par_err("invalid: Sphere: number of arguments"));
-	else if (type == 4 && (num_elems(str) != 3))
+	else if (type == 4 && (num_elems(str) != 4))
 		return (par_err("invalid: Plane: number of arguments"));
-	else if (type == 6 && (num_elems(str) != 5))
+	else if (type == 6 && (num_elems(str) != 6))
 		return (par_err("invalid: Cylinder: number of arguments"));
 	else if (type == 9 && (num_elems(str) != 5))
 		return (par_err("invalid: Triangle: number of arguments"));
