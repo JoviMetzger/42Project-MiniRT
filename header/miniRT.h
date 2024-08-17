@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/05/22 14:46:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/08/17 18:23:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/08/17 18:29:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ typedef struct s_hit_data
 	double	t;
 	double	tmp_t;
 	double	closest_t;
+	double	temp;
 }	t_hit_data;
 
 // -------------------------------------------------------------
