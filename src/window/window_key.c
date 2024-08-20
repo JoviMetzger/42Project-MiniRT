@@ -45,6 +45,7 @@ void	ft_key_action(mlx_key_data_t keydata, t_data *data)
 	}
 	if (data->mouse.selected == true && mlx_is_key_down(data->mlx, MLX_KEY_UP))
 	{
+		printf("Sphere Checkerboard is being calculated. Please wait.../n");
 		data->objs[data->i_am]->i++;
 		if (data->objs[data->i_am]->i > 1)
 			data->objs[data->i_am]->i = 0;
