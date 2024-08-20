@@ -23,7 +23,8 @@ void	free_all(t_data *data)
 /* main function:
  *		- 1. parse_input(); takes the '.rt' file and checks and parses 
  *			 the input correctly into the structs.
- *		- 2. init_pix(); The whole shazam is happening in here.
+ *		- 2. init_pix(); Initializes each pixel.
+ *		- 3. Do_calcs(); The whole shazam is happening in here.
  *			 Calculates all pixels. 3 Main steps happen in here.
  *		     - STEPS:
  *		     	- 1. Calculate the ray from the “eye” through the pixel, 
@@ -32,11 +33,11 @@ void	free_all(t_data *data)
  *		     		 -> ft_calculate_colour();
  *		     	- 3. Compute a color for the closest intersection point. 
  *		     		 -> get_colour(); 
- *		- 3. ft_open_window(); Initializes the window/MlX.
- *		- 4. ft_render(); Prints the pixels.
- *		- 5. mlx_loop(); Runs the loop, so that the window stays open.	
- *		- 6. mlx_terminate(); Terminate the window/MLX once done using.
- *		- 7. free_all(); Cleans up the structs that got allcoated.
+ *		- 4. ft_open_window(); Initializes the window/MlX.
+ *		- 5. ft_render(); Prints the pixels.
+ *		- 6. mlx_loop(); Runs the loop, so that the window stays open.	
+ *		- 7. mlx_terminate(); Terminate the window/MLX once done using.
+ *		- 8. free_all(); Cleans up the structs that got allcoated.
  */
 int	main(int argc, char **argv)
 {
