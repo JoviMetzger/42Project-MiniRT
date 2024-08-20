@@ -23,7 +23,7 @@ int32_t	ft_convert_rgb(int32_t r, int32_t g, int32_t b)
 	return (b << 8 | g << 16 | r << 24 | a);
 }
 
-/*	This function loops through all pixels and prints it on the screen.  
+/*	This function loops through all pixels and prints the information on the screen.  
  */
 void	ft_put_image(t_data *data)
 {
@@ -40,7 +40,7 @@ void	ft_put_image(t_data *data)
 /*	In this function renders and executes keys/mouse movement.
  *	- ft_put_image(); 	-> prints the pixel.
  *	- mlx_key_hook(); 	-> is for key movement (ESC, Arrow up).
- *	- mlx_mouse_hook(); -> is for mouse movement (selcet objects). 
+ *	- mlx_mouse_hook();	-> is for mouse movement (selcet objects). 
  */
 void	ft_render(t_data *data)
 {
