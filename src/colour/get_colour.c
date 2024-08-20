@@ -72,6 +72,19 @@ static void	loop_light_array(t_data *data, t_colour_vars *vars, t_objs *obj,
 	}
 }
 
+/*	STEP 3. Compute a color for the closest intersection point.
+ *
+ *	This function uses the 'Phong reflection model' for each object.
+ *	Including multiple light and creating shadows.
+ *		- Initializing data->vars variables.
+ *		- Initializing the base colour of the object.
+ *		- Initializing the result of the colour with ambient light contribution.
+ *		  (colour = ambient * base / 255)
+ *		- Creating a light_direction.
+ *		- Clamp final values to [0, 255]. 
+ *		  This ensurs that the value is not less than 0 and not bigger than 255. 
+ *		  So basiclly controls the overflow/underflow of RGB colour range.
+ */
 uint32_t	get_light(t_data *data, t_ray ray, t_objs *obj)
 {
 	loop_light_array(data, &data->vars, obj, ray);
