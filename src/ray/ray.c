@@ -34,8 +34,13 @@ static t_vec3	init_ray_pos(double pos_x, double pos_y, double pos_z)
 	return (vec);
 }
 
-// Function to initialize the ray direction with camera orientation.
-static t_vec3	init_vector(t_screen screen, t_camera camera)
+/* Function to initialize the ray direction with camera orientation.
+ * Camera vector(x,y,z)
+ * - If camera vector(0,1,0) -> (fabs(forward.y) == 1.0)
+ * 	- We give it init_ray_pos(1, 0, 0).
+ * - In anyother case it will stay init_ray_pos(0, 1, 0).
+ */
+static t_vec3  	init_vector(t_screen screen, t_camera camera)
 {
 	t_vec3	forward;
 	t_vec3	right;
@@ -43,10 +48,13 @@ static t_vec3	init_vector(t_screen screen, t_camera camera)
 	t_vec3	pixel_direction;
 
 	forward = normalize(camera.vector);
-	right = normalize(cross_product(init_ray_pos(0, 1, 0), forward));
-	up = cross_product(forward, right);
+	if (fabs(forward.y) == 1.0)
+		right = normalize(cross_product(forward, init_ray_pos(1, 0, 0)));
+	else
+		right = normalize(cross_product(forward, init_ray_pos(0, 1, 0)));
+	up = cross_product(right, forward);
 	pixel_direction = plus(plus(scale_vector(right, screen.pixel_delta_x),
-				scale_vector(up, screen.pixel_delta_y)), forward);
+		scale_vector(up, screen.pixel_delta_y)), forward);
 	return (normalize(pixel_direction));
 }
 
