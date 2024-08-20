@@ -96,7 +96,7 @@ typedef struct s_camera
 {
 	t_vec3		place;
 	t_vec3		vector;
-	int			fov;
+	int		fov;
 }	t_camera;
 
 // -------------------------------------------------------------
@@ -116,7 +116,6 @@ typedef struct s_light
 	t_vec3		direction;
 	double		ratio;
 	t_ray		ray;
-
 }	t_light;
 
 // -------------------------------------------------------------
@@ -138,8 +137,8 @@ typedef struct s_mouse
 	int16_t			**mouse_map;
 	uint32_t		window_h;
 	uint32_t		window_w;
-	int				mou_y;
-	int				mou_x;
+	int			mou_y;
+	int			mou_x;
 	bool			selected;
 }	t_mouse;
 
@@ -163,14 +162,14 @@ typedef struct s_objs
 	t_vec3				base;
 	t_vec3				edge[2];
 	t_vec3				point[3];
-	int					point_flag;
+	int				point_flag;
 	double				diameter;
 	double				height;
 	double				height_half;
 	double				radius;
 	int16_t				i_am;
-	int					i;
-	int					what_pattern;
+	int				i;
+	int				what_pattern;
 }	t_objs;
 
 // -------------------------------------------------------------
@@ -225,15 +224,14 @@ typedef struct s_pixel
 	uint32_t	ambient;
 	uint32_t	light;
 	uint32_t	black;
-	int			x;	
-	int			y;	
+	int		x;	
+	int		y;	
 	t_ray		og_ray;
 	t_ray		light_ray;
 	t_objs		*obj;
 	double		hit_t;
 	bool		hit_b;
-
-}			t_pixel;
+}	t_pixel;
 
 // -------------------------------------------------------------
 // Main struct
@@ -243,28 +241,28 @@ typedef struct s_data
 	mlx_t			*mlx;
 
 	t_pixel			**pix;
-	int				pix_i;
-	int				total_pix;
+	int			pix_i;
+	int			total_pix;
 
 	t_objs			**objs;
-	int				objs_i;
+	int			objs_i;
 	t_light			**light;
-	int				light_i;
+	int			light_i;
 
 	t_camera		camera;
 	t_ambient		ambient;
 	t_screen		screen;
 	t_mouse			mouse;
 	t_ray			ray;
-	t_colour_vars	vars;
+	t_colour_vars		vars;
 
-	int				height;
-	int				width;
+	int			height;
+	int			width;
 
 	t_type			type;
 	int16_t			i_am;
-	int				tmp_i;
-	int				i;
+	int			tmp_i;
+	int			i;
 }	t_data;
 
 // -------------------------------------------------------------
@@ -294,8 +292,7 @@ void		free_pixels(t_data *data);
 
 // Movement Functions
 void		ft_key_action(mlx_key_data_t keydata, t_data *data);
-void		ft_handle_mouse_click(mouse_key_t key, action_t act,
-				modifier_key_t m, void *_data);
+void		ft_handle_mouse_click(mouse_key_t key, action_t act, modifier_key_t m, void *_data);
 
 // Ray Functions
 t_ray		ft_create_ray(t_data *data, int x, int y);
