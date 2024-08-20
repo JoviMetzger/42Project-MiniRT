@@ -120,8 +120,7 @@ static void	highlight_object(t_data *data, int16_t num)
  *						-1 -1  0 -1 -1
  *						-1 -1 -1 -1 -1	
  */
-void	ft_handle_mouse_click(mouse_key_t key, action_t act,
-								modifier_key_t m, void *_data)
+void	ft_handle_mouse_click(mouse_key_t key, action_t act, modifier_key_t m, void *_data)
 {
 	t_data		*data;
 	int32_t		x;
@@ -136,7 +135,10 @@ void	ft_handle_mouse_click(mouse_key_t key, action_t act,
 			&& (uint32_t)y >= 0 && (uint32_t)y < data->mouse.window_h)
 		{
 			if (data->mouse.mouse_map[y][x] != -1)
+			{
+				printf("Object has been selected"\n);
 				highlight_object(data, data->mouse.mouse_map[y][x]);
+			}
 		}
 	}
 }
