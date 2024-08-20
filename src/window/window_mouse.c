@@ -134,11 +134,10 @@ void	ft_handle_mouse_click(mouse_key_t key, action_t act, modifier_key_t m, void
 		if ((uint32_t)x >= 0 && (uint32_t)x < data->mouse.window_w
 			&& (uint32_t)y >= 0 && (uint32_t)y < data->mouse.window_h)
 		{
-			if (data->mouse.mouse_map[y][x] != -1)
-			{
-				printf("Object has been selected"\n);
+			if (data->mouse.mouse_map[y][x] == -1)
+				printf("No object here/n");
+			else
 				highlight_object(data, data->mouse.mouse_map[y][x]);
-			}
 		}
 	}
 }
