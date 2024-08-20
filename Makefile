@@ -15,11 +15,10 @@ NAME 			= miniRT
 INPUT_FILE		= scenes/scene_1.rt 
 
 # Compiler and flags
-CC 				= cc
+CC 			= cc
 CFLAGS 			= -Wall -Wextra
 CFLAGS			+= -Werror
 CFLAGS			+= -g -fsanitize=address
-# CFLAGS			+= -Ofast -flto -O3
 CFLAGS			+= -O3 -flto
 MAKEFLAGS		= --no-print-directory
 
@@ -27,68 +26,68 @@ MAKEFLAGS		= --no-print-directory
 LIBFT_PATH		= ./libraries/libft
 LIBFT 			= $(LIBFT_PATH)/libft.a
 
-MLX42_HEADER	= -I include -lglfw -I $(MLX42_PATH)/include/MLX42/
+MLX42_HEADER		= -I include -lglfw -I $(MLX42_PATH)/include/MLX42/
 MLX42_PATH		= ./libraries/mlx42
 MLX42			= $(MLX42_PATH)/build/libmlx42.a
 
 # Sources files
 SRC_HEADER		= ./header
 
-SRCS			= main.c											\
-					utils/operators.c 								\
-					utils/operators1.c 								\
-					window/do_calcs.c 								\
-					window/init_pix.c 								\
-					window/window_key.c 							\
-					window/window_mouse.c 							\
-					window/open_window.c							\
-					window/render.c									\
-					colour/calculate_colour.c						\
-					colour/checkerboard.c 							\
-					colour/get_colour.c 							\
-					colour/colour_utils.c							\
-					objects/sphere.c 								\
-					objects/plane.c 								\
-					objects/cyl_caps.c 								\
-					objects/cylinder.c 								\
-					objects/triangle.c 								\
-					ray/ray.c										\
-					parser/check_elements/check_caps.c				\
-					parser/check_elements/check_elements.c			\
-					parser/check_elements/check_utils.c				\
-					parser/convert/convert_caps.c					\
-					parser/convert/convert_cap_input.c				\
-					parser/convert/convert_obj_input.c				\
-					parser/convert/convert_obj.c					\
-					parser/convert/convert_nums.c					\
-					parser/convert/convert_nums_2.c					\
-					parser/convert/convert_utils/ft_atof.c			\
-					parser/convert/convert_utils/add_rgb.c			\
-					parser/convert/convert_utils/add_coord.c		\
-					parser/convert/convert_utils/add_vec.c			\
-					parser/convert/convert_utils/add_info.c			\
-					parser/convert/convert_utils/convert_utils.c	\
-					parser/convert/convert_utils/utils_2.c			\
-					parser/convert/convert_utils/utils_3.c			\
-					parser/convert/convert_utils/is_funcs.c			\
-					parser/convert/convert_utils/is_funcs_2.c		\
-					parser/convert/convert_utils/is_funcs_3.c		\
-					parser/validate/validate.c						\
-					parser/validate/valid_ratio.c					\
-					parser/parse_input.c							\
-					parser/parse_mouse.c							\
-					parser/parser_free.c							\
-					parser/parser_error.c							\
-					parser/parser_utils.c							\
+SRCS			= main.c						\
+				utils/operators.c 				\
+				utils/operators1.c 				\
+				window/do_calcs.c 				\
+				window/init_pix.c 				\
+				window/window_key.c 				\
+				window/window_mouse.c 				\
+				window/open_window.c				\
+				window/render.c					\
+				colour/calculate_colour.c			\
+				colour/checkerboard.c 				\
+				colour/get_colour.c 				\
+				colour/colour_utils.c				\
+				objects/sphere.c 				\
+				objects/plane.c 				\
+				objects/cyl_caps.c 				\
+				objects/cylinder.c 				\
+				objects/triangle.c 				\
+				ray/ray.c					\
+				parser/check_elements/check_caps.c		\
+				parser/check_elements/check_elements.c		\
+				parser/check_elements/check_utils.c		\
+				parser/convert/convert_caps.c			\
+				parser/convert/convert_cap_input.c		\
+				parser/convert/convert_obj_input.c		\
+				parser/convert/convert_obj.c			\
+				parser/convert/convert_nums.c			\
+				parser/convert/convert_nums_2.c			\
+				parser/convert/convert_utils/ft_atof.c		\
+				parser/convert/convert_utils/add_rgb.c		\
+				parser/convert/convert_utils/add_coord.c	\
+				parser/convert/convert_utils/add_vec.c		\
+				parser/convert/convert_utils/add_info.c		\
+				parser/convert/convert_utils/convert_utils.c	\
+				parser/convert/convert_utils/utils_2.c		\
+				parser/convert/convert_utils/utils_3.c		\
+				parser/convert/convert_utils/is_funcs.c		\
+				parser/convert/convert_utils/is_funcs_2.c	\
+				parser/convert/convert_utils/is_funcs_3.c	\
+				parser/validate/validate.c			\
+				parser/validate/valid_ratio.c			\
+				parser/parse_input.c				\
+				parser/parse_mouse.c				\
+				parser/parser_free.c				\
+				parser/parser_error.c				\
+				parser/parser_utils.c				\
 
 
 SRC_DIR			= src
-SRC				= ($(addprefix $(SRC_DIR)/, $(SRCS)))
+SRC			= ($(addprefix $(SRC_DIR)/, $(SRCS)))
 
 
 # Objects files
 OBJ_PATH		= obj
-OBJ				= $(addprefix $(OBJ_PATH)/, $(SRCS:%.c=%.o))
+OBJ			= $(addprefix $(OBJ_PATH)/, $(SRCS:%.c=%.o))
 
 # Colours
 PINK 			= \033[35m
