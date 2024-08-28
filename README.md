@@ -198,58 +198,44 @@ cy              50.0,0.0,20.6       0.0,0.0,1.0     14.2     21.42   10,0,255
 
 
 WEBSERV
-- https://www.npmjs.com/package/http-server
-- https://nodejs.org/api/http.html
-- https://www.techtarget.com/whatis/definition/Request-for-Comments-RFC
-- https://blog.nginx.org/blog/http2-theory-and-practice-in-nginx-stable-13
-- https://www.linode.com/docs/guides/http-get-request/
-- https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-- https://m4nnb3ll.medium.com/webserv-building-a-non-blocking-web-server-in-c-98-a-42-project-04c7365e4ec7
-- https://www.ibm.com/docs/en/was/9.0.5?topic=console-web-server-configuration
-- https://ncona.com/2019/04/building-a-simple-server-with-cpp/
-- https://kbeezie.com/nginx-configuration-examples/
+Webserv
 
--- https://github.com/Kaydooo/Webserv_42?tab=readme-ov-file
--- https://github.com/LucieLeBriquer/webserv
+This project is made in collabaration with [Adri Rommers](https://github.com/arommers) and [Sven van Hasselt](https://github.com/svenvanhasselt)
+This project is all about creating your own HTTP server, a fundamental piece of the internet's backbone. <br>
+By building it yourself, you’ll see how the Hypertext Transfer Protocol (HTTP) drives the web, <br>
+allowing browsers to communicate with servers to fetch and display web pages.
 
---------------------------------------------------
-web pages info:
 
-https://www.npmjs.com/package/http-server
-https://nodejs.org/api/http.html
-https://www.ietf.org/process/rfcs/
-https://www.techtarget.com/whatis/definition/Request-for-Comments-RFC
-https://nginx.org/en/
-https://www.nginx.com/blog/http2-theory-and-practice-in-nginx-stable-13/
+![image]
 
---------------------------------------------------
+## Table of Contents
 
-Hypertext Transfer Protocol (HTTP)  ->  protocol for distributed, collaborative, hypermedia information systems.
-The communication between client and server takes place using the Hypertext Transfer Protocol (HTTP).
-Pages delivered are most frequently HTML documents, which may include images, style sheets, and scripts in addition to the text content.
+- [About](#About)
+- [Server](#Server)
+- [Request & Response](#Request & Response)
+- [CGI](#CGI)
+- [Configuration File](#Configuration File)
+- [Configuration Parser](#Configuration Parser)
+- [Installation](#Installation)
+- [Resources](#Resources)
 
-RFC -> 'Requests for Comments':
-They define the Internet's technical foundations, such as addressing, routing and transport technologies. They recommend operational best practice and specify application protocols that are used to deliver services used by billions of people every day.
-Has two sub-series, STDs and BCPs, with each numbered STD and BCP comprising one or more RFCs. 
-STDs -> 'Internet Standard'
-BCPs -> describe Best Current Practices in the Internet, some of which are administrative processes for the IETF.
-IETF -> Internet Engineering Task Force
 
-nginx [engine x]:
-NGINX is open source software for web serving, reverse proxying, caching, load balancing, media streaming, and more. It started out as a web server designed for maximum performance and stability. In addition to its HTTP server capabilities, NGINX can also function as a proxy server for email (IMAP, POP3, and SMTP) and a reverse proxy and load balancer for HTTP, TCP, and UDP servers.
 
-The goal of the project is to build a C++98 compatible HTTP web server from scratch. The web server can handle HTTP GET, HEAD, POST, PUT, and DELETE Requests, and can serve static files from a specified root directory or dynamic content using CGI. It is also able to handle multiple client connections concurrently with the help of select().
+## About
+The goal of the project is to build a C++ compatible HTTP web server from scratch. 
+The web server can handle HTTP GET, POST, and DELETE Requests, 
+and can serve static files from a specified root directory or dynamic content using CGI.
 
+### HTTP (Hypertext Transfer Protocol)
 HTTP (Hypertext Transfer Protocol) is a protocol for sending and receiving information over the internet. 
-It is the foundation of the World Wide Web and is used by web browsers and web servers to communicate with each other.
+It is the foundation of the World Wide Web (www) and is used by web browsers and web servers to communicate with each other. 
+When you click a link or submit a form, your browser sends an HTTP request, 
+and the server responds with the content you need—or an error message if something goes wrong.
 
-An HTTP web server is a software application that listens for and responds to HTTP requests from clients (such as web browsers). 
-The main purpose of a web server is to host web content and make it available to users over the internet.
+HTTP consists of requests and responses: When a client (such as a web browser) wants to retrieve a webpage from a server, 
+it sends an HTTP request to the server. The server then processes the request and sends back an HTTP response.
 
-HTTP consists of requests and responses. When a client (such as a web browser) wants to retrieve a webpage from a server, 
-it sends an HTTP request to the server. The server then processes the request and sends back an HTTP response
-
-
+```bash
 								HTTP Message can be either 
 								   a request or response.
 									  /				\
@@ -266,54 +252,8 @@ GET /index.html HTTP/1.1												HTTP/1.1 200 OK
 Host: localhost:8080													Content-Type: text/html
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)					Content-Length: 1234
 																		<Message Body>
-
-
 ------------------------------------------------------------------------------------------
-										HTTP request:
-	
-	request line:						Headers:								optional message body:		
-	consists of							contain additional 						- GET method usually doesn't
-	- the method, 						information about the request			  include any body, most servers
-	- the path, 						- the hostname of the server, 			  respond with information
-	- the HTTP version.					- the type of browser being used.		  from the URI/URL requested.
-   ---------------------	
-The method specifies the action
-that the client wants to perform,
-such as GET (to retrieve a resource) 
-or POST (to submit data to the server)
-   ---------------------
-The path or URI specifies the location 
-of the resource on the server.
-   --------------------- 
-The HTTP version indicates the version
-of the HTTP protocol being used.
-
-------------------------------------------------------------------------------------------
-									HTTP response:
-
-	status line:						 Headers:								  optional message body:
-	consists of							 contain additional 					  - The message body contains the actual	
-	- the HTTP version, 				 information about the response			    content of the response,
-	- the status code, 					 - the type and size					    such as the HTML code for a webpage.	
-   ---------------------				   of the content being returned.	
-The status code indicates 
-the result of the request,
-such as 200 OK (successful) 
-or 404 Not Found (resource not found). 
-The reason phrase is 
-a short description of the status code.
-   ---------------------
-Responses are grouped in five classes:
-(https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
-Informational responses (100 – 199)
-Successful responses (200 – 299)
-Redirection messages (300 – 399)
-Client error responses (400 – 499)
-Server error responses (500 – 599)
-
-
-------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------
+```
 									HTTP Request States:
 
 Either the client or the server may exchange messages using any HTTP request method. 
@@ -332,14 +272,11 @@ GET (read-only request) requests do not alter the server’s state, while POST a
 		   On successful deletion, it returns HTTP response status code 204 (No Content).
 
 
+## Server
 
-------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------
-							Different parts of the project: 
-						
-Server Core:
-The networking part of a web server that handles TCP connections and performs tasks such as listening for incoming requests and sending back responses. Responsible for the low-level networking, such as creating and managing sockets, handling input and output streams, and managing the flow of data between the server and clients.
-TCP socket programming:
+Server Core: 
+Responsible for the low-level networking, such as creating and managing sockets, handling input and output streams, and managing the flow of data between the server and clients.
+Socket programming:
 Socket : mechanism to give programs access to the network
 - create a socket with socket()
 - identify the socket with bind()
@@ -347,34 +284,270 @@ Socket : mechanism to give programs access to the network
 - send and receive messages with read() and write() (or send() and recv())
 - close the socket with close()
 
-   ---------------------
 
-Request Parser:
-The process that is responsible for interpreting and extracting information from HTTP requests. Receives an incoming request, parses it, and extracts the relevant information such as the method, path, headers, and message body(if present). If any syntax error was found in the request during parsing, error flags are set and parsing stops.
+## Request & Response
 
-   ---------------------
+Request:
+The process that is responsible for interpreting and extracting information from HTTP requests. 
+Receives an incoming request, parses it, and extracts the relevant information such as the method, path, headers, and message body(if present). 
+If any syntax error was found in the request during parsing, error flags are set and parsing stops.
+```bash
+-----------------------------------------------------------------------------------------------------------------------------
+													HTTP request:
 
-Response Builder:
-The response builder is responsible for constructing and formatting the HTTP responses that are sent back to clients in response to their requests. Building and storing the HTTP response, including the status line, headers, and message body. The response builder may also perform tasks such as setting the appropriate status code and reason phrase based on the result of the request, adding headers to the response to provide additional information about the content or the server, and formatting the message body according to the content type and encoding of the response. For example, if the server receives a request for a webpage from a client, the server will parse the request and pass it to a 'Response object'(a class) which will fetch the contents of the webpage and construct the HTTP response with the HTML content in the message body and the appropriate headers, such as the Content-Type and Content-Length headers.
+	
+	Request line:							Headers:									Optional message body:		
+	consists of								contain additional 							- GET method usually doesn't
+	- the method, 							information about the request				  include any body, most servers
+	- the path, 							- the hostname of the server, 				  respond with information
+	- the HTTP version.						- the type of browser being used.			  from the URI/URL requested.
+-----------------------------------------------------------------------------------------------------------------------------	
+`The method` specifies the action
+that the client wants to perform,
+such as GET (to retrieve a resource) 
+or POST (to submit data to the server)
+-----------------------------------------------------------------------------------------------------------------------------
+`The path` or URI specifies the location 
+of the resource on the server.
+-----------------------------------------------------------------------------------------------------------------------------
+`The HTTP version` indicates the version
+of the HTTP protocol being used.
+-----------------------------------------------------------------------------------------------------------------------------
+```
 
-   ---------------------
+Response:
+The response is responsible for constructing and formatting the HTTP responses that are sent back to clients in response to their requests. 
+Building and storing the HTTP response, including the status line, headers, and message body. 
+The response builder may also perform tasks such as setting the appropriate status code and reason phrase based on the result of the request, 
+adding headers to the response to provide additional information about the content or the server, 
+and formatting the message body according to the content type and encoding of the response. 
+```bash
+------------------------------------------------------------------------------------------------------------------------------------
+														HTTP response:
 
-Configuration File:
-Configuration file is a text file that contains various settings and directives that dictate how the web server should operate. These settings can include things like the port number that the web server should listen on, the location of the web server's root directory, and many other settings.
 
-   ---------------------
+	Status line:							 Headers:									  Optional message body:
+	consists of								 contain additional 						  - The message body contains the actual	
+	- the HTTP version, 					 information about the response				    content of the response,
+	- the status code, 						 - the type and size						    such as the HTML code for a webpage.
+											   of the content being returned.
+------------------------------------------------------------------------------------------------------------------------------------				 	
+The status code indicates 
+the result of the request,
+such as 200 OK (successful) 
+or 404 Not Found (resource not found). 
+The reason phrase is 
+a short description of the status code.
+   ----------------------------
+Responses are grouped in five classes:
+(https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+Informational responses (100 – 199)
+Successful responses (200 – 299)
+Redirection messages (300 – 399)
+Client error responses (400 – 499)
+Server error responses (500 – 599)
+------------------------------------------------------------------------------------------------------------------------------------
+```
+
+
+## CGI
 
 CGI:
-CGI is a standard for running external programs from a web server. When a user requests a web page that should be handled by a CGI program, the web server executes the program and returns the output to the user's web browser.
-CGI programs are simply scripts that can be written in any programming language, such as Perl, Python, or bash, and are typically used to process data submitted by a user through a web browser, or to generate dynamic content on a web page.
+CGI is a standard for running external programs from a web server. 
+When a user requests a web page that should be handled by a CGI program, 
+the web server executes the program and returns the output to the user's web browser.
+CGI programs are simply scripts that can be written in any programming language, such as Perl, Python, or bash, 
+and are typically used to process data submitted by a user through a web browser, or to generate dynamic content on a web page.
 
-   ---------------------
-   
-   
-   
-   
-   
-   Ports, in the context of computer networking, are identified by port numbers, which range from 0 to 65535. This range means that port numbers can be up to five digits long. Here is a breakdown of the port number ranges:
+
+## Configuration File
+
+Configuration file is a text file that contains various settings and directives that dictate how the web server should operate. 
+Could use nginx as example for testing.
+nginx [engine x]:
+NGINX is open source software for web serving, reverse proxying, caching, load balancing, media streaming, and more. 
+It started out as a web server designed for maximum performance and stability. 
+In addition to its HTTP server capabilities, NGINX can also function as a proxy server for email (IMAP, POP3, and SMTP) and a reverse proxy and load balancer for HTTP, TCP, and UDP servers.
+
+Default server block:
+```bash
+# --- All variables ---
+server {
+	server_name		=	W3bMasters						# Name of server
+	port 			=	8080							# Listen on port for incoming connections
+	host			=	127.0.0.1						# Server block will respond to requests for localhost (or (127.0.0.1))
+	root			=	/www/html						# Sets the root directory for this server block
+	max_client_size =	5000000							# File upload limit is 5MB -> 5000000
+	index			=	/index.html		 				# File to serve when a server running (Main web page)
+	error_page 400 	=	/config/error_page/400.html		# Files to serve when a error occurs
+	error_page 403 	=	/config/error_page/403.html 
+	error_page 404 	=	/config/error_page/404.html
+	error_page 405 	=	/config/error_page/405.html
+	error_page 406 	=	/config/error_page/406.html
+	error_page 409 	=	/config/error_page/409.html
+	error_page 410 	=	/config/error_page/410.html
+	error_page 500 	=	/config/error_page/500.html
+	error_page 505 	=	/config/error_page/505.html
+
+	# Handles requests to the root URL '/cgi-bin' -> first location block context 
+	location /cgi-bin {
+		allowed_methods = POST GET DELETE				# Allowed_methods for that location Block
+		root			= /www
+	}
+	
+	# Handles requests to the root URL '/' -> second location block context
+	location / {
+		index 	= /index.html							# Specifies the default file to serve in this location
+		return	= 301 <URL>								# For redirecting this to a specific page <URL> can be any http-page (https://en.wikipedia.org/wiki/42_(number))
+	}
+
+	# Handles requests to the root URL '/img' -> third location block context
+	location /img {
+		root		= /www/html							# Local pathing to what directory should be served in this location Block
+		autoindex	= on 								# Turns off/on directory listing. -> showes/listing of directories
+	}
+}
+```
+
+Test Server blocks:
+
+# Test 1 : Location Block with a valid autoindex (list of directories)
+server {
+	server_name		=	TestServer
+	port 			=	8080
+	host			=	localhost
+	root			=	/www/html
+	index			=	/index.html
+
+	location /img {
+		root		= /www/html
+		autoindex	= on 
+	}
+}
+=> How to test: Web browser URL -> localhost:8080/img/
+
+
+# Test 2 : Location Block with a invalid root (output '404 error')
+server {
+	server_name		=	TestServer
+	port 			=	8080
+	host			=	localhost
+	root			=	/www/html
+
+	location /cgi-bin {
+		root 			= /test
+	}
+}
+=> How to test: Web browser URL -> localhost:8080
+
+
+# Test 3 : different index & No Location block (should display index1.html)
+server {
+	server_name		=	TestServer
+	port 			=	7070
+	host			=	localhost
+	index			=	/index1.html
+	root			=	/www/html1
+}
+=> How to test: Web browser URL -> localhost:7070
+
+
+# Test 4 : Test Redirects
+server {
+	server_name		=	TestServer
+	port 			=	6060
+	host			=	localhost
+	root			=	/www/html1
+	index			=	/index1.html
+
+	location /img {
+		root		= /www/html
+		return		= 301 https://en.wikipedia.org/wiki/42_(number)
+	}
+}
+=> How to test: Web browser URL -> localhost:6060 (should go to the redirect URL, in this case to 'https://en.wikipedia.org/wiki/42_(number)')
+
+
+# Test 5 : Test server_name (curl --resolve TestServer:8080:127.0.0.1 http://TestServer:8080/index.html -v)
+server {
+	server_name		=	TestServer
+	port 			=	8080
+	host			=	localhost
+	root			=	/www/html
+	index			=	/index.html
+}
+=> How to test: open second terminal (same folder as currecnt one) -> `$ curl --resolve TestServer:8080:127.0.0.1 http://TestServer:8080/index.html -v`
+Output example:
+```bash
+1		* Added TestServer:8080:127.0.0.1 to DNS cache
+2		* Hostname TestServer was found in DNS cache
+3		*   Trying 127.0.0.1:8080...
+4		* Connected to exampletest (127.0.0.1) port 8080 (#0)
+5		> GET /index.html HTTP/1.1
+6		> Host: TestServer:8080
+7		> User-Agent: curl/7.81.0
+8		> Accept: */*
+9		> 
+10		* Mark bundle as not supporting multiuse
+11		< HTTP/1.1 200 Found
+12		< Content-Type: text/html
+13		< Content-Length: 1139
+14		< 
+15		<!DOCTYPE html>
+16		<head>
+17		    <meta charset="UTF-8">
+18		    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+19		    <title>404 Not Found</title>
+20		    <style>
+21		        body {
+22		            font-family: Arial, sans-serif;
+23		            display: flex;
+24		            justify-content: center;
+25		            align-items: center;
+26		            height: 100vh;
+27		            margin: 0;
+28		            background-color: #fff;
+29		        }
+30		        .container {
+31		            text-align: center;
+32		            padding: 20px;
+33		            background-color: #fff;
+34		        }
+35		        .error-code {
+36		            font-size: 9em;
+37		            font-weight: bold;
+38		            margin-bottom: -0.1em;
+39		            color: #333;
+40		        }
+41		        h1 {
+42		            font-size: 2em;
+43		            margin-bottom: 0.1em;
+44		            color: #333;
+45		        }
+46		        p {
+47		            font-size: 1em;
+48		            margin-bottom: 1em;
+49		            color: #666;
+50		        }
+51		    </style>
+52		</head>
+53		<body>
+54		    <div class="container">
+55		        <div class="error-code">404</div>
+56		        <h1>Not Found</h1>
+57		        <p>The requested resource could not be found on the server!</p>
+58		    </div>
+59		</body>
+60		* Connection #0 to host exampletest left intact
+61		</html>% 
+```
+Line 11 : `< HTTP/1.1 200 Found` -> displayes the responds code, so also coud be `< HTTP/1.1 404 Not Found`
+Line 15+ : `<!DOCTYPE html>` -> Onward is the index.html file that the browser is displaying, so might look different -> `< HTTP/1.1 404 Not Found` will display the 404_ErrorPage.html file
+
+
+## Configuration Parser
+
+Ports, in the context of computer networking, are identified by port numbers, which range from 0 to 65535. This range means that port numbers can be up to five digits long. Here is a breakdown of the port number ranges:
 
 Well-Known Ports (0 to 1023): These ports are reserved for system or well-known services and protocols (e.g., HTTP uses port 80, FTP uses port 21).
 
@@ -385,45 +558,39 @@ Dynamic or Private Ports (49152 to 65535): These ports are used for private or t
 So, ports can be 1 to 5 digits long, but they must fall within the 0 to 65535 range.
 
 
+## Installation
+1. Compile the program by running the following command:
+```bash
+$ make
+```
+2. Execute the program using the following command:
+```bash
+$ ./webserv
+```
+or
+```bash
+$ ./webserv <configuration file your choice>
+```
+3. The program is now running. Go to your web browser:
+![image] 
+
+![Video]
+
+## Resources
+
+- NGINX Resources
+	- [Official NGINX Website](https://nginx.org/en/)
+	- [NGINX Blog: HTTP/2 Theory and Practice](https://blog.nginx.org/blog/http2-theory-and-practice-in-nginx-stable-13)
+	- [NGINX Configuration Examples](https://kbeezie.com/nginx-configuration-examples/)
+
+- Node.js and HTTP Servers
+	- [Node.js HTTP Module Documentation](https://nodejs.org/api/http.html)
+
+- HTTP Protocol
+	- [TechTarget: What is an RFC?](https://www.techtarget.com/whatis/definition/Request-for-Comments-RFC)
+	- [Linode Guide: HTTP GET Request](https://www.linode.com/docs/guides/http-get-request/)
+	- [MDN: HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 
 
-# --- default server block ---
-# # (All variables)
-# server {
-# 	server_name		=	VroomVroom					# Name of server
-# 	port 			=	8080						# Listen on port for incoming connections
-# 	host			=	127.0.0.1					# Server block will respond to requests for localhost (or (127.0.0.1))
-# 	root			=	/www/html					# Sets the root directory for this server block
-# 	max_client_size =	5000000						# File upload limit is 5MB -> 5000000
-# 	index			=	/index.html		 			# File to serve when a server running (Main web page)
-# 	error_page 400 	=	/config/error_page/400.html	# Files to serve when a error occurs
-# 	error_page 403 	=	/config/error_page/403.html 
-# 	error_page 404 	=	/config/error_page/404.html
-# 	error_page 405 	=	/config/error_page/405.html
-# 	error_page 406 	=	/config/error_page/406.html
-# 	error_page 409 	=	/config/error_page/409.html
-# 	error_page 410 	=	/config/error_page/410.html
-# 	error_page 500 	=	/config/error_page/500.html
-# 	error_page 505 	=	/config/error_page/505.html
-
-# 	# Handles requests to the root URL '/cgi-bin' -> first location block context 
-# 	location /cgi-bin {
-# 		allowed_methods = POST GET DELETE			# Allowed_methods for that location Block
-# 		root			= /www
-# 	}
-	
-# 	# Handles requests to the root URL '/' -> second location block context
-# 	location / {
-# 		index 	= /index.html						# specifies the default file to serve in this location
-# 		root	= /www/html	
-# 	}
-
-
-# 	# Handles requests to the root URL '/' -> third location block context
-# 	location /img {
-# 		root		= /www/html						# Local pathing to what directory should be served in this location Block
-# 		autoindex	= on 							# Turns off/on directory listing. -> showes/listing of directories
-# 	}
-# }
 
 -->
