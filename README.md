@@ -45,19 +45,33 @@ MiniRT is about Ray tracing, which will render a 3-dimensional computer-generate
 
 
 ## Resources
-- https://nl.wikipedia.org/wiki/Raytracing
-- https://developer.nvidia.com/discover/ray-tracing
-- https://raytracing.github.io/books/RayTracingInOneWeekend.html
-- https://www.geeksforgeeks.org/c-library-math-h-functions/
-- https://www.tutorialspoint.com/c_standard_library/math_h.htm
-- https://rgbacolorpicker.com/
-- https://www.cs.cmu.edu/afs/cs/academic/class/15462-s09/www/lec/04/lec04.pdf
-- https://gamedev.stackexchange.com/questions/156842/how-can-i-correct-an-unwanted-fisheye-effect-when-drawing-a-scene-with-raycastin/156853#156853
-- https://gamedev.stackexchange.com/questions/97574/how-can-i-fix-the-fisheye-distortion-in-my-raycast-renderer
-- https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/minimal-ray-tracer-rendering-spheres.html
-- http://graphics.cs.cmu.edu/nsp/course/15-462/Spring04/slides/13-ray.pdf
-- https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/ligth-and-shadows.html
+
+- Ray Tracing
+	- [Ray Tracing on Wikipedia](https://nl.wikipedia.org/wiki/Raytracing)
+	- [NVIDIA Ray Tracing Resources](https://developer.nvidia.com/discover/ray-tracing)
+	- [Ray Tracing in One Weekend - Book](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
+	- [Minimal Ray Tracer: Seting up the Camera & Rendering Spheres](https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/minimal-ray-tracer-rendering-spheres.html)
+	- [CMU Lecture on Ray Tracing](https://www.cs.cmu.edu/afs/cs/academic/class/15462-s09/www/lec/04/lec04.pdf)
+	- [CMU Graphics Course Ray Tracing Slides](http://graphics.cs.cmu.edu/nsp/course/15-462/Spring04/slides/13-ray.pdf)
+
+- C Library Math Functions
+	- [C Library: <math.h> Functions on GeeksforGeeks](https://www.geeksforgeeks.org/c-library-math-h-functions/)
+	- [C Standard Library: <math.h> Functions on TutorialsPoint](https://www.tutorialspoint.com/c_standard_library/math_h.htm)
+
+- Shading & Lighting
+	- [Introduction to Shading: Light and Shadows](https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/ligth-and-shadows.html)
+	- [Colored Shadows Explanation]()
+	- [RGB Color Picker](https://rgbacolorpicker.com/)
+
+- Troubleshooting & Tips
+	- [Correcting Fisheye Effect in Ray Casting - GameDev Stack Exchange](https://gamedev.stackexchange.com/questions/156842/how-can-i-correct-an-unwanted-fisheye-effect-when-drawing-a-scene-with-raycastin/156853#156853)
+	- [Fixing Fisheye Distortion in Raycast Renderer - GameDev Stack Exchange](https://gamedev.stackexchange.com/questions/97574/how-can-i-fix-the-fisheye-distortion-in-my-raycast-renderer)
+
+
 - https://www.google.com/imgres?q=3%20colored%20lights%20on%20an%20object&imgurl=https%3A%2F%2Fwww.exploratorium.edu%2Fsites%2Fdefault%2Ffiles%2FRGB_screen.gif&imgrefurl=https%3A%2F%2Fwww.exploratorium.edu%2Fsnacks%2Fcolored-shadows&docid=Nzp0duVI3UF6RM&tbnid=gZrFqPSCteUEVM&vet=12ahUKEwig4YGW_oCIAxU7wAIHHQvQKqUQM3oECDIQAA..i&w=1080&h=612&hcb=2&ved=2ahUKEwig4YGW_oCIAxU7wAIHHQvQKqUQM3oECDIQAA
+
+
+
 - 
 - 
 - 
