@@ -1,48 +1,447 @@
-Hello MiniRT :)
+# MiniRT
 
-
-<!--
-MiniRT
-
-Welcome to MiniRT, this project is made in collabaration with [Sarah Mclacke](https://github.com/smclacke).
-MiniRT is about Ray tracing, which will render a 3-dimensional computer-generated images.
-
-![images]()
+Welcome to MiniRT. <br> <br>
+This project was made in collaboration with [Sarah Mclacke](https://github.com/smclacke). <br>
+MiniRT is about a ray-tracing engine that renders realistic 3D computer-generated images through ray-tracing techniques. <br>
 
 ## Table of Contents
 
-- [Build a Ray](#Functions)
-- [Checkerboard](#Buildin)
-- [Spectular light](#Signals)
-- [Shadow](#Prompt)
-- [Important things to know](#Test-for-Leaks)
-- [Information about our MiniRT](#Installing-readline)
+- [Building a Ray Tracer](#Building-a-Ray-Tracer)
+- [Checkerboard](#Checkerboard)
+- [Light](#Light)
+- [Shadow](#Shadow)
+- [Important Things to Know](#Important-Things-to-Know)
 - [Installation](#Installation)
 - [Resources](#Resources)
 
+<br>
+
+eVerYTinG bEloW tHiS liNe wAs ME gOiNg ["hhhUUUUUhhhhhh?????????????"](https://www.youtube.com/watch?v=xVWeRnStdSA) (aka. cat meme)
+			
+![images]()
 
 
+<br> <br>
 
-## Building a Ray
+## Building a Ray Tracer
+A ray tracer works a bit differently than your eye. <br>
+Ray tracing simulates how rays of light interact with objects to produce realistic images. <br>
+Unlike how our eyes work, which detect light coming from objects, <br>
+a ray-tracing algorithm traces rays from the camera (the "eye") into the scene, <br>
+determining which objects they hit and rendering the scene accordingly. ["hUh??"](https://www.youtube.com/watch?v=xVWeRnStdSA) moment
+![](https://www.researchgate.net/figure/1-This-figure-demonstrates-the-concept-of-ray-tracing-A-ray-is-cast-from-the-camera_fig1_236342499)
+ 
+**You get 3 main steps to building a ray tracer:**
+ - [Step 1)](#Step-1-;) &nbsp; Calculate the ray from the “eye” through the pixel, <br>
+			&nbsp;&nbsp;&nbsp; ⇾ Set up your camera and calculate a ray per pixel (width x height).
+ - [Step 2)](#Step-2-;) &nbsp; Determine which objects the ray intersects,	<br>
+			&nbsp;&nbsp;&nbsp; ⇾ Calculate your intersection points with each object (safe that information in a struct)
+ - [Step 3)](#Step-3-;) &nbsp; Compute a color for the closest intersection point. <br>
+			&nbsp;&nbsp;&nbsp; ⇾ Calculate, with the Phong reflection model, your light per light source and shadow.
 
+#### Step 1;
+
+**Understanding the 3D grid:** <br>
+You get 2D grid, which only have x and y coordinates. `Coordinates(x, y)` <br>
+And you get a 3D grid, which has x, y and z coordinates. `Coordinates(x, y, z)` <br>
+	- `x: left/right`
+		⇾ **+x/**x = right *(positive numbers)* ***||*** **-x** = left *(negative numbers)*
+	- `y: up/down`
+		⇾ **+y/y** = right *(positive numbers)* ***||*** **-y** = left *(negative numbers)*
+	- `z: forward/back forward`
+		⇾ **+z/z** = right *(positive numbers)* ***||*** **-z** = left *(negative numbers)* <br>
+
+First do **x**, then **y**, then **z**. <br>
+So we first walk *(x)* left or right, then we go *(y)* up or down, then we go *(z)* forward or back forward. <br>
+*Some people switch* **y** *and* **z***, so* **y** ***=*** *forward and back forward and* **z** ***=*** *up and down, but do it how it makes sense for you.* <br> <br>
+
+Online 3D grid for visualizing: [3D-Graph](https://technology.cpm.org/general/3dgraph/)
+
+
+**How do I set up the ray?:** <br>
+	- 1. Set up the  width, height and image ratio of the window/image.
+		image_width and image_height you can choose yourself. *(a nice size: ****WIDTH = 1800****; and ***HEIGHT = 1900****;)*
+		`image_ratio = image_height / image_width;`
+	- 2. Calculate the viewport, so what your imaginary camera sees.
+		pos_x and pos_y is at what pixel you are currently.
+		`viewport_w = 2 * ((pos_x + 0.5) / image_width) - 1;`
+		`viewport_h = (1 - 2 * ((pos_y + 0.5) / image_height)) * image_ratio;`
+	- 3. Calculate each delta pixel.
+		**M_PI** ⇾ This is a constant representing the value of pi. ***(M_PI = 3.14159265358979323846)***
+		`pixel_x = viewport_w * (tan((fov / 2) * (M_PI / 180)));`
+		`pixel_y = viewport_h * (tan((fov / 2) * (M_PI / 180)));`
+	- 4. Initialize the ray vector and the ray place.
+		Make sure your camera vector works, in other words, make sure your camera can rotate.
+		We did it like this; it's not the most correct way, but it works ***(if it works, don't tough it)***
+		```C
+		forward = normalize(camera.vector);
+		-------------------------------------
+
+		/* Camera vector(x,y,z)
+		* - If camera vector(0,1,0) -> (fabs(forward.y) == 1.0)
+		* 	- We give it init_ray_pos(1, 0, 0).
+		* - In anyother case it will stay init_ray_pos(0, 1, 0).
+		*/
+		if (fabs(forward.y) == 1.0)
+			right = normalize(cross_product(forward, init_ray_pos(1, 0, 0)));
+		else
+			right = normalize(cross_product(forward, init_ray_pos(0, 1, 0)));
+
+		-------------------------------------
+		up = cross_product(right, forward);
+		pixel_direction = plus(plus(scale_vector(right, screen.pixel_delta_x),
+			scale_vector(up, screen.pixel_delta_y)), forward);
+		return (normalize(pixel_direction));
+		```
+
+<br> <br>
+
+#### Step 2;
+	For intersecting objects, you get different options and examples online, take the one that makes most sense for you. <br>
+	`Sphere`, start with the sphere, it is the easiest. *(Plenty examples online)* <br>
+		- Do camera, screen testing with the sphere: 
+			- Check for distortion at the edges of the screen.
+			- Make sure you understand how your grid/position of objects works.
+			- Make sure, if you have two spheres next to each other, that they intersect correctly with each other..
+			![]()
+	`Plane` is easy as well. <br>
+		- Make sure you understand that a plane is infinite.
+		- Make sure if you change the vector that all vector directions work.
+		- It is very important to make sure that the surface normal is correct; otherwise later, the light might give you problems.
+	`Cylinder` is a b**ch! <br>
+		- Cylinders consist out of two or three objects. The body and the two caps.
+		- The body ⇾ it will be in the beginning infinite, so you need to cut/trim it at the correct height.
+		- The caps are two planes, that are trimmed/cut as well.
+			- Make sure the caps are perfectly on the body, sometimes there is space in between cap and body, you will see the space once you added light.
+			- Make sure the surface normal of the caps is correct.
+		- Make sure all vector directions work correctly (look correct)
+		![]()
+	Make sure you have all the objects, before adding light. <br>
+	Make sure you take the object closest to the camera. (Or do this in step 3) <br>
+
+<br> <br>
+#### Step 3;
+	Look at the [light](#Light) and [shadow](#shadow) sections.
+	Make sure you take the object closest to the camera. (If you haven't in step 2)
+	Check all surface normals, sometimes they cause problems with the light.
+	**For example;**
+	a Plane below a light source has the correct lighting, but a plane above a light source has no light at all.
+	**If that happens:** flip the surface normal of the plane above (make the surface normal positive), so it shows the light.
+	```C
+	cyl->normal = mult_vecdub(cyl->vector, -1); // Surface normal points downwards -> mult_vecdub() = multiplying a vector and a duble
+	cyl->normal = cyl->vector; 					// Surface normal points upwards
+	```
+
+<br>
+<br>
 
 ## Checkerboard
+It is not possible to create a sphere with a perfect checkerboard! <br>
+If the checked sphere looks good from the center, check the sides; there will be distortion. <br>
+So rather calculate a checkerboard sphere that touches at the poles. <br>
+Or make a texture that rotates towards the camera, so it always looks good. <br>
+![](perfect and real checkerboard)
+<br>
+<br>
 
 
-## Spectular light
+## Light
+*(A lot of ["hUh??"](https://www.youtube.com/watch?v=xVWeRnStdSA) moments)* <br>
+**Calculating lighting on an object involves several steps:** <br>
+- calculating the direction of light rays,
+- determining the visibility of the light source from the surface point of the object. [(Shadow part)](#Shadow)
+- and then applying illumination models such as [Phong](https://en.wikipedia.org/wiki/Phong_reflection_model) or [Blinn-Phong](https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_reflection_model) to compute the final color of the object.
+<br>
+**Calculate Light Direction:** <br>
+Determine the direction of light rays from the light source(s) to the surface point of the object. <br>
+If the light source is directional *(like the sun)*, you only need the direction vector.  <br>
+If the light source is a point light, you'll need to calculate the direction vector from the surface point to the light source position. <br>
+<br>
+**Check Visibility:** <br>
+Determine if the surface point of the object is in shadow or not. <br>
+<br>
+**Compute Illumination:** <br>
+Apply an illumination model *(such as [Phong](https://en.wikipedia.org/wiki/Phong_reflection_model) or [Blinn-Phong](https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_reflection_model))* to compute the final color of the object at the surface point. <br>
+This involves calculating ambient, diffuse, and specular components based on the surface properties, light properties, and view direction. <br>
+<br>
+You go through each object and each object goes through each light.  <br>
+**for example you have:** 2 objects, 3 lights. <br>
+object**1** will be caclulated with light*1*, light2*,* light*3* <br>
+then, object**2** will be calculated with light*1*, light*2*, light*3* <br>
+
+```c
+while (++i < Number_of_objects)
+{
+	while (++k < Number_of_lights)
+	{
+		- For each light we get:
+			- intersection_point,
+			- light_direction,
+			- current light information (You need the colour, position and ratio of the current light)
+		if (Shadow)
+		{
+			- Shadow -> visibility of the light source from the surface point of the object.
+		}
+		else
+		{
+			- Phong reflection model
+				- Ambient Light (General illumination in the scene)
+				- Diffuse Light (Direct light from the source)
+				- vSpecular Light (Highlights on shiny surfaces)
+		}
+	}
+	- Clamp Light result, so the rgb colours don't overflow, if it overflows it prints black.
+}
+```
+
+Make sure for your Phong reflection model that your base colour is calculated before you do diffuse and spectular light. <br>
+Else your texture (Checkerboard) won't have light and shadow. <br>
+<br>
+We used Phong reflection model, because it was easier to visulize what was happening, but you also could use Blinn-Phong reflection model.
+![Phong reflection model](https://en.wikipedia.org/wiki/Phong_reflection_model#/media/File:Phong_components_version_4.png)
+<br>
+<br>
 
 
 ## Shadow
+**Check Visibility:** <br>
+Determine if the surface point of the object is in shadow or not. <br>
+You can achieve this by casting a shadow ray from the surface point towards the light source and checking if it intersects with any other object in the scene. <br>
+If it intersects, the surface point is in shadow; otherwise, it's light. <br><br>
+So, instead calculating what makes logical sence, to calculate a ray from the light to the object, you need to calculate a ray from the object to the light. *More ["hUh??"](https://www.youtube.com/watch?v=xVWeRnStdSA) moments* <br>
+If the ray *(on the way to the light)* hits another object, shodow will be drawn. If the ray makes it susscesfully to the light, light/Illumination will be calculated.<br>
+![Shadow ray](https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/ligth-and-shadows.html)
+
+<br>
+<br>
+
+## Important Things to Know
+
+<details>
+  <summary><strong>Filed of view (FOV)</strong> <br> &nbsp;&nbsp;&nbsp;<em>(<strong>Filed of view (FOV)</strong>)</em></summary>
+  <br>
+
+### Filed of view (FOV)
+- between 70 and 90 is the sweet spot. Less or more will distort the image.
+- Distortion will always happen near the edges of the image.
+
+br>
+<br>
+
+</details>
+
+---
+
+<details>
+  <summary><strong>Normalizing a vector</strong> <br> &nbsp;&nbsp;&nbsp;<em>(<strong>Normalizing a vector -></strong> Decimal numbers (0.0))</em></summary>
+  <br>
+
+### Normalizing a vector -> Decimal numbers (0.0) 
+- Your number input (excluding rgb) need to take decimal numbers.
+- Thats why we normalize our vectors.
+- The normalization process ensures that the vectors have a consistent scale or magnitude, 
+which can be important in certain operations such as distance calculations, clustering, or classification.
+- So normalize every vector, either in the beginning(while parsing) or every vector you entcounter durring your calculations.
+
+br>
+<br>
+
+</details>
+
+---
+
+<details>
+  <summary><strong>Selecting objects</strong> <br> &nbsp;&nbsp;&nbsp;<em>(<strong>Selecting objects</strong>)</em></summary>
+  <br>
+
+### Selecting objects
+Selecting objects is not part of the project. We just thought it's a nice and esay way for the user/evaluater to click on a object and do something with it.
+
+![]()
+
+#### We only have the option: 
+- You can select all objects, but you can only do something with the sphere.
+- If a sphere is selected you can press arrow key up ![](https://www.google.com/search?sca_esv=adb58b67ff5950fb&sca_upv=1&q=keyboard+arrow+symbol&udm=2&fbs=AEQNm0Aa4sjWe7Rqy32pFwRj0UkWd8nbOJfsBGGB5IQQO6L3J_86uWOeqwdnV0yaSF-x2jopn8p7xL4A1Dm_DA2mNSwQf3Ts-oLed-fok38HK-L3touqFtv6wIt8FVCSDg7FOXl9BZhwvwkKnTuEN51hFYXnnYqV40IDAPbrBOsskslGNy0Z6pM&sa=X&ved=2ahUKEwj12M7CiuGIAxX4g_0HHRowIYgQtKgLegQIFxAB&biw=1442&bih=1133&dpr=1.5#imgrc=opwshXhf8vkFvM&imgdii=bQ-q1cgYYkpsiM) 
+- It will then add the Checkerboard on the sphere.
+
+#### You also could:
+- Add more textures to the sphere or give other objects tectures aswell.
+- Move and rotate objects.
+- Make them bigger or smaller.
 
 
-## Important things to know
+#### How does it work
+you need mlx functions:
+```C
+ - mlx_key_hook(); 		-> is for key movement (ESC, Arrow up).
+ - mlx_mouse_hook();	-> is for mouse movement (selcet objects).
+```
+
+Mouse movement (selcet objects):
+Quick explanation how the mouse map works.
+ - There is a 2D mouse_map[x][y].
+ - While we loop through every pixel, we fill in this map.
+ - If no object is at that position fill in -1.
+ - If there is an object, give it a number (intersection point found).
+ ```script
+		Example:
+				Sphere1 = 0; (red)
+				Sphere2 = 1; (blue)
+				Plane	= 2; (green)
+		mouse_map:
+				-1 -1 -1 -1 -1			⬛⬛⬛⬛⬛
+				-1 -1  0 -1 -1			⬛⬛🟥⬛⬛
+				-1  0  0  0 -1			⬛🟥🟥🟥⬛
+				 0  0  0  0  0	  ->	🟥🟥🟥🟥🟥
+				-1  0  0  0 -1			⬛🟥🟥🟥⬛
+				-1 -1  0 -1  2			⬛⬛🟥⬛🟩
+				-1 -1 -1  2  2			⬛⬛⬛🟩🟩
+```
+ - Find the position of the mouse, with mlx_get_mouse_pos();.
+ - If the mouse map is -1 at that position, So no object has been selected.
+ - Else if the mouse map is NOT -1 at that position. Highlight the object.
+ - Just set/draw a white pixel with a bit of offset inwards next to the position.
+ - For remove_highlight() remove the colour of the pixel (set it to 0).
+ - How is that possible ☝️ ? 
+ - Use mlx_image_to_window() to put a layer on top of the 'original'
+ - It loads faster because it doesn't go through each pixel and recalculates everything.
+ - That's why to remove_highlight(), you can set that colour to 0, so it will just unset those pixels.
 
 
-## Information about our MiniRT
+Key movement (ESC, Arrow up):
+
+🔴 - If the pressed key is 'ESC key', close and free window.
+🟡 - If an object is selected and the key 'Arrow up' is pressed, we change the pattern of that object.
+🟢 - You need to count how many arrow-ups you have. Because arrowUp-1 should change pattern, arrowUp-2 should change to a different pattern or original form. After that, you need to reset your arrow-up count
+🔵 - Change the pattern of that object. 
+
+```C
+void	ft_key_action(mlx_key_data_t keydata, t_data *data)
+{
+	(void)keydata;
+	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE)) 🔴
+		mlx_close_window(data->mlx);
+	if (data->mouse.selected == true && mlx_is_key_down(data->mlx, MLX_KEY_UP)) 🟡
+	{
+		data->objs[data->i_am]->i++;
+		if (data->objs[data->i_am]->i > 1) 🟢
+			data->objs[data->i_am]->i = 0;
+		change_pattern(data, data->objs[data->i_am]); 🔵
+	}
+}
+```
+
+```C
+void	change_pattern()
+{
+	- Check what type the object is : if (obj->type == E_SPHERE)
+	{
+		- if (obj->i == 1) -> is for Checkerboard. (obj->what_pattern = 1)
+		- else -> is for Normal. (obj->what_pattern = 0)
+		- go through each pixel again and redo calculations (🚩 I Don't recommand 🚩)
+	}
+}
+```
+🚩 : BECAUSE: you recalculate all pixels, it will take a while.
+			  It would be wiser to use mlx_image_to_window() to put a layer on top of the 'original'.
+			  In the very beginning, initialize all pixels and store that information for each pixel in a pixel struct (object, distance, colour, light, etc.)
+			  Reuse that pixel struct, so you don't need to recalculate everything.
+			  It's also easier for if you want object rotation, so the original information is saved, and you can access it fast.  
+
+<br>
+<br>
+
+</details>
+
+---
+
+<details>
+  <summary><strong>About Colour</strong> <br> &nbsp;&nbsp;&nbsp;<em>(<strong>About Colour</strong>)</em></summary>
+  <br>
+
+### About Colour
+Use this webside you find you rgb colours -> [RGB Color Picker](https://rgbacolorpicker.com/) <-
+You can pick your colour and it will give you the rgb number.
+<br>
+<br>
+
+Check that your colour overlapping is correct.
+![](https://www.google.com/imgres?q=3%20colored%20lights%20on%20an%20object&imgurl=https%3A%2F%2Fwww.exploratorium.edu%2Fsites%2Fdefault%2Ffiles%2FRGB_screen.gif&imgrefurl=https%3A%2F%2Fwww.exploratorium.edu%2Fsnacks%2Fcolored-shadows&docid=Nzp0duVI3UF6RM&tbnid=gZrFqPSCteUEVM&vet=12ahUKEwig4YGW_oCIAxU7wAIHHQvQKqUQM3oECDIQAA..i&w=1080&h=612&hcb=2&ved=2ahUKEwig4YGW_oCIAxU7wAIHHQvQKqUQM3oECDIQAA)
+![](mine)
+
+br>
+<br>
+
+</details>
+
+---
+
+<details>
+  <summary><strong>'.rt' file</strong> <br> &nbsp;&nbsp;&nbsp;<em>(<strong>template</strong> Just a example)</em></summary>
+  <br>
+
+Minirt.rt file
+```script
+
+# Ambient lightning (A): 
+#Identifier     #Ratio        #R,G,B
+A               0.2           255,255,255
+
+# --------------------------------------------------------------------------------------------
+# Camera (C): 
+#Identifier    #Coordinates         #3D vector     #FOV
+C              0,0,-1     		    0,0,1          70
+
+# --------------------------------------------------------------------------------------------
+# Light (L):
+#Identifier     #Coordinates        #Ratio      #R,G,B
+L               2,2,0  				0.6         255,255,255
+
+# --------------------------------------------------------------------------------------------
+# Sphere (sp):
+#Identifier     #Coordinates        #Diameter       #R,G,B
+sp              0,0,-10     		12.6            10,0,255
+
+# --------------------------------------------------------------------------------------------
+# Plane (pl): 
+#Identifier     #Coordinates        #3D vector      #R,G,B
+pl              10,3,-10     		0,1,0  			0,0,225
+
+# --------------------------------------------------------------------------------------------
+# Cylinder (cy):
+#Identifier     #Coordinates        #3D vector      #Diameter       #Height     #R,G,B
+cy              -5,0,-5      		0,0,1    		14.2            21.42       10,0,255
+
+# --------------------------------------------------------------------------------------------
+# Triangle (tr) -> optional:
+#Identifier     #Coordinates1       #Coordinates2   #Coordinates3   #R,G,B
+tr           	-7,6,-11         	-7,-6,-11       10,0,-11     	255,102,102
+
+
+```
+<br>
+<br>
+
+</details>
+<br>
+<br>
 
 
 ## Installation
 
+To execute the program, follow the steps below:
+
+1. Compile the RayTracer by running the following command:
+```bash
+$ make
+```
+2. Finally, execute the program using the following command: 
+```bash
+$ ./miniRT <scenes/sphere/sphere_circle_back.rt>
+```
+
+<br>
+<br>
 
 ## Resources
 
@@ -60,160 +459,22 @@ MiniRT is about Ray tracing, which will render a 3-dimensional computer-generate
 
 - Shading & Lighting
 	- [Introduction to Shading: Light and Shadows](https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/ligth-and-shadows.html)
-	- [Colored Shadows Explanation]()
 	- [RGB Color Picker](https://rgbacolorpicker.com/)
+	- [Phong reflection model](https://learnopengl.com/Lighting/Basic-Lighting)
+	- [Ambient Light, Diffuse Light, Spectular Light code example](https://learnwebgl.brown37.net/09_lights/lights_combined.html)
 
 - Troubleshooting & Tips
 	- [Correcting Fisheye Effect in Ray Casting - GameDev Stack Exchange](https://gamedev.stackexchange.com/questions/156842/how-can-i-correct-an-unwanted-fisheye-effect-when-drawing-a-scene-with-raycastin/156853#156853)
 	- [Fixing Fisheye Distortion in Raycast Renderer - GameDev Stack Exchange](https://gamedev.stackexchange.com/questions/97574/how-can-i-fix-the-fisheye-distortion-in-my-raycast-renderer)
 
+<br>
+<br>
 
-- https://www.google.com/imgres?q=3%20colored%20lights%20on%20an%20object&imgurl=https%3A%2F%2Fwww.exploratorium.edu%2Fsites%2Fdefault%2Ffiles%2FRGB_screen.gif&imgrefurl=https%3A%2F%2Fwww.exploratorium.edu%2Fsnacks%2Fcolored-shadows&docid=Nzp0duVI3UF6RM&tbnid=gZrFqPSCteUEVM&vet=12ahUKEwig4YGW_oCIAxU7wAIHHQvQKqUQM3oECDIQAA..i&w=1080&h=612&hcb=2&ved=2ahUKEwig4YGW_oCIAxU7wAIHHQvQKqUQM3oECDIQAA
-
-
-
-- 
-- 
-- 
-
-
-
-
-
-Sure, a 4x4 matrix is a mathematical construct used extensively in computer graphics, computer vision, and various other fields involving transformations in three-dimensional space. It's a rectangular array of numbers organized into four rows and four columns. Each element in the matrix can hold a scalar value, typically a floating-point number.
-
-Here's how a 4x4 matrix looks:
-
-Copy code
-| m11  m12  m13  m14 |
-| m21  m22  m23  m24 |
-| m31  m32  m33  m34 |
-| m41  m42  m43  m44 |
-In the context of computer graphics and transformations, each row of the matrix often represents a transformation operation (translation, rotation, scaling, etc.), while each column represents a coordinate axis (x, y, z, w). Here's a breakdown of the components:
-
-m11, m12, m13, m14: These elements typically represent the transformation and scaling applied to the x-axis.
-m21, m22, m23, m24: These elements represent the transformation and scaling applied to the y-axis.
-m31, m32, m33, m34: These elements represent the transformation and scaling applied to the z-axis.
-m41, m42, m43, m44: These elements represent the translation components.
-The elements along the diagonal from the top-left to the bottom-right (m11, m22, m33, m44) are often referred to as the "main diagonal" or simply the "diagonal" of the matrix. In a transformation matrix, these elements are typically related to scaling and rotation operations.
-
-In 3D graphics, the fourth column (m14, m24, m34) and fourth row (m41, m42, m43) are often used for translation components. The fourth row is usually [0 0 0 1], where the last element, m44, is set to 1. This is known as a homogeneous coordinate system, which allows affine transformations (including translations) to be represented as matrix multiplications.
-
-By combining various transformation matrices (for translation, rotation, scaling, etc.) through multiplication, you can perform complex transformations on geometric objects in three-dimensional space efficiently. This is the basis of many operations in computer graphics, such as transforming 3D models, positioning cameras, and rendering scenes.
-
-
-// ------------ eVerYTinG BeloW tHiS liNe iS jUSt ME gOiNg "hhhUUUUUhhhhhh?????????????" -----------
-			// aka. cat meme (https://www.youtube.com/watch?v=xVWeRnStdSA)
-			
-			
-			
-			Calculating lighting on an object involves several steps, including calculating the direction of light rays, determining the visibility of the light source from the surface point of the object, and then applying illumination models such as Phong or Blinn-Phong to compute the final color of the object. Here's a simplified overview of how you can calculate lighting on an object in C:
-
-Calculate Light Direction:
-Determine the direction of light rays from the light source(s) to the surface point of the object. If the light source is directional (like the sun), you only need the direction vector. If the light source is a point light, you'll need to calculate the direction vector from the surface point to the light source position.
-
-Check Visibility:
-Determine if the surface point of the object is in shadow or not. You can achieve this by casting a shadow ray from the surface point towards the light source and checking if it intersects with any other object in the scene. If it intersects, the surface point is in shadow; otherwise, it's illuminated.
-
-Compute Illumination:
-Apply an illumination model (such as Phong or Blinn-Phong) to compute the final color of the object at the surface point. This involves calculating ambient, diffuse, and specular components based on the surface properties, light properties, and view direction.
-
-
-
-
-
-
-
-
-// t_colour get_sphere_colour(t_data *data, t_ray lightray, t_obj_data *obj_data, t_colour ambient)
-// AMBIENT_INTENSITY: Ratio of ambient light intensity (ambient reflection).
-// DIFFUSE_INTENSITY: Ratio of diffuse light intensity (diffuse reflection).
-// SPECULAR_INTENSITY: Ratio of specular light intensity (specular reflection).
-// SPECULAR_POWER: Specular power or shininess, controlling the size and sharpness of specular highlights.
-t_colour get_sphere_colour(t_data *data, t_obj_data *obj_data, t_ray ray)
-{
-    t_colour result;
-    double AMBIENT_INTENSITY = data->ambient.ratio; // (0.2)
-    double DIFFUSE_INTENSITY = data->light.ratio;   // (0.6)
-    double SPECULAR_INTENSITY = 0.2;
-    double SPECULAR_POWER = 32;
-    
-    // Using the 'Phong reflection model'
-	if (obj_data->d >= 0.0)
-	{
-		t_vec3 intersection_point = plus(ray.place, mult_vecdub(ray.vector, obj_data->t));
-		t_vec3	normal = normalize_vector(minus(intersection_point, data->objs->center));
-
-		// Ambient light contribution
-		double ambient_red = AMBIENT_INTENSITY * data->ambient.colour.r;
-		double ambient_green = AMBIENT_INTENSITY * data->ambient.colour.g;
-		double ambient_blue = AMBIENT_INTENSITY * data->ambient.colour.b;
-
-		// Diffuse light contribution
-		t_vec3 light_direction = normalize_vector(minus(data->light.place, intersection_point));
-		double diffuse_factor = dot_product(normal, light_direction);
-		if (diffuse_factor < 0.0)
-			diffuse_factor = 0.0;
-		double diffuse_red = DIFFUSE_INTENSITY * diffuse_factor * data->light.colour.r;
-		double diffuse_green = DIFFUSE_INTENSITY * diffuse_factor * data->light.colour.g;
-		double diffuse_blue = DIFFUSE_INTENSITY * diffuse_factor * data->light.colour.b;
 		
-		// Specular light contribution
-		t_vec3 view_direction = normalize_vector(minus(ray.place, intersection_point));
-		t_vec3 reflection_direction = normalize_vector(ft_reflect(light_direction, normal));
-		double specular_factor = pow(dot_product(reflection_direction, view_direction), SPECULAR_POWER);
-		if (specular_factor < 0.0)
-			specular_factor = 0.0;
-		double specular_red = SPECULAR_INTENSITY * specular_factor * data->ambient.colour.r;
-		double specular_green= SPECULAR_INTENSITY * specular_factor * data->ambient.colour.g;
-		double specular_blue = SPECULAR_INTENSITY * specular_factor * data->ambient.colour.b;
-
-		// Combine ambient, diffuse, and specular contributions
-		double final_red = ambient_red + diffuse_red + specular_red;
-		double final_green = ambient_green + diffuse_green + specular_green;
-		double final_blue = ambient_blue + diffuse_blue + specular_blue;
-		
-		// Clamp final values to [0, 255]
-		final_red = fmin(fmax(final_red, data->objs->colour.r), 255);
-		final_green = fmin(fmax(final_green, data->objs->colour.g), 255);
-		final_blue = fmin(fmax(final_blue, data->objs->colour.b), 255);
-
-        result.r = final_red;
-        result.g = final_green;
-        result.b = final_blue;
-		
-		return result;	
-	}
-	else
-    {
-        result.r = 0;
-        result.g = 0;
-        result.b = 0;
-		return result;
-    }
-	
-}
-
-C              0,0,0      0,0,-1     150
-
-A               0.2      255,255,255
-
-L               -10,0,0     0.5     255,255,0
-
-sp              -5,5,-5       4     0,255,0
-
-sp              0,0,-5       4     255,0,0
-
-pl              0.0,0.0,-10.0     0.0,1.0,0.0     0,0,225
-
-cy              50.0,0.0,20.6       0.0,0.0,1.0     14.2     21.42   10,0,255
 
 
 
-
-
-
-
+<!--
 
 
 WEBSERV
