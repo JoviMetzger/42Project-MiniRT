@@ -32,55 +32,55 @@ determining which objects they hit and rendering the scene accordingly. <small><
 ![](https://www.researchgate.net/figure/1-This-figure-demonstrates-the-concept-of-ray-tracing-A-ray-is-cast-from-the-camera_fig1_236342499)
  
 **You get 3 main steps to building a ray tracer:**
- - [Step 1)](#Understanding-the-3D-grid) &nbsp;&nbsp; Calculate the ray from the “eye” through the pixel, <br>
+ - Step 1) &nbsp;&nbsp; Calculate the ray from the “eye” through the pixel, <br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ Set up your camera and calculate a ray per pixel *(width x height)*.
- - [Step 2)](#Step-2) &nbsp;&nbsp; Determine which objects the ray intersects,	<br>
+ - Step 2) &nbsp;&nbsp; Determine which objects the ray intersects,	<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ Calculate your intersection points with each object *(save that information in a struct)*
- - [Step 3)](#Step-3-;) &nbsp;&nbsp; Compute a color for the closest intersection point. <br>
+ - Step 3) &nbsp;&nbsp; Compute a color for the closest intersection point. <br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ Calculate, with the Phong reflection model, your light per light source and shadow.
 
 
 <details>
   <summary><strong>Step 1;</strong></summary>
 
-## Step 1
+## 🖍️ Step 1
 
 ### 🎲 Understanding the 3D grid:
 You get 2D grid, which only have x and y coordinates. `Coordinates(x, y)` <br>
 And you get a 3D grid, which has x, y and z coordinates. `Coordinates(x, y, z)` <br>
 
 - `x: left/right` <br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **+x/x** = right *(positive numbers)* **|** **-x** = left *(negative numbers)* <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - `y: up/down` <br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **+y/y** = right *(positive numbers)* **|** **-y** = left *(negative numbers)* <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - `z: forward/back forward` <br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **+z/z** = right *(positive numbers)* **|** **-z** = left *(negative numbers)* <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **x** = right *(positive numbers)* **|̷|̷** **-x** = left *(negative numbers)* <br>
+- `y: up/down` <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **y** = right *(positive numbers)* **|̷|̷** **-y** = left *(negative numbers)* <br>
+- `z: forward/back forward` <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **z** = right *(positive numbers)* **|̷|̷** **-z** = left *(negative numbers)* <br>
 
 <br>
 
-First do **x,** then **y,** then **z.** <br>
-So we first walk *(x)* left or right, then we go *(y)* up or down, then we go *(z)* forward or back forward. <br>
+First do **𝓧,** then **𝔂,** then **乙.** <br>
+So we first walk *(🅇)* left or right, then we go *(🅈)* up or down, then we go *(🅉)* forward or back forward. <br>
 *Some people switch* **y** *and* **z** *, so* **y** ***=*** *forward and back forward and* **z** ***=*** *up and down, <br>BUT do it how it makes sense for you.* <br> 
-
+![img]
 
 <small><sup>Online 3D grid for visualizing: <a href="https://technology.cpm.org/general/3dgraph/">3D-Graph</a></sup></small> <br>
 
 
 ### 🎲How do I set up the ray?:
-- 1. Set up the  width, height and image ratio of the window/image. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; image_width and image_height you can choose yourself. <small><sup><i>(a nice size: <strong>WIDTH = 1800</strong>; and <strong>HEIGHT = 1900</strong>;) <i></sup></small> <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `image_ratio = image_height / image_width;` <br>
-&nbsp;&nbsp;&nbsp;&nbsp; - 2. Calculate the viewport, so what your imaginary camera sees. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pos_x and pos_y is at what pixel you are currently. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `viewport_w = 2 * ((pos_x + 0.5) / image_width) - 1;` <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `viewport_h = (1 - 2 * ((pos_y + 0.5) / image_height)) * image_ratio;` <br>
-&nbsp;&nbsp;&nbsp;&nbsp; - 3. Calculate each delta pixel. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **M_PI** ⇾ This is a constant representing the value of pi. <small><sup><i><strong>(M_PI = 3.14159265358979323846)</strong></i></sup></small> <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `pixel_x = viewport_w * (tan((fov / 2) * (M_PI / 180)));` <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `pixel_y = viewport_h * (tan((fov / 2) * (M_PI / 180)));` <br>
-&nbsp;&nbsp;&nbsp;&nbsp; - 4. Initialize the ray vector and the ray place. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Make sure your camera vector works, in other words, make sure your camera can rotate. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We did it like this; it's not the most correct way, but it works *(if it works, don't tough it)* <br>
+- 1) &nbsp;&nbsp; Set up the  width, height and image ratio of the window/image. <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; image_width and image_height you can choose yourself. <small><sup><i>(a nice size: <strong>WIDTH = 1800</strong>; and <strong>HEIGHT = 1900</strong>;) <i></sup></small> <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `image_ratio = image_height / image_width;` <br>
+- 2) &nbsp;&nbsp; Calculate the viewport, so what your imaginary camera sees. <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pos_x and pos_y is at what pixel you are currently. <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `viewport_w = 2 * ((pos_x + 0.5) / image_width) - 1;` <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `viewport_h = (1 - 2 * ((pos_y + 0.5) / image_height)) * image_ratio;` <br>
+- 3) &nbsp;&nbsp; Calculate each delta pixel. <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **M_PI** ⇾ This is a constant representing the value of pi. <small><sup><i><strong>(M_PI = 3.14159265358979323846)</strong></i></sup></small> <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `pixel_x = viewport_w * (tan((fov / 2) * (M_PI / 180)));` <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `pixel_y = viewport_h * (tan((fov / 2) * (M_PI / 180)));` <br>
+- 4) &nbsp;&nbsp; Initialize the ray vector and the ray place. <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Make sure your camera vector works, in other words, make sure your camera can rotate. <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We did it like this; it's not the most correct way, but it works *(if it works, don't tough it)* <br>
 
 ```C
 forward = normalize(camera.vector);
@@ -110,27 +110,25 @@ return (normalize(pixel_direction));
 <details>
   <summary><strong>Step 2;</strong></summary>
 
-## Step 2
+## 🖍️ Step 2
 
 For intersecting objects, you get different options and examples online, <br>
 take the one that makes most sense for you. <br>
 `Sphere`, start with the sphere, it is the easiest. *(Plenty examples online)* <br>
 
-- Do camera, screen testing with the sphere:
-			- Check for distortion at the edges of the screen.
+- Do camera, screen testing with the sphere: <br>
+			- Check for distortion at the edges of the screen. <br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure you understand how your grid/position of objects works.
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure, if you have two spheres next to each other, <br>
 			that they intersect correctly with each other.
 		![]()
 `Plane` is easy as well. <br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure you understand that a plane is infinite.
+- Make sure you understand that a plane is infinite.
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure if you change the vector that all vector directions work.
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- It is very important to make sure that the surface normal is correct; <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise later, the light might give you problems.
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise later, the light might give you problems. <br>
 `Cylinder` is a b**ch! <br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Cylinders consist out of two or three objects. <br>
+- Cylinders consist out of two or three objects. <br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The body and the two caps.
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- The body ⇾ it will be in the beginning infinite, <br>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so you need to cut/trim it at the correct height.
@@ -138,7 +136,7 @@ take the one that makes most sense for you. <br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure the caps are perfectly on the body, <br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sometimes there is space in between cap and body, you will see the space once you added light.
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure the surface normal of the caps is correct.
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure all vector directions work correctly *(look correct)*
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure all vector directions work correctly *(look correct)* <br>
 	![]()
 Make sure you have all the objects, before adding light. <br>
 Make sure you take the object closest to the camera. ***(Or do this in step 3)*** <br>
@@ -153,7 +151,7 @@ Make sure you take the object closest to the camera. ***(Or do this in step 3)**
 <details>
   <summary><strong>Step 3;</strong></summary>
 
-## Step 3
+## 🖍️ Step 3
 
 Look at the [light](#Light) and [shadow](#shadow) sections. <br>
 Make sure you take the object closest to the camera. *(If you haven't in step 2)* <br>
@@ -189,33 +187,34 @@ Or make a texture that rotates towards the camera, so it always looks good. <br>
 ## 💡 Light
 <small><sup><i>(A lot of <a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hUh??"</a>moments)</i></sup></small><br> <br>
 
-**Calculating lighting on an object involves several steps:** <br>
+## Calculating lighting on an object involves several steps:
 - calculating the direction of light rays,
 - determining the visibility of the light source from the surface point of the object. *[(Shadow part)](#Shadow)*
 - and then applying illumination models such as [Phong](https://en.wikipedia.org/wiki/Phong_reflection_model) or [Blinn-Phong](https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_reflection_model) to compute <br>
 the final colour of the object.
 <br>
 
-### 🔦Calculate Light Direction: <br>
+### 🔦 Calculate Light Direction: <br>
 Determine the direction of light rays from the light source(s) to the surface point of the object. <br>
 If the light source is directional *(like the sun)* , you only need the direction vector.  <br>
 If the light source is a point light, you'll need to calculate the direction vector from <br>
 the surface point to the light source position. <br>
 <br>
 
-### 🔦Check Visibility: <br>
+### 🔦 Check Visibility: <br>
 Determine if the surface point of the object is in shadow or not. <br>
 <br>
 
-### 🔦Compute Illumination: <br>
+### 🔦 Compute Illumination: <br>
 Apply an illumination model *(such as [Phong](https://en.wikipedia.org/wiki/Phong_reflection_model) or [Blinn-Phong](https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_reflection_model))* to compute <br>
 the final color of the object at the surface point. <br>
 This involves calculating ambient, diffuse, and specular components based on the surface properties, <br>
 light properties, and view direction. <br>
 <br>
 
-You go through each object and each object goes through each light.  <br> <br>
-**For example you have:** 2 objects, 3 lights. <br>
+You go through each object and each object goes through each light.  <br>
+### For example you have:
+2 objects, 3 lights. <br> <br>
 object**1** will be caclulated with light*1*, light*2*, light*3* <br>
 then, object**2** will be calculated with light*1*, light*2*, light*3* <br> <br>
 
@@ -244,12 +243,9 @@ while (++i < Number_of_objects)
 }
 ```
 
-Make sure for your Phong reflection model that your base colour is calculated <br>
+⭕ Make sure for your Phong reflection model that your base colour is calculated <br>
 before you do diffuse and spectular light. <br>
 Else your texture *(Checkerboard)* won't have light and shadow. <br>
-
-We used Phong reflection model, because it was easier to visualize what was happening, <br>
-but you could also use Blinn-Phong reflection model. <br>
 
 ![Phong reflection model](https://en.wikipedia.org/wiki/Phong_reflection_model#/media/File:Phong_components_version_4.png)
 <br>
@@ -279,7 +275,7 @@ If the ray makes it susscesfully to the light, light/Illumination will be calcul
   <summary><strong>Filed of view (FOV)</strong></summary>
 
 ### Filed of view (FOV)
-- between 70 and 90 is the sweet spot. Less or more will distort the image.
+- between 70° and 90° is the sweet spot. Less or more will distort the image.
 - Distortion will always happen near the edges of the image.
 
 
@@ -308,7 +304,7 @@ or every vector you entcounter durring your calculations.
 
 ### Selecting objects
 Selecting objects is not part of the project. <br>
-We just thought it's a nice and easy way for the user/evaluater <br>.
+We just thought it's a nice and easy way for the user/evaluater. <br>
 to click on a object and do something with it.
 
 ![]()
@@ -325,7 +321,7 @@ to click on a object and do something with it.
 
 <br>
 
-#### How does it work
+### How does it work
 you need **mlx** functions:
 ```C
 - mlx_key_hook();	-> is for key movement (ESC, Arrow up).
@@ -334,7 +330,7 @@ you need **mlx** functions:
 
 <br>
 
-🐭**Mouse movement *(selcet objects)*:** <br>
+🐭 **Mouse movement *(selcet objects)*:** <br>
 Quick explanation how the mouse map works.
  - There is a 2D mouse_map[x][y].
  - While we loop through every pixel, we fill in this map.
@@ -357,25 +353,25 @@ mouse_map:
  - Find the position of the mouse, with **mlx_get_mouse_pos();**.
  - If the mouse map is **-1** at that position, so no object has been selected.
  - Else if the mouse map is **NOT -1** at that position. Highlight the object. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Just set/draw a white pixel with a bit of offset inwards next to the position.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Just set/draw a white pixel with a bit of offset inwards next to the position.
  - For removeing the highlight, remove the colour of the pixel *(set it to 0)*.
  - <strong>How is that possible ☝️ ? </strong>
  - Use **mlx_image_to_window()** to put a layer on top of the 'original' <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - It loads faster because it doesn't go through each pixel and recalculates everything.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ It loads faster because it doesn't go through each pixel and recalculates everything.
 - That's why to remove the highlight, you can set that colour to 0, so it will just unset those pixels.
 
 <br>
 
-🗝️**Key movement *(ESC, Arrow up)*:** <br>
+🗝️ **Key movement *(ESC, Arrow up)*:** <br>
 
-🔴 - If the pressed key is 'ESC key', close and free window. <br>
-🟡 - If an object is selected and the key 'Arrow up' is pressed, <br>
+🔴 &nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp; If the pressed key is 'ESC key', close and free window. <br>
+🟡 &nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp; If an object is selected and the key 'Arrow up' is pressed, <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;we change the pattern of that object. <br>
-🟢 - You need to count how many arrow-ups you have. <br>
+🟢 &nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp; You need to count how many arrow-ups you have. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Because arrowUp-1 should change pattern, arrowUp-2 should change <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to a different pattern or original form. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After that, you need to reset your arrow-up count <br>
-🔵 - Change the pattern of that object. 
+🔵 &nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp; Change the pattern of that object. 
 
 ```C
 void	ft_key_action(mlx_key_data_t keydata, t_data *data)
@@ -484,7 +480,7 @@ tr                  -7,6,-11         -7,-6,-11       10,0,-11        255,102,102
 <br>
 
 
-## 🧬 Installation
+## 🔮 Installation
 
 To execute the program, follow the steps below:
 
