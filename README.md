@@ -63,21 +63,21 @@ And you get a 3D grid, which has x, y and z coordinates. `Coordinates(x, y, z)` 
 <small><sup>Online 3D grid for visualizing: <a href="https://technology.cpm.org/general/3dgraph/">3D-Graph</a></sup></small> <br>
 
 
-### 🎲How do I set up the ray?:
+### 🎲 How do I set up the ray?:
 - 1) &nbsp;&nbsp; Set up the  width, height and image ratio of the window/image. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; image_width and image_height you can choose yourself. <small><sup><i>(a nice size: <strong>WIDTH = 1800</strong>; and <strong>HEIGHT = 1900</strong>;) </i></sup></small> <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `image_ratio = image_height / image_width;` <br>
+	&nbsp;&nbsp; image_width and image_height you can choose yourself. <small><sup><i>(a nice size: <strong>WIDTH = 1800</strong>; and <strong>HEIGHT = 1900</strong>;) </i></sup></small> <br>
+	&nbsp;&nbsp; `image_ratio = image_height / image_width;` <br>
 - 2) &nbsp;&nbsp; Calculate the viewport, so what your imaginary camera sees. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pos_x and pos_y is at what pixel you are currently. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `viewport_w = 2 * ((pos_x + 0.5) / image_width) - 1;` <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `viewport_h = (1 - 2 * ((pos_y + 0.5) / image_height)) * image_ratio;` <br>
+	&nbsp;&nbsp; pos_x and pos_y is at what pixel you are currently. <br>
+	&nbsp;&nbsp; `viewport_w = 2 * ((pos_x + 0.5) / image_width) - 1;` <br>
+	&nbsp;&nbsp; `viewport_h = (1 - 2 * ((pos_y + 0.5) / image_height)) * image_ratio;` <br>
 - 3) &nbsp;&nbsp; Calculate each delta pixel. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **M_PI** ⇾ This is a constant representing the value of pi. <small><sup><i><strong>(M_PI = 3.14159265358979323846)</strong></i></sup></small> <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `pixel_x = viewport_w * (tan((fov / 2) * (M_PI / 180)));` <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `pixel_y = viewport_h * (tan((fov / 2) * (M_PI / 180)));` <br>
+	&nbsp;&nbsp; **M_PI** ⇾ This is a constant representing the value of pi. <small><sup><i><strong>(M_PI = 3.14159265358979323846)</strong></i></sup></small> <br>
+	&nbsp;&nbsp; `pixel_x = viewport_w * (tan((fov / 2) * (M_PI / 180)));` <br>
+	&nbsp;&nbsp; `pixel_y = viewport_h * (tan((fov / 2) * (M_PI / 180)));` <br>
 - 4) &nbsp;&nbsp; Initialize the ray vector and the ray place. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Make sure your camera vector works, in other words, make sure your camera can rotate. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We did it like this; it's not the most correct way, but it works *(if it works, don't tough it)* <br>
+	&nbsp;&nbsp; Make sure your camera vector works, in other words, make sure your camera can rotate. <br>
+	&nbsp;&nbsp; We did it like this; it's not the most correct way, but it works *(if it works, don't tough it)* <br>
 
 ```C
 forward = normalize(camera.vector);
@@ -115,29 +115,30 @@ take the one that makes most sense for you. <br>
 
 - Do camera, screen testing with the sphere: <br>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Check for distortion at the edges of the screen. <br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure you understand how your grid/position of objects works.
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure you understand how your grid/position of objects works. <br>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure, if you have two spheres next to each other, <br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; that they intersect correctly with each other.
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; that they intersect correctly with each other.
 
 ![]()
 `Plane` is easy as well. <br>
-- Make sure you understand that a plane is infinite.
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure if you change the vector that all vector directions work.
+- Make sure you understand that a plane is infinite. <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure if you change the vector that all vector directions work. <br>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ It is very important to make sure that the surface normal is correct; <br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; otherwise later, the light might give you problems. <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp; otherwise later, the light might give you problems. <br>
 
 `Cylinder` is a b**ch! <br>
 - Cylinders consist out of two or three objects. <br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The body and the two caps.
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ The body and the two caps. <br>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ The body ⇾ it will be in the beginning infinite, <br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; so you need to cut/trim it at the correct height.
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ The caps are two planes, that are trimmed/cut as well.
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; so you need to cut/trim it at the correct height. <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ The caps are two planes, that are trimmed/cut as well. <br>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure the caps are perfectly on the body, <br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sometimes there is space in between cap and body, you will see the space once you added light.
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure the surface normal of the caps is correct.
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sometimes there is space in between cap and body, you will see the space once you added light. <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure the surface normal of the caps is correct. <br>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure all vector directions work correctly *(look correct)* <br>
 
 ![]()
+
 Make sure you have all the objects, before adding light. <br>
 Make sure you take the object closest to the camera. ***(Or do this in step 3)*** <br>
 
@@ -244,8 +245,8 @@ while (++i < Number_of_objects)
 ```
 
 ⭕ &nbsp;&nbsp; Make sure for your Phong reflection model that your base colour is calculated <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; before you do diffuse and spectular light. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Else your texture *(Checkerboard)* won't have light and shadow. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; before you do diffuse and spectular light. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Else your texture *(Checkerboard)* won't have light and shadow. <br>
 
 ![Phong reflection model](https://en.wikipedia.org/wiki/Phong_reflection_model#/media/File:Phong_components_version_4.png)
 <br>
