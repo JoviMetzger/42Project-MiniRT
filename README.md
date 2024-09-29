@@ -244,11 +244,11 @@ while (++i < Number_of_objects)
 }
 ```
 
+![Phong reflection model](https://github.com/user-attachments/assets/717fa0b9-c06a-4c3f-a7dd-dd98fe0c8e7a)
+
 ⭕ &nbsp;&nbsp; Make sure for your Phong reflection model that your base colour is calculated <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; before you do diffuse and spectular light. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Else your texture *(Checkerboard)* won't have light and shadow. <br>
-
-![Phong reflection model](https://github.com/user-attachments/assets/717fa0b9-c06a-4c3f-a7dd-dd98fe0c8e7a)
 
 <br>
 <br>
@@ -315,7 +315,7 @@ to click on a object and do something with it.
 
 #### WE only have the option: 
 - You can select all objects, but you can only do something with the sphere.
-- If a sphere is selected you can press arrow key up <img src="https://github.com/user-attachments/assets/184cb383-b186-4048-a030-cfb054eb9758" alt="Arrow_key_up" width="20" height="150> ![Arrow_key_up](https://github.com/user-attachments/assets/184cb383-b186-4048-a030-cfb054eb9758) <br>
+- If a sphere is selected you can press arrow key up <img src="https://github.com/user-attachments/assets/184cb383-b186-4048-a030-cfb054eb9758" alt="Arrow_key_up" width="200"> ![Arrow_key_up](https://github.com/user-attachments/assets/184cb383-b186-4048-a030-cfb054eb9758) <br>
 - It will then add the Checkerboard on the sphere.
 
 #### but YOU also could:
