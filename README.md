@@ -50,17 +50,14 @@ You get 2D grid, which only have x and y coordinates. `Coordinates(x, y)` <br>
 And you get a 3D grid, which has x, y and z coordinates. `Coordinates(x, y, z)` <br>
 
 - `x: left/right` <br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **x** = right *(positive numbers)* **|̷|̷** **-x** = left *(negative numbers)* <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **x** = right *(positive numbers)* **|** **-x** = left *(negative numbers)* <br>
 - `y: up/down` <br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **y** = right *(positive numbers)* **|̷|̷** **-y** = left *(negative numbers)* <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **y** = right *(positive numbers)* **|** **-y** = left *(negative numbers)* <br>
 - `z: forward/back forward` <br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **z** = right *(positive numbers)* **|̷|̷** **-z** = left *(negative numbers)* <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **z** = right *(positive numbers)* **|** **-z** = left *(negative numbers)* <br>
 
 <br>
 
-First do **𝓧,** then **𝔂,** then **乙.** <br>
-So we first walk *(🅇)* left or right, then we go *(🅈)* up or down, then we go *(🅉)* forward or back forward. <br>
-*Some people switch* **y** *and* **z** *, so* **y** ***=*** *forward and back forward and* **z** ***=*** *up and down, <br>BUT do it how it makes sense for you.* <br> 
 ![img]
 
 <small><sup>Online 3D grid for visualizing: <a href="https://technology.cpm.org/general/3dgraph/">3D-Graph</a></sup></small> <br>
@@ -68,19 +65,19 @@ So we first walk *(🅇)* left or right, then we go *(🅈)* up or down, then we
 
 ### 🎲How do I set up the ray?:
 - 1) &nbsp;&nbsp; Set up the  width, height and image ratio of the window/image. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; image_width and image_height you can choose yourself. <small><sup><i>(a nice size: <strong>WIDTH = 1800</strong>; and <strong>HEIGHT = 1900</strong>;) <i></sup></small> <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `image_ratio = image_height / image_width;` <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; image_width and image_height you can choose yourself. <small><sup><i>(a nice size: <strong>WIDTH = 1800</strong>; and <strong>HEIGHT = 1900</strong>;) </i></sup></small> <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `image_ratio = image_height / image_width;` <br>
 - 2) &nbsp;&nbsp; Calculate the viewport, so what your imaginary camera sees. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pos_x and pos_y is at what pixel you are currently. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `viewport_w = 2 * ((pos_x + 0.5) / image_width) - 1;` <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `viewport_h = (1 - 2 * ((pos_y + 0.5) / image_height)) * image_ratio;` <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pos_x and pos_y is at what pixel you are currently. <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `viewport_w = 2 * ((pos_x + 0.5) / image_width) - 1;` <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `viewport_h = (1 - 2 * ((pos_y + 0.5) / image_height)) * image_ratio;` <br>
 - 3) &nbsp;&nbsp; Calculate each delta pixel. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **M_PI** ⇾ This is a constant representing the value of pi. <small><sup><i><strong>(M_PI = 3.14159265358979323846)</strong></i></sup></small> <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `pixel_x = viewport_w * (tan((fov / 2) * (M_PI / 180)));` <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `pixel_y = viewport_h * (tan((fov / 2) * (M_PI / 180)));` <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **M_PI** ⇾ This is a constant representing the value of pi. <small><sup><i><strong>(M_PI = 3.14159265358979323846)</strong></i></sup></small> <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `pixel_x = viewport_w * (tan((fov / 2) * (M_PI / 180)));` <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `pixel_y = viewport_h * (tan((fov / 2) * (M_PI / 180)));` <br>
 - 4) &nbsp;&nbsp; Initialize the ray vector and the ray place. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Make sure your camera vector works, in other words, make sure your camera can rotate. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We did it like this; it's not the most correct way, but it works *(if it works, don't tough it)* <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Make sure your camera vector works, in other words, make sure your camera can rotate. <br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We did it like this; it's not the most correct way, but it works *(if it works, don't tough it)* <br>
 
 ```C
 forward = normalize(camera.vector);
@@ -117,27 +114,30 @@ take the one that makes most sense for you. <br>
 `Sphere`, start with the sphere, it is the easiest. *(Plenty examples online)* <br>
 
 - Do camera, screen testing with the sphere: <br>
-			- Check for distortion at the edges of the screen. <br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure you understand how your grid/position of objects works.
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure, if you have two spheres next to each other, <br>
-			that they intersect correctly with each other.
-		![]()
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Check for distortion at the edges of the screen. <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure you understand how your grid/position of objects works.
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure, if you have two spheres next to each other, <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; that they intersect correctly with each other.
+
+![]()
 `Plane` is easy as well. <br>
 - Make sure you understand that a plane is infinite.
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure if you change the vector that all vector directions work.
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- It is very important to make sure that the surface normal is correct; <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise later, the light might give you problems. <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure if you change the vector that all vector directions work.
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ It is very important to make sure that the surface normal is correct; <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; otherwise later, the light might give you problems. <br>
+
 `Cylinder` is a b**ch! <br>
 - Cylinders consist out of two or three objects. <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The body and the two caps.
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- The body ⇾ it will be in the beginning infinite, <br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so you need to cut/trim it at the correct height.
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- The caps are two planes, that are trimmed/cut as well.
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure the caps are perfectly on the body, <br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sometimes there is space in between cap and body, you will see the space once you added light.
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure the surface normal of the caps is correct.
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Make sure all vector directions work correctly *(look correct)* <br>
-	![]()
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The body and the two caps.
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ The body ⇾ it will be in the beginning infinite, <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; so you need to cut/trim it at the correct height.
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ The caps are two planes, that are trimmed/cut as well.
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure the caps are perfectly on the body, <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sometimes there is space in between cap and body, you will see the space once you added light.
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure the surface normal of the caps is correct.
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ○ Make sure all vector directions work correctly *(look correct)* <br>
+
+![]()
 Make sure you have all the objects, before adding light. <br>
 Make sure you take the object closest to the camera. ***(Or do this in step 3)*** <br>
 
@@ -172,8 +172,8 @@ cyl->normal = cyl->vector; 			// Surface normal points upwards
 <br>
 <br>
 
-## 	🏁Checkerboard
-***It is not possible to create a sphere with a perfect checkerboard!*** <br>
+## 🏁 Checkerboard
+#### It is not possible to create a sphere with a perfect checkerboard!
 If the checked sphere looks good from the center, check the sides; there will be distortion. <br>
 So rather calculate a checkerboard sphere that touches at the poles. <br>
 Or make a texture that rotates towards the camera, so it always looks good. <br>
@@ -185,7 +185,7 @@ Or make a texture that rotates towards the camera, so it always looks good. <br>
 
 
 ## 💡 Light
-<small><sup><i>(A lot of <a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hUh??"</a>moments)</i></sup></small><br> <br>
+<small><sup><i>(A lot of <a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hUh??"</a>moments)</i></sup></small><br>
 
 ## Calculating lighting on an object involves several steps:
 - calculating the direction of light rays,
@@ -213,7 +213,7 @@ light properties, and view direction. <br>
 <br>
 
 You go through each object and each object goes through each light.  <br>
-### For example you have:
+### For example you have;
 2 objects, 3 lights. <br> <br>
 object**1** will be caclulated with light*1*, light*2*, light*3* <br>
 then, object**2** will be calculated with light*1*, light*2*, light*3* <br> <br>
@@ -243,9 +243,9 @@ while (++i < Number_of_objects)
 }
 ```
 
-⭕ Make sure for your Phong reflection model that your base colour is calculated <br>
-before you do diffuse and spectular light. <br>
-Else your texture *(Checkerboard)* won't have light and shadow. <br>
+⭕ &nbsp;&nbsp; Make sure for your Phong reflection model that your base colour is calculated <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; before you do diffuse and spectular light. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Else your texture *(Checkerboard)* won't have light and shadow. <br>
 
 ![Phong reflection model](https://en.wikipedia.org/wiki/Phong_reflection_model#/media/File:Phong_components_version_4.png)
 <br>
@@ -253,14 +253,14 @@ Else your texture *(Checkerboard)* won't have light and shadow. <br>
 
 
 ## ⚫ Shadow
-**Check Visibility:** <br>
+### Check Visibility:
 Determine if the surface point of the object is in shadow or not. <br>
 You can achieve this by casting a shadow ray from the surface point towards the light source <br>
 and checking if it intersects with any other object in the scene. <br>
 If it intersects, the surface point is in shadow; otherwise, it's light. <br><br>
 
 So, instead of calculating what makes logical sence, to calculate a ray from the light to the object, <br>
-you need to calculate a ray from the object to the light.<small><sup><i>More <a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hUh??"</a>moments</i></sup></small><br> <br> <br>
+you need to calculate a ray from the object to the light.<small><sup><i>More <a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hUh??"</a>moments</i></sup></small><br>
 If the ray *(on the way to the light)* hits another object, shadow will be drawn. <br>
 If the ray makes it susscesfully to the light, light/Illumination will be calculated.<br>
 
@@ -364,14 +364,14 @@ mouse_map:
 
 🗝️ **Key movement *(ESC, Arrow up)*:** <br>
 
-🔴 &nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp; If the pressed key is 'ESC key', close and free window. <br>
-🟡 &nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp; If an object is selected and the key 'Arrow up' is pressed, <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;we change the pattern of that object. <br>
-🟢 &nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp; You need to count how many arrow-ups you have. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Because arrowUp-1 should change pattern, arrowUp-2 should change <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to a different pattern or original form. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After that, you need to reset your arrow-up count <br>
-🔵 &nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp; Change the pattern of that object. 
+🔴 &nbsp;&nbsp; - &nbsp;&nbsp; If the pressed key is 'ESC key', close and free window. <br>
+🟡 &nbsp;&nbsp; - &nbsp;&nbsp; If an object is selected and the key 'Arrow up' is pressed, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;we change the pattern of that object. <br>
+🟢 &nbsp;&nbsp; - &nbsp;&nbsp; You need to count how many arrow-ups you have. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Because arrowUp-1 should change pattern, arrowUp-2 should change <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to a different pattern or original form. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After that, you need to reset your arrow-up count <br>
+🔵 &nbsp;&nbsp; - &nbsp;&nbsp; Change the pattern of that object. 
 
 ```C
 void	ft_key_action(mlx_key_data_t keydata, t_data *data)
@@ -424,7 +424,7 @@ You can pick your colour and it will give you the rgb number.
 <br>
 <br>
 
-Check that your colour overlapping is correct. <br>
+Check that your colour overlap is correct. <br>
 ![](https://www.google.com/imgres?q=3%20colored%20lights%20on%20an%20object&imgurl=https%3A%2F%2Fwww.exploratorium.edu%2Fsites%2Fdefault%2Ffiles%2FRGB_screen.gif&imgrefurl=https%3A%2F%2Fwww.exploratorium.edu%2Fsnacks%2Fcolored-shadows&docid=Nzp0duVI3UF6RM&tbnid=gZrFqPSCteUEVM&vet=12ahUKEwig4YGW_oCIAxU7wAIHHQvQKqUQM3oECDIQAA..i&w=1080&h=612&hcb=2&ved=2ahUKEwig4YGW_oCIAxU7wAIHHQvQKqUQM3oECDIQAA)
 ![](mine)
 
