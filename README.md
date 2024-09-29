@@ -18,7 +18,7 @@ MiniRT is about a ray-tracing engine that renders realistic <br>
 
 <small><sup>eVerYTinG bEloW tHiS liNe wAs ME gOiNg <a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hhhUUUUUhhhhhh?????????????"</a> <i>(aka. cat meme)</i></sup></small>
 			
-![images]()
+VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV![images]()
 
 
 <br> <br>
@@ -29,7 +29,7 @@ Ray tracing simulates how rays of light interact with objects to produce realist
 Unlike how our eyes work, which detect light coming from objects, <br>
 a ray-tracing algorithm traces rays from the camera *(the "eye")* into the scene, <br>
 determining which objects they hit and rendering the scene accordingly. <small><sup><i><a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hUh??"</a> moment</i></sup></small>
-![](https://www.researchgate.net/figure/1-This-figure-demonstrates-the-concept-of-ray-tracing-A-ray-is-cast-from-the-camera_fig1_236342499)
+![This-figure-demonstrates-the-concept-of-ray-tracing-A-ray-is-cast-from-the-camera]!(https://github.com/user-attachments/assets/f7fdf88a-2739-4747-95a5-ed68d623ea08)
  
 **You get 3 main steps to building a ray tracer:**
  - Step 1) &nbsp;&nbsp; Calculate the ray from the “eye” through the pixel, <br>
@@ -58,9 +58,9 @@ And you get a 3D grid, which has x, y and z coordinates. `Coordinates(x, y, z)` 
 
 <br>
 
-![img]
+AAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV![3D_Grid_Example]
 
-<small><sup>Online 3D grid for visualizing: <a href="https://technology.cpm.org/general/3dgraph/">3D-Graph</a></sup></small> <br>
+<small><sup>Online 3D grid for visualizing: <a href="https://www.desmos.com/3d">3D-Graph</a></sup></small> <br>
 
 
 ### 🎲 How do I set up the ray?:
@@ -139,8 +139,8 @@ take the one that makes most sense for you. <br>
 
 Make sure you have all the objects, before adding light. <br>
 Make sure you take the object closest to the camera. ***(Or do this in step 3)*** <br>
-![]()
-![]()
+VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV![Correct_intersection]()
+VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV![Space_between_cap_and_body]()
 
 <br>
 <br>
@@ -179,7 +179,7 @@ If the checked sphere looks good from the center, check the sides; there will be
 So rather calculate a checkerboard sphere that touches at the poles. <br>
 Or make a texture that rotates towards the camera, so it always looks good. <br>
 
-![](perfect and real checkerboard)
+VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV![perfect_and_real_checkerboard]()
 
 <br>
 <br>
@@ -248,7 +248,8 @@ while (++i < Number_of_objects)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; before you do diffuse and spectular light. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Else your texture *(Checkerboard)* won't have light and shadow. <br>
 
-![Phong reflection model](https://en.wikipedia.org/wiki/Phong_reflection_model#/media/File:Phong_components_version_4.png)
+![Phong reflection model](https://github.com/user-attachments/assets/717fa0b9-c06a-4c3f-a7dd-dd98fe0c8e7a)
+
 <br>
 <br>
 
@@ -265,7 +266,8 @@ you need to calculate a ray from the object to the light.<small><sup><i>More <a 
 If the ray *(on the way to the light)* hits another object, shadow will be drawn. <br>
 If the ray makes it susscesfully to the light, light/Illumination will be calculated.<br>
 
-![Shadow ray](https://www.scratchapixel.com/lessons/3d-basic-rendering/introduction-to-shading/ligth-and-shadows.html)
+![Shadow ray](https://github.com/user-attachments/assets/f1ebc932-5768-4ab1-88ab-a86e426e510b)
+
 
 <br>
 <br>
@@ -308,11 +310,12 @@ Selecting objects is not part of the project. <br>
 We just thought it's a nice and easy way for the user/evaluater. <br>
 to click on a object and do something with it.
 
-![]()
+![selected_and_deselected_object](https://github.com/user-attachments/assets/d5703193-f3b1-47ec-b8d7-6171f57d89cd)
+
 
 #### WE only have the option: 
 - You can select all objects, but you can only do something with the sphere.
-- If a sphere is selected you can press arrow key up ![](https://www.google.com/search?sca_esv=adb58b67ff5950fb&sca_upv=1&q=keyboard+arrow+symbol&udm=2&fbs=AEQNm0Aa4sjWe7Rqy32pFwRj0UkWd8nbOJfsBGGB5IQQO6L3J_86uWOeqwdnV0yaSF-x2jopn8p7xL4A1Dm_DA2mNSwQf3Ts-oLed-fok38HK-L3touqFtv6wIt8FVCSDg7FOXl9BZhwvwkKnTuEN51hFYXnnYqV40IDAPbrBOsskslGNy0Z6pM&sa=X&ved=2ahUKEwj12M7CiuGIAxX4g_0HHRowIYgQtKgLegQIFxAB&biw=1442&bih=1133&dpr=1.5#imgrc=opwshXhf8vkFvM&imgdii=bQ-q1cgYYkpsiM) 
+- If a sphere is selected you can press arrow key up ![Arrow_key_up](https://github.com/user-attachments/assets/184cb383-b186-4048-a030-cfb054eb9758) <br>
 - It will then add the Checkerboard on the sphere.
 
 #### but YOU also could:
@@ -412,6 +415,8 @@ void	change_pattern()
 			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so the original information is saved, and you can access it fast.   <br>
 
 
+VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV![video]()
+
 </details>
 
 ---
@@ -426,8 +431,7 @@ You can pick your colour and it will give you the rgb number.
 <br>
 
 Check that your colour overlap is correct. <br>
-![](https://www.google.com/imgres?q=3%20colored%20lights%20on%20an%20object&imgurl=https%3A%2F%2Fwww.exploratorium.edu%2Fsites%2Fdefault%2Ffiles%2FRGB_screen.gif&imgrefurl=https%3A%2F%2Fwww.exploratorium.edu%2Fsnacks%2Fcolored-shadows&docid=Nzp0duVI3UF6RM&tbnid=gZrFqPSCteUEVM&vet=12ahUKEwig4YGW_oCIAxU7wAIHHQvQKqUQM3oECDIQAA..i&w=1080&h=612&hcb=2&ved=2ahUKEwig4YGW_oCIAxU7wAIHHQvQKqUQM3oECDIQAA)
-![](mine)
+![Colour_example](https://github.com/user-attachments/assets/16207608-b444-4db5-acb9-98ed9900e667)
 
 
 </details>
