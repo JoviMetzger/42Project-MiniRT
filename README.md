@@ -315,7 +315,7 @@ to click on a object and do something with it.
 
 #### WE only have the option: 
 - You can select all objects, but you can only do something with the sphere.
-- If a sphere is selected you can press arrow key up <div align="center"> <img src="https://github.com/user-attachments/assets/184cb383-b186-4048-a030-cfb054eb9758" alt="Arrow_key_up" width="50"></div> <br>
+- If a sphere is selected you can press arrow key up &nbsp;&nbsp; <img src="https://github.com/user-attachments/assets/184cb383-b186-4048-a030-cfb054eb9758" alt="Arrow_key_up" width="40"> <br>
 - It will then add the Checkerboard on the sphere.
 
 #### but YOU also could:
