@@ -20,8 +20,6 @@ MiniRT is about a ray-tracing engine that renders realistic <br>
 
 <img src="https://github.com/user-attachments/assets/5046f4e9-7e45-42e0-b55d-e5a95bc6c6bb" alt="Images" width="750"> <br>
 
-![Images](https://github.com/user-attachments/assets/5046f4e9-7e45-42e0-b55d-e5a95bc6c6bb)
-
 <br> <br>
 
 ## 🧩 Building a Ray Tracer
@@ -60,7 +58,7 @@ And you get a 3D grid, which has x, y and z coordinates. `Coordinates(x, y, z)` 
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **z** = right *(positive numbers)* **|** **-z** = left *(negative numbers)* <br>
 
 <br>
-<img src="https://github.com/user-attachments/assets/675c4e96-4e7c-4c37-8241-e814f899eb87" alt="3D_Grid_Example" width="700"> <br>
+<img src="https://github.com/user-attachments/assets/675c4e96-4e7c-4c37-8241-e814f899eb87" alt="3D_Grid_Example" width="500"> <br>
 
 ![3D_Grid_Example](https://github.com/user-attachments/assets/675c4e96-4e7c-4c37-8241-e814f899eb87)
 
