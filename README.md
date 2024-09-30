@@ -16,10 +16,9 @@ MiniRT is about a ray-tracing engine that renders realistic <br>
 
 <br>
 
-<small><sup>eVerYTinG bEloW tHiS liNe wAs ME gOiNg <a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hhhUUUUUhhhhhh?????????????"</a> <i>(aka. cat meme)</i></sup></small>
+<small><sup>eVerYTinG bEloW tHiS liNe wAs ME gOiNg <a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hhhUUUUUhhhhhh?????????????"</a> <i>(aka. cat meme)</i></sup></small> <br>
 			
-VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV![images]()
-
+![Images](https://github.com/user-attachments/assets/5046f4e9-7e45-42e0-b55d-e5a95bc6c6bb)
 
 <br> <br>
 
@@ -432,9 +431,11 @@ void	change_pattern()
 Use this webside you find you rgb colours 👉 [RGB Color Picker](https://rgbacolorpicker.com/) 👈 <br>
 You can pick your colour and it will give you the rgb number.
 <br>
+
+Check that your colour overlap is correct. 
+<br>
 <br>
 
-Check that your colour overlap is correct. <br>
 ![Colour_example](https://github.com/user-attachments/assets/dd1bb85a-d790-4741-a32d-09768fa7844e)
 
 
