@@ -18,7 +18,8 @@ MiniRT is about a ray-tracing engine that renders realistic <br>
 
 <small><sup>eVerYTinG bEloW tHiS liNe wAs ME gOiNg <a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hhhUUUUUhhhhhh?????????????"</a> <i>(aka. cat meme)</i></sup></small> <br>
 
-<img src="https://github.com/user-attachments/assets/5046f4e9-7e45-42e0-b55d-e5a95bc6c6bb" alt="Images" width="500">
+<img src="https://github.com/user-attachments/assets/5046f4e9-7e45-42e0-b55d-e5a95bc6c6bb" alt="Images" width="1000"> <br>
+
 ![Images](https://github.com/user-attachments/assets/5046f4e9-7e45-42e0-b55d-e5a95bc6c6bb)
 
 <br> <br>
@@ -182,7 +183,7 @@ So rather calculate a checkerboard sphere that touches at the poles. <br>
 Or make a texture that rotates towards the camera, so it always looks good. <br>
 
 
-<img src="https://github.com/user-attachments/assets/041b6089-5dc9-487d-a844-c3b82bc07971" alt="perfect_and_real_checkerboard" width="100">
+<img src="https://github.com/user-attachments/assets/041b6089-5dc9-487d-a844-c3b82bc07971" alt="perfect_and_real_checkerboard" width="700">
 
 ![perfect_and_real_checkerboard](https://github.com/user-attachments/assets/041b6089-5dc9-487d-a844-c3b82bc07971)
 
@@ -440,7 +441,7 @@ Check that your colour overlap is correct.
 <br>
 <br>
 
-<img src="https://github.com/user-attachments/assets/dd1bb85a-d790-4741-a32d-09768fa7844e" alt="Colour_example" width="100">
+<img src="https://github.com/user-attachments/assets/dd1bb85a-d790-4741-a32d-09768fa7844e" alt="Colour_example" width="700">
 
 ![Colour_example](https://github.com/user-attachments/assets/dd1bb85a-d790-4741-a32d-09768fa7844e)
 
