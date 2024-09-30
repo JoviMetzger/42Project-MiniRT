@@ -58,7 +58,7 @@ And you get a 3D grid, which has x, y and z coordinates. `Coordinates(x, y, z)` 
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **z** = right *(positive numbers)* **|** **-z** = left *(negative numbers)* <br>
 
 <br>
-<img src="https://github.com/user-attachments/assets/675c4e96-4e7c-4c37-8241-e814f899eb87" alt="3D_Grid_Example" width="500"> <br>
+<img src="https://github.com/user-attachments/assets/675c4e96-4e7c-4c37-8241-e814f899eb87" alt="3D_Grid_Example" width="500"> <br> <br>
 
 <small><sup>Online 3D grid for visualizing: <a href="https://www.desmos.com/3d">3D-Graph</a></sup></small> <br>
 
@@ -140,7 +140,7 @@ take the one that makes most sense for you. <br>
 Make sure you have all the objects, before adding light. <br>
 Make sure you take the object closest to the camera. ***(Or do this in step 3)*** <br>
 
-![Correct_intersection_and_Space_between_cap_and_body](https://github.com/user-attachments/assets/ef45cd67-a7e1-4c7e-9438-417e4b6fbd85)
+<img src="https://github.com/user-attachments/assets/ef45cd67-a7e1-4c7e-9438-417e4b6fbd85" alt="Correct_intersection_and_Space_between_cap_and_body" width="800">
 
 <br>
 <br>
