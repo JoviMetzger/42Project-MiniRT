@@ -18,7 +18,7 @@ MiniRT is about a ray-tracing engine that renders realistic <br>
 
 <small><sup>eVerYTinG bEloW tHiS liNe wAs ME gOiNg <a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hhhUUUUUhhhhhh?????????????"</a> <i>(aka. cat meme)</i></sup></small> <br>
 
-<img src="https://github.com/user-attachments/assets/5046f4e9-7e45-42e0-b55d-e5a95bc6c6bb" alt="Images" width="860"> <br>
+<img src="https://github.com/user-attachments/assets/5046f4e9-7e45-42e0-b55d-e5a95bc6c6bb" alt="Images" width="550"> <br>
 
 ![Images](https://github.com/user-attachments/assets/5046f4e9-7e45-42e0-b55d-e5a95bc6c6bb)
 
