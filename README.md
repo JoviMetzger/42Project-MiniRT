@@ -60,8 +60,10 @@ And you get a 3D grid, which has x, y and z coordinates. `Coordinates(x, y, z)` 
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ⇾ **z** = right *(positive numbers)* **|** **-z** = left *(negative numbers)* <br>
 
 <br>
+<img src="https://github.com/user-attachments/assets/675c4e96-4e7c-4c37-8241-e814f899eb87" alt="3D_Grid_Example" width="700"> <br>
 
-AAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV![3D_Grid_Example]
+![3D_Grid_Example](https://github.com/user-attachments/assets/675c4e96-4e7c-4c37-8241-e814f899eb87)
+
 
 <small><sup>Online 3D grid for visualizing: <a href="https://www.desmos.com/3d">3D-Graph</a></sup></small> <br>
 
