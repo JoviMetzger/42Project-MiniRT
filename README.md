@@ -29,7 +29,9 @@ Ray tracing simulates how rays of light interact with objects to produce realist
 Unlike how our eyes work, which detect light coming from objects, <br>
 a ray-tracing algorithm traces rays from the camera *(the "eye")* into the scene, <br>
 determining which objects they hit and rendering the scene accordingly. <small><sup><i><a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hUh??"</a> moment</i></sup></small>
-![This-figure-demonstrates-the-concept-of-ray-tracing-A-ray-is-cast-from-the-camera]!(https://github.com/user-attachments/assets/f7fdf88a-2739-4747-95a5-ed68d623ea08)
+
+![This-figure-demonstrates-the-concept-of-ray-tracing-A-ray-is-cast-from-the-camera](https://github.com/user-attachments/assets/ebd05c2d-aa8f-4b2b-af66-dfd3ad3805dd)
+
  
 **You get 3 main steps to building a ray tracer:**
  - Step 1) &nbsp;&nbsp; Calculate the ray from the “eye” through the pixel, <br>
@@ -266,7 +268,7 @@ you need to calculate a ray from the object to the light.<small><sup><i>More <a 
 If the ray *(on the way to the light)* hits another object, shadow will be drawn. <br>
 If the ray makes it susscesfully to the light, light/Illumination will be calculated.<br>
 
-![Shadow ray](https://github.com/user-attachments/assets/f1ebc932-5768-4ab1-88ab-a86e426e510b)
+![Shadow ray](https://github.com/user-attachments/assets/9834b1a9-93cf-4eef-932b-16f296b37889)
 
 
 <br>
@@ -444,38 +446,38 @@ Check that your colour overlap is correct. <br>
 Minirt.rt file
 ```script
 
-# Ambient lighting (A): 
-# Identifier        # Ratio          # R,G,B
+#Ambient lighting (A): 
+#Identifier         #Ratio           #R,G,B
 A                   0.2              255,255,255
 
 # --------------------------------------------------------------------------------------------
-# Camera (C): 
-# Identifier        # Coordinates    # 3D vector    # FOV
+#Camera (C): 
+#Identifier         #Coordinates     #3D vector     #FOV
 C                   0,0,-1           0,0,1          70
 
 # --------------------------------------------------------------------------------------------
-# Light (L):
-# Identifier        # Coordinates    # Ratio        # R,G,B
+#Light (L):
+#Identifier         #Coordinates     #Ratio        #R,G,B
 L                   2,2,0            0.6           255,255,255
 
 # --------------------------------------------------------------------------------------------
-# Sphere (sp):
-# Identifier        # Coordinates    # Diameter     # R,G,B
+#Sphere (sp):
+#Identifier         #Coordinates     #Diameter      #R,G,B
 sp                  0,0,-10          12.6           10,0,255
 
 # --------------------------------------------------------------------------------------------
-# Plane (pl): 
-# Identifier        # Coordinates    # 3D vector    # R,G,B
+#Plane (pl): 
+#Identifier         #Coordinates     #3D vector     #R,G,B
 pl                  10,3,-10         0,1,0          0,0,225
 
 # --------------------------------------------------------------------------------------------
-# Cylinder (cy):
-# Identifier        # Coordinates    # 3D vector    # Diameter       # Height     # R,G,B
+#Cylinder (cy):
+#Identifier         #Coordinates     #3D vector     #Diameter        #Height      #R,G,B
 cy                  -5,0,-5          0,0,1          14.2             21.42        10,0,255
 
 # --------------------------------------------------------------------------------------------
-# Triangle (tr) -> optional:
-# Identifier        # Coordinates1   # Coordinates2  # Coordinates3  # R,G,B
+#Triangle (tr) -> optional:
+#Identifier         #Coordinates1    #Coordinates2   #Coordinates3   #R,G,B
 tr                  -7,6,-11         -7,-6,-11       10,0,-11        255,102,102
 
 ```
