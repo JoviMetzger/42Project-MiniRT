@@ -141,8 +141,8 @@ take the one that makes most sense for you. <br>
 
 Make sure you have all the objects, before adding light. <br>
 Make sure you take the object closest to the camera. ***(Or do this in step 3)*** <br>
-VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV![Correct_intersection]()
-VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV![Space_between_cap_and_body]()
+
+![Correct_intersection_and_Space_between_cap_and_body](https://github.com/user-attachments/assets/ef45cd67-a7e1-4c7e-9438-417e4b6fbd85)
 
 <br>
 <br>
@@ -181,7 +181,8 @@ If the checked sphere looks good from the center, check the sides; there will be
 So rather calculate a checkerboard sphere that touches at the poles. <br>
 Or make a texture that rotates towards the camera, so it always looks good. <br>
 
-VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV![perfect_and_real_checkerboard]()
+![perfect_and_real_checkerboard](https://github.com/user-attachments/assets/041b6089-5dc9-487d-a844-c3b82bc07971)
+
 
 <br>
 <br>
@@ -310,9 +311,9 @@ or every vector you entcounter durring your calculations.
 ### Selecting objects
 Selecting objects is not part of the project. <br>
 We just thought it's a nice and easy way for the user/evaluater. <br>
-to click on a object and do something with it.
+to click on a object and do something with it. <br>
 
-![selected_and_deselected_object](https://github.com/user-attachments/assets/d5703193-f3b1-47ec-b8d7-6171f57d89cd)
+![selected_and_deselected_object](https://github.com/user-attachments/assets/c5912668-b1e0-483a-b719-e6ad4e7d358a)
 
 
 #### WE only have the option: 
@@ -417,7 +418,12 @@ void	change_pattern()
 			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so the original information is saved, and you can access it fast.   <br>
 
 
-VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV![video]()
+![video](https://github.com/user-attachments/assets/03f23e01-2701-44b5-af07-87508b8826c0)
+
+
+![video](https://github.com/user-attachments/assets/b72cda00-34ce-437e-be8d-7b04f5cd7c45)
+
+
 
 </details>
 
@@ -433,7 +439,9 @@ You can pick your colour and it will give you the rgb number.
 <br>
 
 Check that your colour overlap is correct. <br>
-![Colour_example](https://github.com/user-attachments/assets/16207608-b444-4db5-acb9-98ed9900e667)
+![Colour_example](https://github.com/user-attachments/assets/dd1bb85a-d790-4741-a32d-09768fa7844e)
+
+
 
 
 </details>
