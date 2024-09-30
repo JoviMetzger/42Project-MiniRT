@@ -22,7 +22,7 @@ MiniRT is about a ray-tracing engine that renders realistic <br>
 
 <br> <br>
 
-## 🧩 Building a Ray Tracer
+## 🧩Building a Ray Tracer
 A ray tracer works a bit differently than your eye. <br>
 Ray tracing simulates how rays of light interact with objects to produce realistic images. <br>
 Unlike how our eyes work, which detect light coming from objects, <br>
@@ -173,7 +173,7 @@ cyl->normal = cyl->vector; 			// Surface normal points upwards
 <br>
 <br>
 
-## 🏁 Checkerboard
+## 🏁Checkerboard
 #### It is not possible to create a sphere with a perfect checkerboard!
 If the checked sphere looks good from the center, check the sides; there will be distortion. <br>
 So rather calculate a checkerboard sphere that touches at the poles. <br>
@@ -186,7 +186,7 @@ Or make a texture that rotates towards the camera, so it always looks good. <br>
 <br>
 
 
-## 💡 Light
+## 💡Light
 <small><sup><i>(A lot of <a href="https://www.youtube.com/watch?v=xVWeRnStdSA">"hUh??"</a>moments)</i></sup></small><br>
 
 ## Calculating lighting on an object involves several steps:
@@ -255,7 +255,7 @@ while (++i < Number_of_objects)
 <br>
 
 
-## ⚫ Shadow
+## ⚫Shadow
 ### Check Visibility:
 Determine if the surface point of the object is in shadow or not. <br>
 You can achieve this by casting a shadow ray from the surface point towards the light source <br>
@@ -273,7 +273,7 @@ If the ray makes it susscesfully to the light, light/Illumination will be calcul
 <br>
 <br>
 
-## 🧲 Important Things to Know
+## 🧲Important Things to Know
 
 <details>
   <summary><strong>Filed of view (FOV)</strong></summary>
@@ -489,7 +489,7 @@ tr                  -7,6,-11         -7,-6,-11       10,0,-11        255,102,102
 <br>
 
 
-## 🔮 Installation
+## 🔮Installation
 
 To execute the program, follow the steps below:
 
@@ -505,7 +505,7 @@ $ ./miniRT <scenes/sphere/sphere_circle_back.rt>
 <br>
 <br>
 
-## 📋 Resources
+## 📋Resources
 
 - Ray Tracing
 	- [Ray Tracing on Wikipedia](https://nl.wikipedia.org/wiki/Raytracing)
