@@ -499,9 +499,13 @@ To execute the program, follow the steps below:
 ```bash
 $ make
 ```
-2. Finally, execute the program using the following command: 
+2. Finally, execute the program using the following command:
 ```bash
-$ ./miniRT <scenes/sphere/sphere_circle_back.rt>
+$ ./miniRT scenes/sphere/sphere_circle_back.rt
+```
+***OR***
+```bash
+$ make open
 ```
 
 <br>
